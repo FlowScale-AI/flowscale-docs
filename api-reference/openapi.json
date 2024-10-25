@@ -6,8 +6,8 @@
   },
   "servers": [
     {
-      "url": "https://043e6209e3ad440d9339cc479f64fb10.pod.flowscale.ai",
-      "description": "Pod #043e6209e3ad440d9339cc479f64fb10"
+      "url": "https://flowscale-core.pod.flowscale.ai",
+      "description": "Pod #flowscale-core"
     }
   ],
   "paths": {
@@ -17,6 +17,7 @@
           "comfy"
         ],
         "summary": "Comfyui Health Check",
+        "description": "Checks the health status of all ComfyUI instances within the specified cluster. It verifies whether each ComfyUI instance is running or stopped.",
         "operationId": "comfyui_health_check_api_v1_comfy_health_get",
         "responses": {
           "200": {
@@ -43,6 +44,7 @@
           "comfy"
         ],
         "summary": "Get Queue",
+        "description": "Retrieves the queue data for all ComfyUI instances in the cluster. This includes information about running and pending tasks in each instance's queue.",
         "operationId": "get_queue_api_v1_comfy_queue_get",
         "responses": {
           "200": {
@@ -69,6 +71,7 @@
           "run"
         ],
         "summary": "Execute Workflow",
+        "description": "Executes a specified workflow by processing dynamic form data, which can include both text fields and file uploads. The workflow is executed on an available ComfyUI instance within the cluster based on the queue size limit.\nThis endpoint accepts `multipart/form-data` with arbitrary fields. The form data can include both text fields and file uploads.",
         "operationId": "execute_workflow_api_v1_runs_post",
         "security": [
           {
@@ -123,6 +126,27 @@
               }
             }
           }
+        },
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Dynamic form data with arbitrary fields, including file uploads.",
+                "example": {
+                  "text_field": "Sample text",
+                  "file_field": "(binary file data)"
+                }
+              },
+              "encoding": {
+                "field_name": {
+                  "style": "form",
+                  "explode": true
+                }
+              }
+            }
+          }
         }
       },
       "get": {
@@ -130,6 +154,7 @@
           "run"
         ],
         "summary": "Get Runs",
+        "description": "Retrieves a list of all runs associated with a specific group ID. Useful for aggregating and managing related runs.",
         "operationId": "get_runs_api_v1_runs_get",
         "security": [
           {
@@ -177,6 +202,7 @@
           "run"
         ],
         "summary": "Get Output",
+        "description": "Retrieves the output of a specific run by providing the filename. It checks the run's status and returns a download URL if the output is available.",
         "operationId": "get_output_api_v1_runs_output_get",
         "security": [
           {
@@ -227,6 +253,7 @@
           "run"
         ],
         "summary": "Get Run",
+        "description": "Retrieves detailed information about a specific run using its unique run ID.",
         "operationId": "get_run_api_v1_runs__run_id__get",
         "security": [
           {
