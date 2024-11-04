@@ -1,0 +1,24 @@
+---
+title: Autoscaling
+description: Scale ComfyUI APIs to multiple GPUs for concurrent executions.
+icon: "cloud"
+---
+
+Autoscaling allows ComfyUI APIs to scale out to multiple GPUs, enabling concurrent executions and improved performance. This is achieved by starting multiple containers and load balancing incoming requests based on queue size.
+
+## Key Features
+  - Dynamic Scaling: Automatically adjusts the number of containers based on demand.
+  - Load Balancing: Distributes requests evenly to prevent bottlenecks.
+  - Cost Efficiency: Scale down when demand is low to save resources.
+
+## How to Use Autoscaling
+
+1. Set Scaling Policies:
+  - In your cluster settings, define autoscaling rules.
+  - Specify number of containers.
+  - Specify Queue size Limit
+
+## Benefits
+  - Ensures optimal resource utilization.
+  - Improves application responsiveness under varying loads.
+  - Reduces operational costs by scaling down when idle.

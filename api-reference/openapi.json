@@ -1,94 +1,194 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.1.0",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
+    "title": "Comfy API",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
+      "url": "https://flowscale-core.pod.flowscale.ai",
+      "description": "Pod #flowscale-core"
     }
   ],
   "paths": {
-    "/plants": {
+    "/api/v1/comfy/health": {
       "get": {
-        "description": "Returns all plants from the system that the user has access to",
+        "tags": [
+          "comfy"
+        ],
+        "summary": "Comfyui Health Check",
+        "description": "Checks the health status of all ComfyUI instances within the specified cluster. It verifies whether each ComfyUI instance is running or stopped.",
+        "operationId": "comfyui_health_check_api_v1_comfy_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComfyHealthCheckResponseWrapper"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/v1/comfy/queue": {
+      "get": {
+        "tags": [
+          "comfy"
+        ],
+        "summary": "Get Queue",
+        "description": "Retrieves the queue data for all ComfyUI instances in the cluster. This includes information about running and pending tasks in each instance's queue.",
+        "operationId": "get_queue_api_v1_comfy_queue_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComfyQueueResponseWrapper"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ]
+      }
+    },
+    "/api/v1/runs": {
+      "post": {
+        "tags": [
+          "run"
+        ],
+        "summary": "Execute Workflow",
+        "description": "Executes a specified workflow by processing dynamic form data, which can include both text fields and file uploads. The workflow is executed on an available ComfyUI instance within the cluster based on the queue size limit.\nThis endpoint accepts `multipart/form-data` with arbitrary fields. The form data can include both text fields and file uploads.",
+        "operationId": "execute_workflow_api_v1_runs_post",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
         "parameters": [
           {
-            "name": "limit",
+            "name": "workflow_id",
             "in": "query",
-            "description": "The maximum number of results to return",
+            "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "title": "Workflow Id"
+            }
+          },
+          {
+            "name": "group_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Group Id"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
+                  "$ref": "#/components/schemas/ComfyRunResponseWrapper"
                 }
               }
             }
           },
-          "400": {
-            "description": "Unexpected error",
+          "422": {
+            "description": "Validation Error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Dynamic form data with arbitrary fields, including file uploads.",
+                "example": {
+                  "text_field": "Sample text",
+                  "file_field": "(binary file data)"
+                }
+              },
+              "encoding": {
+                "field_name": {
+                  "style": "form",
+                  "explode": true
                 }
               }
             }
           }
         }
       },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
+      "get": {
+        "tags": [
+          "run"
+        ],
+        "summary": "Get Runs",
+        "description": "Retrieves a list of all runs associated with a specific group ID. Useful for aggregating and managing related runs.",
+        "operationId": "get_runs_api_v1_runs_get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "group_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Group Id"
             }
-          },
-          "required": true
-        },
+          }
+        ],
         "responses": {
           "200": {
-            "description": "plant response",
+            "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Plant"
+                  "$ref": "#/components/schemas/RunListResponseWrapper"
                 }
               }
             }
           },
-          "400": {
-            "description": "unexpected error",
+          "422": {
+            "description": "Validation Error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -96,32 +196,98 @@
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
+    "/api/v1/runs/output": {
+      "get": {
+        "tags": [
+          "run"
+        ],
+        "summary": "Get Output",
+        "description": "Retrieves the output of a specific run by providing the filename. It checks the run's status and returns a download URL if the output is available.",
+        "operationId": "get_output_api_v1_runs_output_get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
+            "name": "filename",
+            "in": "query",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "title": "Filename"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
+          "200": {
+            "description": "Successful Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/RunOutputResponseWrapper"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Output Found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/runs/{run_id}": {
+      "get": {
+        "tags": [
+          "run"
+        ],
+        "summary": "Get Run",
+        "description": "Retrieves detailed information about a specific run using its unique run ID.",
+        "operationId": "get_run_api_v1_runs__run_id__get",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunDetailResponseWrapper"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -132,63 +298,528 @@
   },
   "components": {
     "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
+      "ComfyHealthCheckResponse": {
         "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
+          "url": {
+            "type": "string",
+            "title": "Url"
           },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
+          "status": {
+            "type": "string",
+            "title": "Status"
           }
-        }
+        },
+        "type": "object",
+        "required": [
+          "url",
+          "status"
+        ],
+        "title": "ComfyHealthCheckResponse"
       },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
+      "ComfyHealthCheckResponseWrapper": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
           },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ComfyHealthCheckResponse"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "errors": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
               }
-            }
-          }
-        ]
-      },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
+            ],
+            "title": "Errors"
           },
-          "message": {
-            "type": "string"
+          "meta": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
           }
-        }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "data"
+        ],
+        "title": "ComfyHealthCheckResponseWrapper"
+      },
+      "ComfyQueueResponseItem": {
+        "properties": {
+          "comfy_uri": {
+            "type": "string",
+            "title": "Comfy Uri"
+          },
+          "queue": {
+            "type": "object",
+            "title": "Queue"
+          }
+        },
+        "type": "object",
+        "required": [
+          "comfy_uri",
+          "queue"
+        ],
+        "title": "ComfyQueueResponseItem"
+      },
+      "ComfyQueueResponseWrapper": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ComfyQueueResponseItem"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "errors": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Errors"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "data"
+        ],
+        "title": "ComfyQueueResponseWrapper"
+      },
+      "ComfyRunResponse": {
+        "properties": {
+          "run_id": {
+            "type": "string",
+            "title": "Run Id"
+          },
+          "output_names": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Output Names"
+          },
+          "node_errors": {
+            "title": "Node Errors"
+          }
+        },
+        "type": "object",
+        "required": [
+          "run_id",
+          "output_names",
+          "node_errors"
+        ],
+        "title": "ComfyRunResponse"
+      },
+      "ComfyRunResponseWrapper": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/ComfyRunResponse"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "errors": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Errors"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "data"
+        ],
+        "title": "ComfyRunResponseWrapper"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "RunDetailResponse": {
+        "properties": {
+          "workflow_id": {
+            "type": "string",
+            "title": "Workflow Id"
+          },
+          "group_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "inputs": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Inputs"
+          },
+          "output_names": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Output Names"
+          },
+          "outputs": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Outputs"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "completed_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Completed At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "workflow_id",
+          "group_id",
+          "status",
+          "inputs",
+          "output_names",
+          "outputs",
+          "created_at",
+          "started_at",
+          "completed_at"
+        ],
+        "title": "RunDetailResponse"
+      },
+      "RunDetailResponseWrapper": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RunDetailResponse"
+          },
+          "errors": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Errors"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "data"
+        ],
+        "title": "RunDetailResponseWrapper"
+      },
+      "RunListResponse": {
+        "properties": {
+          "group_id": {
+            "type": "string",
+            "title": "Group Id"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          },
+          "runs": {
+            "items": {
+              "$ref": "#/components/schemas/RunDetailResponse"
+            },
+            "type": "array",
+            "title": "Runs"
+          }
+        },
+        "type": "object",
+        "required": [
+          "group_id",
+          "count",
+          "runs"
+        ],
+        "title": "RunListResponse"
+      },
+      "RunListResponseWrapper": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RunListResponse"
+          },
+          "errors": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Errors"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "data"
+        ],
+        "title": "RunListResponseWrapper"
+      },
+      "RunOutputResponse": {
+        "properties": {
+          "download_url": {
+            "type": "string",
+            "title": "Download Url"
+          },
+          "generation_status": {
+            "type": "string",
+            "title": "Generation Status"
+          }
+        },
+        "type": "object",
+        "required": [
+          "download_url",
+          "generation_status"
+        ],
+        "title": "RunOutputResponse"
+      },
+      "RunOutputResponseWrapper": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RunOutputResponse"
+          },
+          "errors": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Errors"
+          },
+          "meta": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "data"
+        ],
+        "title": "RunOutputResponseWrapper"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
       }
     },
     "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+      "APIKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
       }
     }
   }

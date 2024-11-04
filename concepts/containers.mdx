@@ -1,0 +1,23 @@
+---
+title: Containers
+description: The lowest possible unit of deployment within clusters.
+icon: "laptop"
+---
+
+Containers are the lowest possible unit of deployment in Flowscale. Each cluster comprises one or more containers, which can be used for autoscaling GPUs based on queue size.
+
+## Key Features
+  - Lightweight Execution Units: Containers package your workflows with all dependencies.
+  - Scalable: Easily add or remove containers to meet demand.
+  - Isolation: Each container runs independently, ensuring consistent performance.
+
+## How to Use Projects
+
+1. Configure Containers in Clusters:
+  - When setting up a cluster, specify the number of containers by modifying the **Allotted GPU Containers** in the *Pod GPU Settings*
+  - Set **Queue Size Limit** to specify the queue size upon reaching which, a new ComfyUI instance will spawn.
+
+## Benefits
+  - Fine-grained control over deployment units.
+  - Ability to scale specific components of your application.
+  - Consistency across different environments.
