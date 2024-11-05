@@ -40,19 +40,6 @@
   ],
   "navigation": [
     {
-      "group": "Concepts",
-      "pages": [
-        "concepts/introduction",
-        "concepts/projects",
-        "concepts/pods",
-        "concepts/clusters",
-        "concepts/containers",
-        "concepts/autoscaling",
-        "concepts/runs",
-        "concepts/conclusion"
-      ]
-    },
-    {
       "group": "Get Started",
       "pages": [
         "introduction",
@@ -60,6 +47,18 @@
         "get-started/build",
         "get-started/manage",
         "get-started/deploy"
+      ]
+    },
+    {
+      "group": "Concepts",
+      "pages": [
+        "concepts/introduction",
+        "concepts/projects",
+        "concepts/workflows",
+        "concepts/nodes",
+        "concepts/models",
+        "concepts/pods",
+        "concepts/runs"      
       ]
     },
     {

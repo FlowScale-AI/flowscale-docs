@@ -1,0 +1,47 @@
+---
+title: Custom Nodes
+description: Custom Nodes enable you to expand the functionality of your ComfyUI workflows in Flowscale
+icon: "code"
+---
+
+**Custom Nodes** are essential components that allow users to build, extend, and customize the functionality of their ComfyUI workflows. Nodes perform specialized tasks, process data, and enable unique configurations, enhancing the flexibility and capability of any workflow.
+
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-11-05+144332.png" alt="API Keys Screenshot"/>
+
+## Key Features
+
+- **Custom Nodes Customization**: Implement nodes with specialized functions beyond standard ComfyUI capabilities to cater to unique project requirements.
+- **Caching**: Each node is cached during deployment, reducing setup time by avoiding repeated installations when deploying APIs or launching ComfyUI workflows.
+- **Dependency Management**: Customize each node by defining specific dependencies (both system-level and Python packages) for efficient operation.
+
+## How to Use Nodes
+
+### 1. Import a Custom Node
+
+- Go to the **Nodes** tab within your project.
+- Click on the **+** icon and select **Add Custom Node**.
+- Search for the node by name or enter its **URL** to import directly from a source repository.
+
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-11-05+181620.png" alt="API Keys Screenshot"/>
+
+### 2. Configure Advanced Settings
+
+- Specify **Linux dependencies** (e.g., apt packages) required by the custom node to function.
+- Add **Python dependencies** necessary for the node’s processes, ensuring compatibility with other project components.
+- Use the **Commit SHA of the GitHub repository** to lock the node to a specific version, which is useful for ensuring consistent behaviour across deployments. By default, the latest commit SHA is used.
+
+### 3. Reuse Across Workflows
+
+- Once added, custom nodes are accessible within the project’s node library.
+- Drag and drop nodes into any workflow within the project, promoting easy reuse and maintaining consistency across multiple workflows.
+
+## Benefits
+
+- **Enhanced Flexibility**: Nodes bring advanced processing capabilities to workflows, enabling complex tasks that standard nodes may not support.
+- **Efficiency Through Reusability**: Add a node once, then reuse it across workflows, saving time and minimizing redundant setup.
+- **Collaborative Development**: Share nodes within the project to foster teamwork and collaborative solution-building.
+- **Workflow Scalability**: Nodes make scaling workflows easier by adding specific functionality without restructuring the entire setup.
+
+---
+
+Nodes in Flowscale provide a robust framework for customizing and optimizing ComfyUI workflows, allowing users to streamline their projects with tailored functionalities and automation enhancements.

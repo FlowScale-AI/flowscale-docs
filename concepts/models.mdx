@@ -1,0 +1,113 @@
+---
+title: Models
+description: Manage and deploy model assets like checkpoints, LoRAs, ControlNets, and more within Flowscale
+icon: "database"
+---
+
+**Models** refer to key assets like **checkpoints**, **LoRAs**, **ControlNets**, **VAEs**, and others used within ComfyUI workflows. Models are stored in **Volumes**, which can be either public or private, allowing users to share common resources or securely manage private assets. Additionally, models in Flowscale are **project-agnostic**—once added, they are accessible across all projects, enhancing resource management and workflow efficiency.
+
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-11-05+144352.png" alt="API Keys Screenshot"/>
+
+## Key Features
+
+- **Model Types**: Support for various model types, including checkpoints, LoRAs, ControlNets, VAE, and more (see the complete list below).
+- **Volume Management**: Organize models within **public** or **private volumes** depending on access requirements.
+- **Custom Model Uploads**: Users can add and manage models within private volumes for exclusive use, maintaining security and privacy.
+- **Project-Agnostic**: Models are accessible across all projects once uploaded, supporting centralized management.
+
+## Supported Model Types
+
+Below is the list of model types supported within Flowscale, categorized by **Public** and **Private Volumes**:
+
+### Public Volume
+
+- **Available Models**:
+  - **checkpoints**: `checkpoints`
+  - **clip**: `clip`
+  - **clip_vision**: `clip_vision`
+  - **configs**: `configs`
+  - **controlnet**: `controlnet`
+  - **embeddings**: `embeddings`
+  - **loras**: `loras`
+  - **upscale_models**: `upscale_models`
+  - **vae**: `vae`
+  - **ipadapter**: `ipadapter`
+  - **animatediff_models**: `animatediff_models`
+  - **animatediff_motion_lora**: `animatediff_motion_lora`
+  - **AnimateDiffEvolved_Models**: `animatediff_motion_lora`
+  - **AnimateDiffMotion_LoRA**: `animatediff_motion_lora`
+  - **animatediff_video_formats**: `animatediff_video_formats`
+  - **VHS_video_formats**: `video_formats`
+  - **diffusers**: `diffusers`
+  - **dz_facedetailer**: `dz_facedetailer`
+  - **face_parsing**: `face_parsing`
+  - **facedetection**: `facedetection`
+  - **facerestore_models**: `facerestore_models`
+  - **GPTcheckpoints**: `GPTcheckpoints`
+  - **hypernetworks**: `hypernetworks`
+  - **insightface**: `insightface`
+  - **onnx**: `onnx`
+  - **photomaker**: `photomaker`
+  - **reactor**: `reactor`
+  - **sams**: `sams`
+  - **style_models**: `style_models`
+  - **ultralytics**: `ultralytics`
+  - **ultralytics_bbox**: `ultralytics/bbox`
+  - **ultralytics_segm**: `ultralytics/segm`
+  - **unet**: `unet`
+  - **vae_approx**: `vae_approx`
+  - **gligen**: `gligen`
+  - **classifiers**: `classifiers`
+  - **instantid**: `instantid`
+  - **lama**: `lama`
+  - **llama**: `llama`
+  - **LLavacheckpoints**: `LLavacheckpoints`
+  - **blip**: `blip`
+  - **isnet**: `isnet`
+  - **mmdets_bbox**: `mmdets/bbox`
+  - **mmdets_segm**: `mmdets/segm`
+  - **mmdets**: `mmdets`
+  - **inpaint**: `inpaint`
+  - **BiRefNet**: `BiRefNet`
+  - **xlabs**: `xlabs`
+  - **xlabs_loras**: `xlabs/loras`
+  - **xlabs_controlnets**: `xlabs/controlnets`
+  - **xlabs_ipadapters**: `xlabs/ipadapters`
+
+### Private Volume
+
+- **Available Models**:
+  - Supports all model types listed in the Public Volume.
+
+## How to Use Models
+
+### 1. Accessing Public and Private Volumes
+
+- Navigate to the **Models** section in Flowscale.
+- Use **Public Volumes** to view and access shared models available to all users.
+- Use **Private Volumes** to manage personal or proprietary models, enabling secure usage across workflows.
+
+### 2. Adding Models to Private Volumes
+
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-11-05+174552.png" alt="API Keys Screenshot"/>
+
+- In the **Private Volumes** section, click on the **+** icon and select **Add Folder** to organize models.
+- Within the folder, click the **⋮** icon and choose **Upload Model**.
+- Search for the model or enter the download URL, filename(optional), and source credentials(CivitAI API Key or HuggingFace API Key) 
+- Click **Upload** to add it to your private volume.
+
+### 3. Using Models in ComfyUI Workflows
+
+- Within a workflow, select the relevant node configuration where models are applied (e.g., checkpoints, ControlNets).
+- Choose a model from the volume, adjusting parameters as necessary.
+- Integrate the model directly within the workflow, allowing for seamless interaction with other nodes.
+
+## Benefits
+
+- **Access Control**: Public volumes provide shared access, while private volumes ensure secure storage for proprietary models.
+- **Workflow Customization**: Customize workflows with specialized models to meet specific project needs.
+- **Project-Agnostic Scalability**: Models added once are accessible across all projects, enabling efficient resource sharing and centralized management.
+
+---
+
+Flowscale's model management system supports a wide range of model types and allows users to organize, secure, and deploy essential assets like checkpoints, LoRAs, and ControlNets. This system provides enhanced customization and scalability for ComfyUI workflows, empowering users to optimize performance across projects.
