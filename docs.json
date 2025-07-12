@@ -1,47 +1,139 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "maple",
-  "name": "Your Docs",
+  "theme": "almond",
+  "name": "FlowScale AI",
+  "logo": {
+    "dark": "/logo/logo-with-fullname.svg",
+    "light": "/logo/logo-with-fullname-light.svg",
+    "href": "https://flowscale.ai"
+  },
+  "favicon": "/flowscale-fav.svg",
   "colors": {
-    "primary": "#ff0000"
+    "primary": "#60a5fa",
+    "light": "#93c5fd",
+    "dark": "#2563eb"
   },
   "navigation": {
-    "dropdowns": [
+    "tabs": [
       {
-        "dropdown": "Getting Started",
-        "icon": "book-open",
-        "description": "Get started with our platform",
+        "tab": "Getting Started",
+        "icon": "rocket",
         "groups": [
           {
             "group": "Overview",
             "pages": [
-              "introduction",
-              "get-started/setup",
-              "get-started/build",
-              "get-started/manage",
-              "get-started/deploy"
+              "getting-started/introduction",
+              "getting-started/import-create-workflows",
+              "getting-started/deploy-workflows"
+            ]
+          },
+          {
+            "group": "Glossary",
+            "pages": [
+              "getting-started/glossary/comfyui",
+              "getting-started/glossary/workflows",
+              "getting-started/glossary/nodes",
+              "getting-started/glossary/projects",
+              "getting-started/glossary/pods"
+            ]
+          },
+          {
+            "group": "Troubleshooting",
+            "pages": [
+              "getting-started/troubleshooting/index"
             ]
           }
         ]
       },
       {
-        "dropdown": "API References",
-        "icon": "square-terminal",
-        "description": "Explore our API endpoints",
-        "pages": [
-          "api-reference/introduction",
-          "api-reference/endpoint/health_check",
-          "api-reference/endpoint/get_queue",
-          "api-reference/endpoint/execute_workflow",
-          "api-reference/endpoint/get_execution_output",
-          "api-reference/endpoint/get_run_details",
-          "api-reference/endpoint/get_runs"
+        "tab": "ComfyUI Workspace",
+        "icon": "pen-to-square",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "workspace/overview",
+              "workspace/editor-walkthrough"
+            ]
+          },
+          {
+            "group": "Workflow Management",
+            "pages": [
+              "workspace/basics",
+              "workspace/debug",
+              "workspace/versioning",
+              "workspace/import-export"
+            ]
+          }
         ]
       },
       {
-        "dropdown": "Blog",
-        "href": "https://external-link.com/blog"
+        "tab": "API & Deployment",
+        "icon": "code",
+        "groups": [
+          {
+            "group": "Deployment",
+            "pages": [
+              "deploy-api/overview",
+              "deploy-api/configure",
+              "deploy-api/api-overview",
+              "deploy-api/playground-uis",
+              "deploy-api/scaling"
+            ]
+          },
+          {
+            "group": "SDKs",
+            "pages": [
+              "deploy-api/sdk/sdk-js",
+              "deploy-api/sdk/sdk-python"
+            ]
+          },
+          {
+            "group": "Examples",
+            "pages": [
+              "deploy-api/examples"
+            ]
+          },
+          {
+            "group": "API Reference",
+            "pages": [
+              "deploy-api/reference/get-run"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Other References",
+        "icon": "book",
+        "groups": [
+          {
+            "group": "Architecture",
+            "pages": [
+              "reference/deployment-models",
+              "reference/network-architecture-diagrams"
+            ]
+          },
+          {
+            "group": "Support",
+            "pages": [
+              "reference/troubleshooting/index"
+            ]
+          },
+          {
+            "group": "Changelog",
+            "pages": [
+              "reference/changelog/2025-07-10"
+            ]
+          }
+        ]
       }
     ]
+  },
+  "navbar": {
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://app.flowscale.ai/"
+    }
   }
 }

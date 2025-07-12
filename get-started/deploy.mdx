@@ -4,7 +4,7 @@ description: 'Deploy your ComfyUI workflows as scalable APIs or shareable Gradio
 icon: 'rocket'
 ---
 
-FlowScale allows you to deploy your ComfyUI workflows as scalable APIs or shareable AI apps using Gradio UIs. This guide will cover how to prepare, deploy, and monitor your workflows, as well as the scalability options and post-deployment processes.
+FlowScale AI allows you to deploy your ComfyUI workflows as scalable APIs or shareable AI apps using Gradio UIs. This guide will cover how to prepare, deploy, and monitor your workflows, as well as the scalability options and post-deployment processes.
 
 ---
 
@@ -78,7 +78,7 @@ Before deploying a workflow as an API or Gradio UI, you need to configure the wo
 
 ## 2. **API Deployment**
 
-Deploying a workflow as an API on FlowScale enables scalable, serverless API endpoints for external use.
+Deploying a workflow as an API on FlowScale AI enables scalable, serverless API endpoints for external use.
 
 ### **Steps for Deploying a Workflow as an API**
 1. **Deploy the Workflow**:
@@ -120,7 +120,7 @@ Deploying a workflow as an API on FlowScale enables scalable, serverless API end
     </Frame>
 
 ### **API Documentation (Swagger)**
-- After deployment, FlowScale generates API documentation using **Swagger**. This documentation includes details on how to call the API, endpoints, request/response formats, and authentication information.
+- After deployment, FlowScale AI generates API documentation using **Swagger**. This documentation includes details on how to call the API, endpoints, request/response formats, and authentication information.
 - You can access the **API Docs** by clicking the **API Docs** button in the deployment section.
 
     <Frame caption="API Docs Link" style={{marginBottom: '10px'}}>
@@ -187,13 +187,13 @@ Deploying a workflow as a Gradio UI creates a shareable interface that can be ac
 
 ## 4. **Scaling and Performance**
 
-FlowScale workflows are designed to be scalable and handle multiple API requests efficiently.
+FlowScale AI workflows are designed to be scalable and handle multiple API requests efficiently.
 
 ### **Handling Scalability**
-- **Queue-based System**: FlowScale uses ComfyUI's **queue-based system** to handle multiple concurrent requests. When several users access the API at the same time, their requests are queued to ensure smooth execution without overwhelming the system.
+- **Queue-based System**: FlowScale AI uses ComfyUI's **queue-based system** to handle multiple concurrent requests. When several users access the API at the same time, their requests are queued to ensure smooth execution without overwhelming the system.
 
 ### **Scaling Up or Down Based on Demand** (Coming Soon)
-- Currently, there is no manual functionality to scale workflows up or down based on demand. However, in the near future, FlowScale plans to introduce **auto-scaling features**. (This feature does not need to be included in the documentation for now.)
+- Currently, there is no manual functionality to scale workflows up or down based on demand. However, in the near future, FlowScale AI plans to introduce **auto-scaling features**. (This feature does not need to be included in the documentation for now.)
 
 ### **Optimizing Workflows for Better Performance**
 - **Minimize Node Complexity**: Keep the node list lightweight. The more nodes a workflow has, the **longer the cold start time** will be.
@@ -235,4 +235,4 @@ Once a workflow is deployed, it’s essential to monitor its performance and mak
 
 ### **Conclusion**
 
-Deploying workflows in FlowScale is a seamless process that enables scalable API endpoints and shareable Gradio UIs. By following this guide, you can ensure that your workflows are properly configured, optimized for performance, and monitored effectively after deployment.
+Deploying workflows in FlowScale AI is a seamless process that enables scalable API endpoints and shareable Gradio UIs. By following this guide, you can ensure that your workflows are properly configured, optimized for performance, and monitored effectively after deployment.

@@ -1,0 +1,330 @@
+---
+title: Projects
+description: "Understanding projects in FlowScale - organizing workflows and team collaboration"
+icon: "folder-open"
+---
+
+## What are Projects?
+
+A **project** in FlowScale is a workspace that contains related workflows, models, and configurations. Projects serve as the organizational unit for your AI development work, enabling team collaboration, resource sharing, and deployment management.
+
+<Frame>
+  <img
+    src="/images/setup/new-project.png"
+    alt="Creating a new project in FlowScale"
+  />
+</Frame>
+
+## Project Structure
+
+### Core Components
+
+Every FlowScale project contains:
+
+<CardGroup cols={2}>
+  <Card title="Workflows" icon="diagram-project">
+    ComfyUI workflows and their versions
+  </Card>
+  <Card title="Models" icon="cube">
+    AI models, checkpoints, LoRAs, and custom nodes
+  </Card>
+  <Card title="Deployments" icon="rocket">
+    Live APIs and applications based on project workflows
+  </Card>
+  <Card title="Settings" icon="gear">
+    Configuration, permissions, and project metadata
+  </Card>
+</CardGroup>
+
+### Project Hierarchy
+
+```
+📂 Project
+├── 🔄 Workflows/
+│   ├── text-to-image-basic/
+│   ├── portrait-enhancer/
+│   └── style-transfer/
+├── 🎯 Models/
+│   ├── checkpoints/
+│   ├── loras/
+│   └── custom-nodes/
+├── 🚀 Deployments/
+│   ├── api-endpoints/
+│   └── gradio-apps/
+└── ⚙️ Settings/
+    ├── team-permissions/
+    ├── gpu-preferences/
+    └── api-keys/
+```
+
+## Project Types
+
+### Personal Projects
+
+**Individual workspaces** for personal AI development:
+
+- **Private by default**: Only accessible to the creator
+- **Full control**: Complete ownership of all resources
+- **No usage limits**: Subject only to account limits
+- **Easy sharing**: Can invite collaborators when needed
+
+### Team Projects
+
+**Collaborative workspaces** for team development:
+
+<Tabs>
+  <Tab title="Small Teams (2-5 members)">
+    - Shared workflow development
+    - Informal collaboration patterns
+    - Simple permission management
+    - Direct communication within the platform
+  </Tab>
+  <Tab title="Large Teams (5+ members)">
+    - Role-based access control
+    - Structured workflow approval processes
+    - Integration with external tools (GitHub, Slack)
+    - Advanced monitoring and analytics
+  </Tab>
+</Tabs>
+
+### Organization Projects
+
+**Enterprise-level** project management:
+
+- **Centralized governance**: Organization-wide policies and standards
+- **Resource pooling**: Shared GPU quotas and model libraries
+- **Compliance features**: Audit trails and security controls
+- **Billing management**: Unified billing across all projects
+
+## Project Lifecycle
+
+### Creation and Setup
+
+<Steps>
+  <Step title="Create Project">
+    Choose project name, description, and initial settings
+  </Step>
+  <Step title="Configure Resources">
+    Set GPU preferences and resource limits
+  </Step>
+  <Step title="Add Team Members">
+    Invite collaborators with appropriate permissions
+  </Step>
+  <Step title="Import Initial Workflows">
+    Upload existing workflows or start with templates
+  </Step>
+</Steps>
+
+### Development Phase
+
+During active development, projects evolve through:
+
+- **Workflow creation**: Building new AI pipelines
+- **Model management**: Adding and organizing AI models
+- **Testing and iteration**: Refining workflows through experimentation
+- **Version control**: Tracking changes and maintaining history
+
+### Production Phase
+
+Mature projects focus on:
+
+- **Deployment management**: Maintaining live APIs and applications
+- **Performance optimization**: Monitoring and improving efficiency
+- **Scaling operations**: Handling increased usage and demand
+- **Maintenance**: Updates, bug fixes, and security patches
+
+## Collaboration Features
+
+### Team Management
+
+<Frame>
+  <img
+    src="/images/setup/collab-1.png"
+    alt="Team collaboration interface"
+  />
+</Frame>
+
+**Role-Based Permissions**:
+
+| Role | Permissions | Use Case |
+|------|-------------|----------|
+| **Owner** | Full control, billing access | Project creator, team lead |
+| **Admin** | Manage members, deploy workflows | Senior developers, DevOps |
+| **Developer** | Edit workflows, manage models | Core development team |
+| **Contributor** | Create workflows, limited editing | Junior developers, contractors |
+| **Viewer** | Read-only access | Stakeholders, QA team |
+
+### Real-Time Collaboration
+
+<AccordionGroup>
+  <Accordion title="Simultaneous Editing">
+    - Multiple team members can edit workflows simultaneously
+    - Live cursor positions and real-time updates
+    - Automatic conflict resolution for simple changes
+    - Manual merge resolution for complex conflicts
+  </Accordion>
+  <Accordion title="Communication Tools">
+    - In-line comments on specific workflow nodes
+    - Discussion threads for project-wide conversations
+    - @mentions to notify specific team members
+    - Integration with external chat tools (Slack, Discord)
+  </Accordion>
+  <Accordion title="Change Tracking">
+    - Detailed history of all project changes
+    - Commit messages explaining modifications
+    - Blame/credit tracking for accountability
+    - Rollback capabilities for easy recovery
+  </Accordion>
+</AccordionGroup>
+
+## Resource Management
+
+### Model Sharing
+
+Projects provide efficient model management:
+
+- **Shared model library**: All team members access the same models
+- **Version control**: Track model updates and changes
+- **Automatic syncing**: New models available to all collaborators
+- **Storage optimization**: Deduplication across project workflows
+
+### GPU Resource Allocation
+
+<Tabs>
+  <Tab title="Personal Allocation">
+    - Individual GPU quotas per team member
+    - Usage tracking and billing attribution
+    - Priority queuing based on role and project needs
+    - Automatic scaling within defined limits
+  </Tab>
+  <Tab title="Shared Pool">
+    - Project-wide GPU budget and quotas
+    - Dynamic allocation based on demand
+    - Fair usage policies to prevent resource hogging
+    - Cost optimization through intelligent scheduling
+  </Tab>
+</Tabs>
+
+## Project Settings
+
+### Configuration Options
+
+**General Settings**:
+- Project name, description, and tags
+- Default GPU types and scaling preferences
+- Timezone and regional settings
+- Integration configurations
+
+**Security Settings**:
+- Access control and permission policies
+- API key management and rotation
+- Network access restrictions
+- Audit logging and compliance
+
+**Billing Settings**:
+- Payment methods and billing contacts
+- Usage alerts and spending limits
+- Cost allocation and reporting
+- Budget management and approvals
+
+## Project Templates
+
+FlowScale provides templates for common project types:
+
+<CardGroup cols={2}>
+  <Card title="AI Art Studio" icon="palette">
+    Pre-configured for creative image generation workflows
+  </Card>
+  <Card title="API Development" icon="code">
+    Optimized for building and deploying AI APIs
+  </Card>
+  <Card title="Research Lab" icon="flask">
+    Designed for AI research and experimentation
+  </Card>
+  <Card title="Production Pipeline" icon="industry">
+    Enterprise-ready setup for production AI workflows
+  </Card>
+</CardGroup>
+
+## Best Practices
+
+### Organization
+
+<AccordionGroup>
+  <Accordion title="Naming Conventions">
+    - Use clear, descriptive project names
+    - Establish consistent workflow naming patterns
+    - Tag projects by category, team, or purpose
+    - Maintain organized folder structures
+  </Accordion>
+  <Accordion title="Documentation">
+    - Document project purpose and scope
+    - Maintain README files for complex workflows
+    - Record deployment procedures and requirements
+    - Keep team contact information updated
+  </Accordion>
+  <Accordion title="Workflow Management">
+    - Use branching for experimental features
+    - Implement code review processes for critical workflows
+    - Maintain staging and production environments
+    - Regular cleanup of unused workflows and models
+  </Accordion>
+</AccordionGroup>
+
+### Security
+
+- **Access Control**: Regularly review and update team permissions
+- **API Security**: Rotate API keys and use least-privilege access
+- **Data Protection**: Follow data privacy regulations and best practices
+- **Audit Trails**: Monitor project activity and maintain compliance logs
+
+## Migration and Backup
+
+### Exporting Projects
+
+FlowScale supports various export options:
+
+- **Complete project export**: All workflows, models, and configurations
+- **Selective export**: Choose specific components to export
+- **API integration**: Programmatic access to project data
+- **Standard formats**: Compatible with other AI development tools
+
+### Backup Strategies
+
+- **Automatic backups**: Regular snapshots of project state
+- **Version history**: Access to historical project versions
+- **Cross-region redundancy**: Data replicated across multiple locations
+- **Manual export**: On-demand backup creation
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Create Your First Project"
+    icon="plus"
+    href="/getting-started/import-create-workflows"
+  >
+    Set up a new project and import workflows
+  </Card>
+  <Card
+    title="Team Collaboration"
+    icon="users"
+    href="/workspace/versioning"
+  >
+    Learn advanced collaboration features
+  </Card>
+  <Card
+    title="Project Deployment"
+    icon="rocket"
+    href="/getting-started/deploy-workflows"
+  >
+    Deploy project workflows as APIs
+  </Card>
+  <Card
+    title="Resource Management"
+    icon="chart-pie"
+    href="/deploy-api/scaling"
+  >
+    Optimize project resource usage
+  </Card>
+</CardGroup>

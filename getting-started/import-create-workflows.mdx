@@ -1,0 +1,188 @@
+---
+title: Import & Create Workflows
+description: "Learn how to bring existing ComfyUI workflows into FlowScale or create new ones from scratch"
+icon: "upload"
+---
+
+## Importing Existing Workflows
+
+FlowScale makes it easy to import your existing ComfyUI workflows and run them on powerful cloud GPUs.
+
+### From JSON Files
+
+The most common way to import workflows is through ComfyUI's workflow JSON format:
+
+<Steps>
+  <Step title="Export from ComfyUI">
+    In ComfyUI, click **"Save"** to export your workflow as JSON
+  </Step>
+  <Step title="Import to FlowScale">
+    In your FlowScale project, click **"Import Workflow"** and upload the JSON file
+  </Step>
+  <Step title="Resolve Dependencies">
+    FlowScale will automatically detect required models and custom nodes
+  </Step>
+  <Step title="Test & Deploy">
+    Run the workflow in the cloud editor and deploy when ready
+  </Step>
+</Steps>
+
+<Frame>
+  <img
+    src="/images/build/import-workflow-modal.png"
+    alt="Import workflow modal"
+  />
+</Frame>
+
+### Supported Formats
+
+| Format | Description | Use Case |
+|--------|-------------|----------|
+| **Workflow JSON** | Standard ComfyUI workflow format | Most common, includes all node connections and settings |
+| **API JSON** | ComfyUI API format | Advanced users, programmatic workflows |
+| **PNG with metadata** | Images with embedded workflow data | Workflows shared in communities |
+
+<Tip>
+When importing PNG files with embedded workflows, FlowScale automatically extracts the workflow data and converts it to the proper format.
+</Tip>
+
+## Creating New Workflows
+
+Start building AI workflows from scratch using FlowScale's cloud-based ComfyUI editor.
+
+### Quick Start Templates
+
+FlowScale provides pre-built templates for common use cases:
+
+<CardGroup cols={2}>
+  <Card title="Text-to-Image" icon="image">
+    Stable Diffusion workflow for generating images from text prompts
+  </Card>
+  <Card title="Image-to-Image" icon="wand-magic-sparkles">
+    Transform existing images with AI-powered modifications
+  </Card>
+  <Card title="Upscaling" icon="expand">
+    Enhance image resolution using super-resolution models
+  </Card>
+  <Card title="ControlNet" icon="sliders">
+    Precise control over image generation with guidance images
+  </Card>
+</CardGroup>
+
+### Building Your First Workflow
+
+<Steps>
+  <Step title="Create New Workflow">
+    Click **"New Workflow"** in your project dashboard
+  </Step>
+  <Step title="Choose a Template">
+    Select a template or start with a blank canvas
+  </Step>
+  <Step title="Add Nodes">
+    Drag and drop nodes from the library to build your pipeline
+  </Step>
+  <Step title="Connect Nodes">
+    Link node outputs to inputs to create the data flow
+  </Step>
+  <Step title="Configure Parameters">
+    Set up input parameters and default values
+  </Step>
+  <Step title="Test & Iterate">
+    Run the workflow to validate functionality
+  </Step>
+</Steps>
+
+## Managing Models & Dependencies
+
+FlowScale automatically handles model management and dependencies for your workflows.
+
+### Automatic Model Detection
+
+When you import a workflow, FlowScale:
+
+- Scans for required models (checkpoints, LoRAs, VAEs)
+- Checks availability in the public model library
+- Prompts you to upload missing models
+
+### Model Sources
+
+<Tabs>
+  <Tab title="Public Library">
+    Access thousands of pre-loaded models from:
+    - Hugging Face
+    - Civitai
+    - Popular community models
+  </Tab>
+  <Tab title="Private Models">
+    Upload your own models:
+    - Custom trained checkpoints
+    - Fine-tuned LoRAs
+    - Specialized VAEs
+  </Tab>
+  <Tab title="Auto-Download">
+    FlowScale can automatically download models from:
+    - Direct URLs
+    - Hugging Face repositories
+    - Civitai links
+  </Tab>
+</Tabs>
+
+<Frame>
+  <img
+    src="/images/build/public-models.png"
+    alt="Public models library"
+  />
+</Frame>
+
+### Custom Nodes
+
+FlowScale supports most popular ComfyUI custom nodes:
+
+- **ControlNet nodes**: Advanced image guidance
+- **Face restoration**: Portrait enhancement workflows
+- **Video processing**: Animation and video generation
+- **3D workflows**: Depth maps and 3D scene generation
+
+<Warning>
+Some custom nodes may require manual installation. Contact support if you encounter compatibility issues with specific nodes.
+</Warning>
+
+## Best Practices
+
+### Workflow Design
+
+- **Modular approach**: Break complex workflows into reusable components
+- **Clear naming**: Use descriptive names for nodes and connections
+- **Parameter exposure**: Make key settings accessible as API inputs
+- **Error handling**: Add validation nodes for robust workflows
+
+### Performance Optimization
+
+- **Batch processing**: Group operations when possible
+- **Memory management**: Use appropriate model precision settings
+- **GPU selection**: Choose the right GPU tier for your workflow complexity
+
+### Collaboration
+
+- **Version control**: Commit changes with descriptive messages
+- **Documentation**: Add comments explaining complex sections
+- **Testing**: Validate workflows thoroughly before sharing
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="ComfyUI Workspace"
+    icon="pen-to-square"
+    href="/workspace/editor-walkthrough"
+  >
+    Learn the cloud editor interface
+  </Card>
+  <Card
+    title="Deploy Workflows"
+    icon="rocket"
+    href="/getting-started/deploy-workflows"
+  >
+    Turn your workflow into an API
+  </Card>
+</CardGroup>

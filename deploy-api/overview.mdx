@@ -1,0 +1,390 @@
+---
+title: Deploy API Overview
+description: "Transform your ComfyUI workflows into production-ready APIs and interactive applications"
+icon: "rocket"
+---
+
+## API Deployment Platform
+
+FlowScale's API deployment platform transforms your ComfyUI workflows into scalable, production-ready endpoints with zero infrastructure management. Deploy in seconds, scale automatically, and integrate anywhere.
+
+<Frame>
+  <img
+    src="/images/deploy/deployment-tab.png"
+    alt="API deployment dashboard"
+  />
+</Frame>
+
+## Why Deploy with FlowScale?
+
+### Zero Infrastructure Complexity
+
+Focus on your AI workflows while FlowScale handles everything else:
+
+<CardGroup cols={2}>
+  <Card title="Serverless Architecture" icon="cloud">
+    Auto-scaling infrastructure that adapts to your traffic
+  </Card>
+  <Card title="Global Edge Network" icon="globe">
+    Deploy across multiple regions for low-latency access
+  </Card>
+  <Card title="Automatic HTTPS" icon="shield">
+    SSL certificates and security handled automatically
+  </Card>
+  <Card title="Built-in Monitoring" icon="chart-line">
+    Real-time metrics, logging, and error tracking
+  </Card>
+</CardGroup>
+
+### Production-Grade Features
+
+<AccordionGroup>
+  <Accordion title="High Availability">
+    - 99.9% uptime SLA with automatic failover
+    - Multi-zone redundancy and disaster recovery
+    - Health checks and automatic pod replacement
+    - Zero-downtime deployments and updates
+  </Accordion>
+  <Accordion title="Security & Compliance">
+    - API key authentication with fine-grained permissions
+    - Rate limiting and DDoS protection
+    - SOC 2 Type II compliance
+    - GDPR-compliant data handling
+  </Accordion>
+  <Accordion title="Developer Experience">
+    - Auto-generated OpenAPI documentation
+    - Interactive API testing interface
+    - Multi-language SDKs and code examples
+    - Webhook support for async workflows
+  </Accordion>
+</AccordionGroup>
+
+## Deployment Options
+
+### REST APIs
+
+Convert workflows into HTTP endpoints that integrate with any application:
+
+<CodeGroup>
+
+```bash curl
+curl -X POST https://api.flowscale.ai/v1/run \
+  -H "Authorization: Bearer fs_1234567890abcdef" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "workflow_id": "text-to-image-v2",
+    "inputs": {
+      "prompt": "A serene mountain landscape at sunset",
+      "width": 1024,
+      "height": 1024,
+      "steps": 20,
+      "cfg_scale": 7.5
+    }
+  }'
+```
+
+```python Python
+import flowscale
+
+client = flowscale.Client(api_key="fs_1234567890abcdef")
+
+result = client.run(
+    workflow_id="text-to-image-v2",
+    inputs={
+        "prompt": "A serene mountain landscape at sunset",
+        "width": 1024,
+        "height": 1024,
+        "steps": 20,
+        "cfg_scale": 7.5
+    }
+)
+
+print(result.images[0].url)
+```
+
+```javascript JavaScript
+import FlowScale from '@flowscale/sdk';
+
+const client = new FlowScale({
+  apiKey: 'fs_1234567890abcdef'
+});
+
+const result = await client.run({
+  workflowId: 'text-to-image-v2',
+  inputs: {
+    prompt: 'A serene mountain landscape at sunset',
+    width: 1024,
+    height: 1024,
+    steps: 20,
+    cfgScale: 7.5
+  }
+});
+
+console.log(result.images[0].url);
+```
+
+</CodeGroup>
+
+### Interactive Applications
+
+Generate user-friendly Gradio interfaces automatically:
+
+<Tabs>
+  <Tab title="Auto-Generated UI">
+    FlowScale automatically creates beautiful interfaces based on your workflow parameters:
+    - **Form fields** for text inputs, sliders for numbers
+    - **File upload** widgets for image inputs
+    - **Real-time preview** of generated content
+    - **Parameter validation** and helpful error messages
+  </Tab>
+  <Tab title="Custom Branding">
+    Personalize your application's appearance:
+    - Upload your logo and brand colors
+    - Customize the interface title and description
+    - Add custom CSS for advanced styling
+    - White-label options for enterprise customers
+  </Tab>
+  <Tab title="Sharing Options">
+    Multiple ways to share your AI applications:
+    - **Public URLs** for open access
+    - **Password protection** for controlled access
+    - **Embed codes** for integration into websites
+    - **Domain mapping** for custom URLs
+  </Tab>
+</Tabs>
+
+<Frame>
+  <img
+    src="/images/deploy/gradio-ui.png"
+    alt="Auto-generated Gradio interface"
+  />
+</Frame>
+
+## Deployment Workflow
+
+### Simple 4-Step Process
+
+<Steps>
+  <Step title="Prepare Workflow">
+    Ensure your workflow runs successfully in the editor and produces the desired outputs
+  </Step>
+  <Step title="Configure API">
+    Define input parameters, validation rules, and output formats
+  </Step>
+  <Step title="Deploy">
+    Click deploy and choose your scaling and security settings
+  </Step>
+  <Step title="Test & Share">
+    Use the generated documentation to test your API and share with users
+  </Step>
+</Steps>
+
+### Configuration Options
+
+<Tabs>
+  <Tab title="Input Configuration">
+    **Parameter Types**:
+    - **Text**: Prompts, descriptions, filenames
+    - **Number**: Steps, CFG scale, dimensions
+    - **Image**: Upload widgets with format validation
+    - **Boolean**: Toggles for optional features
+    - **Select**: Dropdown menus for predefined options
+
+    **Validation Rules**:
+    - Min/max values for numbers
+    - Character limits for text
+    - File size and format restrictions
+    - Required vs. optional parameters
+  </Tab>
+  <Tab title="Output Configuration">
+    **Response Formats**:
+    - **Images**: URLs to generated images with metadata
+    - **JSON**: Structured data with custom fields
+    - **Files**: Direct download links for any file type
+    - **Streaming**: Real-time updates for long-running workflows
+
+    **Content Delivery**:
+    - Global CDN for fast image delivery
+    - Temporary URLs with configurable expiration
+    - Permanent storage options for important outputs
+    - Compression and optimization settings
+  </Tab>
+  <Tab title="Performance Settings">
+    **GPU Selection**:
+    - **T4**: Basic workflows, development testing
+    - **L4**: Standard image generation, moderate complexity
+    - **A100**: Complex workflows, batch processing
+    - **H100**: Largest models, real-time applications
+
+    **Scaling Configuration**:
+    - Min/max instance counts
+    - Auto-scaling triggers and thresholds
+    - Cold-start optimization settings
+    - Geographic distribution preferences
+  </Tab>
+</Tabs>
+
+## Production Features
+
+### Auto-Generated Documentation
+
+Every deployed API includes comprehensive documentation:
+
+<Frame>
+  <img
+    src="/images/deploy/api-docs.png"
+    alt="Auto-generated API documentation"
+  />
+</Frame>
+
+**Interactive Documentation**:
+- Complete API reference with all endpoints
+- Try-it-now functionality for testing
+- Code examples in multiple languages
+- Parameter descriptions and validation rules
+- Response schemas and example outputs
+
+### Monitoring & Analytics
+
+Track your API's performance and usage:
+
+<CardGroup cols={2}>
+  <Card title="Request Analytics" icon="chart-bar">
+    Monitor API calls, response times, and success rates
+  </Card>
+  <Card title="Error Tracking" icon="triangle-exclamation">
+    Detailed error logs with stack traces and debugging info
+  </Card>
+  <Card title="Usage Metrics" icon="gauge">
+    Track resource consumption and optimization opportunities
+  </Card>
+  <Card title="Cost Analysis" icon="dollar-sign">
+    Understand your infrastructure costs and usage patterns
+  </Card>
+</CardGroup>
+
+### Security & Access Control
+
+<AccordionGroup>
+  <Accordion title="Authentication">
+    - **API Keys**: Secure token-based authentication
+    - **JWT Tokens**: For more complex authentication flows
+    - **OAuth 2.0**: Integration with external identity providers
+    - **Custom Auth**: Webhook-based authentication for enterprise
+  </Accordion>
+  <Accordion title="Authorization">
+    - **Rate Limiting**: Protect against abuse and manage costs
+    - **IP Allowlisting**: Restrict access to specific networks
+    - **Usage Quotas**: Set limits on API consumption
+    - **Role-Based Access**: Different permission levels for different users
+  </Accordion>
+  <Accordion title="Data Protection">
+    - **HTTPS Only**: All communications encrypted in transit
+    - **Data Retention**: Configurable policies for input/output data
+    - **PII Handling**: Special protections for sensitive data
+    - **Audit Logging**: Complete records of all API activity
+  </Accordion>
+</AccordionGroup>
+
+## Integration Examples
+
+### Common Use Cases
+
+<Tabs>
+  <Tab title="Web Applications">
+    **Frontend Integration**:
+    ```javascript
+    // React component example
+    const [image, setImage] = useState(null);
+    const [loading, setLoading] = useState(false);
+    
+    const generateImage = async (prompt) => {
+      setLoading(true);
+      try {
+        const result = await flowscale.run({
+          workflowId: 'text-to-image',
+          inputs: { prompt }
+        });
+        setImage(result.images[0].url);
+      } catch (error) {
+        console.error('Generation failed:', error);
+      }
+      setLoading(false);
+    };
+    ```
+  </Tab>
+  <Tab title="Mobile Applications">
+    **Flutter/React Native**:
+    ```dart
+    // Flutter example
+    Future<String> generateImage(String prompt) async {
+      final response = await http.post(
+        Uri.parse('https://api.flowscale.ai/v1/run'),
+        headers: {
+          'Authorization': 'Bearer $apiKey',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'workflow_id': 'text-to-image',
+          'inputs': {'prompt': prompt}
+        }),
+      );
+      
+      final data = jsonDecode(response.body);
+      return data['images'][0]['url'];
+    }
+    ```
+  </Tab>
+  <Tab title="Backend Services">
+    **Microservice Integration**:
+    ```python
+    # Python service example
+    from fastapi import FastAPI
+    import flowscale
+    
+    app = FastAPI()
+    client = flowscale.Client(api_key=os.getenv('FLOWSCALE_API_KEY'))
+    
+    @app.post("/generate")
+    async def generate_content(request: GenerateRequest):
+        result = await client.run(
+            workflow_id="content-generator",
+            inputs=request.dict()
+        )
+        return {"content": result.outputs}
+    ```
+  </Tab>
+</Tabs>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Deploy Your First API"
+    icon="rocket"
+    href="/getting-started/deploy-workflows"
+  >
+    Step-by-step deployment guide
+  </Card>
+  <Card
+    title="SDK Documentation"
+    icon="code"
+    href="/deploy-api/sdk/sdk-js"
+  >
+    Learn to integrate with our SDKs
+  </Card>
+  <Card
+    title="Scaling Strategies"
+    icon="chart-line"
+    href="/deploy-api/scaling"
+  >
+    Optimize performance and manage costs
+  </Card>
+  <Card
+    title="API Reference"
+    icon="book"
+    href="/deploy-api/reference/get-run"
+  >
+    Complete API documentation
+  </Card>
+</CardGroup>

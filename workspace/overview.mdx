@@ -1,0 +1,284 @@
+---
+title: ComfyUI Workspace Overview
+description: "Master FlowScale's cloud-based ComfyUI environment for building AI workflows"
+icon: "pen-to-square"
+---
+
+## What is the ComfyUI Workspace?
+
+FlowScale's **ComfyUI Workspace** is a cloud-based, collaborative environment where you build, test, and refine AI workflows. It provides all the power of ComfyUI without the hassle of local setup, GPU management, or dependency issues.
+
+<Frame>
+  <img
+    src="/images/introduction/editor.png"
+    alt="FlowScale ComfyUI Workspace"
+  />
+</Frame>
+
+## Key Features
+
+### Cloud-Native ComfyUI
+
+Experience ComfyUI enhanced for the cloud:
+
+<CardGroup cols={2}>
+  <Card title="No Setup Required" icon="rocket">
+    Start building immediately - no installations or configuration needed
+  </Card>
+  <Card title="Powerful GPUs" icon="microchip">
+    Access T4, L4, A100, and H100 GPUs on-demand
+  </Card>
+  <Card title="Always Up-to-Date" icon="refresh">
+    Latest ComfyUI features and community nodes automatically available
+  </Card>
+  <Card title="Automatic Scaling" icon="chart-line">
+    Resources scale automatically based on your workflow complexity
+  </Card>
+</CardGroup>
+
+### Collaboration Features
+
+Work together seamlessly with your team:
+
+- **Real-time editing**: Multiple users can edit workflows simultaneously
+- **Live cursors**: See where teammates are working in real-time
+- **Comments & discussions**: Add context and feedback directly to workflows
+- **Version control**: Track changes with automatic git-like versioning
+
+### Enhanced Productivity
+
+FlowScale adds powerful features to the standard ComfyUI experience:
+
+<AccordionGroup>
+  <Accordion title="Intelligent Model Management">
+    - Automatic model detection and downloading
+    - Centralized model library across all projects
+    - Model versioning and update notifications
+    - Smart caching for faster workflow execution
+  </Accordion>
+  <Accordion title="Advanced Debugging Tools">
+    - Step-by-step execution visualization
+    - Performance profiling and bottleneck detection
+    - Resource usage monitoring
+    - Detailed error reporting with stack traces
+  </Accordion>
+  <Accordion title="Workflow Templates">
+    - Pre-built templates for common use cases
+    - Community-shared workflow library
+    - Custom template creation and sharing
+    - Template versioning and updates
+  </Accordion>
+</AccordionGroup>
+
+## Workspace Interface
+
+### Main Components
+
+The workspace is organized into several key areas:
+
+<Tabs>
+  <Tab title="Node Editor">
+    **The main canvas** where you build workflows:
+    - Drag-and-drop node placement
+    - Visual connection system
+    - Zoom and pan navigation
+    - Grid snapping and alignment tools
+  </Tab>
+  <Tab title="Node Library">
+    **Searchable catalog** of available nodes:
+    - Categorized by function (models, samplers, etc.)
+    - Search and filter capabilities
+    - Favorites and recently used
+    - Custom node installation
+  </Tab>
+  <Tab title="Properties Panel">
+    **Configure selected nodes**:
+    - Parameter adjustment with validation
+    - Real-time preview of changes
+    - Help text and documentation
+    - Batch parameter editing
+  </Tab>
+  <Tab title="Execution Panel">
+    **Monitor workflow execution**:
+    - Real-time progress tracking
+    - Resource usage monitoring
+    - Error reporting and debugging
+    - Execution history and logs
+  </Tab>
+</Tabs>
+
+### Navigation and Controls
+
+<Frame>
+  <img
+    src="/images/build/actions-bar.png"
+    alt="Workspace action bar with controls"
+  />
+</Frame>
+
+**Top Action Bar**:
+- **Run**: Execute the current workflow
+- **Save**: Commit changes to version control
+- **Share**: Generate collaboration links
+- **Deploy**: Convert workflow to API
+- **Settings**: Configure workspace preferences
+
+**Keyboard Shortcuts**:
+- `Ctrl/Cmd + S`: Save workflow
+- `Ctrl/Cmd + Z`: Undo action
+- `Ctrl/Cmd + Y`: Redo action
+- `Space`: Pan canvas (drag)
+- `Ctrl/Cmd + Mouse Wheel`: Zoom in/out
+
+## Getting Started
+
+### Your First Workflow
+
+<Steps>
+  <Step title="Open Workspace">
+    Navigate to your project and click "New Workflow" or open an existing one
+  </Step>
+  <Step title="Add Nodes">
+    Drag nodes from the library to the canvas or use the right-click context menu
+  </Step>
+  <Step title="Connect Nodes">
+    Click and drag from output sockets to input sockets to create connections
+  </Step>
+  <Step title="Configure Parameters">
+    Select nodes and adjust their parameters in the properties panel
+  </Step>
+  <Step title="Test Execution">
+    Click "Run" to execute your workflow and see the results
+  </Step>
+</Steps>
+
+### Common Workflow Patterns
+
+**Basic Text-to-Image**:
+1. Checkpoint Loader → Load your AI model
+2. CLIP Text Encode → Process your prompt
+3. KSampler → Generate the image
+4. VAE Decode → Convert to viewable format
+5. Save Image → Output the result
+
+**Image-to-Image**:
+1. Load Image → Import source image
+2. VAE Encode → Convert to latent space
+3. KSampler → Apply transformations
+4. VAE Decode → Convert back to image
+5. Save Image → Export result
+
+## Workspace Customization
+
+### Layout Options
+
+Customize the workspace to match your preferences:
+
+- **Panel arrangement**: Dock panels where you need them
+- **Theme selection**: Choose between light and dark themes
+- **Grid settings**: Adjust grid size and visibility
+- **Zoom preferences**: Set default zoom levels and animation
+
+### Performance Settings
+
+Optimize the workspace for your hardware:
+
+- **Preview quality**: Balance between quality and performance
+- **Automatic execution**: Enable/disable auto-run on changes
+- **Resource monitoring**: Show/hide performance metrics
+- **Cache settings**: Configure model and result caching
+
+## Best Practices
+
+### Workflow Organization
+
+<AccordionGroup>
+  <Accordion title="Logical Layout">
+    - Arrange nodes from left to right (input → processing → output)
+    - Group related functionality together
+    - Use consistent spacing and alignment
+    - Minimize crossing connections for clarity
+  </Accordion>
+  <Accordion title="Naming Conventions">
+    - Use descriptive names for complex workflows
+    - Add comments to explain non-obvious logic
+    - Tag workflows with relevant keywords
+    - Maintain consistent naming across projects
+  </Accordion>
+  <Accordion title="Documentation">
+    - Add workflow descriptions and usage instructions
+    - Document parameter ranges and expected inputs
+    - Include example use cases and results
+    - Keep change logs for major modifications
+  </Accordion>
+</AccordionGroup>
+
+### Performance Optimization
+
+- **Start simple**: Begin with basic workflows and add complexity gradually
+- **Test incrementally**: Validate each section before building further
+- **Monitor resources**: Keep an eye on GPU and memory usage
+- **Use appropriate models**: Match model complexity to your needs
+
+### Collaboration Etiquette
+
+- **Communicate changes**: Use comments to explain modifications
+- **Test before saving**: Ensure workflows run successfully before committing
+- **Resolve conflicts**: Address merge conflicts promptly and clearly
+- **Respect work in progress**: Coordinate with teammates on active workflows
+
+## Troubleshooting
+
+### Common Issues
+
+<Warning>
+**Workflow won't execute**: Check that all required inputs are connected and models are loaded
+</Warning>
+
+<Warning>
+**Performance is slow**: Consider using a more powerful GPU or optimizing your workflow
+</Warning>
+
+<Warning>
+**Can't find a node**: Use the search function or check if custom nodes need to be installed
+</Warning>
+
+### Getting Help
+
+- **In-editor help**: Hover over nodes and parameters for tooltips
+- **Documentation**: Access comprehensive guides from the help menu
+- **Community**: Join our Discord for peer support and tips
+- **Support**: Contact technical support for complex issues
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Editor Walkthrough"
+    icon="mouse-pointer"
+    href="/workspace/editor-walkthrough"
+  >
+    Detailed tour of the workspace interface
+  </Card>
+  <Card
+    title="Workflow Basics"
+    icon="graduation-cap"
+    href="/workspace/basics"
+  >
+    Learn fundamental workflow building techniques
+  </Card>
+  <Card
+    title="Version Control"
+    icon="code-branch"
+    href="/workspace/versioning"
+  >
+    Master collaboration and version management
+  </Card>
+  <Card
+    title="Debugging Guide"
+    icon="bug"
+    href="/workspace/debug"
+  >
+    Troubleshoot and optimize your workflows
+  </Card>
+</CardGroup>

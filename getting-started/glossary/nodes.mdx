@@ -1,0 +1,302 @@
+---
+title: Nodes
+description: "Understanding nodes - the fundamental building blocks of ComfyUI workflows"
+icon: "circle-nodes"
+---
+
+## What are Nodes?
+
+**Nodes** are the fundamental building blocks of ComfyUI workflows. Each node represents a specific operation, function, or component that processes data. Think of nodes as specialized tools that each perform one task very well.
+
+<Frame>
+  <img
+    src="/images/build/new-node-modal.png"
+    alt="Node library showing available nodes"
+  />
+</Frame>
+
+## Node Anatomy
+
+### Basic Structure
+
+Every node has three main components:
+
+<CardGroup cols={3}>
+  <Card title="Inputs" icon="arrow-right">
+    Connection points that receive data from other nodes
+  </Card>
+  <Card title="Parameters" icon="sliders">
+    Configuration options that control the node's behavior
+  </Card>
+  <Card title="Outputs" icon="arrow-left">
+    Results that can be passed to other nodes
+  </Card>
+</CardGroup>
+
+### Visual Elements
+
+- **Node title**: Identifies the node type and function
+- **Input sockets**: Left side connection points (different colors for different data types)
+- **Output sockets**: Right side connection points
+- **Parameter fields**: Editable settings within the node
+- **Status indicators**: Visual feedback about execution state
+
+## Node Categories
+
+### Core Model Nodes
+
+These nodes handle AI models and their loading:
+
+| Node Type | Purpose | Common Use |
+|-----------|---------|------------|
+| **Checkpoint Loader** | Load Stable Diffusion models | Primary image generation model |
+| **LoRA Loader** | Apply LoRA fine-tuning | Style modifications, character consistency |
+| **VAE Loader** | Load Variational Autoencoder | Image encoding/decoding quality |
+| **CLIP Text Encode** | Process text prompts | Convert prompts to embeddings |
+
+### Processing Nodes
+
+Nodes that transform or manipulate data:
+
+<Tabs>
+  <Tab title="Image Processing">
+    - **KSampler**: Generate images using diffusion sampling
+    - **Upscale Model**: Enhance image resolution
+    - **Image Resize**: Change image dimensions
+    - **Image Blend**: Combine multiple images
+  </Tab>
+  <Tab title="Text Processing">
+    - **Text Concatenate**: Combine text strings
+    - **Prompt Styler**: Apply predefined style templates
+    - **Text Replace**: Find and replace text patterns
+    - **Random Prompt**: Generate random prompt variations
+  </Tab>
+  <Tab title="Data Manipulation">
+    - **Math Operations**: Perform calculations
+    - **Array Operations**: Handle lists of data
+    - **Conditional Logic**: If/then decision making
+    - **Loop Controllers**: Repeat operations
+  </Tab>
+</Tabs>
+
+### Input/Output Nodes
+
+Nodes that handle data entry and results:
+
+<CardGroup cols={2}>
+  <Card title="Input Nodes" icon="download">
+    - **Load Image**: Import images from files
+    - **Text Input**: Accept user text input
+    - **Number Input**: Numeric parameter entry
+    - **File Upload**: Handle file uploads in APIs
+  </Card>
+  <Card title="Output Nodes" icon="upload">
+    - **Save Image**: Export generated images
+    - **Preview Image**: Display results in editor
+    - **JSON Output**: Structure data for APIs
+    - **File Download**: Provide downloadable results
+  </Card>
+</CardGroup>
+
+## Data Types and Connections
+
+### Understanding Data Flow
+
+Nodes communicate through **typed connections** that ensure compatibility:
+
+| Data Type | Color | Description | Example Use |
+|-----------|--------|-------------|-------------|
+| **IMAGE** | 🟢 Green | Image data | Generated pictures, photos |
+| **LATENT** | 🟡 Yellow | Compressed image representation | Internal diffusion processing |
+| **MODEL** | 🔵 Blue | AI model data | Stable Diffusion checkpoints |
+| **CONDITIONING** | 🟠 Orange | Text embeddings | Processed prompts |
+| **STRING** | ⚪ White | Text data | Prompts, filenames |
+| **INT/FLOAT** | 🔴 Red | Numeric values | Steps, CFG scale, dimensions |
+
+### Connection Rules
+
+<AccordionGroup>
+  <Accordion title="Type Compatibility">
+    - Connections must match data types (green to green, blue to blue)
+    - Some nodes can convert between compatible types
+    - Invalid connections are prevented by the interface
+  </Accordion>
+  <Accordion title="Flow Direction">
+    - Data flows from output sockets (right) to input sockets (left)
+    - Nodes execute when all required inputs are available
+    - Circular dependencies are not allowed
+  </Accordion>
+  <Accordion title="Multiple Connections">
+    - One output can connect to multiple inputs
+    - Each input can only receive one connection
+    - Use splitter nodes to distribute data to multiple destinations
+  </Accordion>
+</AccordionGroup>
+
+## Custom Nodes
+
+### Popular Custom Node Packages
+
+FlowScale AI supports many community-created custom nodes:
+
+<Tabs>
+  <Tab title="ControlNet Nodes">
+    **Advanced image guidance and control**
+    - Pose detection and guidance
+    - Depth map generation
+    - Edge detection (Canny)
+    - Semantic segmentation
+  </Tab>
+  <Tab title="Animation Nodes">
+    **Video and animation generation**
+    - Frame interpolation
+    - Video upscaling
+    - Motion transfer
+    - Temporal consistency
+  </Tab>
+  <Tab title="Utility Nodes">
+    **Workflow enhancement tools**
+    - Batch processing helpers
+    - Advanced math operations
+    - File system utilities
+    - API integration nodes
+  </Tab>
+</Tabs>
+
+### Installing Custom Nodes
+
+FlowScale AI automatically handles custom node installation:
+
+<Steps>
+  <Step title="Automatic Detection">
+    When importing workflows, FlowScale AI detects required custom nodes
+  </Step>
+  <Step title="Installation Prompt">
+    You'll be prompted to install missing custom nodes
+  </Step>
+  <Step title="Dependency Resolution">
+    FlowScale AI handles all dependencies and version compatibility
+  </Step>
+  <Step title="Availability">
+    Installed nodes become available in your node library
+  </Step>
+</Steps>
+
+## Node Best Practices
+
+### Organization
+
+- **Logical grouping**: Group related nodes together
+- **Clean connections**: Minimize crossing connection lines
+- **Consistent spacing**: Use regular spacing for readability
+- **Color coding**: Use node colors to indicate different workflow stages
+
+### Parameter Management
+
+<AccordionGroup>
+  <Accordion title="Default Values">
+    - Set sensible defaults for all parameters
+    - Document acceptable value ranges
+    - Use validation where possible
+    - Provide fallback values for optional inputs
+  </Accordion>
+  <Accordion title="Exposed Parameters">
+    - Make key settings accessible as workflow inputs
+    - Group related parameters logically
+    - Use descriptive names and help text
+    - Consider user experience when choosing what to expose
+  </Accordion>
+  <Accordion title="Performance Considerations">
+    - Choose appropriate precision levels
+    - Use batch processing where beneficial
+    - Minimize redundant computations
+    - Cache expensive operations when possible
+  </Accordion>
+</AccordionGroup>
+
+## Debugging Nodes
+
+### Common Issues
+
+<Warning>
+**Connection Errors**: Verify that data types match between connected nodes
+</Warning>
+
+<Warning>
+**Missing Models**: Ensure all required models are loaded and accessible
+</Warning>
+
+<Warning>
+**Parameter Validation**: Check that parameter values are within acceptable ranges
+</Warning>
+
+### Debugging Tools
+
+- **Node execution order**: Follow the execution flow to identify bottlenecks
+- **Error messages**: Read detailed error information in the console
+- **Preview nodes**: Use preview nodes to inspect intermediate results
+- **Isolation testing**: Test individual nodes with known good inputs
+
+## Advanced Node Techniques
+
+### Conditional Execution
+
+Create dynamic workflows that adapt based on inputs:
+
+```python
+# Example: Conditional upscaling based on image size
+if image_width < 512:
+    use_upscale_node()
+else:
+    use_direct_output()
+```
+
+### Loop Operations
+
+Process multiple items or create variations:
+
+- **Batch processing**: Handle multiple images simultaneously
+- **Iterative refinement**: Progressively improve results
+- **A/B testing**: Generate multiple variations for comparison
+
+### Custom Logic
+
+Implement complex business logic using combination of nodes:
+
+- **Quality gates**: Validate results before proceeding
+- **Adaptive parameters**: Adjust settings based on intermediate results
+- **Multi-path workflows**: Different processing based on input characteristics
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Workflow Basics"
+    icon="diagram-project"
+    href="/workspace/basics"
+  >
+    Learn how to combine nodes into effective workflows
+  </Card>
+  <Card
+    title="Editor Walkthrough"
+    icon="mouse-pointer"
+    href="/workspace/editor-walkthrough"
+  >
+    Master the node editor interface
+  </Card>
+  <Card
+    title="Advanced Patterns"
+    icon="graduation-cap"
+    href="/workspace/debug"
+  >
+    Explore advanced node usage patterns
+  </Card>
+  <Card
+    title="Custom Node Development"
+    icon="code"
+    href="https://docs.comfy.org/essentials/custom_node_tutorial"
+    external
+  >
+    Learn to create your own custom nodes
+  </Card>
+</CardGroup>

@@ -1,0 +1,263 @@
+---
+title: Release Notes - July 10, 2025
+description: "Latest updates, features, and improvements to FlowScale AI"
+icon: "newspaper"
+---
+
+## 🚀 Major Updates
+
+### Enhanced ComfyUI Workspace
+
+**Real-time Collaboration 2.0**
+- **Live cursors**: See exactly where your teammates are working
+- **Conflict resolution**: Automatic handling of simultaneous edits
+- **Voice comments**: Record audio notes directly on workflow nodes
+- **Presence indicators**: Know who's online and actively editing
+
+**Performance Improvements**
+- **50% faster** workflow execution with optimized model caching
+- **Reduced cold starts** from 45s to under 15s for most workflows
+- **Memory optimization** allowing larger models on smaller GPU tiers
+- **Background model loading** for instant execution of popular workflows
+
+### API Platform Enhancements
+
+**New Deployment Options**
+- **Edge deployment**: Deploy APIs closer to users in 12 new regions
+- **Custom domains**: Use your own domain names for deployed APIs
+- **A/B testing**: Built-in support for testing multiple workflow versions
+- **Webhook delivery**: Real-time notifications for workflow completion
+
+**Developer Experience**
+- **OpenAPI 3.1 support**: Enhanced API documentation and tooling
+- **GraphQL endpoints**: Alternative API interface for complex queries
+- **SDK improvements**: New Python and JavaScript SDK versions with better error handling
+- **Postman collections**: Auto-generated collections for easy API testing
+
+## 🛠️ New Features
+
+### Workflow Builder
+
+<CardGroup cols={2}>
+  <Card title="Custom Node Marketplace" icon="store">
+    Browse and install community nodes directly from the editor
+  </Card>
+  <Card title="Workflow Templates" icon="template">
+    30+ new templates including video generation and 3D workflows
+  </Card>
+  <Card title="Smart Suggestions" icon="lightbulb">
+    AI-powered recommendations for workflow optimization
+  </Card>
+  <Card title="Batch Operations" icon="layer-group">
+    Process multiple inputs simultaneously for improved efficiency
+  </Card>
+</CardGroup>
+
+### Model Management
+
+**Expanded Model Library**
+- **SDXL 1.0**: Full support with optimized loading and execution
+- **ControlNet v1.1**: All new ControlNet models with improved accuracy
+- **LCM Models**: Lightning-fast image generation in 4-8 steps
+- **Video models**: AnimateDiff and other video generation models
+
+**Smart Model Suggestions**
+- Automatic recommendations based on your workflow patterns
+- Compatibility checking to prevent model conflicts
+- Performance impact predictions for different model choices
+- One-click model upgrades with migration assistance
+
+### Security & Compliance
+
+<AccordionGroup>
+  <Accordion title="SOC 2 Type II Certification">
+    FlowScale AI has achieved SOC 2 Type II certification, ensuring enterprise-grade security and compliance standards for handling sensitive data and workflows.
+  </Accordion>
+  <Accordion title="Enhanced API Security">
+    - **JWT token support** for more secure authentication flows
+    - **IP allowlisting** to restrict API access to specific networks
+    - **Request signing** to verify the integrity of API requests
+    - **Audit logging** with detailed records of all API activity
+  </Accordion>
+  <Accordion title="GDPR Compliance">
+    - **Data residency controls** to keep data in specific geographic regions
+    - **Right to erasure** with automated data deletion workflows
+    - **Consent management** for handling user-generated content
+    - **Privacy-by-design** architecture for all new features
+  </Accordion>
+</AccordionGroup>
+
+## 🔧 Improvements
+
+### Performance Optimizations
+
+**GPU Utilization**
+- **40% improvement** in GPU memory efficiency
+- **Dynamic batching** to maximize throughput
+- **Model quantization** options for faster inference
+- **Optimized scheduling** reducing wait times during peak usage
+
+**Network & Storage**
+- **CDN integration** for 60% faster image delivery globally
+- **Compressed model storage** reducing loading times
+- **Delta syncing** for faster workflow updates
+- **Intelligent caching** with 85% hit rate for popular workflows
+
+### User Experience
+
+**Interface Improvements**
+- **Dark mode enhancements** with better contrast and readability
+- **Keyboard shortcuts** for power users (see full list in help menu)
+- **Contextual help** with in-line tips and documentation links
+- **Mobile-responsive** workflow viewer for monitoring on the go
+
+**Collaboration Features**
+- **Enhanced commenting** with rich text formatting and @mentions
+- **Project templates** for faster team onboarding
+- **Role-based permissions** with granular access controls
+- **Activity feeds** to stay updated on project changes
+
+## 🐛 Bug Fixes
+
+### Critical Fixes
+
+- **Fixed**: Memory leaks in long-running workflows causing pod crashes
+- **Fixed**: Inconsistent model loading behavior across different GPU types
+- **Fixed**: API rate limiting edge cases causing legitimate requests to be blocked
+- **Fixed**: Workflow export/import issues with custom node dependencies
+
+### UI/UX Fixes
+
+- **Fixed**: Node connection lines sometimes disappearing after zoom operations
+- **Fixed**: Property panel not updating when switching between nodes quickly
+- **Fixed**: Deployment status not refreshing in real-time
+- **Fixed**: Search function in node library not finding recently installed custom nodes
+
+### API Fixes
+
+- **Fixed**: Webhook delivery failures for large payloads
+- **Fixed**: Inconsistent error message formatting across different endpoints
+- **Fixed**: API documentation not reflecting latest parameter changes
+- **Fixed**: CORS issues when calling APIs from certain domain configurations
+
+## 📊 Platform Statistics
+
+Since our last release, FlowScale AI has seen tremendous growth:
+
+<CardGroup cols={2}>
+  <Card title="Workflows Deployed" icon="rocket">
+    **2.3M+** workflows deployed as APIs (+180% from last month)
+  </Card>
+  <Card title="API Requests" icon="chart-line">
+    **45M+** API requests processed (+220% growth)
+  </Card>
+  <Card title="New Features Shipped" icon="gift">
+    **23** new features and **67** improvements delivered
+  </Card>
+  <Card title="Bug Fixes" icon="wrench">
+    **156** bugs fixed with **99.8%** uptime maintained
+  </Card>
+</CardGroup>
+
+## 🛣️ Coming Next
+
+### August 2025 Roadmap
+
+**Advanced Workflow Features**
+- **Conditional logic nodes**: If/then/else operations for dynamic workflows
+- **Loop constructs**: Iterate over datasets and generate variations
+- **External integrations**: Connect to databases, APIs, and cloud storage
+- **Workflow analytics**: Detailed performance insights and optimization suggestions
+
+**Enterprise Features**
+- **Single Sign-On (SSO)**: Integration with enterprise identity providers
+- **Private cloud deployment**: Dedicated infrastructure for enterprise customers
+- **Advanced audit logging**: Compliance-ready logging and reporting
+- **Custom SLA options**: Guaranteed uptime and support response times
+
+**AI-Powered Assistance**
+- **Workflow optimization AI**: Automatic suggestions for improving performance
+- **Error diagnosis**: AI-powered debugging and resolution suggestions
+- **Smart templates**: AI-generated workflow templates based on descriptions
+- **Code generation**: Generate integration code automatically
+
+## 📚 Documentation Updates
+
+- **New tutorial series**: "Building Production AI Applications with FlowScale AI"
+- **API cookbook**: 50+ real-world integration examples
+- **Video guides**: Step-by-step video tutorials for complex workflows
+- **Community examples**: Curated collection of community-built workflows
+
+## 🤝 Community Highlights
+
+Special thanks to our community contributors:
+
+- **@ai_artist_mike**: Created the popular "Portrait Enhancement" workflow template
+- **@dev_sarah**: Contributed improvements to the JavaScript SDK
+- **@research_lab**: Shared advanced video generation workflows
+- **@startup_founder**: Provided valuable feedback on enterprise features
+
+## 🎯 Migration Guide
+
+### Breaking Changes
+
+<Warning>
+**API Version 1.0 Deprecation**: API v1.0 will be deprecated on October 1, 2025. Please migrate to v1.1 using our [migration guide](/deploy-api/migration-v1-1).
+</Warning>
+
+### Recommended Actions
+
+<Steps>
+  <Step title="Update SDKs">
+    Upgrade to the latest SDK versions for optimal performance and new features
+  </Step>
+  <Step title="Review Security Settings">
+    Take advantage of new security features like IP allowlisting and request signing
+  </Step>
+  <Step title="Optimize Workflows">
+    Use the new performance profiling tools to identify optimization opportunities
+  </Step>
+  <Step title="Explore New Features">
+    Try out the new workflow templates and custom node marketplace
+  </Step>
+</Steps>
+
+## 📞 Support & Feedback
+
+We're always here to help and would love to hear from you:
+
+<CardGroup cols={2}>
+  <Card
+    title="Join Our Discord"
+    icon="discord"
+    href="https://discord.gg/flowscale"
+  >
+    Connect with the community and get real-time support
+  </Card>
+  <Card
+    title="Feature Requests"
+    icon="lightbulb"
+    href="https://github.com/flowscale/feedback"
+  >
+    Vote on upcoming features and suggest new ideas
+  </Card>
+  <Card
+    title="Bug Reports"
+    icon="bug"
+    href="mailto:support@flowscale.ai"
+  >
+    Report issues directly to our engineering team
+  </Card>
+  <Card
+    title="Documentation"
+    icon="book"
+    href="/getting-started/introduction"
+  >
+    Explore our comprehensive documentation
+  </Card>
+</CardGroup>
+
+---
+
+*FlowScale AI Team*  
+*July 10, 2025*

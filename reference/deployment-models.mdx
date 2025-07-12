@@ -1,0 +1,358 @@
+---
+title: Deployment Models
+description: "Understanding FlowScale AI's flexible deployment options for different organizational needs"
+icon: "building"
+---
+
+## Overview
+
+FlowScale AI offers multiple deployment models to meet diverse organizational requirements, from individual developers to large enterprises with strict security and compliance needs.
+
+<Frame>
+  <img
+    src="/images/reference/deployment-architecture.png"
+    alt="FlowScale AI deployment architecture options"
+  />
+</Frame>
+
+## SaaS (Software as a Service)
+
+### Multi-Tenant Cloud
+
+The standard FlowScale AI experience - shared infrastructure optimized for performance and cost-effectiveness.
+
+<CardGroup cols={2}>
+  <Card title="Best For" icon="users">
+    Individual developers, startups, small to medium teams
+  </Card>
+  <Card title="Key Benefits" icon="zap">
+    Fastest time to value, no infrastructure management, automatic updates
+  </Card>
+</CardGroup>
+
+**Features**:
+- **Shared GPU pools**: Cost-effective access to high-performance hardware
+- **Global CDN**: Fast content delivery worldwide
+- **Automatic scaling**: Handle traffic spikes without configuration
+- **24/7 monitoring**: Platform health managed by FlowScale AI team
+
+**Pricing Structure**:
+- **Pay-per-use**: Only pay for compute resources consumed
+- **No minimum commitments**: Scale up or down as needed
+- **Transparent pricing**: Per-second billing for GPU usage
+- **Free tier available**: Get started without payment
+
+<Tabs>
+  <Tab title="Advantages">
+    - **Quick setup**: Start building in minutes
+    - **Cost-effective**: Shared infrastructure reduces costs
+    - **Always current**: Automatic updates and new features
+    - **Global reach**: Worldwide infrastructure included
+    - **No maintenance**: Zero infrastructure management required
+  </Tab>
+  <Tab title="Considerations">
+    - **Shared resources**: GPU availability depends on overall demand
+    - **Data residency**: Limited control over data location
+    - **Customization**: Standard feature set may not meet all specialized needs
+    - **Network isolation**: Shared network infrastructure
+  </Tab>
+</Tabs>
+
+## Private Cloud
+
+### Single-Tenant Infrastructure
+
+Dedicated FlowScale AI infrastructure running in your preferred cloud region, providing isolation while maintaining the full platform experience.
+
+<CardGroup cols={2}>
+  <Card title="Best For" icon="shield">
+    Mid-market companies, regulated industries, data-sensitive organizations
+  </Card>
+  <Card title="Key Benefits" icon="lock">
+    Data isolation, predictable performance, regional compliance
+  </Card>
+</CardGroup>
+
+**Architecture**:
+- **Dedicated VPC**: Isolated network infrastructure
+- **Private GPU clusters**: Reserved compute resources
+- **Regional deployment**: Choose specific geographic locations
+- **Custom networking**: VPN or private connectivity options
+
+**Enhanced Features**:
+- **Guaranteed resources**: Dedicated GPU allocation
+- **Custom retention policies**: Control data storage and deletion
+- **Advanced monitoring**: Detailed metrics and logging
+- **Priority support**: Dedicated support channels
+
+<AccordionGroup>
+  <Accordion title="Security & Compliance">
+    - **Network isolation**: Complete separation from other tenants
+    - **Encryption**: Data encrypted in transit and at rest
+    - **Audit logging**: Comprehensive activity tracking
+    - **Compliance certifications**: SOC 2, ISO 27001, GDPR compliance
+    - **Custom security policies**: Tailored to your requirements
+  </Accordion>
+  <Accordion title="Performance & Reliability">
+    - **Dedicated resources**: No resource contention with other users
+    - **Custom SLAs**: Guaranteed uptime and performance metrics
+    - **Regional optimization**: Deploy close to your users/data
+    - **Disaster recovery**: Multi-zone redundancy and backup options
+    - **Performance tuning**: Infrastructure optimized for your workloads
+  </Accordion>
+  <Accordion title="Integration & Connectivity">
+    - **VPN connectivity**: Secure connection to your existing infrastructure
+    - **Private endpoints**: Direct access without internet routing
+    - **Custom domains**: Use your own domain names and SSL certificates
+    - **API gateway integration**: Connect with existing API management
+    - **Single sign-on**: Integration with your identity providers
+  </Accordion>
+</AccordionGroup>
+
+## Air-Gapped / On-Premises
+
+### Complete Infrastructure Control
+
+FlowScale AI software deployed within your own infrastructure, providing maximum security and control for highly regulated environments.
+
+<CardGroup cols={2}>
+  <Card title="Best For" icon="bank">
+    Government agencies, financial institutions, healthcare, defense contractors
+  </Card>
+  <Card title="Key Benefits" icon="server">
+    Complete data control, maximum security, regulatory compliance
+  </Card>
+</CardGroup>
+
+**Deployment Options**:
+
+<Tabs>
+  <Tab title="On-Premises Hardware">
+    **Physical Infrastructure**:
+    - Deploy on your own servers and GPU hardware
+    - Complete control over hardware specifications
+    - No external network dependencies
+    - Maximum security and data sovereignty
+
+    **Requirements**:
+    - Minimum hardware specifications for FlowScale AI platform
+    - Compatible GPU drivers and CUDA versions
+    - Container orchestration (Kubernetes recommended)
+    - Network configuration for internal communication
+  </Tab>
+  <Tab title="Private Cloud (Your Account)">
+    **Cloud Provider Integration**:
+    - Deploy in your AWS, Azure, or GCP accounts
+    - Use your existing cloud credits and billing
+    - Leverage cloud-native security features
+    - Maintain administrative control
+
+    **Supported Platforms**:
+    - **AWS**: EKS, EC2, S3 integration
+    - **Azure**: AKS, Virtual Machines, Blob Storage
+    - **Google Cloud**: GKE, Compute Engine, Cloud Storage
+    - **Other**: OpenStack, VMware vSphere support available
+  </Tab>
+  <Tab title="Edge Deployment">
+    **Distributed Infrastructure**:
+    - Deploy close to data sources or end users
+    - Support for edge computing scenarios
+    - Reduced latency for real-time applications
+    - Local processing for bandwidth-constrained environments
+
+    **Use Cases**:
+    - Manufacturing facilities with local AI processing
+    - Remote locations with limited connectivity
+    - Real-time video analysis at the edge
+    - Autonomous systems requiring local inference
+  </Tab>
+</Tabs>
+
+### Implementation Support
+
+**Professional Services**:
+- **Architecture consulting**: Design optimal deployment for your needs
+- **Installation and setup**: Expert deployment of FlowScale AI platform
+- **Migration assistance**: Move existing workflows to on-premises deployment
+- **Training and certification**: Ensure your team can manage the platform
+
+**Ongoing Support**:
+- **Dedicated support team**: Direct access to FlowScale AI engineers
+- **Custom SLA agreements**: Guaranteed response times and resolution
+- **Regular health checks**: Proactive monitoring and optimization
+- **Security updates**: Coordinated deployment of patches and updates
+
+## Comparison Matrix
+
+| Feature | SaaS | Private Cloud | Air-Gapped |
+|---------|------|---------------|------------|
+| **Setup Time** | Immediate | 2-4 weeks | 4-12 weeks |
+| **Infrastructure Management** | FlowScale AI | FlowScale AI | Customer |
+| **Data Residency Control** | Limited | High | Complete |
+| **Customization Level** | Standard | High | Maximum |
+| **Compliance Support** | Standard | Enhanced | Custom |
+| **Pricing Model** | Pay-per-use | Reserved + Usage | License + Support |
+| **Scaling Complexity** | Automatic | Managed | Manual |
+| **Update Frequency** | Automatic | Scheduled | Controlled |
+
+## Security Considerations
+
+### Data Protection
+
+<AccordionGroup>
+  <Accordion title="Data in Transit">
+    **All Deployment Models**:
+    - TLS 1.3 encryption for all communications
+    - Certificate pinning for API communications
+    - VPN support for additional network security
+    - End-to-end encryption for sensitive workflows
+
+    **Private/Air-Gapped Additional**:
+    - Custom certificate authorities supported
+    - Private network routing (no internet traversal)
+    - Network segmentation and microsegmentation
+    - Custom encryption key management
+  </Accordion>
+  <Accordion title="Data at Rest">
+    **All Deployment Models**:
+    - AES-256 encryption for stored data
+    - Encrypted database and file storage
+    - Secure key management practices
+    - Regular security audits and penetration testing
+
+    **Private/Air-Gapped Additional**:
+    - Customer-managed encryption keys (CMEK)
+    - Hardware security module (HSM) integration
+    - Custom data retention and deletion policies
+    - Air-gapped backup and recovery procedures
+  </Accordion>
+  <Accordion title="Access Controls">
+    **All Deployment Models**:
+    - Role-based access control (RBAC)
+    - Multi-factor authentication (MFA)
+    - API key management and rotation
+    - Audit logging for all access attempts
+
+    **Private/Air-Gapped Additional**:
+    - Integration with enterprise identity providers
+    - Custom authentication and authorization policies
+    - Privileged access management (PAM)
+    - Zero-trust network architecture support
+  </Accordion>
+</AccordionGroup>
+
+### Compliance Frameworks
+
+**Supported Certifications**:
+- **SOC 2 Type II**: Security, availability, and confidentiality
+- **ISO 27001**: Information security management
+- **GDPR**: European data protection regulation
+- **HIPAA**: Healthcare information protection (on-premises)
+- **FedRAMP**: Federal risk and authorization management (planned)
+
+## Choosing the Right Model
+
+### Decision Framework
+
+<Steps>
+  <Step title="Assess Requirements">
+    Evaluate security, compliance, performance, and integration needs
+  </Step>
+  <Step title="Consider Constraints">
+    Budget, timeline, internal expertise, and regulatory requirements
+  </Step>
+  <Step title="Plan for Growth">
+    Future scaling needs, geographic expansion, and feature requirements
+  </Step>
+  <Step title="Evaluate Total Cost">
+    Consider both direct costs and internal resource requirements
+  </Step>
+</Steps>
+
+### Common Decision Factors
+
+<Tabs>
+  <Tab title="Choose SaaS If">
+    - **Fast time to market** is critical
+    - **Budget is limited** or variable
+    - **No strict data residency** requirements
+    - **Small to medium team** size
+    - **Standard compliance** needs are sufficient
+    - **Focus on AI/ML** rather than infrastructure
+  </Tab>
+  <Tab title="Choose Private Cloud If">
+    - **Data isolation** is required
+    - **Predictable performance** is needed
+    - **Regional compliance** must be met
+    - **Custom networking** is necessary
+    - **Moderate security** requirements
+    - **Dedicated support** is valuable
+  </Tab>
+  <Tab title="Choose Air-Gapped If">
+    - **Maximum security** is paramount
+    - **Strict regulatory** requirements exist
+    - **Complete data control** is needed
+    - **Custom infrastructure** is required
+    - **Compliance auditing** demands isolation
+    - **Government or defense** use cases
+  </Tab>
+</Tabs>
+
+## Migration Between Models
+
+### Upgrade Path
+
+Organizations can migrate between deployment models as needs evolve:
+
+**SaaS → Private Cloud**:
+- Gradual migration with parallel running
+- Data export and import tools provided
+- Workflow compatibility guaranteed
+- Training and support during transition
+
+**Private Cloud → Air-Gapped**:
+- Infrastructure assessment and planning
+- Custom deployment architecture design
+- Professional services for implementation
+- Extended support during transition period
+
+### Migration Support
+
+- **Dedicated migration team**: Expert guidance throughout the process
+- **Data migration tools**: Automated export/import capabilities
+- **Parallel deployment**: Run both environments during transition
+- **Rollback procedures**: Safety nets in case of issues
+- **Performance validation**: Ensure equivalent or better performance
+
+## Getting Started
+
+<CardGroup cols={3}>
+  <Card
+    title="Start with SaaS"
+    icon="rocket"
+    href="https://app.flowscale.ai/signup"
+  >
+    Begin immediately with our cloud platform
+  </Card>
+  <Card
+    title="Request Private Cloud"
+    icon="envelope"
+    href="mailto:enterprise@flowscale.ai"
+  >
+    Contact our enterprise team for dedicated infrastructure
+  </Card>
+  <Card
+    title="Discuss Air-Gapped"
+    icon="phone"
+    href="mailto:government@flowscale.ai"
+  >
+    Schedule a consultation for on-premises deployment
+  </Card>
+</CardGroup>
+
+**Next Steps**:
+1. **Assessment call**: Discuss your specific requirements
+2. **Architecture review**: Design optimal deployment approach  
+3. **Proof of concept**: Validate solution with your workflows
+4. **Implementation planning**: Timeline and resource allocation
+5. **Deployment and training**: Full implementation with support

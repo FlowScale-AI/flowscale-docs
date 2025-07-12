@@ -1,0 +1,614 @@
+---
+title: JavaScript/TypeScript SDK
+description: "Integrate FlowScale APIs into JavaScript and TypeScript applications"
+icon: "js"
+---
+
+## Installation
+
+Install the FlowScale SDK using your preferred package manager:
+
+<CodeGroup>
+
+```bash npm
+npm install @flowscale/sdk
+```
+
+```bash yarn
+yarn add @flowscale/sdk
+```
+
+```bash pnpm
+pnpm add @flowscale/sdk
+```
+
+</CodeGroup>
+
+## Quick Start
+
+Get up and running with FlowScale in just a few lines of code:
+
+```typescript
+import FlowScale from '@flowscale/sdk';
+
+// Initialize the client
+const flowscale = new FlowScale({
+  apiKey: 'fs_your_api_key_here'
+});
+
+// Run a workflow
+const result = await flowscale.run({
+  workflowId: 'text-to-image-basic',
+  inputs: {
+    prompt: 'A beautiful sunset over mountains',
+    width: 1024,
+    height: 1024
+  }
+});
+
+console.log('Generated image:', result.images[0].url);
+```
+
+## Configuration
+
+### Client Options
+
+```typescript
+interface FlowScaleConfig {
+  apiKey: string;
+  baseUrl?: string;           // Default: 'https://api.flowscale.ai'
+  timeout?: number;           // Default: 300000 (5 minutes)
+  retries?: number;           // Default: 3
+  retryDelay?: number;        // Default: 1000 (1 second)
+  userAgent?: string;         // Custom user agent
+}
+
+const flowscale = new FlowScale({
+  apiKey: process.env.FLOWSCALE_API_KEY,
+  timeout: 60000,             // 1 minute timeout
+  retries: 5                  // Retry failed requests 5 times
+});
+```
+
+### Environment Variables
+
+Set up your API key using environment variables:
+
+```bash
+# .env file
+FLOWSCALE_API_KEY=fs_your_api_key_here
+FLOWSCALE_BASE_URL=https://api.flowscale.ai  # Optional
+```
+
+## Core Methods
+
+### Running Workflows
+
+Execute workflows with typed parameters and responses:
+
+```typescript
+// Basic workflow execution
+const result = await flowscale.run({
+  workflowId: 'my-workflow',
+  inputs: {
+    prompt: 'A serene lake at dawn',
+    steps: 20,
+    cfg_scale: 7.5
+  }
+});
+
+// With additional options
+const result = await flowscale.run({
+  workflowId: 'my-workflow',
+  inputs: { /* ... */ },
+  options: {
+    timeout: 120000,          // 2 minute timeout for this request
+    webhookUrl: 'https://my-app.com/webhook',
+    priority: 'high',
+    metadata: {
+      userId: 'user123',
+      sessionId: 'session456'
+    }
+  }
+});
+```
+
+### Async Workflows
+
+For long-running workflows, use async execution:
+
+```typescript
+// Start async execution
+const execution = await flowscale.runAsync({
+  workflowId: 'complex-workflow',
+  inputs: { /* ... */ }
+});
+
+console.log('Execution ID:', execution.id);
+
+// Poll for completion
+const result = await flowscale.getExecution(execution.id);
+
+// Or wait for completion
+const finalResult = await flowscale.waitForCompletion(execution.id, {
+  pollInterval: 5000,         // Check every 5 seconds
+  maxWaitTime: 600000        // Give up after 10 minutes
+});
+```
+
+### Streaming Results
+
+Get real-time updates for workflows that support streaming:
+
+```typescript
+const stream = await flowscale.runStream({
+  workflowId: 'realtime-generation',
+  inputs: { prompt: 'A flowing river' }
+});
+
+stream.on('progress', (data) => {
+  console.log('Progress:', data.progress, '%');
+});
+
+stream.on('partial', (data) => {
+  console.log('Partial result:', data.partialImage);
+});
+
+stream.on('complete', (result) => {
+  console.log('Final result:', result.images[0].url);
+});
+
+stream.on('error', (error) => {
+  console.error('Stream error:', error);
+});
+```
+
+## TypeScript Support
+
+### Type Definitions
+
+The SDK includes comprehensive TypeScript definitions:
+
+```typescript
+interface WorkflowInput {
+  [key: string]: string | number | boolean | File | Blob;
+}
+
+interface WorkflowResult {
+  id: string;
+  status: 'completed' | 'failed' | 'running';
+  images?: Array<{
+    url: string;
+    width: number;
+    height: number;
+    format: string;
+  }>;
+  outputs?: { [key: string]: any };
+  metadata?: {
+    executionTime: number;
+    gpuType: string;
+    cost: number;
+  };
+}
+
+interface ExecutionOptions {
+  timeout?: number;
+  webhookUrl?: string;
+  priority?: 'low' | 'normal' | 'high';
+  metadata?: { [key: string]: any };
+}
+```
+
+### Workflow-Specific Types
+
+Generate types for your specific workflows:
+
+```typescript
+// Define types for your workflow
+interface TextToImageInputs {
+  prompt: string;
+  negative_prompt?: string;
+  width: number;
+  height: number;
+  steps: number;
+  cfg_scale: number;
+  seed?: number;
+}
+
+interface TextToImageResult extends WorkflowResult {
+  images: Array<{
+    url: string;
+    width: number;
+    height: number;
+    seed: number;
+  }>;
+}
+
+// Use with the SDK
+const result = await flowscale.run<TextToImageInputs, TextToImageResult>({
+  workflowId: 'text-to-image-v2',
+  inputs: {
+    prompt: 'A majestic mountain range',
+    width: 1024,
+    height: 1024,
+    steps: 20,
+    cfg_scale: 7.5
+  }
+});
+
+// TypeScript knows the shape of the result
+const imageUrl: string = result.images[0].url;
+```
+
+## File Handling
+
+### Uploading Files
+
+Handle image and file uploads seamlessly:
+
+```typescript
+// Browser file upload
+const fileInput = document.getElementById('imageUpload') as HTMLInputElement;
+const file = fileInput.files?.[0];
+
+if (file) {
+  const result = await flowscale.run({
+    workflowId: 'image-to-image',
+    inputs: {
+      image: file,              // Direct file upload
+      prompt: 'Make it artistic',
+      strength: 0.7
+    }
+  });
+}
+
+// From URL
+const result = await flowscale.run({
+  workflowId: 'image-to-image',
+  inputs: {
+    image: 'https://example.com/input-image.jpg',
+    prompt: 'Add magical effects'
+  }
+});
+
+// From base64
+const base64Image = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQ...';
+const result = await flowscale.run({
+  workflowId: 'image-enhancement',
+  inputs: {
+    image: base64Image,
+    enhancement_type: 'upscale'
+  }
+});
+```
+
+### Downloading Results
+
+```typescript
+// Get image as blob
+const imageBlob = await flowscale.downloadImage(result.images[0].url);
+
+// Save to file (Node.js)
+import fs from 'fs';
+const buffer = Buffer.from(await imageBlob.arrayBuffer());
+fs.writeFileSync('generated-image.png', buffer);
+
+// Display in browser
+const imageUrl = URL.createObjectURL(imageBlob);
+document.getElementById('result-image').src = imageUrl;
+```
+
+## Error Handling
+
+### Comprehensive Error Handling
+
+```typescript
+import { FlowScaleError, NetworkError, ValidationError } from '@flowscale/sdk';
+
+try {
+  const result = await flowscale.run({
+    workflowId: 'my-workflow',
+    inputs: { /* ... */ }
+  });
+} catch (error) {
+  if (error instanceof ValidationError) {
+    console.error('Invalid inputs:', error.details);
+    // Handle validation errors (e.g., show user-friendly messages)
+  } else if (error instanceof NetworkError) {
+    console.error('Network error:', error.message);
+    // Handle network issues (e.g., retry logic)
+  } else if (error instanceof FlowScaleError) {
+    console.error('FlowScale API error:', error.message, error.code);
+    // Handle API-specific errors
+  } else {
+    console.error('Unexpected error:', error);
+  }
+}
+```
+
+### Retry Logic
+
+```typescript
+async function runWithRetry(params: any, maxRetries = 3) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await flowscale.run(params);
+    } catch (error) {
+      if (attempt === maxRetries) throw error;
+      
+      // Exponential backoff
+      const delay = Math.pow(2, attempt) * 1000;
+      await new Promise(resolve => setTimeout(resolve, delay));
+      
+      console.log(`Retry attempt ${attempt + 1}/${maxRetries}`);
+    }
+  }
+}
+```
+
+## React Integration
+
+### Custom Hook
+
+Create a React hook for easy workflow execution:
+
+```tsx
+import { useState, useCallback } from 'react';
+import FlowScale from '@flowscale/sdk';
+
+const flowscale = new FlowScale({
+  apiKey: process.env.REACT_APP_FLOWSCALE_API_KEY
+});
+
+export function useFlowScale() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  const run = useCallback(async (params: any) => {
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const result = await flowscale.run(params);
+      return result;
+    } catch (err) {
+      setError(err as Error);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  return { run, loading, error };
+}
+```
+
+### Component Example
+
+```tsx
+import React, { useState } from 'react';
+import { useFlowScale } from './hooks/useFlowScale';
+
+export function ImageGenerator() {
+  const [prompt, setPrompt] = useState('');
+  const [result, setResult] = useState<any>(null);
+  const { run, loading, error } = useFlowScale();
+
+  const generateImage = async () => {
+    try {
+      const result = await run({
+        workflowId: 'text-to-image',
+        inputs: { prompt }
+      });
+      setResult(result);
+    } catch (error) {
+      console.error('Generation failed:', error);
+    }
+  };
+
+  return (
+    <div>
+      <input
+        value={prompt}
+        onChange={(e) => setPrompt(e.target.value)}
+        placeholder="Enter your prompt..."
+      />
+      <button onClick={generateImage} disabled={loading}>
+        {loading ? 'Generating...' : 'Generate Image'}
+      </button>
+      
+      {error && <div className="error">{error.message}</div>}
+      
+      {result && (
+        <img src={result.images[0].url} alt="Generated" />
+      )}
+    </div>
+  );
+}
+```
+
+## Advanced Features
+
+### Webhook Integration
+
+Handle webhook notifications for async workflows:
+
+```typescript
+// Express.js webhook handler
+import express from 'express';
+
+const app = express();
+app.use(express.json());
+
+app.post('/webhook/flowscale', (req, res) => {
+  const { id, status, result } = req.body;
+  
+  if (status === 'completed') {
+    console.log('Workflow completed:', id);
+    console.log('Result:', result.images[0].url);
+    
+    // Process the result (save to database, notify user, etc.)
+    processCompletedWorkflow(id, result);
+  } else if (status === 'failed') {
+    console.error('Workflow failed:', id, result.error);
+    handleFailedWorkflow(id, result.error);
+  }
+  
+  res.status(200).send('OK');
+});
+```
+
+### Batch Processing
+
+Process multiple inputs efficiently:
+
+```typescript
+const prompts = [
+  'A sunset over the ocean',
+  'A mountain landscape',
+  'A city skyline at night'
+];
+
+const results = await Promise.all(
+  prompts.map(prompt => 
+    flowscale.run({
+      workflowId: 'text-to-image',
+      inputs: { prompt }
+    })
+  )
+);
+
+console.log('Generated', results.length, 'images');
+```
+
+### Workflow Management
+
+```typescript
+// List available workflows
+const workflows = await flowscale.listWorkflows();
+
+// Get workflow details
+const workflow = await flowscale.getWorkflow('text-to-image-v2');
+console.log('Workflow inputs:', workflow.inputs);
+console.log('Workflow outputs:', workflow.outputs);
+
+// Get workflow versions
+const versions = await flowscale.getWorkflowVersions('text-to-image');
+```
+
+## Best Practices
+
+### Performance Optimization
+
+```typescript
+// Reuse client instances
+const flowscale = new FlowScale({ apiKey: 'your-key' });
+
+// Use connection pooling for high-volume applications
+const flowscale = new FlowScale({
+  apiKey: 'your-key',
+  httpAgent: new https.Agent({ keepAlive: true })
+});
+
+// Cache results when appropriate
+const cache = new Map();
+
+async function getCachedResult(cacheKey: string, params: any) {
+  if (cache.has(cacheKey)) {
+    return cache.get(cacheKey);
+  }
+  
+  const result = await flowscale.run(params);
+  cache.set(cacheKey, result);
+  return result;
+}
+```
+
+### Security
+
+```typescript
+// Never expose API keys in client-side code
+// Use environment variables or secure key management
+
+// Validate inputs on both client and server
+function validateInputs(inputs: any) {
+  if (!inputs.prompt || inputs.prompt.length > 1000) {
+    throw new Error('Invalid prompt');
+  }
+  // Add more validation...
+}
+
+// Use HTTPS only
+const flowscale = new FlowScale({
+  apiKey: 'your-key',
+  baseUrl: 'https://api.flowscale.ai' // Always use HTTPS
+});
+```
+
+## Examples & Recipes
+
+<CardGroup cols={2}>
+  <Card
+    title="Image Generation App"
+    icon="image"
+    href="/deploy-api/examples#image-generation"
+  >
+    Complete React app for text-to-image generation
+  </Card>
+  <Card
+    title="Batch Processing"
+    icon="layer-group"
+    href="/deploy-api/examples#batch-processing"
+  >
+    Process multiple images efficiently
+  </Card>
+  <Card
+    title="Real-time Chat Bot"
+    icon="robot"
+    href="/deploy-api/examples#chatbot"
+  >
+    AI-powered chat with image generation
+  </Card>
+  <Card
+    title="E-commerce Integration"
+    icon="shopping-cart"
+    href="/deploy-api/examples#ecommerce"
+  >
+    Product image generation for online stores
+  </Card>
+</CardGroup>
+
+## Support
+
+Need help with the JavaScript SDK?
+
+<CardGroup cols={2}>
+  <Card
+    title="API Reference"
+    icon="book"
+    href="/deploy-api/reference/get-run"
+  >
+    Complete API documentation
+  </Card>
+  <Card
+    title="GitHub Repository"
+    icon="github"
+    href="https://github.com/flowscale/sdk-js"
+  >
+    Source code, issues, and contributions
+  </Card>
+  <Card
+    title="Discord Community"
+    icon="discord"
+    href="https://discord.gg/flowscale"
+  >
+    Chat with other developers
+  </Card>
+  <Card
+    title="Support Team"
+    icon="envelope"
+    href="mailto:support@flowscale.ai"
+  >
+    Direct support for technical issues
+  </Card>
+</CardGroup>

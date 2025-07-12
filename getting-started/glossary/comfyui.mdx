@@ -1,0 +1,166 @@
+---
+title: ComfyUI
+description: "Understanding ComfyUI and its role in FlowScale AI"
+icon: "nodes"
+---
+
+## What is ComfyUI?
+
+**ComfyUI** is a powerful, node-based interface for building AI workflows, particularly for image generation and manipulation using Stable Diffusion models. Think of it as a visual programming language where you connect different components (nodes) to create complex AI pipelines.
+
+<Frame>
+  <img
+    src="/images/introduction/editor.png"
+    alt="ComfyUI Node Editor"
+  />
+</Frame>
+
+## Key Concepts
+
+### Node-Based Architecture
+
+ComfyUI uses a **visual node system** where each node performs a specific function:
+
+- **Input nodes**: Load models, images, or accept user parameters
+- **Processing nodes**: Apply effects, transformations, or AI operations
+- **Output nodes**: Save results or display generated content
+
+### Workflow Execution
+
+Unlike traditional interfaces, ComfyUI executes workflows as a **directed graph**:
+
+1. **Dependency resolution**: Nodes execute only when their inputs are ready
+2. **Lazy evaluation**: Only necessary computations are performed
+3. **Memory efficiency**: Resources are freed as soon as possible
+
+## Why ComfyUI in FlowScale AI?
+
+### Advanced Workflow Control
+
+ComfyUI provides unmatched flexibility for AI workflows:
+
+- **Precise parameter control**: Fine-tune every aspect of generation
+- **Complex pipelines**: Chain multiple AI models together
+- **Conditional logic**: Create dynamic workflows with branching
+- **Custom nodes**: Extend functionality with community contributions
+
+### Production Benefits
+
+FlowScale AI enhances ComfyUI for production use:
+
+<CardGroup cols={2}>
+  <Card title="Cloud Infrastructure" icon="cloud">
+    Run ComfyUI on powerful cloud GPUs without local setup
+  </Card>
+  <Card title="Scalable Deployment" icon="arrows-scale">
+    Transform workflows into APIs that scale automatically
+  </Card>
+  <Card title="Team Collaboration" icon="users">
+    Centralized workspace for teams to collaborate on workflows
+  </Card>
+  <Card title="Dependency Management" icon="cube">
+    Automatic handling of models and custom nodes
+  </Card>
+</CardGroup>
+
+## ComfyUI vs. Other Interfaces
+
+| Feature | ComfyUI | Automatic1111 | Midjourney |
+|---------|---------|---------------|------------|
+| **Flexibility** | ✅ Unlimited | ⚠️ Limited | ❌ Fixed prompts |
+| **Customization** | ✅ Full control | ⚠️ Some options | ❌ Minimal |
+| **Workflow Reuse** | ✅ Save & share | ❌ Manual recreation | ❌ Not possible |
+| **Advanced Features** | ✅ All supported | ⚠️ Some missing | ❌ Basic only |
+| **Learning Curve** | ⚠️ Moderate | ✅ Easy | ✅ Very easy |
+
+## Common Use Cases
+
+### Image Generation Workflows
+
+- **Text-to-image**: Create images from text descriptions
+- **Image-to-image**: Transform existing images with AI
+- **Inpainting**: Fill or modify parts of images
+- **Outpainting**: Extend images beyond their borders
+
+### Advanced Pipelines
+
+- **Multi-model workflows**: Combine different AI models
+- **Iterative refinement**: Progressive improvement of results
+- **Batch processing**: Generate multiple variations
+- **Conditional generation**: Different outputs based on inputs
+
+## Getting Started with ComfyUI
+
+<Steps>
+  <Step title="Understand Nodes">
+    Learn about different node types and their functions
+  </Step>
+  <Step title="Follow Data Flow">
+    Trace how data moves through connected nodes
+  </Step>
+  <Step title="Start Simple">
+    Begin with basic text-to-image workflows
+  </Step>
+  <Step title="Experiment">
+    Try different node combinations and parameters
+  </Step>
+</Steps>
+
+<Tip>
+New to node-based interfaces? Think of nodes like LEGO blocks - each piece has a specific function, and you connect them to build something larger.
+</Tip>
+
+## FlowScale AI Enhancements
+
+FlowScale AI adds several improvements to the standard ComfyUI experience:
+
+### Cloud-Native Features
+
+- **GPU auto-scaling**: Automatically provision resources as needed
+- **Model management**: Centralized library with automatic downloads
+- **Persistent storage**: Workflows and outputs saved automatically
+
+### Collaboration Tools
+
+- **Centralized workspace**: Teams have a shared environment for ComfyUI workflows
+- **Version history**: Track changes and revert to previous versions
+
+### Production Deployment
+
+- **API generation**: Automatically create REST APIs from workflows
+- **Performance optimization**: Caching and resource management
+- **Monitoring**: Track usage, performance, and costs
+
+## Learning Resources
+
+<CardGroup cols={2}>
+  <Card
+    title="Workflow Basics"
+    icon="play"
+    href="/workspace/basics"
+  >
+    Learn fundamental workflow concepts
+  </Card>
+  <Card
+    title="Editor Walkthrough"
+    icon="mouse-pointer"
+    href="/workspace/editor-walkthrough"
+  >
+    Master the FlowScale AI ComfyUI interface
+  </Card>
+  <Card
+    title="Example Workflows"
+    icon="images"
+    href="/deploy-api/examples"
+  >
+    Explore real-world workflow examples
+  </Card>
+  <Card
+    title="Community Resources"
+    icon="users"
+    href="https://comfyui.com"
+    external
+  >
+    ComfyUI documentation and community
+  </Card>
+</CardGroup>

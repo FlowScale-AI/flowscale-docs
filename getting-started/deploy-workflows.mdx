@@ -1,0 +1,264 @@
+---
+title: Deploy Workflows
+description: "Transform your ComfyUI workflows into production-ready APIs and interactive applications"
+icon: "rocket"
+---
+
+## One-Click Deployment
+
+FlowScale AI transforms your ComfyUI workflows into scalable APIs with a single click. No infrastructure management, no complex configurations.
+
+<Frame>
+  <img
+    src="/images/deploy/deploy-button.png"
+    alt="Deploy workflow button"
+  />
+</Frame>
+
+### Deployment Process
+
+<Steps>
+  <Step title="Prepare Workflow">
+    Ensure your workflow runs successfully in the editor
+  </Step>
+  <Step title="Configure Inputs/Outputs">
+    Define API parameters and response format
+  </Step>
+  <Step title="Deploy">
+    Click "Deploy" and choose your deployment settings
+  </Step>
+  <Step title="Test API">
+    Use the generated API documentation to test endpoints
+  </Step>
+</Steps>
+
+## Deployment Options
+
+### API Endpoints
+
+Transform workflows into REST APIs that can be integrated into any application:
+
+<CodeGroup>
+
+```bash curl
+curl -X POST https://api.flowscale.ai/v1/run \
+  -H "Authorization: Bearer your-api-key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "workflow_id": "wf_abc123",
+    "inputs": {
+      "prompt": "A beautiful sunset over mountains",
+      "steps": 20,
+      "cfg": 7.5
+    }
+  }'
+```
+
+```javascript JavaScript
+const response = await fetch('https://api.flowscale.ai/v1/run', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer your-api-key',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    workflow_id: 'wf_abc123',
+    inputs: {
+      prompt: 'A beautiful sunset over mountains',
+      steps: 20,
+      cfg: 7.5
+    }
+  })
+});
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    'https://api.flowscale.ai/v1/run',
+    headers={
+        'Authorization': 'Bearer your-api-key',
+        'Content-Type': 'application/json'
+    },
+    json={
+        'workflow_id': 'wf_abc123',
+        'inputs': {
+            'prompt': 'A beautiful sunset over mountains',
+            'steps': 20,
+            'cfg': 7.5
+        }
+    }
+)
+```
+
+</CodeGroup>
+
+### Interactive UIs (Gradio)
+
+Generate user-friendly interfaces automatically:
+
+- **Auto-generated forms**: Input fields based on workflow parameters
+- **Real-time preview**: Live updates as users adjust settings
+- **Shareable links**: Easy distribution to end-users
+- **Custom branding**: Add your logo and styling
+
+<Frame>
+  <img
+    src="/images/deploy/gradio-ui.png"
+    alt="Auto-generated Gradio interface"
+  />
+</Frame>
+
+## Configuration Options
+
+### Input/Output Settings
+
+Configure how your workflow interacts with the API:
+
+<Tabs>
+  <Tab title="Input Parameters">
+    - **Text prompts**: String inputs with validation
+    - **Numeric values**: Sliders, number inputs with ranges
+    - **Image uploads**: File handling with format restrictions
+    - **Dropdown options**: Predefined choices for models/styles
+  </Tab>
+  <Tab title="Output Formats">
+    - **Images**: PNG, JPEG, WebP with quality settings
+    - **JSON data**: Structured response with metadata
+    - **File downloads**: Direct file URLs for generated content
+    - **Batch results**: Multiple outputs from single request
+  </Tab>
+</Tabs>
+
+### GPU & Scaling Settings
+
+<Frame>
+  <img
+    src="/images/build/gpu-settings.png"
+    alt="GPU configuration options"
+  />
+</Frame>
+
+Choose the right compute resources for your workflow:
+
+| GPU Type | Use Case | Performance | Cost |
+|----------|----------|-------------|------|
+| **T4** | Simple workflows, testing | Basic | $ |
+| **L4** | Standard image generation | Good | $$ |
+| **A100** | Complex workflows, batch processing | Excellent | $$$ |
+| **H100** | Largest models, real-time inference | Premium | $$$$ |
+
+### Auto-scaling Configuration
+
+- **Concurrency limits**: Maximum simultaneous requests
+- **Cold start optimization**: Faster response times
+- **Geographic regions**: Deploy closer to your users
+- **Timeout settings**: Request processing limits
+
+## Monitoring & Management
+
+### Deployment Dashboard
+
+Track the performance and usage of your deployed workflows:
+
+<CardGroup cols={2}>
+  <Card title="Request Analytics" icon="chart-line">
+    Monitor API usage, response times, and error rates
+  </Card>
+  <Card title="Cost Tracking" icon="dollar-sign">
+    View compute costs and optimize resource usage
+  </Card>
+  <Card title="Version Management" icon="code-branch">
+    Deploy multiple versions and manage traffic routing
+  </Card>
+  <Card title="Error Monitoring" icon="triangle-exclamation">
+    Debug issues with detailed error logs and traces
+  </Card>
+</CardGroup>
+
+### API Documentation
+
+FlowScale AI automatically generates comprehensive API documentation:
+
+- **Interactive docs**: Test endpoints directly in the browser
+- **Code examples**: Ready-to-use snippets in multiple languages
+- **Schema definitions**: Detailed input/output specifications
+- **Authentication**: API key management and security
+
+<Frame>
+  <img
+    src="/images/deploy/api-docs.png"
+    alt="Auto-generated API documentation"
+  />
+</Frame>
+
+## Production Considerations
+
+### Security & Authentication
+
+- **API keys**: Secure access with regeneratable keys
+- **Rate limiting**: Protect against abuse and manage costs
+- **CORS configuration**: Control cross-origin access
+- **Webhook support**: Real-time notifications for long-running jobs
+
+### Performance Optimization
+
+<AccordionGroup>
+  <Accordion title="Caching Strategies">
+    - Model caching to reduce cold start times
+    - Result caching for identical requests
+    - CDN integration for faster content delivery
+  </Accordion>
+  <Accordion title="Request Optimization">
+    - Async processing for long-running workflows
+    - Batch requests to reduce overhead
+    - Progressive loading for large outputs
+  </Accordion>
+  <Accordion title="Resource Management">
+    - Auto-scaling based on demand
+    - GPU pooling for efficient utilization
+    - Memory optimization for large models
+  </Accordion>
+</AccordionGroup>
+
+## Deployment Checklist
+
+Before deploying to production:
+
+<Steps>
+  <Step title="Test Thoroughly">
+    Validate workflow with various inputs and edge cases
+  </Step>
+  <Step title="Set Resource Limits">
+    Configure appropriate GPU type and scaling settings
+  </Step>
+  <Step title="Configure Monitoring">
+    Set up alerts for errors and performance issues
+  </Step>
+  <Step title="Document API">
+    Ensure clear documentation for integration teams
+  </Step>
+  <Step title="Plan for Scale">
+    Consider usage patterns and cost implications
+  </Step>
+</Steps>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="API Integration"
+    icon="code"
+    href="/deploy-api/sdk/sdk-js"
+  >
+    Learn to integrate APIs into your applications
+  </Card>
+  <Card
+    title="Scaling Strategies"
+    icon="chart-line"
+    href="/deploy-api/scaling"
+  >
+    Optimize performance and manage costs
+  </Card>
+</CardGroup>
