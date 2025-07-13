@@ -1,188 +1,287 @@
 ---
-title: Import & Create Workflows
-description: "Learn how to bring existing ComfyUI workflows into FlowScale or create new ones from scratch"
+title: Import/Create Workflows
+description: "Learn how to bring existing ComfyUI workflows into FlowScale AI or create new ones from scratch"
 icon: "upload"
 ---
 
+import ImportWorkflowsTroubleshooting from '/snippets/troubleshooting/import-workflows-basic.mdx';
+
+FlowScale AI provides a centralized, team-friendly platform for managing ComfyUI workflows with deployment capabilities. Unlike ComfyUI's local interface, FlowScale AI is designed for collaboration and easy workflow deployment.
+
+<Info>
+Before working with workflows, you must first [create a project](/get-started/setup) in FlowScale AI. All workflows are organized within projects.
+</Info>
+
+## Understanding FlowScale AI vs ComfyUI
+
+FlowScale AI's interface differs from standard ComfyUI because it's built for:
+- **Team collaboration**: Centralized workspace for multiple users
+- **Deployment focus**: Easy conversion of workflows to APIs
+- **Cloud infrastructure**: Scalable compute resources on demand
+
+While ComfyUI's default interface is designed for local, isolated workflow development, FlowScale AI extends this with enterprise features and cloud deployment capabilities.
+
 ## Importing Existing Workflows
 
-FlowScale makes it easy to import your existing ComfyUI workflows and run them on powerful cloud GPUs.
+Import your existing ComfyUI workflows to run them on powerful cloud GPUs with team collaboration features.
 
-### From JSON Files
-
-The most common way to import workflows is through ComfyUI's workflow JSON format:
+### Step-by-Step Import Process
 
 <Steps>
-  <Step title="Export from ComfyUI">
-    In ComfyUI, click **"Save"** to export your workflow as JSON
+  <Step title="Click Import Workflow">
+    In your FlowScale AI project dashboard, click the **"Import Workflow"** button
+    
+    *[Screenshot needed: Project dashboard with Import Workflow button highlighted]*
   </Step>
-  <Step title="Import to FlowScale">
-    In your FlowScale project, click **"Import Workflow"** and upload the JSON file
+  
+  <Step title="Upload Workflow JSON">
+    Select and upload your ComfyUI workflow JSON file (exported from ComfyUI using the "Save" option)
+    
+    *[Screenshot needed: Import modal showing file upload area]*
   </Step>
-  <Step title="Resolve Dependencies">
-    FlowScale will automatically detect required models and custom nodes
+  
+  <Step title="Review Custom Nodes">
+    FlowScale AI automatically detects required custom nodes and displays them for review
+    
+    *[Screenshot needed: Custom nodes detection screen showing detected nodes]*
   </Step>
-  <Step title="Test & Deploy">
-    Run the workflow in the cloud editor and deploy when ready
+  
+  <Step title="Resolve Conflicts">
+    If conflicting nodes are detected, select the correct versions that your workflow actually uses
+    
+    *[Screenshot needed: Node conflict resolution interface]*
+  </Step>
+  
+  <Step title="Complete Setup">
+    Click proceed to add all necessary configuration for your workflow
   </Step>
 </Steps>
 
 <Frame>
   <img
-    src="/images/build/import-workflow-modal.png"
-    alt="Import workflow modal"
+    src="/images/getting-started/import-workflow-process.png"
+    alt="Complete workflow import process"
   />
 </Frame>
 
-### Supported Formats
+### Supported Import Format
 
-| Format | Description | Use Case |
-|--------|-------------|----------|
-| **Workflow JSON** | Standard ComfyUI workflow format | Most common, includes all node connections and settings |
-| **API JSON** | ComfyUI API format | Advanced users, programmatic workflows |
-| **PNG with metadata** | Images with embedded workflow data | Workflows shared in communities |
+FlowScale AI currently supports importing **Workflow JSON** files only - the standard ComfyUI workflow format exported via ComfyUI's "Save" button. This ensures maximum compatibility and reliability when importing your workflows.
 
-<Tip>
-When importing PNG files with embedded workflows, FlowScale automatically extracts the workflow data and converts it to the proper format.
-</Tip>
+## Starting ComfyUI Editor
 
-## Creating New Workflows
+FlowScale AI uses **Pods** to run ComfyUI instances in the cloud.
 
-Start building AI workflows from scratch using FlowScale's cloud-based ComfyUI editor.
-
-### Quick Start Templates
-
-FlowScale provides pre-built templates for common use cases:
-
-<CardGroup cols={2}>
-  <Card title="Text-to-Image" icon="image">
-    Stable Diffusion workflow for generating images from text prompts
-  </Card>
-  <Card title="Image-to-Image" icon="wand-magic-sparkles">
-    Transform existing images with AI-powered modifications
-  </Card>
-  <Card title="Upscaling" icon="expand">
-    Enhance image resolution using super-resolution models
-  </Card>
-  <Card title="ControlNet" icon="sliders">
-    Precise control over image generation with guidance images
-  </Card>
-</CardGroup>
-
-### Building Your First Workflow
+### Launch Process
 
 <Steps>
-  <Step title="Create New Workflow">
-    Click **"New Workflow"** in your project dashboard
+  <Step title="Start ComfyUI">
+    Click **"Start ComfyUI"** button in your project
+    
+    *[Screenshot needed: Project interface with Start ComfyUI button]*
   </Step>
-  <Step title="Choose a Template">
-    Select a template or start with a blank canvas
+  
+  <Step title="Select Pod">
+    Choose the pod configuration for your ComfyUI instance from the modal
+    
+    *[Screenshot needed: Pod selection modal with different pod options]*
   </Step>
-  <Step title="Add Nodes">
-    Drag and drop nodes from the library to build your pipeline
+  
+  <Step title="Monitor Installation">
+    While ComfyUI starts, custom nodes are installed automatically. View progress in System Logs
+    
+    *[Screenshot needed: ComfyUI starting screen with logs panel open showing installation progress]*
   </Step>
-  <Step title="Connect Nodes">
-    Link node outputs to inputs to create the data flow
-  </Step>
-  <Step title="Configure Parameters">
-    Set up input parameters and default values
-  </Step>
-  <Step title="Test & Iterate">
-    Run the workflow to validate functionality
+  
+  <Step title="Editor Ready">
+    Once started, you'll see the ComfyUI editor in CPU mode
+    
+    *[Screenshot needed: ComfyUI editor interface with CPU mode indicator]*
   </Step>
 </Steps>
 
-## Managing Models & Dependencies
-
-FlowScale automatically handles model management and dependencies for your workflows.
-
-### Automatic Model Detection
-
-When you import a workflow, FlowScale:
-
-- Scans for required models (checkpoints, LoRAs, VAEs)
-- Checks availability in the public model library
-- Prompts you to upload missing models
-
-### Model Sources
+### CPU vs GPU Mode
 
 <Tabs>
-  <Tab title="Public Library">
-    Access thousands of pre-loaded models from:
-    - Hugging Face
-    - Civitai
-    - Popular community models
+  <Tab title="CPU Mode (Default)">
+    - **Purpose**: Workflow editing and development
+    - **Cost**: Minimal credits usage
+    - **Best for**: Building, testing, and modifying workflows
+    - **Switch to**: Use the actions bar at the bottom of the page
   </Tab>
-  <Tab title="Private Models">
-    Upload your own models:
-    - Custom trained checkpoints
-    - Fine-tuned LoRAs
-    - Specialized VAEs
-  </Tab>
-  <Tab title="Auto-Download">
-    FlowScale can automatically download models from:
-    - Direct URLs
-    - Hugging Face repositories
-    - Civitai links
+  
+  <Tab title="GPU Mode">
+    - **Purpose**: Running compute-intensive workflows
+    - **Cost**: Higher credits usage
+    - **Best for**: Actual workflow execution and testing
+    - **Switch from**: Actions bar when you need to execute workflows
   </Tab>
 </Tabs>
 
-<Frame>
-  <img
-    src="/images/build/public-models.png"
-    alt="Public models library"
-  />
-</Frame>
+<Tip>
+**Cost Optimization**: Always use CPU mode for editing workflows and only switch to GPU mode when you need to execute them. This prevents unnecessary credit burn.
+</Tip>
 
-### Custom Nodes
+*[Screenshot needed: Actions bar showing CPU/GPU mode toggle]*
 
-FlowScale supports most popular ComfyUI custom nodes:
+## Managing Models and Dependencies
 
-- **ControlNet nodes**: Advanced image guidance
-- **Face restoration**: Portrait enhancement workflows
-- **Video processing**: Animation and video generation
-- **3D workflows**: Depth maps and 3D scene generation
+Model management in FlowScale AI is a manual process that ensures you have full control over your dependencies.
+
+### Model Setup Workflow
+
+<Steps>
+  <Step title="Start ComfyUI Editor">
+    Launch your ComfyUI instance in your project
+  </Step>
+  
+  <Step title="Test Workflow">
+    Run your workflow once to identify missing models (you'll see error messages)
+    
+    *[Screenshot needed: Error message showing missing model]*
+  </Step>
+  
+  <Step title="Check Workflow Node Dropdowns for Public Models">
+    Look for required models in the dropdown menus of the workflow nodes themselves. If models are available in the public library, they will appear in the relevant node dropdowns within your workflow
+    
+    <Tip>
+    Models may appear under similar filenames—check carefully for variations or similar names.
+    </Tip>
+    
+    *[Screenshot needed: Workflow node showing model dropdown with available models]*
+  </Step>
+  
+  <Step title="Access Private Models">
+    If models aren't found publicly, navigate to **Private Models** section
+    
+    *[Screenshot needed: Private models interface]*
+  </Step>
+  
+  <Step title="Create Model Folders">
+    Create appropriate folder structure as required by ComfyUI or custom nodes
+    
+    *[Screenshot needed: Creating model folder interface]*
+  </Step>
+  
+  <Step title="Upload Models">
+    Click **"Upload Model"** and either search for models or provide download links
+    
+    *[Screenshot needed: Model upload interface with search and URL options]*
+  </Step>
+  
+  <Step title="Refresh ComfyUI">
+    After model download completes, refresh ComfyUI from the actions bar
+    
+    *[Screenshot needed: Refresh button in actions bar]*
+  </Step>
+  
+  <Step title="Verify Model Availability">
+    Check the workflow node dropdowns again to confirm the newly added models are now available for selection
+    
+    *[Screenshot needed: Workflow node dropdown showing newly added model]*
+  </Step>
+</Steps>
+
+### Model Sources
+
+<CardGroup cols={3}>
+  <Card title="Public Library" icon="globe">
+    Pre-loaded models from Hugging Face, Civitai, and popular community sources
+  </Card>
+  <Card title="Private Upload" icon="upload">
+    Custom models, fine-tuned checkpoints, and specialized LoRAs
+  </Card>
+  <Card title="URL Download" icon="link">
+    Direct download from external sources using model URLs
+  </Card>
+</CardGroup>
+
+### Folder Structure Guidelines
+
+When creating folders for models, follow ComfyUI conventions:
+
+- **Checkpoints**: `models/checkpoints/`
+- **LoRAs**: `models/loras/`
+- **VAE**: `models/vae/`
+- **Custom nodes**: Check the node's GitHub repository for specific folder requirements
 
 <Warning>
-Some custom nodes may require manual installation. Contact support if you encounter compatibility issues with specific nodes.
+For custom node models, always refer to the node's GitHub repository README for correct folder naming conventions.
 </Warning>
 
-## Best Practices
+*[Screenshot needed: Private models folder structure example]*
 
-### Workflow Design
+## Creating New Workflows
 
-- **Modular approach**: Break complex workflows into reusable components
-- **Clear naming**: Use descriptive names for nodes and connections
-- **Parameter exposure**: Make key settings accessible as API inputs
-- **Error handling**: Add validation nodes for robust workflows
+Build workflows from scratch using FlowScale AI's cloud-based ComfyUI editor.
 
-### Performance Optimization
+### Quick Start Method
 
-- **Batch processing**: Group operations when possible
-- **Memory management**: Use appropriate model precision settings
-- **GPU selection**: Choose the right GPU tier for your workflow complexity
+<Steps>
+  <Step title="Create New Workflow">
+    Click **"Create New Workflow"** button in your project
+    
+    *[Screenshot needed: Create New Workflow button location]*
+  </Step>
+  
+  <Step title="Start with Basic Template">
+    A basic text-to-image workflow loads automatically in the ComfyUI editor
+    
+    *[Screenshot needed: Basic workflow template in editor]*
+  </Step>
+  
+  <Step title="Customize Workflow">
+    Modify the workflow by adding, removing, or connecting nodes as needed
+    
+    *[Screenshot needed: Workflow editing in progress]*
+  </Step>
+  
+  <Step title="Save Workflow">
+    Click **"Save"** in the actions bar and provide a descriptive commit message
+    
+    *[Screenshot needed: Save workflow modal with commit message field]*
+  </Step>
+</Steps>
 
-### Collaboration
+## Troubleshooting
 
-- **Version control**: Commit changes with descriptive messages
-- **Documentation**: Add comments explaining complex sections
-- **Testing**: Validate workflows thoroughly before sharing
+### Common Issues
+
+<ImportWorkflowsTroubleshooting />
+
+<Info>
+For detailed troubleshooting guidance, refer to our [FAQ and Troubleshooting guide](/getting-started/troubleshooting).
+</Info>
 
 ## Next Steps
 
 <CardGroup cols={2}>
   <Card
-    title="ComfyUI Workspace"
+    title="ComfyUI Editor Guide"
     icon="pen-to-square"
-    href="/workspace/editor-walkthrough"
+    href="/workspace/overview"
   >
-    Learn the cloud editor interface
+    Master the cloud editor interface
   </Card>
   <Card
     title="Deploy Workflows"
     icon="rocket"
     href="/getting-started/deploy-workflows"
   >
-    Turn your workflow into an API
+    Convert workflows to production APIs
+  </Card>
+  <Card
+    title="Manage Projects"
+    icon="folder"
+    href="/getting-started/manage"
+  >
+    Organize and collaborate on workflows
+  </Card>
+  <Card
+    title="Troubleshooting"
+    icon="life-ring"
+    href="/getting-started/troubleshooting"
+  >
+    Resolve common issues
   </Card>
 </CardGroup>

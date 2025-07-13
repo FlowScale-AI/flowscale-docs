@@ -46,7 +46,7 @@
         ]
       },
       {
-        "tab": "ComfyUI Workspace",
+        "tab": "ComfyUI Editor",
         "icon": "pen-to-square",
         "groups": [
           {
