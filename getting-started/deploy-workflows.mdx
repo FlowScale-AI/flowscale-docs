@@ -4,39 +4,233 @@ description: "Transform your ComfyUI workflows into production-ready APIs and in
 icon: "rocket"
 ---
 
-## One-Click Deployment
+import DeploymentTroubleshooting from '/snippets/troubleshooting/deployment.mdx';
 
-FlowScale AI transforms your ComfyUI workflows into scalable APIs with a single click. No infrastructure management, no complex configurations.
+Once your workflows are set up in the ComfyUI Editor, you can easily move to the deployment stage. By the time you reach this document, we assume your workflows are properly imported/created and all custom nodes or models are set up.
+
+<Info>
+If you haven't set up your workflows yet, please refer to the [Import/Create Workflows guide](/getting-started/import-create-workflows) first.
+</Info>
+
+## Prerequisites
+
+Before deploying, ensure your workflow meets these requirements:
+
+<Steps>
+  <Step title="Successful Execution">
+    Run your workflow at least once successfully in the ComfyUI editor
+  </Step>
+  <Step title="Save Workflow">
+    Save the workflow after successful execution
+  </Step>
+  <Step title="Verify Dependencies">
+    Confirm all models and custom nodes are properly set up
+  </Step>
+</Steps>
+
+**[IMAGE PLACEHOLDER: ComfyUI editor showing a successful workflow execution with green status indicators]**
+
+<Warning>
+**Important**: The workflow must run successfully at least once in the ComfyUI editor before deployment. This ensures all models and custom nodes are properly configured and the platform can verify the workflow's functionality.
+</Warning>
+
+## Configure Workflow for Deployment
+
+All workflows consist of interconnected nodes, with some serving as input nodes and others as output nodes. The platform needs to identify these input and output nodes to:
+
+- Create API parameters for the deployed workflow
+- Generate the playground user interface
+- Define the workflow's external interface
+
+<Info>
+By default, workflows are not configured for deployment. You'll notice a **red cross mark** next to unconfigured workflows in your project's workflow sidebar.
+</Info>
+
+**[IMAGE PLACEHOLDER: Project sidebar showing workflow list with red cross marks next to unconfigured workflows]**
+
+### Understanding I/O Configuration
+
+When you deploy a workflow, FlowScale AI needs to understand:
+- **Which nodes accept external inputs** (text prompts, images, parameters)
+- **Which nodes produce outputs** (generated images, text, data)
+- **How these inputs/outputs should be exposed** in the API and playground
+
+### Configuration Methods
+
+There are two primary ways to configure a workflow for deployment:
+
+<Tabs>
+  <Tab title="FlowScale I/O Nodes (Recommended)">
+    Use specialized FlowScale I/O nodes that are designed for deployment configuration.
+  </Tab>
+  <Tab title="Advanced I/O Configurator">
+    Use the advanced configuration interface for complex setups. [Read more about advanced API configuration](/deploy-api/overview).
+  </Tab>
+</Tabs>
+
+## Using FlowScale I/O Nodes
+
+The easiest way to configure your workflow is using FlowScale's specialized input and output nodes.
+
+### Adding Input Nodes
+
+<Steps>
+  <Step title="Open Node Search">
+    Double-click on an empty area in the ComfyUI editor to open the node search
+  </Step>
+  <Step title="Search for Input Nodes">
+    Type one of the following input node names:
+    - **InputText** - For text prompts and string inputs
+    - **InputImage** - For image uploads
+    - **InputNumber** - For numeric parameters
+    - **InputSlider** - For slider controls
+  </Step>
+  <Step title="Select FlowScale Nodes">
+    Choose nodes with the **"[FS]"** prefix, indicating they are FlowScale-specific nodes
+  </Step>
+  <Step title="Connect to Workflow">
+    Connect these input nodes to your workflow where external inputs are needed
+  </Step>
+</Steps>
+
+**[IMAGE PLACEHOLDER: ComfyUI editor showing node search dialog with FlowScale I/O input nodes with "[FS]" prefix visible in search results]**
 
 <Frame>
   <img
-    src="/images/deploy/deploy-button.png"
-    alt="Deploy workflow button"
+    src="/images/deploy/io-config-option.png"
+    alt="Adding FlowScale I/O nodes to workflow"
   />
 </Frame>
+
+### Adding Output Nodes
+
+<Steps>
+  <Step title="Search for Output Nodes">
+    In the node search, type one of the following output node names:
+    - **SaveImage** - For image outputs
+    - **SaveText** - For text outputs
+    - **SaveVideo** - For video outputs
+    - **SaveAudio** - For audio outputs
+  </Step>
+  <Step title="Select FlowScale Nodes">
+    Again, choose nodes with the **"[FS]"** prefix
+  </Step>
+  <Step title="Connect to Workflow">
+    Connect these output nodes to capture the final results of your workflow
+  </Step>
+</Steps>
+
+**[IMAGE PLACEHOLDER: ComfyUI editor showing FlowScale output nodes (SaveImage, SaveText, etc.) being connected to a workflow]**
+
+### Available FlowScale I/O Nodes
+
+| Node Type | Purpose | Use Case |
+|-----------|---------|----------|
+| **[FS] InputText** | Text input field | Prompts, descriptions, parameters |
+| **[FS] InputImage** | Image upload | Reference images, masks, source images |
+| **[FS] InputNumber** | Numeric input | Steps, strength, dimensions |
+| **[FS] InputSlider** | Range slider | CFG scale, denoise strength |
+| **[FS] SaveImage** | Image output | Generated images, processed images |
+| **[FS] SaveText** | Text output | Generated text, metadata |
+| **[FS] SaveVideo** | Video output | Animated sequences |
+| **[FS] SaveAudio** | Audio output | Generated audio files |
+
+### Verify Configuration
+
+After adding FlowScale I/O nodes:
+
+<Steps>
+  <Step title="Connect All Nodes">
+    Ensure all I/O nodes are properly connected to your workflow
+  </Step>
+  <Step title="Save Workflow">
+    Click the **Save** button in the ComfyUI editor
+  </Step>
+  <Step title="Check Status">
+    Look for a **green checkmark** next to your workflow in the left sidebar, indicating successful configuration
+  </Step>
+</Steps>
+
+**[IMAGE PLACEHOLDER: Project sidebar showing workflow with green checkmark indicating successful configuration for deployment]**
+
+## Deploy Your Workflow
+
+Once your workflow is configured (showing a green checkmark), you can deploy it.
 
 ### Deployment Process
 
 <Steps>
-  <Step title="Prepare Workflow">
-    Ensure your workflow runs successfully in the editor
+  <Step title="Click Deploy">
+    Click the **"Deploy"** button in the top-right corner of the application
+    
+    <Frame>
+      <img
+        src="/images/deploy/deploy-button.png"
+        alt="Deploy workflow button"
+      />
+    </Frame>
   </Step>
-  <Step title="Configure Inputs/Outputs">
-    Define API parameters and response format
+  
+  <Step title="Select Pod">
+    A dialog box will appear asking you to select the Pod for deployment
+    
+    <Frame>
+      <img
+        src="/images/deploy/deploy-modal.png"
+        alt="Pod selection modal"
+      />
+    </Frame>
   </Step>
-  <Step title="Deploy">
-    Click "Deploy" and choose your deployment settings
+  
+  <Step title="Choose Configuration">
+    Select the appropriate pod based on your workflow requirements:
+    - **GPU type** needed for your models
+    - **Memory requirements** for your workflow
+    - **Expected usage** patterns
   </Step>
-  <Step title="Test API">
-    Use the generated API documentation to test endpoints
+  
+  <Step title="Confirm Deployment">
+    Click **Deploy** to start the deployment process
   </Step>
 </Steps>
 
-## Deployment Options
+**[IMAGE PLACEHOLDER: Deployment process in progress showing loading/progress indicators]**
 
-### API Endpoints
+### Pod Selection Guide
 
-Transform workflows into REST APIs that can be integrated into any application:
+Choose the right pod for your workflow:
+
+| Pod Type | Best For | GPU | Memory | Cost |
+|----------|----------|-----|--------|------|
+| **Basic** | Simple workflows, testing | T4 | 8GB | $ |
+| **Standard** | Image generation, most workflows | L4 | 16GB | $$ |
+| **Advanced** | Complex workflows, large models | A100 | 40GB | $$$ |
+| **Premium** | Real-time inference, batch processing | H100 | 80GB | $$$$ |
+
+## Using Your Deployed Workflow
+
+### API Server Page
+
+After successful deployment, you'll be taken to the **API Server** page where you can:
+
+- **Monitor deployment status** and health
+- **View API documentation** with interactive examples
+- **Test API endpoints** directly in the browser
+- **Manage API keys** and access controls
+- **Monitor usage** and performance metrics
+
+**[IMAGE PLACEHOLDER: API Server page showing deployed workflow with monitoring dashboard, API documentation links, and status indicators]**
+
+<Frame>
+  <img
+    src="/images/deploy/api-docs.png"
+    alt="API documentation interface"
+  />
+</Frame>
+
+### API Integration
+
+Use your deployed workflow in any application:
 
 <CodeGroup>
 
@@ -94,42 +288,42 @@ response = requests.post(
 
 </CodeGroup>
 
-### Interactive UIs (Gradio)
+### Playground Interface
 
-Generate user-friendly interfaces automatically:
+The playground provides a user-friendly interface for testing and sharing your workflow:
 
-- **Auto-generated forms**: Input fields based on workflow parameters
-- **Real-time preview**: Live updates as users adjust settings
-- **Shareable links**: Easy distribution to end-users
-- **Custom branding**: Add your logo and styling
+<Steps>
+  <Step title="Access Playground">
+    In the API Server page, find your deployed workflow and click **"Open Playground"**
+  </Step>
+  <Step title="Test Workflow">
+    Use the auto-generated form to input parameters and test your workflow
+  </Step>
+  <Step title="Share with Team">
+    Share the playground URL with team members for easy access without ComfyUI complexity
+  </Step>
+</Steps>
+
+**[IMAGE PLACEHOLDER: API Server page showing deployed workflows list with "Open Playground" buttons and options]**
 
 <Frame>
   <img
     src="/images/deploy/gradio-ui.png"
-    alt="Auto-generated Gradio interface"
+    alt="Auto-generated playground interface"
   />
 </Frame>
 
-## Configuration Options
+### Playground Benefits
 
-### Input/Output Settings
+- **No technical expertise required** - Simple form-based interface
+- **No setup needed** - Works directly in the browser
+- **Shareable** - Send links to team members or clients
+- **Real-time results** - Immediate feedback and outputs
+- **Mobile-friendly** - Works on any device with a browser
 
-Configure how your workflow interacts with the API:
+**[IMAGE PLACEHOLDER: Playground interface showing user-friendly form with various input types (text fields, sliders, image upload) and real-time results]**
 
-<Tabs>
-  <Tab title="Input Parameters">
-    - **Text prompts**: String inputs with validation
-    - **Numeric values**: Sliders, number inputs with ranges
-    - **Image uploads**: File handling with format restrictions
-    - **Dropdown options**: Predefined choices for models/styles
-  </Tab>
-  <Tab title="Output Formats">
-    - **Images**: PNG, JPEG, WebP with quality settings
-    - **JSON data**: Structured response with metadata
-    - **File downloads**: Direct file URLs for generated content
-    - **Batch results**: Multiple outputs from single request
-  </Tab>
-</Tabs>
+## Advanced Configuration Options
 
 ### GPU & Scaling Settings
 
@@ -156,6 +350,27 @@ Choose the right compute resources for your workflow:
 - **Geographic regions**: Deploy closer to your users
 - **Timeout settings**: Request processing limits
 
+**[IMAGE PLACEHOLDER: Advanced deployment configuration screen showing GPU selection, scaling options, and timeout settings]**
+
+### Input/Output Settings
+
+Configure how your workflow interacts with the API:
+
+<Tabs>
+  <Tab title="Input Parameters">
+    - **Text prompts**: String inputs with validation
+    - **Numeric values**: Sliders, number inputs with ranges
+    - **Image uploads**: File handling with format restrictions
+    - **Dropdown options**: Predefined choices for models/styles
+  </Tab>
+  <Tab title="Output Formats">
+    - **Images**: PNG, JPEG, WebP with quality settings
+    - **JSON data**: Structured response with metadata
+    - **File downloads**: Direct file URLs for generated content
+    - **Batch results**: Multiple outputs from single request
+  </Tab>
+</Tabs>
+
 ## Monitoring & Management
 
 ### Deployment Dashboard
@@ -177,6 +392,8 @@ Track the performance and usage of your deployed workflows:
   </Card>
 </CardGroup>
 
+**[IMAGE PLACEHOLDER: Deployment dashboard showing analytics cards with request metrics, cost tracking, version management, and error monitoring]**
+
 ### API Documentation
 
 FlowScale AI automatically generates comprehensive API documentation:
@@ -185,6 +402,8 @@ FlowScale AI automatically generates comprehensive API documentation:
 - **Code examples**: Ready-to-use snippets in multiple languages
 - **Schema definitions**: Detailed input/output specifications
 - **Authentication**: API key management and security
+
+**[IMAGE PLACEHOLDER: API documentation page showing interactive docs, code examples in multiple languages, and API key management interface]**
 
 <Frame>
   <img
@@ -222,27 +441,15 @@ FlowScale AI automatically generates comprehensive API documentation:
   </Accordion>
 </AccordionGroup>
 
-## Deployment Checklist
+## Troubleshooting
 
-Before deploying to production:
+### Common Deployment Issues
 
-<Steps>
-  <Step title="Test Thoroughly">
-    Validate workflow with various inputs and edge cases
-  </Step>
-  <Step title="Set Resource Limits">
-    Configure appropriate GPU type and scaling settings
-  </Step>
-  <Step title="Configure Monitoring">
-    Set up alerts for errors and performance issues
-  </Step>
-  <Step title="Document API">
-    Ensure clear documentation for integration teams
-  </Step>
-  <Step title="Plan for Scale">
-    Consider usage patterns and cost implications
-  </Step>
-</Steps>
+<DeploymentTroubleshooting />
+
+<Info>
+For additional troubleshooting guidance, refer to our [comprehensive troubleshooting guide](/getting-started/troubleshooting).
+</Info>
 
 ## Next Steps
 
@@ -255,10 +462,24 @@ Before deploying to production:
     Learn to integrate APIs into your applications
   </Card>
   <Card
-    title="Scaling Strategies"
-    icon="chart-line"
-    href="/deploy-api/scaling"
+    title="Advanced Configuration"
+    icon="settings"
+    href="/deploy-api/overview"
   >
-    Optimize performance and manage costs
+    Explore advanced API configuration options
+  </Card>
+  <Card
+    title="Monitoring & Analytics"
+    icon="chart-line"
+    href="/workspace/overview"
+  >
+    Track performance and optimize costs
+  </Card>
+  <Card
+    title="Troubleshooting"
+    icon="life-ring"
+    href="/getting-started/troubleshooting"
+  >
+    Resolve deployment issues
   </Card>
 </CardGroup>

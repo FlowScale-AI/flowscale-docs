@@ -1,0 +1,96 @@
+<Accordion title="Workflow Not Configured for Deployment (Red Cross Mark)">
+**Issue**: Workflow shows a red cross mark in the sidebar, indicating it's not configured for deployment.
+
+**[IMAGE PLACEHOLDER: Project sidebar showing workflow list with red cross marks next to unconfigured workflows]**
+
+**Solution**: 
+- Add FlowScale I/O nodes to your workflow (InputText, InputImage, SaveImage, etc. with "[FS]" prefix)
+- Ensure at least one input and one output node are connected
+- Save the workflow after adding the nodes
+
+**[IMAGE PLACEHOLDER: Same sidebar after configuration showing green checkmarks next to properly configured workflows]**
+</Accordion>
+
+<Accordion title="Workflow Won't Run in ComfyUI Editor">
+**Issue**: Cannot deploy a workflow that hasn't been successfully executed at least once.
+
+**[IMAGE PLACEHOLDER: ComfyUI editor showing a workflow with error indicators or failed execution status]**
+
+**Solution**:
+- Run the workflow completely in the ComfyUI editor first
+- Verify all models and custom nodes are properly loaded
+- Check for any error messages in the console
+- Save the workflow after successful execution
+
+**[IMAGE PLACEHOLDER: ComfyUI editor showing successful workflow execution with green indicators and completed output]**
+</Accordion>
+
+<Accordion title="FlowScale I/O Nodes Not Appearing">
+**Issue**: Cannot find FlowScale-specific nodes when searching in ComfyUI.
+
+**[IMAGE PLACEHOLDER: ComfyUI node search dialog showing empty results when searching for FlowScale nodes]**
+
+**Solution**:
+- Ensure you're searching for nodes with "[FS]" prefix
+- Double-click on empty space in ComfyUI editor to open node search
+- Try searching for: "InputText", "InputImage", "SaveImage", "SaveText"
+- Restart ComfyUI if nodes are still missing
+
+**[IMAGE PLACEHOLDER: ComfyUI node search dialog showing FlowScale I/O nodes with "[FS]" prefix in the search results]**
+</Accordion>
+
+<Accordion title="Deployment Fails During Pod Selection">
+**Issue**: Deployment process stops when selecting a pod.
+
+**[IMAGE PLACEHOLDER: Deployment modal showing pod selection with error message or loading state that gets stuck]**
+
+**Solution**:
+- Verify your project has available pod quota
+- Check if the selected pod type supports your workflow requirements
+- Ensure your account has sufficient credits
+- Try selecting a different pod configuration
+
+**[IMAGE PLACEHOLDER: Successful pod selection modal showing available pod options with clear descriptions and successful selection]**
+</Accordion>
+
+<Accordion title="API Not Responding After Deployment">
+**Issue**: Deployed API returns errors or timeouts.
+
+**[IMAGE PLACEHOLDER: API Server page showing deployment with error status or failed requests in the logs/monitoring section]**
+
+**Solution**:
+- Check deployment logs in the API Server page
+- Verify all workflow inputs are properly configured
+- Ensure the workflow runs successfully with the same inputs in the editor
+- Check if GPU resources are sufficient for your workflow
+
+**[IMAGE PLACEHOLDER: API Server page showing healthy deployment status with successful API requests and green indicators]**
+</Accordion>
+
+<Accordion title="Playground UI Not Loading">
+**Issue**: Deployed playground interface doesn't load or shows errors.
+
+**[IMAGE PLACEHOLDER: Browser showing playground URL with loading error, blank page, or error message instead of the expected playground interface]**
+
+**Solution**:
+- Verify the workflow has proper input/output configuration
+- Check that all required models are available on the deployment pod
+- Clear browser cache and try again
+- Check browser console for JavaScript errors
+
+**[IMAGE PLACEHOLDER: Successfully loaded playground interface showing the auto-generated form with input fields and working functionality]**
+</Accordion>
+
+<Accordion title="Configuration Lost After Saving">
+**Issue**: I/O configuration disappears after saving the workflow.
+
+**[IMAGE PLACEHOLDER: ComfyUI editor showing a workflow where FlowScale I/O nodes appear disconnected or isolated from the main workflow graph]**
+
+**Solution**:
+- Ensure FlowScale I/O nodes are properly connected to the workflow
+- Verify nodes are not isolated (must be part of the workflow graph)
+- Save the workflow only after adding and connecting all I/O nodes
+- Check that you're using official FlowScale I/O nodes (with "[FS]" prefix)
+
+**[IMAGE PLACEHOLDER: ComfyUI editor showing properly connected FlowScale I/O nodes integrated into the workflow graph with visible connections]**
+</Accordion>
