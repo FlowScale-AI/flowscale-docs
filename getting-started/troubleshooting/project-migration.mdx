@@ -1,0 +1,150 @@
+---
+title: Project Migration from GitHub to Google Login
+description: "How to migrate your existing projects after switching from GitHub to Google authentication"
+icon: "arrows-rotate"
+---
+
+## Overview
+
+FlowScale AI has transitioned from GitHub authentication to Google authentication to provide a better user experience. If you previously used our platform with GitHub login, we've created a seamless migration process to ensure you don't lose access to your existing projects.
+
+## How Migration Works
+
+When you log in with Google using the **same email address** that was associated with your GitHub account, FlowScale will automatically detect your previous projects and initiate a migration process.
+
+### What Gets Migrated
+
+During the migration process, the following will be imported from your GitHub repositories to our database:
+
+- **All your projects** and their configurations
+- **Workflow files** and versions
+- **Project settings** and metadata
+- **Model uploads** and custom nodes (if applicable)
+- **Deployment configurations**
+
+### Migration Process
+
+<Steps>
+  <Step title="Log in with Google">
+    Use the same email address that was associated with your GitHub account when logging into FlowScale.
+  </Step>
+  
+  <Step title="Automatic Detection">
+    Our system will automatically detect that you have existing projects from your GitHub integration.
+  </Step>
+  
+  <Step title="Migration Initiation">
+    You'll see a migration prompt explaining that your projects are being imported. This process happens behind the scenes.
+  </Step>
+  
+  <Step title="Project Import">
+    Your GitHub repositories containing FlowScale projects will be scanned and imported into our database.
+  </Step>
+  
+  <Step title="Verification">
+    Once complete, you'll be able to access all your projects from the dashboard as before.
+  </Step>
+</Steps>
+
+## What to Expect
+
+<AccordionGroup>
+  <Accordion title="Migration Timeline">
+    - **Small projects** (1-5 workflows): Usually complete within 2-3 minutes
+    - **Medium projects** (5-20 workflows): May take 5-10 minutes
+    - **Large projects** (20+ workflows): Could take up to 15-20 minutes
+    
+    You'll receive a notification once the migration is complete.
+  </Accordion>
+
+  <Accordion title="During Migration">
+    - You can continue using FlowScale while migration happens in the background
+    - Migrated projects will appear in your dashboard as they're processed
+    - You may see a progress indicator for large migrations
+  </Accordion>
+
+  <Accordion title="After Migration">
+    - All projects will be accessible from your FlowScale dashboard
+    - No changes to your workflow files or configurations
+    - Existing deployments will continue to work normally
+    - GitHub repositories remain unchanged (they're just copied, not moved)
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting Migration Issues
+
+<Warning>
+If you encounter issues during migration, these solutions usually resolve common problems.
+</Warning>
+
+### Migration Not Starting
+
+If the migration process doesn't start automatically:
+
+1. **Verify email match**: Ensure you're using the exact same email address from your GitHub account
+2. **Clear browser cache**: Sometimes cached data can interfere with the detection process
+3. **Try incognito mode**: Test logging in using an incognito/private browser window
+4. **Wait a few minutes**: The detection system may need a moment to process your login
+
+### Projects Missing After Migration
+
+If some projects don't appear after migration:
+
+1. **Check repository permissions**: Ensure FlowScale had access to all your repositories
+2. **Private repositories**: Make sure private repos containing FlowScale projects were accessible
+3. **Repository naming**: Projects may have been in repositories with non-standard names
+4. **Contact support**: We can manually review your account for missing projects
+
+### Migration Stuck or Failed
+
+If migration appears stuck or fails:
+
+1. **Refresh the page**: Sometimes the status display needs updating
+2. **Check internet connection**: Ensure you have a stable connection
+3. **Large projects**: Very large projects may take longer than expected
+4. **Try logging out and back in**: This can restart the migration process
+
+## Getting Help
+
+If you continue to experience issues with project migration:
+
+<CardGroup cols={2}>
+  <Card
+    title="Priority Support"
+    icon="headset"
+    href="mailto:migration-support@flowscale.ai"
+  >
+    Email our migration support team for immediate assistance
+  </Card>
+  <Card
+    title="Discord Community"
+    icon="discord"
+    href="https://discord.gg/flowscale"
+  >
+    Get help from the community and FlowScale team
+  </Card>
+</CardGroup>
+
+<Note>
+Migration support is available 24/7 during the transition period. We're committed to ensuring all users can access their projects seamlessly.
+</Note>
+
+## FAQ
+
+<AccordionGroup>
+  <Accordion title="Will my GitHub repositories be deleted?">
+    No, your GitHub repositories remain completely untouched. We only copy the project data to our database - nothing is moved or deleted from GitHub.
+  </Accordion>
+
+  <Accordion title="Can I still use GitHub integration after migration?">
+    After migration, FlowScale operates independently of GitHub. Your projects will be managed within our platform, and you won't need GitHub access for FlowScale functionality.
+  </Accordion>
+
+  <Accordion title="What if I used multiple GitHub accounts?">
+    If you had projects across multiple GitHub accounts, you'll need to contact support to help consolidate them under your new Google account.
+  </Accordion>
+
+  <Accordion title="Can I migrate later if I skip it now?">
+    Yes, the migration option will remain available. However, we recommend migrating as soon as possible to ensure continued access to your projects.
+  </Accordion>
+</AccordionGroup>
