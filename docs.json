@@ -23,6 +23,7 @@
             "group": "Overview",
             "pages": [
               "getting-started/introduction",
+              "getting-started/why-flowscale-ai",
               "getting-started/import-create-workflows",
               "getting-started/deploy-workflows"
             ]
@@ -31,8 +32,6 @@
             "group": "Glossary",
             "pages": [
               "getting-started/glossary/comfyui",
-              "getting-started/glossary/workflows",
-              "getting-started/glossary/nodes",
               "getting-started/glossary/projects",
               "getting-started/glossary/pods"
             ]
