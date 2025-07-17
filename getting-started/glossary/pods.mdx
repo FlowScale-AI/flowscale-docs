@@ -1,323 +1,219 @@
 ---
 title: Pods
-description: "Understanding pods - the compute infrastructure that powers your workflows"
+description: "Cloud GPU infrastructure that powers your ComfyUI workflows and deployments"
 icon: "server"
 ---
 
-## What are Pods?
+<Note>
+**TL;DR:** A Pod is a cloud GPU machine managed by FlowScale AI that powers your ComfyUI workspace and any APIs/playgrounds you deploy from a project. Pods give you fine‑grained control over cost, performance, access, and scale—all without having to provision infrastructure yourself.
+</Note>
 
-**Pods** in FlowScale AI are isolated compute environments that execute your ComfyUI workflows. Think of them as virtual machines specifically optimized for AI workloads, equipped with powerful GPUs and pre-configured with all necessary dependencies.
+## Why Pods Exist
 
-<Frame>
-  <img
-    src="/images/build/gpu-activity.png"
-    alt="Pod GPU activity monitoring"
-  />
-</Frame>
-
-## Pod Architecture
-
-### Compute Resources
-
-Each pod contains:
-
-<CardGroup cols={2}>
-  <Card title="GPU Hardware" icon="microchip">
-    High-performance graphics cards (T4, L4, A100, H100)
+<CardGroup cols={3}>
+  <Card title="Run ComfyUI" icon="paintbrush">
+    Every FlowScale AI project needs an attached pod to spin‑up a ComfyUI workspace in the cloud
   </Card>
-  <Card title="CPU & Memory" icon="memory">
-    Sufficient CPU cores and RAM for AI processing
+  <Card title="Serve APIs & Playgrounds" icon="globe">
+    Deploy workflows as API endpoints with optional Gradio playground UI
   </Card>
-  <Card title="Storage" icon="hard-drive">
-    Fast SSD storage for models and temporary data
-  </Card>
-  <Card title="Network" icon="network-wired">
-    High-bandwidth connectivity for data transfer
+  <Card title="Scale on Demand" icon="arrows-maximize">
+    Serverless GPU containers that scale automatically based on traffic
   </Card>
 </CardGroup>
 
-### Software Environment
+## Key Concepts
 
-Pods come pre-configured with:
+<AccordionGroup>
+  <Accordion title="GPU Type">
+    The graphics card model used by the pod (e.g. *T4 16 GB*, *A100 80 GB*). Each model has a different $/hr rate.
+  </Accordion>
+  <Accordion title="Allotted GPU Containers">
+    The *maximum* number of GPU workers the pod can burst to during high load.
+  </Accordion>
+  <Accordion title="Idle Timeout">
+    Time a container waits after a generation before parking (→ $0.07/hr CPU fee only).
+  </Accordion>
+  <Accordion title="Cold Start">
+    The first request that wakes an idle container. Adds ~10‑20s latency depending on model size.
+  </Accordion>
+  <Accordion title="Warm Containers">
+    Containers you pin **always‑on**. Great for latency‑sensitive use cases; incurs full GPU cost 24/7.
+  </Accordion>
+  <Accordion title="Run Timeout">
+    Hard cap (in minutes) on a single generation. Prevents runaway jobs & surprise bills.
+  </Accordion>
+  <Accordion title="Credit Budget">
+    Optional soft‑limit that stops the pod once the specified credit amount is consumed.
+  </Accordion>
+</AccordionGroup>
 
-- **ComfyUI runtime**: Latest stable version with common extensions
-- **AI frameworks**: PyTorch, transformers, diffusers, and dependencies
-- **Model libraries**: Popular checkpoints and commonly used models
-- **Custom nodes**: Pre-installed community extensions and tools
+## Pod Types & GPU Configurations
 
-## Pod Types
+<CardGroup cols={2}>
+  <Card title="T4 - 16GB VRAM" icon="microchip" color="#10b981">
+    **Best for:** Development, simple workflows, testing
+    
+    Perfect for getting started and lightweight image generation tasks
+  </Card>
+  <Card title="L4 - 24GB VRAM" icon="microchip" color="#3b82f6">
+    **Best for:** Standard image generation, medium workloads
+    
+    Balanced performance for most production use cases
+  </Card>
+  <Card title="A100 - 40GB/80GB VRAM" icon="microchip" color="#f59e0b">
+    **Best for:** Complex workflows, batch processing
+    
+    High-performance computing for demanding AI tasks
+  </Card>
+  <Card title="H100 - 80GB VRAM" icon="microchip" color="#dc2626">
+    **Best for:** Largest models, real-time inference
+    
+    Top-tier performance for the most demanding workloads
+  </Card>
+</CardGroup>
 
-### GPU Configurations
-
-FlowScale AI offers different pod types optimized for various workloads:
-
-| Pod Type | GPU | VRAM | Use Case | Cost |
-|----------|-----|------|----------|------|
-| **T4** | NVIDIA T4 | 16GB | Development, simple workflows | $ |
-| **L4** | NVIDIA L4 | 24GB | Standard image generation | $$ |
-| **A100** | NVIDIA A100 | 40GB/80GB | Complex workflows, batch processing | $$$ |
-| **H100** | NVIDIA H100 | 80GB | Largest models, real-time inference | $$$$ |
-
-### Specialized Pods
-
-<Tabs>
-  <Tab title="Development Pods">
-    **Optimized for workflow development**:
-    - Persistent sessions for iterative development
-    - Extended idle timeouts
-    - Full ComfyUI editor access
-    - Real-time collaboration support
-  </Tab>
-  <Tab title="Production Pods">
-    **Optimized for API serving**:
-    - Fast cold-start times
-    - Automatic scaling capabilities
-    - Optimized model loading
-    - High-throughput processing
-  </Tab>
-  <Tab title="Batch Pods">
-    **Optimized for large-scale processing**:
-    - Multi-GPU configurations
-    - Extended execution timeouts
-    - Optimized for parallel processing
-    - Cost-effective for large jobs
-  </Tab>
-</Tabs>
-
-## Pod Lifecycle
-
-### Provisioning
+## Creating a Pod
 
 <Steps>
-  <Step title="Request">
-    User initiates workflow execution or deployment
+  <Step title="Navigate to Pods">
+    Go to **Pods → ➕ New Pod**
   </Step>
-  <Step title="Scheduling">
-    FlowScale AI selects optimal pod type and availability zone
+  <Step title="Select GPU Type">
+    Pick a **GPU Type** that balances memory requirements vs. price
   </Step>
-  <Step title="Initialization">
-    Pod starts up and loads required models and dependencies
+  <Step title="Configure Containers">
+    Set **Allotted GPU Containers** (start with 1 unless you expect heavy traffic)
   </Step>
-  <Step title="Ready">
-    Pod is ready to execute workflows
+  <Step title="Set Budget (Optional)">
+    Tick **Assign Credit Budget** and enter a limit to control costs
+  </Step>
+  <Step title="Create">
+    Click **Create Pod** — ComfyUI is now one click away!
   </Step>
 </Steps>
 
-### Execution
+## Pod Settings Configuration
 
-During workflow execution:
-
-1. **Input processing**: Receive and validate input data
-2. **Workflow execution**: Run ComfyUI workflow steps
-3. **Output generation**: Process and format results
-4. **Cleanup**: Free resources and prepare for next request
-
-### Termination
-
-Pods are terminated when:
-
-- Workflow execution completes
-- Idle timeout is reached
-- Manual termination by user
-- Pod replacement due to updates or maintenance
-
-## Pod Management
-
-### Automatic Scaling
-
-FlowScale AI automatically manages pod scaling based on demand:
-
-<AccordionGroup>
-  <Accordion title="Scale-Up Triggers">
-    - Incoming API requests exceed current capacity
-    - Queue length reaches configured thresholds
-    - Response time targets are not being met
-    - Scheduled batch jobs require additional resources
-  </Accordion>
-  <Accordion title="Scale-Down Triggers">
-    - Request volume decreases below capacity
-    - Pods remain idle beyond configured timeout
-    - Cost optimization algorithms identify opportunities
-    - Maintenance windows require pod cycling
-  </Accordion>
-  <Accordion title="Scaling Policies">
-    - Minimum and maximum pod counts
-    - Scale-up and scale-down rates
-    - Cooldown periods to prevent thrashing
-    - Geographic distribution preferences
-  </Accordion>
-</AccordionGroup>
-
-### Pod Health Monitoring
-
-FlowScale AI continuously monitors pod health:
-
-- **Resource utilization**: CPU, GPU, memory, and storage usage
-- **Performance metrics**: Execution times, throughput, error rates
-- **Health checks**: Automated tests to verify pod functionality
-- **Alerting**: Notifications for performance issues or failures
-
-## Development vs Production Pods
-
-### Development Pods
-
-**Characteristics**:
-- Longer session persistence (up to 6 hours)
-- Full ComfyUI editor interface
-- Real-time collaboration features
-- Debugging and development tools
-- Flexible resource allocation
-
-**Use Cases**:
-- Workflow development and testing
-- Model experimentation
-- Team collaboration sessions
-- Learning and training
-
-### Production Pods
-
-**Characteristics**:
-- Fast cold-start optimization (< 30 seconds)
-- API-only interface
-- High availability and redundancy
-- Automatic failover capabilities
-- Optimized for cost and performance
-
-**Use Cases**:
-- Serving production APIs
-- High-volume batch processing
-- Real-time applications
-- Enterprise integrations
-
-## Pod Networking
-
-### Security
-
-Pods are isolated in secure network environments:
-
-- **Network isolation**: Each pod runs in its own virtual network
-- **Firewall protection**: Only necessary ports are exposed
-- **Encrypted communication**: All data transfer uses TLS/SSL
-- **Access control**: API key authentication and authorization
-
-### Connectivity
+Navigate to **Pods › *Your Pod* › Settings** to access three configuration tabs:
 
 <Tabs>
-  <Tab title="Internet Access">
-    - Download models from public repositories
-    - Access external APIs and services
-    - Fetch data from URLs
-    - Upload results to external storage
+  <Tab title="General">
+    <Frame>
+      <img src="/images/build/gpu-settings.png" alt="General pod settings" />
+    </Frame>
+    
+    - Rename or add description to your pod
+    - Toggle **Assign Credit Budget** and manage spending limits
   </Tab>
-  <Tab title="FlowScale AI Services">
-    - Model library and storage
-    - Workflow version control
-    - Monitoring and logging
-    - Collaboration features
+  
+  <Tab title="GPU Settings">
+    <Frame>
+      <img src="/images/build/gpu-activity.png" alt="GPU settings configuration" />
+    </Frame>
+    
+    **Core Configuration:**
+    - Change the **GPU Type**
+    - Adjust **Allotted GPU Containers**
+    
+    **Timeout Options:**
+    - **Generation Run Timeout** – cap per‑request time
+    - **Idle Timeout** – how long containers stay warm after each request
+    
+    **Performance Optimization:**
+    - **Warm Containers** (visible when scaling > 1) – pin a subset always‑on
+    
+    <Tip>Start with Idle Timeout = 60s and Warm Containers = 0 to minimize spend, then optimize for latency later.</Tip>
   </Tab>
-  <Tab title="Private Networks">
-    - VPC connectivity for enterprise customers
-    - Private model repositories
-    - On-premises integration
-    - Custom networking configurations
+  
+  <Tab title="Pod Members">
+    **Access Control:**
+    - Add teammates by handle or email
+    - Assign **Owner**, **Admin**, or **Member** roles
+    - Only listed members and service accounts can access ComfyUI workspace or call private APIs
   </Tab>
 </Tabs>
 
-## Performance Optimization
+## How Pod Scaling Works
 
-### Model Caching
+```mermaid
+sequenceDiagram
+    participant User
+    participant API as Pod API Gateway
+    participant Queue as GPU Container Queue
+    participant Container1 as GPU Container #1
+    participant ContainerN as GPU Container #N
+    
+    User->>API: POST /generate
+    API->>Queue: Enqueue request
+    
+    Note over Queue: Cold start if queue > warm containers
+    
+    Queue->>Container1: Spawn/wake container
+    
+    alt Multiple requests
+        Queue->>Container1: Job 1
+        Queue->>ContainerN: Job 2
+    end
+    
+    Container1-->>User: Generated response
+    
+    Note over Container1,ContainerN: Containers stay warm until idle timeout
+```
 
-Pods optimize performance through intelligent caching:
+**Key Phases:**
+- **Cold Start** – Container boots and loads workflow graph ± model weights
+- **Warm Pool** – Containers stay resident until *Idle Timeout* expires  
+- **Round‑Robin** – FlowScale AI evenly distributes jobs to maximize utilization
 
-- **Warm starts**: Keep frequently used models loaded in memory
-- **Model sharing**: Share common models across pod instances
-- **Predictive loading**: Pre-load models based on usage patterns
-- **Cache eviction**: Manage memory by removing unused models
+## Cost Control Best Practices
 
-### Resource Allocation
+<Checklist>
+  <Check>Use the smallest GPU that meets VRAM requirements</Check>
+  <Check>Keep **Allotted GPU Containers** realistic (1‑2 for dev, ≥3 for prod)</Check>
+  <Check>Set **Run Timeout** ≤ expected worst‑case generation + 20%</Check>
+  <Check>Tune **Idle Timeout** (30‑120s sweet spot) before going live</Check>
+  <Check>Apply a **Credit Budget** on every non‑trial pod</Check>
+</Checklist>
 
-<AccordionGroup>
-  <Accordion title="GPU Memory Management">
-    - Dynamic memory allocation based on workflow requirements
-    - Memory pooling to minimize allocation overhead
-    - Garbage collection to free unused memory
-    - Out-of-memory detection and recovery
-  </Accordion>
-  <Accordion title="CPU Optimization">
-    - Multi-threading for parallel processing
-    - CPU affinity for optimal performance
-    - Background task scheduling
-    - Resource reservation for critical operations
-  </Accordion>
-  <Accordion title="I/O Optimization">
-    - SSD caching for frequently accessed data
-    - Parallel data loading and processing
-    - Compression for network transfers
-    - Async operations to minimize blocking
-  </Accordion>
-</AccordionGroup>
-
-## Monitoring and Debugging
-
-### Real-Time Metrics
-
-Monitor pod performance in real-time:
+## Monitoring & Performance
 
 <CardGroup cols={2}>
-  <Card title="Resource Usage" icon="chart-line">
-    CPU, GPU, memory, and storage utilization
+  <Card title="Real-Time Metrics" icon="chart-line">
+    Monitor CPU, GPU, memory, and storage utilization in real-time
   </Card>
-  <Card title="Performance" icon="gauge">
-    Execution times, throughput, and latency
+  <Card title="Performance Analytics" icon="gauge">
+    Track execution times, throughput, and latency patterns
   </Card>
-  <Card title="Errors" icon="triangle-exclamation">
-    Error rates, failure types, and debugging info
+  <Card title="Error Tracking" icon="triangle-exclamation">
+    Monitor error rates, failure types, and get debugging information
   </Card>
-  <Card title="Costs" icon="dollar-sign">
-    Resource costs and optimization opportunities
+  <Card title="Cost Analytics" icon="dollar-sign">
+    Track resource costs and identify optimization opportunities
   </Card>
 </CardGroup>
 
-### Debugging Tools
-
-When issues occur, FlowScale AI provides:
-
-- **Execution logs**: Detailed logs of workflow execution
-- **Error traces**: Stack traces and error context
-- **Performance profiling**: Identify bottlenecks and optimization opportunities
-- **Resource monitoring**: Track resource usage patterns
-
-## Cost Optimization
-
-### Billing Model
-
-Pod costs are based on:
-
-- **GPU type**: Different rates for T4, L4, A100, H100
-- **Usage time**: Charged per second of actual usage
-- **Resource utilization**: Optimized billing for partial usage
-- **Regional pricing**: Different rates based on geographic location
-
-### Cost-Saving Strategies
+## Frequently Asked Questions
 
 <AccordionGroup>
-  <Accordion title="Right-Sizing">
-    - Choose appropriate GPU types for your workload
-    - Monitor utilization and downgrade if possible
-    - Use batch processing for cost-effective high-volume work
-    - Implement auto-scaling to avoid over-provisioning
+  <Accordion title="Can one project use multiple pods?">
+    Yes! For example, use an A100 pod for 4K renders and a T4 pod for thumbnails to optimize costs.
   </Accordion>
-  <Accordion title="Scheduling">
-    - Use off-peak hours for batch processing
-    - Implement queue management to optimize resource usage
-    - Schedule maintenance during low-usage periods
-    - Use spot instances for fault-tolerant workloads
+  
+  <Accordion title="What happens when the budget is exceeded?">
+    New jobs fail with a budget error; existing generations finish gracefully. You can raise the cap or wait until the next billing cycle.
   </Accordion>
-  <Accordion title="Optimization">
-    - Optimize workflows for faster execution
-    - Use model quantization to reduce memory requirements
-    - Implement result caching to avoid redundant processing
-    - Monitor and eliminate inefficient resource usage
+  
+  <Accordion title="Can I connect the same pod to several projects?">
+    No—pods are **scoped to a single project** for isolation & cost tracking purposes.
+  </Accordion>
+  
+  <Accordion title="How do I monitor usage?">
+    Go to **Pods › *Your Pod* › Deployment History** for per‑generation logs and credit burn‑down analytics.
+  </Accordion>
+  
+  <Accordion title="What's the difference between development and production pods?">
+    **Development pods** have longer session persistence (up to 6 hours) and full ComfyUI editor interface. **Production pods** have fast cold-start optimization (< 30 seconds) and API-only interface.
   </Accordion>
 </AccordionGroup>
 
@@ -325,31 +221,31 @@ Pod costs are based on:
 
 <CardGroup cols={2}>
   <Card
-    title="Workflow Deployment"
+    title="Deploy Workflows"
     icon="rocket"
     href="/getting-started/deploy-workflows"
   >
-    Deploy workflows to production pods
+    Deploy your ComfyUI workflows to production pods
   </Card>
   <Card
-    title="Performance Monitoring"
+    title="Monitor Performance"
     icon="chart-line"
-    href="/deploy-api/scaling"
+    href="/deploy-api/overview"
   >
-    Monitor and optimize pod performance
+    Track and optimize your pod performance
   </Card>
   <Card
-    title="Cost Management"
+    title="Manage Costs"
     icon="dollar-sign"
     href="/reference/deployment-models"
   >
-    Understand pricing and optimize costs
+    Understand pricing models and cost optimization
   </Card>
   <Card
     title="Troubleshooting"
     icon="wrench"
-    href="/workspace/debug"
+    href="/getting-started/troubleshooting"
   >
-    Debug pod and workflow issues
+    Debug common pod and workflow issues
   </Card>
 </CardGroup>
