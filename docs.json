@@ -22,8 +22,8 @@
           {
             "group": "Overview",
             "pages": [
-              "getting-started/introduction",
               "getting-started/why-flowscale-ai",
+              "getting-started/introduction",
               "getting-started/import-create-workflows",
               "getting-started/deploy-workflows"
             ]
