@@ -33,7 +33,8 @@
             "pages": [
               "getting-started/glossary/comfyui",
               "getting-started/glossary/projects",
-              "getting-started/glossary/pods"
+              "getting-started/glossary/pods",
+              "getting-started/glossary/comfyui-editor"
             ]
           },
           {
@@ -41,28 +42,6 @@
             "pages": [
               "getting-started/troubleshooting/index",
               "getting-started/troubleshooting/project-migration"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "ComfyUI Editor",
-        "icon": "pen-to-square",
-        "groups": [
-          {
-            "group": "Overview",
-            "pages": [
-              "workspace/overview",
-              "workspace/editor-walkthrough"
-            ]
-          },
-          {
-            "group": "Workflow Management",
-            "pages": [
-              "workspace/basics",
-              "workspace/debug",
-              "workspace/versioning",
-              "workspace/import-export"
             ]
           }
         ]
