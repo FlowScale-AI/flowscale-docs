@@ -1,0 +1,244 @@
+---
+title: "Models"
+description: "Understanding AI models in FlowScale: management, deployment, and optimization for generative AI workflows"
+icon: "brain"
+---
+
+## What are Models in FlowScale?
+
+Models in FlowScale AI are the core AI engines that power your generative workflows. These are pre-trained machine learning models that can generate images, process text, transform data, and perform various AI tasks. FlowScale provides a comprehensive model management system that handles everything from model discovery to deployment optimization.
+
+<Frame>
+  <img src="/images/glossary/models-overview.png" alt="FlowScale Models dashboard showing various AI models including Stable Diffusion, FLUX, and custom models with their specifications and usage metrics" />
+</Frame>
+
+## Types of Models Available
+
+### Pre-loaded Foundation Models
+FlowScale comes with a curated library of popular, production-ready models:
+
+**Image Generation Models:**
+- **Stable Diffusion variants** (SD 1.5, SDXL, SD3)
+- **FLUX models** for high-quality image generation
+- **ControlNet models** for guided image generation
+- **LoRA models** for style and concept fine-tuning
+
+**Text and Language Models:**
+- **Language models** for text processing and generation
+- **Embedding models** for semantic understanding
+- **Translation models** for multi-language support
+
+**Specialized Models:**
+- **Upscaling models** for image enhancement
+- **Inpainting models** for image editing
+- **Face restoration models** for portrait enhancement
+- **Background removal models** for image segmentation
+
+### Custom Model Support
+- **Private model uploads** for proprietary AI models
+- **Fine-tuned models** tailored to your specific use cases
+- **Community models** from platforms like Hugging Face and Civitai
+- **Enterprise models** with custom licensing agreements
+
+## Model Management Features
+
+### Automated Model Lifecycle
+<Frame>
+  <img src="/images/glossary/model-lifecycle.png" alt="Diagram showing model lifecycle: Discovery → Upload → Validation → Deployment → Monitoring → Updates" />
+</Frame>
+
+**Discovery & Import**
+- Browse FlowScale's model library
+- Import models from external repositories
+- Upload custom trained models
+- Batch import for model collections
+
+**Validation & Testing**
+- Automatic compatibility checks
+- Performance benchmarking
+- Quality validation with test inputs
+- Security scanning for malicious code
+
+**Version Management**
+- Model versioning with semantic versioning
+- Rollback capabilities to previous versions
+- A/B testing between model versions
+- Automated update notifications
+
+### Storage & Optimization
+
+**Efficient Storage**
+- **Deduplication** - Shared model weights across projects
+- **Compression** - Optimized storage formats
+- **Caching** - Intelligent model caching strategies
+- **CDN distribution** - Global model availability
+
+**Performance Optimization**
+- **Model quantization** for faster inference
+- **Batch processing** optimization
+- **GPU memory management** 
+- **Auto-scaling** based on model demand
+
+## Working with Models in FlowScale
+
+### Model Discovery
+1. **Browse the Model Library**: Access hundreds of pre-vetted models
+2. **Search and Filter**: Find models by type, performance, or use case
+3. **Model Cards**: Detailed information about each model's capabilities
+4. **Usage Examples**: See how models are used in real workflows
+
+### Model Integration
+```
+Workflow Node → Model Selection → Configuration → Testing → Deployment
+```
+
+**In the ComfyUI Editor:**
+1. Drag a model node onto your workflow canvas
+2. Select from available models in the dropdown
+3. Configure model-specific parameters
+4. Connect to input/output nodes
+5. Test with sample data
+
+### Model Configuration
+
+**Standard Parameters:**
+- **Input resolution** and format requirements
+- **Batch size** for processing multiple inputs
+- **Quality settings** (speed vs. quality trade-offs)
+- **Memory allocation** and GPU requirements
+
+**Advanced Settings:**
+- **Sampling parameters** for generation models
+- **Guidance scales** for controlled generation
+- **Custom preprocessors** for input handling
+- **Post-processing** options
+
+## Model Performance & Monitoring
+
+### Real-time Metrics
+<Frame>
+  <img src="/images/glossary/model-metrics.png" alt="Model performance dashboard showing inference time, GPU utilization, success rates, and cost metrics across different models" />
+</Frame>
+
+**Performance Tracking:**
+- **Inference time** per request
+- **Throughput** (requests per second)
+- **GPU utilization** and memory usage
+- **Success/failure rates**
+
+**Cost Management:**
+- **Resource consumption** tracking
+- **Cost per inference** calculation
+- **Budget alerts** and usage limits
+- **Optimization recommendations**
+
+### Quality Monitoring
+- **Output quality scores** based on automated metrics
+- **User feedback** integration
+- **Drift detection** for model performance degradation
+- **Comparative analysis** between model versions
+
+## Security & Compliance
+
+### Model Security
+- **Encrypted storage** for all model files
+- **Access control** with role-based permissions
+- **Audit logs** for model usage and modifications
+- **Malware scanning** for uploaded models
+
+### Compliance Features
+- **Data residency** controls for model storage
+- **GDPR compliance** for EU data processing
+- **SOC 2** certified infrastructure
+- **Custom compliance** frameworks support
+
+## Best Practices for Model Management
+
+### Choosing the Right Model
+1. **Define your use case** clearly before model selection
+2. **Consider performance requirements** (speed vs. quality)
+3. **Evaluate resource constraints** (GPU memory, cost)
+4. **Test with representative data** before production deployment
+
+### Model Optimization
+- **Start with standard settings** and iterate
+- **Use quantized models** for production efficiency
+- **Implement caching** for frequently used models
+- **Monitor performance** and optimize based on metrics
+
+### Team Collaboration
+- **Document model choices** and configurations
+- **Share model templates** across team projects
+- **Establish model approval** processes for production
+- **Regular model audits** and updates
+
+## Troubleshooting Common Model Issues
+
+### Loading Problems
+**Symptoms:** Model fails to load or initialize
+**Solutions:**
+- Check model file integrity and format
+- Verify sufficient GPU memory allocation
+- Ensure compatibility with workflow requirements
+- Review model dependencies and versions
+
+### Performance Issues
+**Symptoms:** Slow inference or high resource usage
+**Solutions:**
+- Consider model quantization options
+- Adjust batch sizes for your hardware
+- Enable model caching if available
+- Switch to optimized model variants
+
+### Quality Problems
+**Symptoms:** Poor or inconsistent outputs
+**Solutions:**
+- Review and adjust model parameters
+- Check input data quality and format
+- Experiment with different sampling settings
+- Consider fine-tuning for your specific use case
+
+## Integration with FlowScale Ecosystem
+
+### Workflow Integration
+- **Seamless node integration** in ComfyUI Editor
+- **Auto-configuration** based on workflow context
+- **Dynamic model switching** based on inputs
+- **Pipeline optimization** across multiple models
+
+### API Deployment
+- **Model abstraction** in deployed APIs
+- **Version management** in production endpoints
+- **A/B testing** capabilities for model comparison
+- **Rollback mechanisms** for production issues
+
+### Scaling & Distribution
+- **Auto-scaling** based on model demand
+- **Load balancing** across model instances
+- **Geographic distribution** for global access
+- **Edge deployment** for low-latency applications
+
+## Future of Models in FlowScale
+
+### Upcoming Features
+- **Model marketplace** for community sharing
+- **Automated fine-tuning** services
+- **Custom model training** in the cloud
+- **Multi-modal model support** (text + image + audio)
+
+### AI Model Trends
+- **Larger foundation models** with better capabilities
+- **Specialized domain models** for specific industries
+- **Efficiency improvements** in model architecture
+- **Open-source model** ecosystem expansion
+
+## Related Concepts
+
+- [ComfyUI Editor](/getting-started/glossary/comfyui-editor) - Learn how to use models in workflows
+- [Projects](/getting-started/glossary/projects) - Understanding model organization in projects
+- [Pods](/getting-started/glossary/pods) - Computing resources that run your models
+- [ComfyUI](/getting-started/glossary/comfyui) - The framework that powers model workflows
+
+## Getting Started with Models
+
+Ready to start working with models? Check out our [Import & Create Workflows](/getting-started/import-create-workflows) guide to begin building your first AI-powered workflow with FlowScale's model library.

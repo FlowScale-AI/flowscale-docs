@@ -1,0 +1,148 @@
+---
+title: "ComfyUI Editor"
+description: "Understanding FlowScale's integrated ComfyUI editor and workspace for building and managing generative AI workflows"
+icon: "pen-to-square"
+---
+
+## What is the ComfyUI Editor?
+
+The ComfyUI Editor in FlowScale AI is a cloud-based, enhanced version of the popular ComfyUI interface that allows you to build, edit, and manage generative AI workflows visually. It combines the familiar node-based workflow creation of ComfyUI with enterprise-grade features like version control, collaboration tools, and seamless deployment capabilities.
+
+<Frame>
+  <img src="/images/glossary/comfyui-editor-overview.png" alt="FlowScale ComfyUI Editor interface showing the node-based workflow canvas, model library, and deployment options" />
+</Frame>
+
+## Key Features
+
+### Visual Workflow Builder
+- **Drag-and-drop interface** for creating complex AI workflows
+- **Node-based system** where each node represents a specific AI operation
+- **Real-time preview** of workflow execution and outputs
+- **Interactive canvas** with zoom, pan, and organizing capabilities
+
+### Enhanced Model Management
+- **Integrated model library** with popular models pre-loaded
+- **Custom model upload** for proprietary or specialized models
+- **Version tracking** for model updates and rollbacks
+- **Automatic dependency resolution** for custom nodes and models
+
+### Collaborative Features
+- **Team workspaces** for sharing workflows across your organization
+- **Version control** with git-like workflow management
+- **Comment and annotation** system for workflow documentation
+- **Role-based access control** for team collaboration
+
+## How It Works
+
+### 1. Workflow Creation
+Start by dragging nodes from the library onto the canvas. Connect nodes to create a pipeline that processes your inputs through various AI models and transformations.
+
+```
+Input → Pre-processing → AI Model → Post-processing → Output
+```
+
+### 2. Configuration
+Each node can be configured with specific parameters:
+- Model selection and settings
+- Processing parameters
+- Input/output specifications
+- Custom configurations
+
+### 3. Testing & Debugging
+- **Real-time execution** to test workflows as you build
+- **Step-by-step debugging** to identify issues
+- **Performance monitoring** to optimize workflow efficiency
+- **Error handling** with detailed logs and suggestions
+
+### 4. Version Management
+- **Automatic saves** with timestamped versions
+- **Branching** for experimental modifications
+- **Rollback capabilities** to previous working versions
+- **Change tracking** to see what was modified
+
+## Differences from Standard ComfyUI
+
+| Feature | Standard ComfyUI | FlowScale ComfyUI Editor |
+|---------|------------------|--------------------------|
+| **Hosting** | Local installation required | Cloud-based, no setup needed |
+| **Models** | Manual download/management | Pre-loaded library + easy uploads |
+| **Collaboration** | Single-user focused | Multi-user with team features |
+| **Deployment** | Manual API wrapping needed | One-click deployment to production |
+| **Version Control** | No built-in versioning | Git-like workflow management |
+| **Security** | Local security only | Enterprise-grade security & access controls |
+| **Scaling** | Limited by local hardware | Auto-scaling cloud infrastructure |
+
+## Getting Started with the Editor
+
+### Accessing the Editor
+1. Log into your FlowScale AI dashboard
+2. Navigate to your project workspace
+3. Click "Open Editor" or create a new workflow
+
+### Basic Workflow Creation
+1. **Start with inputs**: Add input nodes for your data (images, text, parameters)
+2. **Add processing nodes**: Drag AI models and processing nodes onto the canvas
+3. **Connect the nodes**: Link outputs to inputs to create your processing pipeline
+4. **Configure parameters**: Set up each node's specific settings
+5. **Test your workflow**: Run the workflow with sample data
+6. **Save and version**: Save your completed workflow with a descriptive name
+
+### Best Practices
+- **Start simple**: Begin with basic workflows and gradually add complexity
+- **Use descriptive names**: Name your nodes and workflows clearly for team collaboration
+- **Test frequently**: Run partial workflows to catch issues early
+- **Document your work**: Use comments and annotations to explain complex logic
+- **Version strategically**: Create new versions before major changes
+
+## Advanced Features
+
+### Custom Nodes
+- Import and use community-created custom nodes
+- Upload your own custom node implementations
+- Manage node dependencies and requirements
+
+### Workflow Templates
+- Start from pre-built templates for common use cases
+- Save your workflows as templates for team reuse
+- Browse community-shared workflow templates
+
+### Integration Capabilities
+- **API endpoints**: Every workflow can become a REST API
+- **Webhook support**: Trigger workflows from external events
+- **Database connections**: Connect to external data sources
+- **Third-party integrations**: Link with popular tools and platforms
+
+## Troubleshooting Common Issues
+
+### Model Loading Problems
+- Ensure models are properly uploaded to your project
+- Check model compatibility with your workflow nodes
+- Verify sufficient GPU memory allocation
+
+### Performance Issues
+- Monitor node execution times in the performance panel
+- Consider breaking complex workflows into smaller segments
+- Use appropriate GPU instance types for your workload
+
+### Connection Errors
+- Verify node input/output types match
+- Check for circular dependencies in your workflow
+- Ensure all required inputs are connected
+
+## Next Steps
+
+Once you've built your workflow in the ComfyUI Editor:
+
+1. **Test thoroughly** with various inputs to ensure reliability
+2. **Deploy to production** using FlowScale's one-click deployment
+3. **Create user interfaces** with the Playground UI feature
+4. **Share with your team** using collaboration tools
+5. **Monitor performance** through the deployment dashboard
+
+The ComfyUI Editor bridges the gap between experimental AI workflows and production-ready applications, enabling teams to innovate quickly while maintaining enterprise standards.
+
+## Related Concepts
+
+- [ComfyUI](/getting-started/glossary/comfyui) - Learn about the underlying ComfyUI framework
+- [Projects](/getting-started/glossary/projects) - Understanding FlowScale project organization
+- [Pods](/getting-started/glossary/pods) - Computing resources that power your workflows

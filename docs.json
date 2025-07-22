@@ -34,6 +34,7 @@
               "getting-started/glossary/comfyui",
               "getting-started/glossary/projects",
               "getting-started/glossary/pods",
+              "getting-started/glossary/models",
               "getting-started/glossary/comfyui-editor"
             ]
           },
@@ -54,8 +55,7 @@
             "group": "Deployment",
             "pages": [
               "deploy-api/overview",
-              "deploy-api/configure",
-              "deploy-api/api-overview",
+              "deploy-api/deployment-configuration",
               "deploy-api/playground-uis",
               "deploy-api/scaling"
             ]
