@@ -1,8 +1,18 @@
 ---
 title: JavaScript/TypeScript SDK
-description: "Integrate FlowScale APIs into JavaScript and TypeScript applications"
+description: "A comprehensive SDK designed to simplify interaction with the FlowScale ComfyUI API. Works in both Node.js and browser environments."
 icon: "js"
 ---
+
+<Warning>
+**Important Security Notice for Browser Usage**
+
+When using this SDK in a browser environment, your API key will be exposed to end users. This is a significant security risk. We strongly recommend:
+
+- Using this SDK in a Node.js backend environment
+- Creating a proxy API that securely handles the API key server-side
+- If you must use the SDK directly in the browser, you must explicitly acknowledge this by setting the `allowDangerouslyExposeApiKey` option
+</Warning>
 
 ## Installation
 
@@ -11,43 +21,82 @@ Install the FlowScale SDK using your preferred package manager:
 <CodeGroup>
 
 ```bash npm
-npm install @flowscale/sdk
+npm install flowscale
 ```
 
 ```bash yarn
-yarn add @flowscale/sdk
+yarn add flowscale
 ```
 
 ```bash pnpm
-pnpm add @flowscale/sdk
+pnpm add flowscale
+```
+
+```bash bun
+bun install flowscale
 ```
 
 </CodeGroup>
 
 ## Quick Start
 
-Get up and running with FlowScale in just a few lines of code:
+### Importing the SDK
 
-```typescript
-import FlowScale from '@flowscale/sdk';
+To get started, import the FlowScale SDK into your project:
 
-// Initialize the client
-const flowscale = new FlowScale({
-  apiKey: 'fs_your_api_key_here'
+<CodeGroup>
+
+```typescript Node.js (Recommended)
+import { FlowscaleAPI } from 'flowscale';
+
+// Store API keys in environment variables
+const apiKey = process.env.FLOWSCALE_API_KEY;
+const apiUrl = process.env.FLOWSCALE_API_URL;
+
+const flowscale = new FlowscaleAPI({
+  apiKey,
+  baseUrl: apiUrl
 });
-
-// Run a workflow
-const result = await flowscale.run({
-  workflowId: 'text-to-image-basic',
-  inputs: {
-    prompt: 'A beautiful sunset over mountains',
-    width: 1024,
-    height: 1024
-  }
-});
-
-console.log('Generated image:', result.images[0].url);
 ```
+
+```typescript Browser (Not Recommended)
+import { FlowscaleAPI } from 'flowscale';
+
+// ⚠️ WARNING: This will expose your API key to users
+const flowscale = new FlowscaleAPI({
+  apiKey: 'your-api-key',
+  baseUrl: 'https://your-api-url.pod.flowscale.ai',
+  allowDangerouslyExposeApiKey: true // Explicitly acknowledge the security risk
+});
+```
+
+</CodeGroup>
+
+### Environment Variables
+
+Add the following to your `.env` file:
+
+```bash
+FLOWSCALE_API_KEY=your-api-key
+FLOWSCALE_API_URL=https://your-api-url.pod.flowscale.ai
+```
+
+### Environment-Specific Considerations
+
+<Tabs>
+  <Tab title="Node.js (Recommended)">
+    - Store API keys in environment variables
+    - Use `.env` files for configuration
+    - Full access to all SDK features
+    - Secure API key handling
+  </Tab>
+  <Tab title="Browser">
+    - API key will be visible in network requests
+    - Supports File/Blob uploads directly from browser
+    - Consider implementing a backend proxy instead
+    - Must explicitly acknowledge security risks
+  </Tab>
+</Tabs>
 
 ## Configuration
 
@@ -56,112 +105,350 @@ console.log('Generated image:', result.images[0].url);
 ```typescript
 interface FlowScaleConfig {
   apiKey: string;
-  baseUrl?: string;           // Default: 'https://api.flowscale.ai'
-  timeout?: number;           // Default: 300000 (5 minutes)
-  retries?: number;           // Default: 3
-  retryDelay?: number;        // Default: 1000 (1 second)
-  userAgent?: string;         // Custom user agent
+  baseUrl?: string;                    // Default: 'https://api.flowscale.ai'
+  allowDangerouslyExposeApiKey?: boolean; // Required for browser usage
+  enableLogging?: boolean;             // Default: true
+  logLevel?: 'debug' | 'info' | 'warn' | 'error'; // Default: 'info'
+  timeout?: number;                    // Default: 300000 (5 minutes)
+  retries?: number;                    // Default: 3
+  retryDelay?: number;                 // Default: 1000 (1 second)
+  userAgent?: string;                  // Custom user agent
 }
 
-const flowscale = new FlowScale({
+const flowscale = new FlowscaleAPI({
   apiKey: process.env.FLOWSCALE_API_KEY,
-  timeout: 60000,             // 1 minute timeout
-  retries: 5                  // Retry failed requests 5 times
+  baseUrl: process.env.FLOWSCALE_API_URL,
+  enableLogging: true,
+  logLevel: 'info',
+  timeout: 60000,                      // 1 minute timeout
+  retries: 5                           // Retry failed requests 5 times
 });
 ```
 
-### Environment Variables
+### Logging Configuration
 
-Set up your API key using environment variables:
+The SDK includes configurable logging to help with debugging and monitoring:
 
-```bash
-# .env file
-FLOWSCALE_API_KEY=fs_your_api_key_here
-FLOWSCALE_BASE_URL=https://api.flowscale.ai  # Optional
+```typescript
+// Configure logging during initialization
+const flowscale = new FlowscaleAPI({
+  apiKey: 'your-api-key',
+  baseUrl: 'https://your-api-url.pod.flowscale.ai',
+  enableLogging: true,    // Enable/disable logging (default: true)
+  logLevel: 'debug'       // Set log level (default: 'info')
+});
+
+// Change logging settings after initialization
+flowscale.setLoggingConfig(true, 'debug');
+
+// Disable logging completely
+flowscale.setLoggingConfig(false);
+
+// Check current logging configuration
+const loggingConfig = flowscale.getLoggingConfig();
+console.log(loggingConfig); // { enabled: true, level: 'debug' }
 ```
+
+<Accordion title="Log Levels">
+- **debug**: Most verbose, includes detailed operation information
+- **info**: General information about operations (default)
+- **warn**: Warning messages for potential issues
+- **error**: Only error messages
+
+All logs are prefixed with timestamp and level:
+```
+[Flowscale INFO] 2025-06-03T10:30:45.123Z: WebSocket connection established
+[Flowscale DEBUG] 2025-06-03T10:30:46.456Z: Polling workflow output: {...}
+```
+</Accordion>
 
 ## Core Methods
 
-### Running Workflows
+### Platform Health and Status
 
-Execute workflows with typed parameters and responses:
+#### Check Health Status
+
+Monitor the health of the FlowScale platform, including container status:
 
 ```typescript
-// Basic workflow execution
-const result = await flowscale.run({
-  workflowId: 'my-workflow',
-  inputs: {
-    prompt: 'A serene lake at dawn',
-    steps: 20,
-    cfg_scale: 7.5
-  }
-});
+const health = await flowscale.checkHealth();
+console.log('API Health:', health);
+```
 
-// With additional options
-const result = await flowscale.run({
-  workflowId: 'my-workflow',
-  inputs: { /* ... */ },
-  options: {
-    timeout: 120000,          // 2 minute timeout for this request
-    webhookUrl: 'https://my-app.com/webhook',
-    priority: 'high',
-    metadata: {
-      userId: 'user123',
-      sessionId: 'session456'
+<Accordion title="Response Example">
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "container": "container #1",
+      "status": "idle"
+    },
+    {
+      "container": "container #2", 
+      "status": "running"
     }
+  ]
+}
+```
+</Accordion>
+
+#### Get Queue Status
+
+Retrieve the current workflow queue status:
+
+```typescript
+const queue = await flowscale.getQueue();
+console.log('Queue Details:', queue);
+```
+
+<Accordion title="Response Example">
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "container": "container #1",
+      "queue": {
+        "queue_running": [
+          [0, "2a0babc4-acce-4521-9576-00fa0e6ecc91"]
+        ],
+        "queue_pending": [
+          [1, "5d60718a-7e89-4c64-b32d-0d1366b44e2a"]
+        ]
+      }
+    }
+  ]
+}
+```
+</Accordion>
+
+### Workflow Management
+
+#### List Available Workflows
+
+Get all deployed workflows in your cluster:
+
+```typescript
+const workflows = await flowscale.getWorkflows();
+console.log('Available Workflows:', workflows);
+```
+
+<Accordion title="Response Example">
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "id": "bncu0a1kipv",
+      "name": "Text to Image",
+      "description": "Generate an image from text input",
+      "inputs": "{ \"text_51536\": \"string\" }",
+      "outputs": "{ \"image_output\": \"image\" }"
+    },
+    {
+      "id": "a9bc45rt2kpm", 
+      "name": "Image to Image",
+      "description": "Transform an existing image",
+      "inputs": "{ \"image_input\": \"image\", \"prompt\": \"string\" }",
+      "outputs": "{ \"transformed_image\": \"image\" }"
+    }
+  ]
+}
+```
+</Accordion>
+
+### Executing Workflows
+
+#### Execute Workflow (Synchronous)
+
+Trigger a workflow execution and get immediate response:
+
+```typescript
+const workflowId = "bncu0a1kipv";
+const groupId = "test_group"; // Optional for organizing runs
+
+const inputs = {
+  "text_51536": "A beautiful sunset over mountains",
+  "image_1234": fileOrBlob, // File or Blob object
+  "video_1239": videoFile   // File or Blob object
+};
+
+const result = await flowscale.executeWorkflow(workflowId, inputs, groupId);
+console.log('Workflow Result:', result);
+```
+
+<Accordion title="Response Example">
+```json
+{
+  "status": "success",
+  "data": {
+    "number": 0,
+    "node_errors": {},
+    "output_names": [
+      "filename_prefix_58358_5WWF7GQUYF"
+    ],
+    "run_id": "808f34d0-ef97-4b78-a00f-1268077ea6db"
   }
-});
+}
 ```
+</Accordion>
 
-### Async Workflows
+#### Execute Workflow (Asynchronous with Auto-Polling)
 
-For long-running workflows, use async execution:
+Execute a workflow and automatically wait for the result:
 
 ```typescript
-// Start async execution
-const execution = await flowscale.runAsync({
-  workflowId: 'complex-workflow',
-  inputs: { /* ... */ }
-});
+const workflowId = "bncu0a1kipv";
+const inputs = {
+  "text_51536": "A serene lake at dawn",
+  "image_1234": imageFile
+};
 
-console.log('Execution ID:', execution.id);
-
-// Poll for completion
-const result = await flowscale.getExecution(execution.id);
-
-// Or wait for completion
-const finalResult = await flowscale.waitForCompletion(execution.id, {
-  pollInterval: 5000,         // Check every 5 seconds
-  maxWaitTime: 600000        // Give up after 10 minutes
-});
+try {
+  // Auto-polls every 1 second, times out after 5 minutes by default
+  const result = await flowscale.executeWorkflowAsync(
+    workflowId,
+    inputs,
+    "my_group",     // groupId (optional)
+    2000,           // pollIntervalMs (optional)
+    600000          // timeoutMs (optional)
+  );
+  console.log('Workflow Result:', result);
+} catch (error) {
+  if (error.message.includes('timed out')) {
+    console.error('Workflow took too long to complete');
+  } else {
+    console.error('Workflow error:', error);
+  }
+}
 ```
 
-### Streaming Results
+<Accordion title="Response Example">
+```json
+{
+  "status": "success",
+  "data": {
+    "download_url": "https://runs.s3.amazonaws.com/generations/...",
+    "generation_status": "success"
+  }
+}
+```
+</Accordion>
 
-Get real-time updates for workflows that support streaming:
+### Managing Workflow Runs
+
+#### Get Run Details
+
+Retrieve detailed information about a specific run:
 
 ```typescript
-const stream = await flowscale.runStream({
-  workflowId: 'realtime-generation',
-  inputs: { prompt: 'A flowing river' }
-});
-
-stream.on('progress', (data) => {
-  console.log('Progress:', data.progress, '%');
-});
-
-stream.on('partial', (data) => {
-  console.log('Partial result:', data.partialImage);
-});
-
-stream.on('complete', (result) => {
-  console.log('Final result:', result.images[0].url);
-});
-
-stream.on('error', (error) => {
-  console.error('Stream error:', error);
-});
+const runDetails = await flowscale.getRun('808f34d0-ef97-4b78-a00f-1268077ea6db');
+console.log('Run Details:', runDetails);
 ```
+
+<Accordion title="Response Example">
+```json
+{
+  "status": "success",
+  "data": {
+    "_id": "808f34d0-ef97-4b78-a00f-1268077ea6db",
+    "status": "completed",
+    "inputs": [
+      {
+        "path": "text_51536",
+        "value": "a man riding a bike"
+      }
+    ],
+    "outputs": [
+      {
+        "filename": "filename_prefix_58358_5WWF7GQUYF.png",
+        "url": "https://runs.s3.amazonaws.com/generations/..."
+      }
+    ]
+  }
+}
+```
+</Accordion>
+
+#### Get Multiple Runs
+
+Retrieve runs by group ID or get all runs:
+
+```typescript
+// Get runs for a specific group
+const runs = await flowscale.getRuns('test_group');
+console.log('Runs for Group:', runs);
+
+// Get all runs for the team
+const allRuns = await flowscale.getRuns();
+console.log('All Runs:', allRuns);
+```
+
+<Accordion title="Response Example">
+```json
+{
+  "status": "success",
+  "data": {
+    "group_id": "test_group",
+    "count": 2,
+    "runs": [
+      {
+        "_id": "cc29a72d-75b9-4c7b-b991-ccaf2a04d6ea",
+        "status": "completed",
+        "outputs": [
+          {
+            "filename": "filename_prefix_58358_G3DRLIVVYP.png",
+            "url": "https://runs.s3.amazonaws.com/generations/..."
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+</Accordion>
+
+#### Cancel Running Workflow
+
+Cancel a workflow execution using its run ID:
+
+```typescript
+const result = await flowscale.cancelRun('808f34d0-ef97-4b78-a00f-1268077ea6db');
+console.log('Cancellation Result:', result);
+```
+
+<Accordion title="Response Example">
+```json
+{
+  "status": "success",
+  "data": "Run cancelled successfully"
+}
+```
+</Accordion>
+
+### Retrieving Outputs
+
+#### Get Workflow Output
+
+Fetch the output of a completed workflow:
+
+```typescript
+const output = await flowscale.getOutput('filename_prefix_58358_5WWF7GQUYF.png');
+console.log('Workflow Output:', output);
+```
+
+<Accordion title="Response Example">
+```json
+{
+  "status": "success",
+  "data": {
+    "download_url": "https://runs.s3.amazonaws.com/generations/...",
+    "generation_status": "success"
+  }
+}
+```
+</Accordion>
 
 ## TypeScript Support
 
@@ -225,15 +512,12 @@ interface TextToImageResult extends WorkflowResult {
 }
 
 // Use with the SDK
-const result = await flowscale.run<TextToImageInputs, TextToImageResult>({
-  workflowId: 'text-to-image-v2',
-  inputs: {
-    prompt: 'A majestic mountain range',
-    width: 1024,
-    height: 1024,
-    steps: 20,
-    cfg_scale: 7.5
-  }
+const result = await flowscale.executeWorkflow('text-to-image-v2', {
+  prompt: 'A majestic mountain range',
+  width: 1024,
+  height: 1024,
+  steps: 20,
+  cfg_scale: 7.5
 });
 
 // TypeScript knows the shape of the result
@@ -244,49 +528,55 @@ const imageUrl: string = result.images[0].url;
 
 ### Uploading Files
 
-Handle image and file uploads seamlessly:
+Handle image and file uploads seamlessly across different environments:
 
-```typescript
-// Browser file upload
-const fileInput = document.getElementById('imageUpload') as HTMLInputElement;
-const file = fileInput.files?.[0];
+<Tabs>
+  <Tab title="Browser File Upload">
+    ```typescript
+    // Browser file upload from input element
+    const fileInput = document.getElementById('imageUpload') as HTMLInputElement;
+    const file = fileInput.files?.[0];
 
-if (file) {
-  const result = await flowscale.run({
-    workflowId: 'image-to-image',
-    inputs: {
-      image: file,              // Direct file upload
-      prompt: 'Make it artistic',
-      strength: 0.7
+    if (file) {
+      const result = await flowscale.executeWorkflow('image-to-image', {
+        image: file,              // Direct file upload
+        prompt: 'Make it artistic',
+        strength: 0.7
+      });
     }
-  });
-}
-
-// From URL
-const result = await flowscale.run({
-  workflowId: 'image-to-image',
-  inputs: {
-    image: 'https://example.com/input-image.jpg',
-    prompt: 'Add magical effects'
-  }
-});
-
-// From base64
-const base64Image = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQ...';
-const result = await flowscale.run({
-  workflowId: 'image-enhancement',
-  inputs: {
-    image: base64Image,
-    enhancement_type: 'upscale'
-  }
-});
-```
+    ```
+  </Tab>
+  <Tab title="URL Input">
+    ```typescript
+    // From URL
+    const result = await flowscale.executeWorkflow('image-to-image', {
+      image: 'https://example.com/input-image.jpg',
+      prompt: 'Add magical effects'
+    });
+    ```
+  </Tab>
+  <Tab title="Base64 Input">
+    ```typescript
+    // From base64
+    const base64Image = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQ...';
+    const result = await flowscale.executeWorkflow('image-enhancement', {
+      image: base64Image,
+      enhancement_type: 'upscale'
+    });
+    ```
+  </Tab>
+</Tabs>
 
 ### Downloading Results
 
 ```typescript
-// Get image as blob
-const imageBlob = await flowscale.downloadImage(result.images[0].url);
+// Get output URL from workflow result
+const output = await flowscale.getOutput('filename_prefix_58358_5WWF7GQUYF.png');
+const imageUrl = output.data.download_url;
+
+// Download image as blob (browser)
+const response = await fetch(imageUrl);
+const imageBlob = await response.blob();
 
 // Save to file (Node.js)
 import fs from 'fs';
@@ -294,8 +584,8 @@ const buffer = Buffer.from(await imageBlob.arrayBuffer());
 fs.writeFileSync('generated-image.png', buffer);
 
 // Display in browser
-const imageUrl = URL.createObjectURL(imageBlob);
-document.getElementById('result-image').src = imageUrl;
+const objectUrl = URL.createObjectURL(imageBlob);
+document.getElementById('result-image').src = objectUrl;
 ```
 
 ## Error Handling
@@ -303,12 +593,11 @@ document.getElementById('result-image').src = imageUrl;
 ### Comprehensive Error Handling
 
 ```typescript
-import { FlowScaleError, NetworkError, ValidationError } from '@flowscale/sdk';
+import { FlowScaleError, NetworkError, ValidationError } from 'flowscale';
 
 try {
-  const result = await flowscale.run({
-    workflowId: 'my-workflow',
-    inputs: { /* ... */ }
+  const result = await flowscale.executeWorkflow('my-workflow', {
+    prompt: 'A beautiful landscape'
   });
 } catch (error) {
   if (error instanceof ValidationError) {
@@ -329,10 +618,10 @@ try {
 ### Retry Logic
 
 ```typescript
-async function runWithRetry(params: any, maxRetries = 3) {
+async function executeWithRetry(workflowId: string, inputs: any, maxRetries = 3) {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
-      return await flowscale.run(params);
+      return await flowscale.executeWorkflow(workflowId, inputs);
     } catch (error) {
       if (attempt === maxRetries) throw error;
       
@@ -354,22 +643,23 @@ Create a React hook for easy workflow execution:
 
 ```tsx
 import { useState, useCallback } from 'react';
-import FlowScale from '@flowscale/sdk';
+import { FlowscaleAPI } from 'flowscale';
 
-const flowscale = new FlowScale({
-  apiKey: process.env.REACT_APP_FLOWSCALE_API_KEY
+const flowscale = new FlowscaleAPI({
+  apiKey: process.env.REACT_APP_FLOWSCALE_API_KEY,
+  baseUrl: process.env.REACT_APP_FLOWSCALE_API_URL
 });
 
 export function useFlowScale() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const run = useCallback(async (params: any) => {
+  const executeWorkflow = useCallback(async (workflowId: string, inputs: any, groupId?: string) => {
     setLoading(true);
     setError(null);
     
     try {
-      const result = await flowscale.run(params);
+      const result = await flowscale.executeWorkflowAsync(workflowId, inputs, groupId);
       return result;
     } catch (err) {
       setError(err as Error);
@@ -379,7 +669,7 @@ export function useFlowScale() {
     }
   }, []);
 
-  return { run, loading, error };
+  return { executeWorkflow, loading, error };
 }
 ```
 
@@ -392,13 +682,12 @@ import { useFlowScale } from './hooks/useFlowScale';
 export function ImageGenerator() {
   const [prompt, setPrompt] = useState('');
   const [result, setResult] = useState<any>(null);
-  const { run, loading, error } = useFlowScale();
+  const { executeWorkflow, loading, error } = useFlowScale();
 
   const generateImage = async () => {
     try {
-      const result = await run({
-        workflowId: 'text-to-image',
-        inputs: { prompt }
+      const result = await executeWorkflow('text-to-image', {
+        text_51536: prompt
       });
       setResult(result);
     } catch (error) {
@@ -419,106 +708,59 @@ export function ImageGenerator() {
       
       {error && <div className="error">{error.message}</div>}
       
-      {result && (
-        <img src={result.images[0].url} alt="Generated" />
+      {result?.data?.download_url && (
+        <img src={result.data.download_url} alt="Generated" />
       )}
     </div>
   );
 }
 ```
 
-## Advanced Features
+## Best Practices
 
-### Webhook Integration
+### Environment Configuration
 
-Handle webhook notifications for async workflows:
+Always store sensitive information such as API keys in environment variables:
+
+```bash
+# .env file
+FLOWSCALE_API_KEY=your-api-key
+FLOWSCALE_API_URL=https://your-api-url.pod.flowscale.ai
+```
 
 ```typescript
-// Express.js webhook handler
-import express from 'express';
-
-const app = express();
-app.use(express.json());
-
-app.post('/webhook/flowscale', (req, res) => {
-  const { id, status, result } = req.body;
-  
-  if (status === 'completed') {
-    console.log('Workflow completed:', id);
-    console.log('Result:', result.images[0].url);
-    
-    // Process the result (save to database, notify user, etc.)
-    processCompletedWorkflow(id, result);
-  } else if (status === 'failed') {
-    console.error('Workflow failed:', id, result.error);
-    handleFailedWorkflow(id, result.error);
-  }
-  
-  res.status(200).send('OK');
+// Use environment variables
+const flowscale = new FlowscaleAPI({
+  apiKey: process.env.FLOWSCALE_API_KEY,
+  baseUrl: process.env.FLOWSCALE_API_URL
 });
 ```
-
-### Batch Processing
-
-Process multiple inputs efficiently:
-
-```typescript
-const prompts = [
-  'A sunset over the ocean',
-  'A mountain landscape',
-  'A city skyline at night'
-];
-
-const results = await Promise.all(
-  prompts.map(prompt => 
-    flowscale.run({
-      workflowId: 'text-to-image',
-      inputs: { prompt }
-    })
-  )
-);
-
-console.log('Generated', results.length, 'images');
-```
-
-### Workflow Management
-
-```typescript
-// List available workflows
-const workflows = await flowscale.listWorkflows();
-
-// Get workflow details
-const workflow = await flowscale.getWorkflow('text-to-image-v2');
-console.log('Workflow inputs:', workflow.inputs);
-console.log('Workflow outputs:', workflow.outputs);
-
-// Get workflow versions
-const versions = await flowscale.getWorkflowVersions('text-to-image');
-```
-
-## Best Practices
 
 ### Performance Optimization
 
 ```typescript
 // Reuse client instances
-const flowscale = new FlowScale({ apiKey: 'your-key' });
+const flowscale = new FlowscaleAPI({ 
+  apiKey: process.env.FLOWSCALE_API_KEY,
+  baseUrl: process.env.FLOWSCALE_API_URL 
+});
 
 // Use connection pooling for high-volume applications
-const flowscale = new FlowScale({
-  apiKey: 'your-key',
+const flowscale = new FlowscaleAPI({
+  apiKey: process.env.FLOWSCALE_API_KEY,
+  baseUrl: process.env.FLOWSCALE_API_URL,
   httpAgent: new https.Agent({ keepAlive: true })
 });
 
 // Cache results when appropriate
 const cache = new Map();
 
-async function getCachedResult(cacheKey: string, params: any) {
+async function getCachedResult(cacheKey: string, workflowId: string, inputs: any) {
   if (cache.has(cacheKey)) {
     return cache.get(cacheKey);
   }
   
-  const result = await flowscale.run(params);
+  const result = await flowscale.executeWorkflowAsync(workflowId, inputs);
   cache.set(cacheKey, result);
   return result;
 }
@@ -538,43 +780,96 @@ function validateInputs(inputs: any) {
   // Add more validation...
 }
 
-// Use HTTPS only
-const flowscale = new FlowScale({
-  apiKey: 'your-key',
-  baseUrl: 'https://api.flowscale.ai' // Always use HTTPS
+// Always use HTTPS
+const flowscale = new FlowscaleAPI({
+  apiKey: process.env.FLOWSCALE_API_KEY,
+  baseUrl: 'https://your-api-url.pod.flowscale.ai' // Always use HTTPS
 });
+```
+
+### Testing and Debugging
+
+- Test workflows in a development environment before deploying to production
+- Validate inputs to ensure they match the workflow requirements  
+- Wrap API calls in try-catch blocks to handle errors gracefully
+- Use the SDK's logging functionality for debugging:
+
+```typescript
+// Enable debug logging for development
+const flowscale = new FlowscaleAPI({
+  apiKey: process.env.FLOWSCALE_API_KEY,
+  baseUrl: process.env.FLOWSCALE_API_URL,
+  enableLogging: true,
+  logLevel: 'debug'
+});
+```
+
+### Batch Processing
+
+Process multiple inputs efficiently:
+
+```typescript
+const prompts = [
+  'A sunset over the ocean',
+  'A mountain landscape', 
+  'A city skyline at night'
+];
+
+const results = await Promise.all(
+  prompts.map(prompt => 
+    flowscale.executeWorkflowAsync('text-to-image', {
+      text_51536: prompt
+    })
+  )
+);
+
+console.log('Generated', results.length, 'images');
 ```
 
 ## Examples & Recipes
 
 <CardGroup cols={2}>
   <Card
-    title="Image Generation App"
+    title="Text to Image Generation"
     icon="image"
     href="/deploy-api/examples#image-generation"
   >
-    Complete React app for text-to-image generation
+    Complete React app for text-to-image generation using workflows
+  </Card>
+  <Card
+    title="Image to Image Processing"
+    icon="arrows-rotate"
+    href="/deploy-api/examples#image-processing"
+  >
+    Transform existing images with AI-powered workflows
   </Card>
   <Card
     title="Batch Processing"
     icon="layer-group"
     href="/deploy-api/examples#batch-processing"
   >
-    Process multiple images efficiently
+    Process multiple images efficiently with concurrent execution
   </Card>
   <Card
-    title="Real-time Chat Bot"
-    icon="robot"
-    href="/deploy-api/examples#chatbot"
+    title="Real-time WebSocket Updates"
+    icon="satellite-dish"
+    href="/deploy-api/examples#websocket"
   >
-    AI-powered chat with image generation
+    Get real-time updates on workflow execution status
   </Card>
   <Card
-    title="E-commerce Integration"
-    icon="shopping-cart"
-    href="/deploy-api/examples#ecommerce"
+    title="File Upload Integration"
+    icon="upload"
+    href="/deploy-api/examples#file-upload"
   >
-    Product image generation for online stores
+    Handle file uploads in browser and Node.js environments
+  </Card>
+  <Card
+    title="Error Handling & Retry Logic"
+    icon="shield-check"
+    href="/deploy-api/examples#error-handling"
+  >
+    Robust error handling and automatic retry mechanisms
   </Card>
 </CardGroup>
 
@@ -586,9 +881,9 @@ Need help with the JavaScript SDK?
   <Card
     title="API Reference"
     icon="book"
-    href="/deploy-api/reference/get-run"
+    href="/api-reference/introduction"
   >
-    Complete API documentation
+    Complete API documentation and endpoint reference
   </Card>
   <Card
     title="GitHub Repository"
@@ -598,17 +893,31 @@ Need help with the JavaScript SDK?
     Source code, issues, and contributions
   </Card>
   <Card
+    title="NPM Package"
+    icon="box"
+    href="https://www.npmjs.com/package/flowscale"
+  >
+    Official NPM package with installation instructions
+  </Card>
+  <Card
     title="Discord Community"
     icon="discord"
     href="https://discord.gg/flowscale"
   >
-    Chat with other developers
+    Chat with other developers and get community support
   </Card>
   <Card
     title="Support Team"
     icon="envelope"
     href="mailto:support@flowscale.ai"
   >
-    Direct support for technical issues
+    Direct support for technical issues and questions
+  </Card>
+  <Card
+    title="Documentation"
+    icon="book-open"
+    href="/getting-started/introduction"
+  >
+    Complete guides and tutorials for getting started
   </Card>
 </CardGroup>
