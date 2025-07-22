@@ -1,148 +1,265 @@
 ---
 title: "ComfyUI Workspace"
-description: "Understanding FlowScale's integrated ComfyUI workspace for building and managing generative AI workflows"
+description: "Complete guide to FlowScale's ComfyUI workspace: starting ComfyUI, managing workflows, models, and custom nodes in your project environment"
 icon: "pen-to-square"
 ---
 
 ## What is the ComfyUI Workspace?
 
-The ComfyUI Workspace in FlowScale AI is a cloud-based, enhanced version of the popular ComfyUI interface that allows you to build, edit, and manage generative AI workflows visually. It combines the familiar node-based workflow creation of ComfyUI with enterprise-grade features like version control, collaboration tools, and seamless deployment capabilities.
+The ComfyUI Workspace is the main interface you see when you open a project in FlowScale AI. This is your central hub for building and managing generative AI workflows using the familiar ComfyUI interface, enhanced with FlowScale's cloud infrastructure and collaboration features.
 
 <Frame>
-  <img src="/images/glossary/comfyui-workspace-overview.png" alt="FlowScale ComfyUI Workspace interface showing the node-based workflow canvas, model library, and deployment options" />
+  <img src="/images/glossary/comfyui-workspace-overview.png" alt="FlowScale ComfyUI Workspace showing the workflow editor on the left, ComfyUI interface on the right, and control buttons at the bottom" />
 </Frame>
 
-## Key Features
+## Workspace Layout
 
-### Visual Workflow Builder
-- **Drag-and-drop interface** for creating complex AI workflows
-- **Node-based system** where each node represents a specific AI operation
-- **Real-time preview** of workflow execution and outputs
-- **Interactive canvas** with zoom, pan, and organizing capabilities
+When you open a project, the ComfyUI Workspace is organized into distinct areas:
 
-### Enhanced Model Management
-- **Integrated model library** with popular models pre-loaded
-- **Custom model upload** for proprietary or specialized models
-- **Version tracking** for model updates and rollbacks
-- **Automatic dependency resolution** for custom nodes and models
+### Left Panel: Project Management
+- **Workflows tab** - Manage and organize your workflows
+- **Models tab** - Access organization-wide model library
+- **Nodes tab** - Manage custom nodes and dependencies
 
-### Collaborative Features
-- **Team workspaces** for sharing workflows across your organization
-- **Version control** with git-like workflow management
-- **Comment and annotation** system for workflow documentation
-- **Role-based access control** for team collaboration
+### Right Panel: ComfyUI Interface
+- **Start ComfyUI button** - Launch your ComfyUI instance
+- **ComfyUI canvas** - The actual workflow editor (appears after starting)
 
-## How It Works
+### Bottom Panel: Control Bar
+- **Action buttons** - Save, run, and manage your workflows
+- **Logs section** - Monitor system and workflow execution logs
 
-### 1. Workflow Creation
-Start by dragging nodes from the library onto the canvas. Connect nodes to create a pipeline that processes your inputs through various AI models and transformations.
+## Starting ComfyUI
 
-```
-Input → Pre-processing → AI Model → Post-processing → Output
-```
+### Launch Process
 
-### 2. Configuration
-Each node can be configured with specific parameters:
-- Model selection and settings
-- Processing parameters
-- Input/output specifications
-- Custom configurations
+1. **Click "Start ComfyUI"** button in the right panel
+2. **Select a Pod** from the dialog that appears
+3. **Wait for initialization** - You'll see a progress bar showing "ComfyUI resources are being prepared"
+4. **ComfyUI loads** - The interface appears on the right side with the default workflow
 
-### 3. Testing & Debugging
-- **Real-time execution** to test workflows as you build
-- **Step-by-step debugging** to identify issues
-- **Performance monitoring** to optimize workflow efficiency
-- **Error handling** with detailed logs and suggestions
+<Frame>
+  <img src="/images/build/comfyui-starting.png" alt="ComfyUI startup dialog showing pod selection and initialization progress" />
+</Frame>
 
-### 4. Version Management
-- **Automatic saves** with timestamped versions
-- **Branching** for experimental modifications
-- **Rollback capabilities** to previous working versions
-- **Change tracking** to see what was modified
+### What Happens Next
+Once ComfyUI starts, you'll see:
+- The **default ComfyUI workflow** loaded on the canvas
+- **Control buttons** at the bottom for managing your session
+- **Full ComfyUI functionality** ready for workflow creation
 
-## Differences from Standard ComfyUI
+## Control Bar Functions
 
-| Feature | Standard ComfyUI | FlowScale ComfyUI Workspace |
-|---------|------------------|--------------------------|
-| **Hosting** | Local installation required | Cloud-based, no setup needed |
-| **Models** | Manual download/management | Pre-loaded library + easy uploads |
-| **Collaboration** | Single-user focused | Multi-user with team features |
-| **Deployment** | Manual API wrapping needed | One-click deployment to production |
-| **Version Control** | No built-in versioning | Git-like workflow management |
-| **Security** | Local security only | Enterprise-grade security & access controls |
-| **Scaling** | Limited by local hardware | Auto-scaling cloud infrastructure |
+At the bottom of the ComfyUI interface, you'll find essential control buttons:
 
-## Getting Started with the Workspace
+<Frame>
+  <img src="/images/build/actions-bar.png" alt="ComfyUI control bar showing save, CPU/GPU toggle, queue, stop, refresh, and power buttons" />
+</Frame>
 
-### Accessing the Workspace
-1. Log into your FlowScale AI dashboard
-2. Navigate to your project workspace
-3. Click "Open Workspace" or create a new workflow
+### Save Button (💾)
+- **Purpose**: Save changes to your current workflow
+- **When to use**: After making modifications to your workflow
+- **Result**: Updates are saved to your project
 
-### Basic Workflow Creation
-1. **Start with inputs**: Add input nodes for your data (images, text, parameters)
-2. **Add processing nodes**: Drag AI models and processing nodes onto the canvas
-3. **Connect the nodes**: Link outputs to inputs to create your processing pipeline
-4. **Configure parameters**: Set up each node's specific settings
-5. **Test your workflow**: Run the workflow with sample data
-6. **Save and version**: Save your completed workflow with a descriptive name
+### CPU/GPU Toggle Switch
+- **Default mode**: CPU ($0.07/hour) - Low cost for workflow editing
+- **GPU mode**: Switch when you need to run actual generations
+- **Cost-effective**: Use CPU for building, GPU only for execution
 
-### Best Practices
-- **Start simple**: Begin with basic workflows and gradually add complexity
-- **Use descriptive names**: Name your nodes and workflows clearly for team collaboration
-- **Test frequently**: Run partial workflows to catch issues early
-- **Document your work**: Use comments and annotations to explain complex logic
-- **Version strategically**: Create new versions before major changes
+### Queue Button (White)
+- **Purpose**: Run your workflow (queue a generation)
+- **Function**: Executes the current workflow with your inputs
+- **Result**: Processes through the workflow pipeline
 
-## Advanced Features
+### Stop Button (Red Square)
+- **Purpose**: Stop a currently running generation
+- **When to use**: Cancel long-running or problematic executions
+- **Effect**: Halts workflow execution immediately
 
-### Custom Nodes
-- Import and use community-created custom nodes
-- Upload your own custom node implementations
-- Manage node dependencies and requirements
+### Refresh Button (🔄)
+- **Purpose**: Refresh the ComfyUI instance
+- **When to use**: After installing custom nodes or uploading models
+- **Effect**: Reloads ComfyUI to recognize new resources
 
-### Workflow Templates
-- Start from pre-built templates for common use cases
-- Save your workflows as templates for team reuse
-- Browse community-shared workflow templates
+### Power Button (Red Circle)
+- **Purpose**: Stop the entire ComfyUI session
+- **Effect**: Shuts down ComfyUI and frees up pod resources
+- **Note**: You'll need to restart ComfyUI to continue working
 
-### Integration Capabilities
-- **API endpoints**: Every workflow can become a REST API
-- **Webhook support**: Trigger workflows from external events
-- **Database connections**: Connect to external data sources
-- **Third-party integrations**: Link with popular tools and platforms
+## Workflows Tab
 
-## Troubleshooting Common Issues
+The Workflows tab is your central hub for organizing and managing all your AI workflows.
 
-### Model Loading Problems
-- Ensure models are properly uploaded to your project
-- Check model compatibility with your workflow nodes
-- Verify sufficient GPU memory allocation
+### Creating New Content
 
-### Performance Issues
-- Monitor node execution times in the performance panel
-- Consider breaking complex workflows into smaller segments
-- Use appropriate GPU instance types for your workload
+**Create Folder:**
+- Click the **plus icon** to create a new folder
+- Organize workflows by project, type, or team
+- Helps maintain clean project structure
 
-### Connection Errors
-- Verify node input/output types match
-- Check for circular dependencies in your workflow
-- Ensure all required inputs are connected
+**Create New Workflow:**
+- Click **"Create New Workflow"** button
+- Loads the default ComfyUI workflow template
+- Ready for immediate customization
 
-## Next Steps
+**Import Workflow:**
+- Click **"Import Workflow"** from the dropdown
+- Upload existing ComfyUI workflows to your project
 
-Once you've built your workflow in the ComfyUI Workspace:
+<Frame>
+  <img src="/images/build/new-workflow.png" alt="Workflow creation options showing new workflow and import workflow buttons" />
+</Frame>
 
-1. **Test thoroughly** with various inputs to ensure reliability
-2. **Deploy to production** using FlowScale's one-click deployment
-3. **Create user interfaces** with the Playground UI feature
-4. **Share with your team** using collaboration tools
-5. **Monitor performance** through the deployment dashboard
+### Managing Existing Workflows
 
-The ComfyUI Workspace bridges the gap between experimental AI workflows and production-ready applications, enabling teams to innovate quickly while maintaining enterprise standards.
+**Workflow Actions (Three-dot menu):**
+- **Rename** - Change workflow or folder names
+- **Download** - Export workflow as JSON file
+- **Delete** - Remove workflows or folders
 
-## Related Concepts
+**API Deployment Status:**
+- **Red cross icon** - Workflow not configured for API deployment
+- **Green checkmark** - Workflow ready for API deployment
 
-- [ComfyUI](/getting-started/glossary/comfyui) - Learn about the underlying ComfyUI framework
+### Import Workflow Process
+
+#### Step 1: Upload Workflow File
+<Frame>
+  <img src="/images/build/import-workflow-modal.png" alt="Import workflow dialog showing drag and drop area for JSON files" />
+</Frame>
+
+1. **Drag and drop** your workflow JSON file
+   - Use the **workflow JSON** file (not the API JSON file)
+   - Standard ComfyUI workflow format
+2. **Provide workflow name** for easy identification
+3. **Select target folder** or create a new one
+4. Click **"Next"** to proceed
+
+#### Step 2: Configure Dependencies
+<Frame>
+  <img src="/images/build/workflow-dependencies.png" alt="Dependency configuration screen showing custom nodes, conflicting nodes, and missing nodes sections" />
+</Frame>
+
+The system automatically identifies required custom nodes and presents three categories:
+
+**Custom Nodes:**
+- Automatically detected custom nodes from your workflow
+- Pre-selected based on workflow requirements
+
+**Conflicting Nodes:**
+- Nodes with similar names from different repositories
+- **Choose the correct repository** for your workflow
+- When in doubt, select all and refine later
+
+**Missing Nodes:**
+- Nodes that couldn't be found automatically
+- **Provide GitHub repository URLs** for these nodes
+- Required for workflow to function properly
+
+**Finalize Import:**
+- Review your selections
+- Click **"Confirm"** to complete the import
+- Custom nodes will be installed automatically
+
+## Models Tab
+
+The Models tab provides access to your organization's complete model library directly within your project workspace.
+
+### Functionality
+- **Same interface** as the global Models section
+- **Organization-wide access** - All models available across projects
+- **Convenient location** - Manage models while working on workflows
+
+For complete model management instructions, refer to the [Models documentation](/getting-started/glossary/models).
+
+## Nodes Tab
+
+The Nodes tab manages custom nodes required for your workflows to function properly.
+
+### Viewing Installed Nodes
+- **Imported workflow nodes** appear automatically after workflow import
+- **Required dependencies** are listed for each workflow
+- **Installation status** shows which nodes are ready
+
+### Adding Custom Nodes
+
+#### Manual Addition Process
+1. **Click the plus button** in the Nodes tab
+2. **Select "Add Custom Node"** from the dropdown
+3. **Configure the custom node** in the dialog
+
+<Frame>
+  <img src="/images/build/add-custom-node-dialog.png" alt="Add custom node dialog showing search field, GitHub URL input, and advanced settings" />
+</Frame>
+
+#### Configuration Options
+
+**Basic Settings:**
+- **Search by name** - Find popular custom nodes by name
+- **GitHub repository URL** - Direct link to the custom node repository
+
+**Advanced Settings (Optional):**
+- **Python dependencies** - Comma-separated list of required Python packages
+- **Linux dependencies** - Comma-separated list of system packages
+- **GitHub SHA** - Pin to specific commit for version stability
+
+#### When to Use Advanced Settings
+- **Python dependencies**: When nodes need additional Python libraries
+- **Linux dependencies**: When nodes require system-level packages
+- **GitHub SHA**: For production stability or specific version requirements
+
+**Complete Installation:**
+- Review your configuration
+- Click **"Save"** to install the custom node
+- Node becomes available in your ComfyUI workspace
+
+## Best Practices
+
+### Resource Management
+- **Use CPU mode** for workflow building and editing
+- **Switch to GPU** only when running actual generations
+- **Stop ComfyUI** when not actively working to save costs
+
+### Workflow Organization
+- **Create descriptive folder structures** for easy navigation
+- **Use clear workflow names** that indicate their purpose
+- **Regularly save your work** using the save button
+
+### Dependency Management
+- **Import all required custom nodes** during workflow import
+- **Test workflows** after importing to ensure all dependencies work
+- **Document custom requirements** for team collaboration
+
+## Troubleshooting
+
+### ComfyUI Won't Start
+- **Check pod availability** - Ensure pods are running in your organization
+- **Verify permissions** - Confirm you have access to the selected pod
+- **Try different pod** - Some pods may be temporarily unavailable
+
+### Workflow Execution Issues
+- **Refresh ComfyUI** after installing new nodes or models
+- **Check logs** at the bottom panel for error details
+- **Verify all inputs** are properly connected in your workflow
+
+### Custom Node Problems
+- **Check dependencies** - Ensure all Python/Linux packages are specified
+- **Verify GitHub URLs** - Confirm repository links are correct and accessible
+- **Restart ComfyUI** after installing new custom nodes
+
+## Getting Started
+
+1. **Open your project** in FlowScale AI
+2. **Start ComfyUI** by selecting a pod
+3. **Create or import** your first workflow
+4. **Install required custom nodes** if needed
+5. **Test your workflow** with sample inputs
+6. **Save your work** regularly
+
+The ComfyUI Workspace provides a seamless bridge between local ComfyUI development and cloud-based production deployment, enabling you to build sophisticated AI workflows with enterprise-grade infrastructure and collaboration features.
+
+## Related Documentation
+
+- [Models](/getting-started/glossary/models) - Learn how to manage AI models in FlowScale
 - [Projects](/getting-started/glossary/projects) - Understanding FlowScale project organization
 - [Pods](/getting-started/glossary/pods) - Computing resources that power your workflows
