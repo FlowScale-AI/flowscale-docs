@@ -1,244 +1,289 @@
 ---
 title: "Models"
-description: "Understanding AI models in FlowScale: management, deployment, and optimization for generative AI workflows"
+description: "Complete guide to managing AI models in FlowScale: from browsing public models to uploading custom ones for your ComfyUI workflows"
 icon: "cube"
 ---
 
 ## What are Models in FlowScale?
 
-Models in FlowScale AI are the core AI engines that power your generative workflows. These are pre-trained machine learning models that can generate images, process text, transform data, and perform various AI tasks. FlowScale provides a comprehensive model management system that handles everything from model discovery to deployment optimization.
+Models in FlowScale AI are the powerful AI engines that drive your generative workflows. Just like in a local ComfyUI setup, these models need to be properly organized and accessible for your workflows to function. FlowScale simplifies this process by providing both a curated collection of public models and the ability to manage your own private model library.
 
 <Frame>
-  <img src="/images/glossary/models-overview.png" alt="FlowScale Models dashboard showing various AI models including Stable Diffusion, FLUX, and custom models with their specifications and usage metrics" />
+  <img src="/images/glossary/models-overview.png" alt="FlowScale Models dashboard showing public and private model sections with folder structure similar to local ComfyUI setup" />
 </Frame>
 
-## Types of Models Available
+For a deeper understanding of how models work in ComfyUI, refer to the [official ComfyUI documentation on models](https://docs.comfy.org/development/core-concepts/models).
 
-### Pre-loaded Foundation Models
-FlowScale comes with a curated library of popular, production-ready models:
+## Model Storage and Organization
 
-**Image Generation Models:**
-- **Stable Diffusion variants** (SD 1.5, SDXL, SD3)
-- **FLUX models** for high-quality image generation
-- **ControlNet models** for guided image generation
-- **LoRA models** for style and concept fine-tuning
+### Dedicated Model Storage
+FlowScale provides each organization with a **dedicated volume** for model storage with:
+- **Unlimited storage capacity** - No restrictions on model library size
+- **Organization-level access** - All team members can access shared models
+- **Persistent storage** - Models remain available across all projects and sessions
 
-**Text and Language Models:**
-- **Language models** for text processing and generation
-- **Embedding models** for semantic understanding
-- **Translation models** for multi-language support
+### ComfyUI-Compatible Folder Structure
+FlowScale maintains the exact same folder structure as local ComfyUI installations, ensuring seamless compatibility:
 
-**Specialized Models:**
-- **Upscaling models** for image enhancement
-- **Inpainting models** for image editing
-- **Face restoration models** for portrait enhancement
-- **Background removal models** for image segmentation
-
-### Custom Model Support
-- **Private model uploads** for proprietary AI models
-- **Fine-tuned models** tailored to your specific use cases
-- **Community models** from platforms like Hugging Face and Civitai
-- **Enterprise models** with custom licensing agreements
-
-## Model Management Features
-
-### Automated Model Lifecycle
-<Frame>
-  <img src="/images/glossary/model-lifecycle.png" alt="Diagram showing model lifecycle: Discovery → Upload → Validation → Deployment → Monitoring → Updates" />
-</Frame>
-
-**Discovery & Import**
-- Browse FlowScale's model library
-- Import models from external repositories
-- Upload custom trained models
-- Batch import for model collections
-
-**Validation & Testing**
-- Automatic compatibility checks
-- Performance benchmarking
-- Quality validation with test inputs
-- Security scanning for malicious code
-
-**Version Management**
-- Model versioning with semantic versioning
-- Rollback capabilities to previous versions
-- A/B testing between model versions
-- Automated update notifications
-
-### Storage & Optimization
-
-**Efficient Storage**
-- **Deduplication** - Shared model weights across projects
-- **Compression** - Optimized storage formats
-- **Caching** - Intelligent model caching strategies
-- **CDN distribution** - Global model availability
-
-**Performance Optimization**
-- **Model quantization** for faster inference
-- **Batch processing** optimization
-- **GPU memory management** 
-- **Auto-scaling** based on model demand
-
-## Working with Models in FlowScale
-
-### Model Discovery
-1. **Browse the Model Library**: Access hundreds of pre-vetted models
-2. **Search and Filter**: Find models by type, performance, or use case
-3. **Model Cards**: Detailed information about each model's capabilities
-4. **Usage Examples**: See how models are used in real workflows
-
-### Model Integration
 ```
-Workflow Node → Model Selection → Configuration → Testing → Deployment
+Models/
+├── checkpoints/          # Stable Diffusion checkpoints
+├── vae/                 # VAE models
+├── loras/               # LoRA models
+├── controlnet/          # ControlNet models
+├── clip/                # CLIP models
+├── unet/                # U-Net models
+├── upscale_models/      # Super-resolution models
+└── embeddings/          # Text embeddings
 ```
 
-**In the ComfyUI Workspace:**
-1. Drag a model node onto your workflow canvas
-2. Select from available models in the dropdown
-3. Configure model-specific parameters
-4. Connect to input/output nodes
-5. Test with sample data
+This structure ensures that models are automatically recognized by ComfyUI workflows without any additional configuration.
 
-### Model Configuration
+## Accessing the Models Interface
 
-**Standard Parameters:**
-- **Input resolution** and format requirements
-- **Batch size** for processing multiple inputs
-- **Quality settings** (speed vs. quality trade-offs)
-- **Memory allocation** and GPU requirements
+You can access the same models interface from two convenient locations in FlowScale:
 
-**Advanced Settings:**
-- **Sampling parameters** for generation models
-- **Guidance scales** for controlled generation
-- **Custom preprocessors** for input handling
-- **Post-processing** options
+### 1. Global Models Tab
+- Located next to the **Pods** tab in the main navigation
+- Provides organization-wide model management
+- Access all models available to your organization
 
-## Model Performance & Monitoring
+### 2. Project-Level Models Section
+- Available within each individual project for convenience
+- Shows the same organization-wide models as the global tab
+- Convenient access while working within a project context
+- No difference in functionality - just easier access during workflow development
 
-### Real-time Metrics
 <Frame>
-  <img src="/images/glossary/model-metrics.png" alt="Model performance dashboard showing inference time, GPU utilization, success rates, and cost metrics across different models" />
+  <img src="/images/manage/models-tab-location.png" alt="Screenshot showing the Models tab location next to the Pods tab in FlowScale interface" />
 </Frame>
 
-**Performance Tracking:**
-- **Inference time** per request
-- **Throughput** (requests per second)
-- **GPU utilization** and memory usage
-- **Success/failure rates**
+## Public Models Library
 
-**Cost Management:**
-- **Resource consumption** tracking
-- **Cost per inference** calculation
-- **Budget alerts** and usage limits
-- **Optimization recommendations**
+### Curated Model Collection
+FlowScale provides a comprehensive **Public Models** section featuring:
+- **Latest AI models** - Cutting-edge and trending models
+- **Production-ready models** - Tested and optimized for reliability
+- **Popular model variants** - Different versions of Stable Diffusion, FLUX, and more
+- **Specialized models** - ControlNet, LoRA, upscaling, and other task-specific models
 
-### Quality Monitoring
-- **Output quality scores** based on automated metrics
-- **User feedback** integration
-- **Drift detection** for model performance degradation
-- **Comparative analysis** between model versions
+### Categories Available
+- **Image Generation**: Stable Diffusion (1.5, XL, 3.0), FLUX, Midjourney-style models
+- **Style Transfer**: LoRA models for specific art styles and concepts
+- **Image Control**: ControlNet models for pose, depth, edge guidance
+- **Enhancement**: Upscaling and restoration models
+- **Text Processing**: CLIP and embedding models
+- **Video Generation**: AnimateDiff models for image-to-video, text-to-video generation, motion transfer, and temporal consistency
 
-## Security & Compliance
+The public library is continuously updated by the FlowScale team to include the latest and most effective models in the AI community.
 
-### Model Security
-- **Encrypted storage** for all model files
-- **Access control** with role-based permissions
-- **Audit logs** for model usage and modifications
-- **Malware scanning** for uploaded models
+## Managing Private Models
 
-### Compliance Features
-- **Data residency** controls for model storage
-- **GDPR compliance** for EU data processing
-- **SOC 2** certified infrastructure
-- **Custom compliance** frameworks support
+### When to Use Private Models
+Use the **Private Models** section when:
+- The model you need isn't available in the public library
+- You have custom-trained or fine-tuned models
+- You need proprietary models for your organization
+- You want to use specific model versions not in the public collection
 
-## Best Practices for Model Management
+### Creating Folder Structure
 
-### Choosing the Right Model
-1. **Define your use case** clearly before model selection
-2. **Consider performance requirements** (speed vs. quality)
-3. **Evaluate resource constraints** (GPU memory, cost)
-4. **Test with representative data** before production deployment
+Before uploading a model, ensure the correct folder exists:
 
-### Model Optimization
-- **Start with standard settings** and iterate
-- **Use quantized models** for production efficiency
-- **Implement caching** for frequently used models
-- **Monitor performance** and optimize based on metrics
+1. **Check existing folders** - See if the appropriate category folder exists
+2. **Create new folder** - If needed, create the folder matching ComfyUI conventions
+3. **Follow naming conventions** - Use standard ComfyUI folder names for compatibility
 
-### Team Collaboration
-- **Document model choices** and configurations
-- **Share model templates** across team projects
-- **Establish model approval** processes for production
-- **Regular model audits** and updates
+<Frame>
+  <img src="/images/build/create-model-folder-modal.png" alt="Dialog for creating a new model folder with dropdown showing standard ComfyUI folder options" />
+</Frame>
 
-## Troubleshooting Common Model Issues
+## Uploading Models to FlowScale
 
-### Loading Problems
-**Symptoms:** Model fails to load or initialize
+### Step-by-Step Upload Process
+
+#### 1. Navigate to the Upload Interface
+- Go to the **Private Models** section
+- Find or create the appropriate folder (e.g., `checkpoints`, `loras`)
+- Click the **three-dot menu** on the folder
+- Select **Upload** from the dropdown
+
+<Frame>
+  <img src="/images/build/model-upload-menu.png" alt="Three-dot menu on model folder showing upload option" />
+</Frame>
+
+#### 2. Choose Your Upload Method
+The upload dialog provides three options:
+
+**Option A: Direct URL Download**
+- Paste the direct download URL of the model
+- FlowScale will download the model directly to your storage
+- Fastest method for publicly available models
+
+**Option B: Local File Upload**
+- Upload model files from your computer
+- Drag and drop or browse to select files
+- Best for custom models or files you already have locally
+
+**Option C: Search and Import**
+- Search by model name to find models from:
+  - **Civitai.com** - Community-created models and LoRAs
+  - **Hugging Face** - Research and open-source models
+- Browse search results and select the model you want
+
+<Frame>
+  <img src="/images/build/model-upload-dialog.png" alt="Model upload dialog showing URL, file upload, and search options" />
+</Frame>
+
+#### 3. Configure API Access (if needed)
+
+For models from external platforms, you'll need API credentials:
+
+**For Civitai Models:**
+- Get your API key from [Civitai API Settings](https://civitai.com/user/account)
+- Paste the API key in the upload dialog
+- Required for downloading from Civitai's repository
+
+**For Hugging Face Models:**
+- Get your access token from [Hugging Face Token Settings](https://huggingface.co/settings/tokens)
+- Paste the token in the upload dialog
+- Required for accessing Hugging Face models
+
+<Frame>
+  <img src="/images/build/api-key-setup.png" alt="API key configuration section in the upload dialog" />
+</Frame>
+
+#### 4. Start the Upload
+- Click **Upload** to begin the process
+- You'll see a progress indicator
+- You can leave the page - the upload continues in the background
+
+### Upload Monitoring
+
+**Background Processing:**
+- Models upload and process in the background
+- No need to stay on the models page during upload
+- Continue working on other tasks while models download
+
+**Completion Notifications:**
+- Receive notification when model upload completes successfully
+- Get alerts if upload fails with error details
+- **Check status anytime** by clicking the **bell icon** in the top navigation to view notifications
+- All model download progress and completion status appears in the notifications panel
+
+<Frame>
+  <img src="/images/build/model-upload-progress.png" alt="Model upload progress indicator and notification system" />
+</Frame>
+
+## Using Uploaded Models in ComfyUI
+
+### Accessing Models in Workflows
+
+After uploading models to FlowScale:
+
+1. **Open your ComfyUI workspace** in any project
+2. **Add model nodes** to your workflow (Load Checkpoint, Load LoRA, etc.)
+3. **Click the model dropdown** in the node
+4. **Select your uploaded model** from the list
+
+### Refreshing Model List
+
+If newly uploaded models don't appear in ComfyUI:
+
+#### Method 1: Refresh Button
+- Look for the **Refresh** button in the **Actions Bar** at the bottom of ComfyUI
+- Click to reload the model list
+- This updates ComfyUI's model cache with newly uploaded models
+
+<Frame>
+  <img src="/images/build/comfyui-refresh-button.png" alt="Refresh button location in ComfyUI actions bar" />
+</Frame>
+
+#### Method 2: Restart ComfyUI
+If refresh doesn't work:
+1. **Stop ComfyUI** using the stop button
+2. **Start ComfyUI** again
+3. Models should now be visible in dropdowns
+
+This fully reloads ComfyUI and ensures all models are properly detected.
+
+## Troubleshooting Model Issues
+
+### Model Not Visible in ComfyUI
+
+**Problem:** Uploaded model doesn't appear in node dropdowns in ComfyUI
+
 **Solutions:**
-- Check model file integrity and format
-- Verify sufficient GPU memory allocation
-- Ensure compatibility with workflow requirements
-- Review model dependencies and versions
+1. **Check folder placement** - Ensure model is in the correct ComfyUI folder
+2. **Verify folder spelling** - Check that folder names match ComfyUI's exact spelling requirements (e.g., `checkpoints/`, `loras/`, `controlnet/`)
+3. **Refresh ComfyUI** - Use the refresh button in the actions bar
+4. **Restart ComfyUI** - Stop and start ComfyUI to force reload
+5. **Verify upload completion** - Check that upload finished successfully
+6. **Check file format** - Ensure model file has correct extension (.safetensors, .ckpt, etc.)
 
-### Performance Issues
-**Symptoms:** Slow inference or high resource usage
+### Upload Failures
+
+**Problem:** Model upload fails or gets stuck
+
 **Solutions:**
-- Consider model quantization options
-- Adjust batch sizes for your hardware
-- Enable model caching if available
-- Switch to optimized model variants
+1. **Check internet connection** - Ensure stable connection for large downloads
+2. **Verify API keys** - Ensure Civitai/Hugging Face credentials are correct
+3. **Try different upload method** - Switch between URL, local upload, or search
 
-### Quality Problems
-**Symptoms:** Poor or inconsistent outputs
-**Solutions:**
-- Review and adjust model parameters
-- Check input data quality and format
-- Experiment with different sampling settings
-- Consider fine-tuning for your specific use case
+### Getting Help
 
-## Integration with FlowScale Ecosystem
+If you continue experiencing issues:
 
-### Workflow Integration
-- **Seamless node integration** in ComfyUI Workspace
-- **Auto-configuration** based on workflow context
-- **Dynamic model switching** based on inputs
-- **Pipeline optimization** across multiple models
+1. **Check error messages** - Note any specific error codes or messages
+2. **Try basic troubleshooting** - Refresh, restart, re-upload
+3. **Contact FlowScale support** - Reach out via:
+   - **Email**: hello@flowscale.ai
+   - **Slack Community**: [Join here](https://join.slack.com/t/flowscalecommunity/shared_invite/zt-320joycdu-K67c8VNMR7eTmHUZ3asuRg) and chat in the general channel - the FlowScale team is very active there
+4. **Provide details** - Include model name, upload method, and error messages
 
-### API Deployment
-- **Model abstraction** in deployed APIs
-- **Version management** in production endpoints
-- **A/B testing** capabilities for model comparison
-- **Rollback mechanisms** for production issues
+The FlowScale team can assist with model installation and troubleshooting to ensure your models work properly in your workflows.
 
-### Scaling & Distribution
-- **Auto-scaling** based on model demand
-- **Load balancing** across model instances
-- **Geographic distribution** for global access
-- **Edge deployment** for low-latency applications
+## Frequently Asked Questions
 
-## Future of Models in FlowScale
+<AccordionGroup>
+  <Accordion title="Can I use the same model across multiple projects?">
+    Yes! All models in FlowScale are stored at the organization level. Once uploaded, any model is automatically available across all projects in your organization. Both the global Models tab and project-level Models sections show identical content.
+  </Accordion>
 
-### Upcoming Features
-- **Model marketplace** for community sharing
-- **Automated fine-tuning** services
-- **Custom model training** in the cloud
-- **Multi-modal model support** (text + image + audio)
+  <Accordion title="What's the difference between Public and Private models?">
+    **Public Models** are curated by FlowScale and include popular, tested models like Stable Diffusion, FLUX, and ControlNet variants. **Private Models** are for your custom uploads, proprietary models, or specific versions not available in the public library.
+  </Accordion>
 
-### AI Model Trends
-- **Larger foundation models** with better capabilities
-- **Specialized domain models** for specific industries
-- **Efficiency improvements** in model architecture
-- **Open-source model** ecosystem expansion
+  <Accordion title="How do I organize my models properly?">
+    Follow ComfyUI's standard folder structure: checkpoints/, loras/, controlnet/, vae/, etc. This ensures automatic recognition in workflows. Create appropriate folders before uploading and use descriptive names for easy identification.
+  </Accordion>
 
-## Related Concepts
+  <Accordion title="Why isn't my uploaded model showing in ComfyUI?">
+    First, click the **Refresh** button in ComfyUI's actions bar. If that doesn't work, stop and restart ComfyUI. Also verify the model is in the correct folder and the upload completed successfully (check notifications via the bell icon).
+  </Accordion>
 
-- [ComfyUI Workspace](/getting-started/glossary/comfyui-workspace) - Learn how to use models in workflows
-- [Projects](/getting-started/glossary/projects) - Understanding model organization in projects
+  <Accordion title="Can I upload models from Civitai and Hugging Face?">
+    Yes! Use the **Search and Import** option in the upload dialog. You'll need API credentials: get your Civitai API key from their account settings, or your Hugging Face access token from their token settings page.
+  </Accordion>
+
+  <Accordion title="Is there a storage limit for models?">
+    No, FlowScale provides unlimited storage capacity for your organization's model library. You can upload as many models as needed without size restrictions.
+  </Accordion>
+
+  <Accordion title="How do I track model upload progress?">
+    Click the **bell icon** in the top navigation to view notifications. All model download progress, completion status, and any error messages appear in the notifications panel.
+  </Accordion>
+
+  <Accordion title="What file formats are supported?">
+    FlowScale supports all standard ComfyUI model formats including .safetensors, .ckpt, .pt, and other common AI model file types. The same formats that work in local ComfyUI will work in FlowScale.
+  </Accordion>
+</AccordionGroup>
+
+## Getting Started
+
+Ready to start working with models? Check out our [Import & Create Workflows](/getting-started/import-create-workflows) guide to begin building your first AI-powered workflow using FlowScale's model management system.
+
+### Related Documentation
+- [ComfyUI Workspace](/getting-started/glossary/comfyui-workspace) - Learn how to build workflows with models
+- [Projects](/getting-started/glossary/projects) - Understanding project organization
 - [Pods](/getting-started/glossary/pods) - Computing resources that run your models
-- [ComfyUI](/getting-started/glossary/comfyui) - The framework that powers model workflows
-
-## Getting Started with Models
-
-Ready to start working with models? Check out our [Import & Create Workflows](/getting-started/import-create-workflows) guide to begin building your first AI-powered workflow with FlowScale's model library.
