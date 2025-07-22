@@ -6,7 +6,7 @@ icon: "rocket"
 
 import DeploymentTroubleshooting from '/snippets/troubleshooting/deployment.mdx';
 
-Once your workflows are set up in the ComfyUI Editor, you can easily move to the deployment stage. By the time you reach this document, we assume your workflows are properly imported/created and all custom nodes or models are set up.
+Once your workflows are set up in the ComfyUI Workspace, you can easily move to the deployment stage. By the time you reach this document, we assume your workflows are properly imported/created and all custom nodes or models are set up.
 
 <Info>
 If you haven't set up your workflows yet, please refer to the [Import/Create Workflows guide](/getting-started/import-create-workflows) first.
@@ -18,7 +18,7 @@ Before deploying, ensure your workflow meets these requirements:
 
 <Steps>
   <Step title="Successful Execution">
-    Run your workflow at least once successfully in the ComfyUI editor
+    Run your workflow at least once successfully in the ComfyUI workspace
   </Step>
   <Step title="Save Workflow">
     Save the workflow after successful execution
@@ -28,10 +28,10 @@ Before deploying, ensure your workflow meets these requirements:
   </Step>
 </Steps>
 
-**[IMAGE PLACEHOLDER: ComfyUI editor showing a successful workflow execution with green status indicators]**
+**[IMAGE PLACEHOLDER: ComfyUI workspace showing a successful workflow execution with green status indicators]**
 
 <Warning>
-**Important**: The workflow must run successfully at least once in the ComfyUI editor before deployment. This ensures all models and custom nodes are properly configured and the platform can verify the workflow's functionality.
+**Important**: The workflow must run successfully at least once in the ComfyUI workspace before deployment. This ensures all models and custom nodes are properly configured and the platform can verify the workflow's functionality.
 </Warning>
 
 ## Configure Workflow for Deployment
@@ -76,7 +76,7 @@ The easiest way to configure your workflow is using FlowScale's specialized inpu
 
 <Steps>
   <Step title="Open Node Search">
-    Double-click on an empty area in the ComfyUI editor to open the node search
+    Double-click on an empty area in the ComfyUI workspace to open the node search
   </Step>
   <Step title="Search for Input Nodes">
     Type one of the following input node names:
@@ -93,7 +93,7 @@ The easiest way to configure your workflow is using FlowScale's specialized inpu
   </Step>
 </Steps>
 
-**[IMAGE PLACEHOLDER: ComfyUI editor showing node search dialog with FlowScale I/O input nodes with "[FS]" prefix visible in search results]**
+**[IMAGE PLACEHOLDER: ComfyUI workspace showing node search dialog with FlowScale I/O input nodes with "[FS]" prefix visible in search results]**
 
 <Frame>
   <img
@@ -120,7 +120,7 @@ The easiest way to configure your workflow is using FlowScale's specialized inpu
   </Step>
 </Steps>
 
-**[IMAGE PLACEHOLDER: ComfyUI editor showing FlowScale output nodes (SaveImage, SaveText, etc.) being connected to a workflow]**
+**[IMAGE PLACEHOLDER: ComfyUI workspace showing FlowScale output nodes (SaveImage, SaveText, etc.) being connected to a workflow]**
 
 ### Available FlowScale I/O Nodes
 
@@ -144,7 +144,7 @@ After adding FlowScale I/O nodes:
     Ensure all I/O nodes are properly connected to your workflow
   </Step>
   <Step title="Save Workflow">
-    Click the **Save** button in the ComfyUI editor
+    Click the **Save** button in the ComfyUI workspace
   </Step>
   <Step title="Check Status">
     Look for a **green checkmark** next to your workflow in the left sidebar, indicating successful configuration
