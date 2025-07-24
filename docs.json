@@ -55,8 +55,8 @@
             "group": "Deployment",
             "pages": [
               "deploy-api/overview",
-              "deploy-api/deployment-configuration",
-              "deploy-api/playground-uis",
+              "deploy-api/configuration",
+              "deploy-api/playgrounds",
               "deploy-api/scaling"
             ]
           },

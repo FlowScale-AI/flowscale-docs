@@ -1,0 +1,673 @@
+---
+title: "Scaling & Performance"
+description: "Auto-scale GPUs and optimize costs under load with FlowScale AI's scaling primitives."
+icon: "chart-line"
+---
+
+# Scale, Observe, and Control Cost/Performance
+
+Your workflow is deployed and accessible via API and Playground UI. Now you need it to **handle real usage patterns**: traffic spikes during product launches, batch processing jobs overnight, and cost optimization during quiet periods.
+
+This page covers FlowScale AI's **scaling primitives**: horizontal scaling, autoscale triggers, warm pools, queue depth behavior, cost levers, SLA monitoring, and the operational tools that ensure your AI workflows perform reliably under production load.
+
+<Callout type="info">
+**For Engineering Leadership:** Focus on [SLA Guarantees](#sla-guarantees--monitoring) and [Cost Optimization](#cost-optimization-levers).
+**For Developers:** See [Auto-Scaling Configuration](#auto-scaling-configuration) for technical implementation.
+**For AI & Creative Leads:** Review [Performance vs Cost Trade-offs](#performance-vs-cost-trade-offs) for budget planning.
+</Callout>
+
+---
+
+## Scaling Modes Overview
+
+| Scaling Mode | Best For | Cost Profile | Latency Profile | Management Overhead |
+|---|---|---|---|---|
+| **Fixed Scaling** | Predictable workloads, demos | Highest (always running) | Lowest (instant response) | Minimal |
+| **Auto-Scaling** | Variable traffic, production apps | Balanced (scales with demand) | Low (warm pool available) | Low |
+| **Batch Scaling** | Background jobs, data processing | Lowest (spot pricing) | Variable (queue-based) | Medium |
+| **On-Demand** | Development, occasional use | Pay-per-use | Highest (cold start penalty) | Minimal |
+
+---
+
+## Auto-Scaling Configuration
+
+### Scaling Triggers & Thresholds
+
+<Frame>
+  <img
+    src="/images/deploy/scaling-diagram.png"
+    alt="Auto-scaling behavior showing queue depth, response time, and instance count over time"
+  />
+</Frame>
+
+<Tabs>
+  <Tab title="Queue-Based Scaling">
+    **Scale up when requests queue, scale down when idle**
+    
+    ```yaml
+    scaling:
+      mode: "auto"
+      triggers:
+        scale_up:
+          - metric: "queue_depth"
+            threshold: 3
+            duration: "30s"
+        scale_down:
+          - metric: "idle_duration" 
+            threshold: "5m"
+            cooldown: "10m"
+      
+      limits:
+        min_instances: 0
+        max_instances: 20
+        warm_pool_size: 2  # Always-ready instances
+    ```
+    
+    **Best for:** API endpoints with variable request patterns
+  </Tab>
+  <Tab title="Response-Time Scaling">
+    **Scale up when latency increases, optimize for user experience**
+    
+    ```yaml
+    scaling:
+      mode: "performance_optimized"
+      triggers:
+        scale_up:
+          - metric: "p95_response_time"
+            threshold: "10s"
+            duration: "1m"
+        scale_down:
+          - metric: "p95_response_time"
+            threshold: "3s"  
+            duration: "5m"
+            
+      performance_targets:
+        p50_response_time: "5s"
+        p95_response_time: "8s"
+        p99_response_time: "12s"
+    ```
+    
+    **Best for:** Customer-facing applications with SLA requirements
+  </Tab>
+  <Tab title="Cost-Optimized Scaling">
+    **Minimize costs while maintaining reasonable performance**
+    
+    ```yaml
+    scaling:
+      mode: "cost_optimized"
+      triggers:
+        scale_up:
+          - metric: "queue_depth"
+            threshold: 10  # Higher tolerance for queuing
+            duration: "2m"  # Wait longer before scaling
+        scale_down:
+          - metric: "utilization"
+            threshold: "30%"  # Aggressive downscaling
+            duration: "2m"
+            
+      cost_controls:
+        use_spot_instances: true
+        max_hourly_spend: "$50"
+        off_peak_hours: "10pm-6am EST"
+        weekend_scaling: "reduced"  # 50% capacity
+    ```
+    
+    **Best for:** Internal tools, batch processing, development environments
+  </Tab>
+</Tabs>
+
+### GPU Instance Types & Performance
+
+<CardGroup cols={3}>
+  <Card title="T4 Basic" icon="server">
+    **$0.60/hour**
+    
+    - 16GB GPU memory
+    - Good for: Text, simple images
+    - Typical latency: 3-8s
+    - Max concurrent: 2-4 requests
+    - Cold start: ~45s
+  </Card>
+  <Card title="A10G Performance" icon="server">
+    **$1.20/hour**
+    
+    - 24GB GPU memory  
+    - Good for: High-res images, video
+    - Typical latency: 2-5s
+    - Max concurrent: 4-8 requests
+    - Cold start: ~60s
+  </Card>
+  <Card title="A100 Premium" icon="server">
+    **$3.20/hour**
+    
+    - 80GB GPU memory
+    - Good for: Large models, batch jobs
+    - Typical latency: 1-3s
+    - Max concurrent: 8-16 requests
+    - Cold start: ~90s
+  </Card>
+</CardGroup>
+
+### Warm Pool Strategy
+
+<CodeGroup>
+```yaml Always-Ready Configuration
+warm_pool:
+  strategy: "always_ready"
+  pool_size: 2
+  instance_type: "a10g"
+  
+  # Keep instances warm even during low usage
+  maintenance:
+    health_check_interval: "1m"
+    restart_unhealthy: true
+    update_schedule: "daily 2am EST"
+    
+  cost_management:
+    max_idle_time: "2h"  # Scale down warm pool if unused
+    off_peak_reduction: 50%  # Reduce warm pool size during off hours
+```
+
+```yaml Smart Warm Pool
+warm_pool:
+  strategy: "predictive"
+  
+  # Learn usage patterns and pre-warm before traffic spikes
+  prediction:
+    historical_data: "30_days"
+    seasonal_patterns: true
+    event_based_scaling:
+      - event: "product_launch"
+        pre_warm_duration: "2h"
+        expected_multiplier: 5
+      - event: "marketing_campaign"
+        pre_warm_duration: "30m" 
+        expected_multiplier: 3
+        
+  fallback:
+    min_pool_size: 1
+    emergency_scaling: true  # Rapid scale-up if prediction fails
+```
+</CodeGroup>
+
+---
+
+## Performance vs Cost Trade-offs
+
+### Optimization Strategies
+
+<Tabs>
+  <Tab title="Caching & Optimization">
+    **Reduce computation through intelligent caching**
+    
+    <CardGroup cols={2}>
+      <Card title="Model Caching" icon="database">
+        - Keep frequently-used models in GPU memory
+        - Reduce cold start times by 60-80%
+        - Share model cache across instances
+        - Automatic cache eviction based on usage
+      </Card>
+      <Card title="Output Caching" icon="image">
+        - Cache generated results for identical prompts
+        - Configurable cache TTL (1 hour → 30 days)
+        - Content-based cache keys with fuzzy matching
+        - ~90% cost reduction for repeated requests
+      </Card>
+    </CardGroup>
+    
+    ```yaml Caching Configuration
+    optimization:
+      model_caching:
+        enabled: true
+        cache_size: "16GB"  # Per instance
+        eviction_policy: "lru"
+        shared_cache: true  # Across instances
+        
+      output_caching:
+        enabled: true
+        ttl: "24h"
+        fuzzy_matching: true  # Similar prompts use cached results
+        cache_hit_threshold: 0.95  # Similarity score
+        max_cache_size: "100GB"
+    ```
+  </Tab>
+  <Tab title="Batch Processing">
+    **Optimize throughput for non-real-time workloads**
+    
+    ```yaml Batch Configuration
+    batch_processing:
+      enabled: true
+      batch_size: 8  # Process multiple requests together
+      max_wait_time: "30s"  # Collect requests before processing
+      
+      scheduling:
+        priority_queues:
+          - name: "real_time"
+            max_latency: "10s"
+            reserved_capacity: 50%
+          - name: "batch"
+            max_latency: "5m" 
+            cost_optimization: true
+            
+      spot_instances:
+        enabled: true
+        max_interruption_tolerance: "5m"
+        fallback_to_on_demand: true
+    ```
+    
+    **Benefits:**
+    - 40-60% cost reduction via spot pricing
+    - Higher GPU utilization through batching
+    - Automatic job retry on spot interruption
+  </Tab>
+  <Tab title="Multi-Region Scaling">
+    **Optimize for global performance and cost arbitrage**
+    
+    ```yaml Multi-Region Setup
+    regions:
+      primary: "us-east-1"
+      secondary: ["us-west-2", "eu-west-1"]
+      
+    routing:
+      strategy: "cost_and_latency_optimized"
+      latency_weight: 0.7
+      cost_weight: 0.3
+      
+      fallback_behavior:
+        - primary_region_failure: "route_to_secondary"
+        - capacity_exhausted: "queue_with_spillover"
+        - cost_budget_exceeded: "route_to_cheapest"
+        
+    cost_arbitrage:
+      enabled: true
+      spot_price_monitoring: true
+      auto_migration: true  # Move workloads to cheaper regions
+      data_locality_constraints: ["gdpr_compliant"]
+    ```
+  </Tab>
+</Tabs>
+
+### Real-World Cost Examples
+
+<Frame>
+  <img
+    src="/images/deploy/cost-scenarios.png"
+    alt="Cost comparison across different usage patterns and optimization strategies"
+  />
+</Frame>
+
+<Accordion title="E-commerce Product Images: $500/month → $180/month">
+**Scenario:** 10,000 product images generated monthly
+
+**Before Optimization:**
+- Fixed 2x A10G instances: $1,728/month
+- 70% idle time during off-hours
+- No caching (many similar product types)
+
+**After Optimization:**
+- Auto-scaling with 1-8 A10G instances
+- Output caching enabled (80% hit rate)
+- Batch processing during off-peak hours
+- **Result:** 65% cost reduction, same quality/speed
+</Accordion>
+
+<Accordion title="Marketing Campaign: $2,000/month → $800/month">
+**Scenario:** Variable load with campaign spikes
+
+**Before Optimization:**
+- Over-provisioned for peak capacity
+- Manual scaling during campaign launches
+- Separate instances per campaign
+
+**After Optimization:**  
+- Predictive warm pool scaling
+- Shared GPU pool across campaigns
+- Spot instances for batch asset generation
+- **Result:** 60% cost reduction, better performance during spikes
+</Accordion>
+
+---
+
+## SLA Guarantees & Monitoring
+
+### Service Level Objectives
+
+<CardGroup cols={2}>
+  <Card title="Availability SLAs" icon="shield-check">
+    **99.9% Uptime Guarantee**
+    
+    - Multi-zone deployment for redundancy
+    - Automatic failover within 30 seconds
+    - Planned maintenance windows (4 hours/month)
+    - Real-time status page and incident notifications
+  </Card>
+  <Card title="Performance SLAs" icon="clock">
+    **Response Time Guarantees**
+    
+    - P50: < 5 seconds for standard workflows
+    - P95: < 10 seconds during normal load
+    - P99: < 15 seconds including cold starts
+    - Queue time disclosure and early timeout warnings
+  </Card>
+</CardGroup>
+
+### Monitoring & Alerting Dashboard
+
+<Frame>
+  <img
+    src="/images/deploy/monitoring-dashboard.png"
+    alt="Real-time monitoring dashboard showing performance metrics, costs, and alerts"
+  />
+</Frame>
+
+<Tabs>
+  <Tab title="Real-Time Metrics">
+    **Key Performance Indicators:**
+    
+    - **Request Volume:** Requests/minute, concurrent users, queue depth
+    - **Response Times:** P50/P95/P99 latency, cold start frequency
+    - **Error Rates:** 4xx/5xx errors, timeout rate, retry success rate
+    - **Resource Usage:** GPU utilization, memory usage, instance count
+    - **Cost Tracking:** Hourly spend, budget burn rate, cost per request
+  </Tab>
+  <Tab title="Proactive Alerts">
+    **Automated Alert Configuration:**
+    
+    ```yaml
+    alerts:
+      performance:
+        - name: "High Latency"
+          condition: "p95_response_time > 15s for 5m"
+          severity: "warning"
+          notification: ["team-slack", "on-call-engineer"]
+          
+        - name: "Error Rate Spike" 
+          condition: "error_rate > 5% for 2m"
+          severity: "critical"
+          notification: ["team-slack", "pager-duty", "engineering-lead"]
+          
+      scaling:
+        - name: "Auto-Scale Exhausted"
+          condition: "instance_count >= max_instances and queue_depth > 10"
+          severity: "critical"
+          action: "increase_max_instances_temporarily"
+          
+      cost:
+        - name: "Budget Alert"
+          condition: "daily_spend > budget * 1.5"
+          severity: "warning" 
+          notification: ["finance-team", "ai-lead"]
+    ```
+  </Tab>
+  <Tab title="Business Intelligence">
+    **Executive Dashboard Metrics:**
+    
+    - **Usage Growth:** DAU/MAU trends, feature adoption rates
+    - **Cost Efficiency:** Cost per successful generation, ROI metrics
+    - **Quality Metrics:** User satisfaction scores, output approval rates
+    - **Capacity Planning:** Peak usage forecasts, infrastructure needs
+    - **Competitive Analysis:** Performance vs industry benchmarks
+    
+    **Automated Reports:**
+    - Weekly usage and cost summary
+    - Monthly capacity planning recommendations
+    - Quarterly ROI and business impact analysis
+  </Tab>
+</Tabs>
+
+---
+
+## Cost Optimization Levers
+
+### Advanced Cost Controls
+
+<CardGroup cols={2}>
+  <Card title="Smart Scheduling" icon="calendar">
+    **Time-Based Optimization**
+    
+    - Route batch jobs to cheapest hours (typically 2-6 AM)
+    - Reduced capacity during low-usage periods
+    - Geographic routing based on regional pricing
+    - Seasonal scaling patterns (holiday traffic, etc.)
+  </Card>
+  <Card title="Quality vs Speed" icon="balance-scale">
+    **Configurable Performance Tiers**
+    
+    - "Economy" mode: Higher queue tolerance, spot instances
+    - "Standard" mode: Balanced performance and cost
+    - "Premium" mode: Guaranteed low latency, dedicated capacity
+    - Dynamic tier adjustment based on request urgency
+  </Card>
+</CardGroup>
+
+### Budget Management & Governance
+
+<CodeGroup>
+```yaml Department Budget Controls
+cost_governance:
+  budget_hierarchy:
+    organization: "$10,000/month"
+    departments:
+      creative: "$4,000/month"
+      product: "$3,000/month" 
+      marketing: "$2,000/month"
+      engineering: "$1,000/month"
+      
+  enforcement:
+    soft_limits: [75%, 90%]  # Alert thresholds
+    hard_limit: 100%  # Block requests
+    emergency_override: "c_level_approval"
+    
+  cost_allocation:
+    track_by: ["department", "project", "user"]
+    chargeback_reports: "monthly"
+    cost_center_integration: "workday"
+```
+
+```yaml Project-Based Budgeting
+projects:
+  - name: "Q4_holiday_campaign"
+    budget: "$2,500"
+    duration: "2024-10-01 to 2024-12-31"
+    auto_pause_when_exceeded: true
+    
+  - name: "product_catalog_refresh"
+    budget: "$1,200"
+    priority: "high"  # Don't pause even if over budget
+    approval_required_over: "$1,500"
+    
+cost_optimization:
+  spot_instance_preference: 80%  # Use spot for 80% of workload
+  off_peak_scheduling: true
+  auto_pause_idle_deployments: "after_1_hour"
+```
+</CodeGroup>
+
+---
+
+## Scaling Patterns by Use Case
+
+<Tabs>
+  <Tab title="E-commerce Integration">
+    **Pattern:** Steady baseline with predictable traffic spikes
+    
+    ```yaml
+    scaling_pattern: "predictable_spikes"
+    
+    baseline:
+      instances: 2
+      instance_type: "a10g"
+      
+    spike_handling:
+      triggers:
+        - "weekend_traffic_increase"
+        - "sale_events" 
+        - "new_product_launches"
+      scale_multiplier: 3-5x
+      pre_warm_duration: "30_minutes"
+      
+    optimization:
+      output_caching: "aggressive"  # Many similar products
+      batch_processing: "overnight"  # Bulk catalog updates
+      cost_target: "$0.05_per_image"
+    ```
+  </Tab>
+  <Tab title="Creative Agency">
+    **Pattern:** Project-based bursts with client deadlines
+    
+    ```yaml
+    scaling_pattern: "project_burst"
+    
+    default_state: "minimal"  # Scale to zero when not in use
+    
+    project_scaling:
+      ramp_up: "fast"  # Scale up quickly for client deadlines
+      peak_capacity: "unlimited"  # Don't constrain creative work
+      ramp_down: "gradual"  # Allow for revisions and iterations
+      
+    client_separation:
+      isolated_deployments: true  # Separate client workloads
+      branded_interfaces: true
+      usage_tracking: "per_client"
+      
+    cost_management:
+      client_billing: "pass_through"  # Clients pay for their usage
+      internal_budget: "$500/month"  # For business development
+    ```
+  </Tab>
+  <Tab title="SaaS Product Feature">
+    **Pattern:** Growing user base with 24/7 availability needs
+    
+    ```yaml
+    scaling_pattern: "saas_growth"
+    
+    availability:
+      target_uptime: "99.95%"
+      multi_region: true
+      failover_time: "<30s"
+      
+    growth_scaling:
+      auto_scaling: "predictive"  # Learn user patterns
+      capacity_buffer: "20%"  # Always ready for growth spikes
+      load_testing: "weekly"  # Ensure scaling works
+      
+    performance_tiers:
+      free_tier: "economy_mode"  # Higher latency acceptable
+      paid_tier: "standard_mode"  # Balanced performance
+      enterprise: "premium_mode"  # Guaranteed low latency
+      
+    cost_structure:
+      variable_pricing: true  # Costs scale with revenue
+      profitability_target: "70%_gross_margin"
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Troubleshooting & Optimization
+
+### Common Scaling Issues
+
+<AccordionGroup>
+  <Accordion title="Cold Start Latency Problems">
+    **Symptoms:** Initial requests taking 30-90 seconds, poor user experience
+    
+    **Solutions:**
+    - Increase warm pool size during peak hours
+    - Use predictive scaling based on historical patterns
+    - Implement model pre-loading and caching
+    - Consider keeping 1 instance always-warm for critical deployments
+    
+    **Monitoring:** Track cold start frequency and duration
+  </Accordion>
+  
+  <Accordion title="Cost Overruns">
+    **Symptoms:** Monthly bills exceeding budget, unexpected scaling events
+    
+    **Solutions:**
+    - Implement hard budget limits with automatic shut-off
+    - Review scaling triggers for over-aggressive scaling
+    - Enable output caching to reduce redundant processing
+    - Use spot instances for non-critical workloads
+    
+    **Prevention:** Set up proactive budget alerts at 50%, 75%, 90%
+  </Accordion>
+  
+  <Accordion title="Queue Backup During Spikes">
+    **Symptoms:** Long wait times, user timeouts, poor experience during high traffic
+    
+    **Solutions:**
+    - Lower scale-up thresholds (queue_depth: 3 → 1)
+    - Increase maximum instance count temporarily
+    - Implement request prioritization (paid vs free users)
+    - Add geographic load balancing
+    
+    **Emergency Response:** Manual override to maximum capacity
+  </Accordion>
+</AccordionGroup>
+
+### Performance Tuning Checklist
+
+<Steps>
+  <Step title="Baseline Measurement">
+    - Record current P95 response times and costs
+    - Identify peak usage patterns and bottlenecks
+    - Document user experience requirements
+  </Step>
+  <Step title="Caching Optimization">
+    - Enable output caching for repeated requests
+    - Tune cache hit ratios and TTL settings
+    - Monitor cache storage costs vs compute savings
+  </Step>
+  <Step title="Scaling Tuning">
+    - Adjust scaling triggers based on actual usage patterns
+    - Right-size warm pool for your traffic patterns
+    - Test scaling behavior under simulated load
+  </Step>
+  <Step title="Cost Optimization">  
+    - Enable spot instances where appropriate
+    - Implement time-based scaling for predictable patterns
+    - Review instance types for workload optimization
+  </Step>
+  <Step title="Monitoring Setup">
+    - Configure alerts for performance degradation
+    - Set up cost monitoring and budget alerts
+    - Implement user experience tracking
+  </Step>
+</Steps>
+
+---
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="SDK Integration"
+    icon="code"
+    href="/deploy-api/sdk/sdk-js"
+  >
+    Integrate your scaled deployment into applications with type-safe SDKs
+  </Card>
+  <Card
+    title="Advanced Security"
+    icon="shield"
+    href="/deploy-api/security"
+  >
+    Enterprise-grade access controls and compliance features for production
+  </Card>
+  <Card
+    title="API Reference"
+    icon="book"
+    href="/api-reference/introduction"
+  >
+    Complete endpoint documentation for scaling and monitoring APIs
+  </Card>
+  <Card
+    title="Enterprise Support"
+    icon="headset"
+    href="/support/enterprise"
+  >
+    Dedicated support for mission-critical scaling and performance needs
+  </Card>
+</CardGroup>
