@@ -7,7 +7,17 @@
   "servers": [
     {
       "url": "https://flowscale-core.pod.flowscale.ai",
-      "description": "Pod #flowscale-core"
+      "description": "Pod #flowscale-core (Default)"
+    },
+    {
+      "url": "{customDomain}",
+      "description": "Custom Domain",
+      "variables": {
+        "customDomain": {
+          "default": "https://your-domain.com",
+          "description": "Your custom domain or API endpoint"
+        }
+      }
     }
   ],
   "paths": {
