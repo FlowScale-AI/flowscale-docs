@@ -1,22 +1,35 @@
 ---
 title: JavaScript/TypeScript SDK
-description: "A comprehensive SDK designed to simplify interaction with the FlowScale ComfyUI API. Works in both Node.js and browser environments."
+description: "Transform your deployed ComfyUI workflows into powerful application features with production-ready JavaScript and TypeScript integration."
 icon: "js"
 ---
 
+**Your ComfyUI workflows are deployed as APIs—now let's integrate them into real applications.** This SDK transforms your creative AI work into application features that users can access through web apps, mobile apps, Node.js services, and automation systems.
+
+<Note>
+**What you're building:** Instead of asking users to understand ComfyUI or API endpoints, you're creating seamless experiences where AI capabilities feel like native application features. Your workflows become the invisible intelligence powering user-facing products.
+</Note>
+
 <Warning>
-**Important Security Notice for Browser Usage**
+**Production Security Best Practices**
 
-When using this SDK in a browser environment, your API key will be exposed to end users. This is a significant security risk. We strongly recommend:
+**Your AI workflows are now business infrastructure—protect them accordingly.** When integrating into client-side applications, your API keys become visible to users, which could lead to unauthorized usage and unexpected costs.
 
-- Using this SDK in a Node.js backend environment
-- Creating a proxy API that securely handles the API key server-side
-- If you must use the SDK directly in the browser, you must explicitly acknowledge this by setting the `allowDangerouslyExposeApiKey` option
+**Recommended Architecture:**
+- **Backend Integration**: Use this SDK in Node.js servers where API keys remain secure
+- **Proxy Pattern**: Create your own API endpoints that internally call FlowScale AI
+- **Rate Limiting**: Control usage to prevent abuse and manage costs
+
+**If you must use client-side**: Set `allowDangerouslyExposeApiKey: true` to acknowledge the security implications.
 </Warning>
 
-## Installation
+## Installation: Adding AI Power to Your Applications
 
-Install the FlowScale SDK using your preferred package manager:
+**Ready to bring your AI workflows into your applications?** Install the FlowScale SDK to start integrating your deployed ComfyUI workflows into any JavaScript or TypeScript project.
+
+<Tip>
+**What this enables:** Your users won't interact with ComfyUI or see API endpoints—they'll experience AI capabilities as seamless application features. Image generation, style transfer, content creation, and other AI workflows become as simple as calling a function.
+</Tip>
 
 <CodeGroup>
 
@@ -38,11 +51,15 @@ bun install flowscale
 
 </CodeGroup>
 
-## Quick Start
+## Quick Start: From Deployment to Integration
 
-### Importing the SDK
+<Note>
+**Prerequisites:** You should have already deployed your ComfyUI workflow as an API through the FlowScale AI platform. If you haven't, complete the [Deploy Workflows guide](/getting-started/deploy-workflows) first.
+</Note>
 
-To get started, import the FlowScale SDK into your project:
+### Connecting Your Application to Your AI Infrastructure
+
+**This is where your deployed AI workflows become application features.** Import the SDK and connect to the production APIs you've already created:
 
 <CodeGroup>
 
@@ -81,20 +98,32 @@ FLOWSCALE_API_KEY=your-api-key
 FLOWSCALE_API_URL=https://your-api-url.pod.flowscale.ai
 ```
 
-### Environment-Specific Considerations
+### Architecture Patterns for Production Applications
+
+**Choose the integration pattern that matches your application's needs:**
 
 <Tabs>
-  <Tab title="Node.js (Recommended)">
-    - Store API keys in environment variables
-    - Use `.env` files for configuration
-    - Full access to all SDK features
-    - Secure API key handling
+  <Tab title="Backend API Integration (Recommended)">
+    **Best for:** Web applications, mobile app backends, automation systems
+    
+    **Benefits:**
+    - Secure API key management
+    - Rate limiting and cost control
+    - User authentication and authorization
+    - Request logging and monitoring
+    
+    **Use cases:** User-facing applications, internal tools, automated workflows
   </Tab>
-  <Tab title="Browser">
-    - API key will be visible in network requests
-    - Supports File/Blob uploads directly from browser
-    - Consider implementing a backend proxy instead
-    - Must explicitly acknowledge security risks
+  <Tab title="Direct Browser Integration">
+    **Best for:** Prototypes, demos, public tools where usage costs are acceptable
+    
+    **Considerations:**
+    - API keys visible to users
+    - Direct billing exposure
+    - Limited access control
+    - Suitable for public/demo applications
+    
+    **Use cases:** Interactive demos, public creative tools, proof-of-concepts
   </Tab>
 </Tabs>
 

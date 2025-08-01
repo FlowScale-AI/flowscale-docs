@@ -68,12 +68,6 @@
             ]
           },
           {
-            "group": "Examples",
-            "pages": [
-              "deploy-api/examples"
-            ]
-          },
-          {
             "group": "API Reference",
             "pages": [
               "deploy-api/reference/get-run"
@@ -85,19 +79,6 @@
         "tab": "Other References",
         "icon": "book",
         "groups": [
-          {
-            "group": "Architecture",
-            "pages": [
-              "reference/deployment-models",
-              "reference/network-architecture-diagrams"
-            ]
-          },
-          {
-            "group": "Support",
-            "pages": [
-              "reference/troubleshooting/index"
-            ]
-          },
           {
             "group": "Changelog",
             "pages": [

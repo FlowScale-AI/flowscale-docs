@@ -6,50 +6,107 @@ icon: "upload"
 
 import ImportWorkflowsTroubleshooting from '/snippets/troubleshooting/import-workflows-basic.mdx';
 
-FlowScale AI provides a centralized, team-friendly platform for managing ComfyUI workflows with deployment capabilities. Unlike ComfyUI's local interface, FlowScale AI is designed for collaboration and easy workflow deployment.
+**You've built something amazing in ComfyUI.** Now it's time to bring that creative breakthrough into a collaborative, production-ready environment where your team can build on your work and users can actually benefit from your innovation.
 
-<Info>
-Before working with workflows, you must first [create a project](/get-started/setup) in FlowScale AI. All workflows are organized within projects.
-</Info>
+This guide shows you how to transform your local ComfyUI experiments into **team-accessible, deployable workflows** that maintain all their creative power while gaining enterprise-grade collaboration and deployment capabilities.
 
-## Understanding FlowScale AI vs ComfyUI
+<Note>
+**Already have a working ComfyUI workflow?** Perfect! You're about to see how quickly your local creation becomes a collaborative, deployable asset. The import process takes just a few minutes, but the transformation in capability is profound.
+</Note>
 
-FlowScale AI's interface differs from standard ComfyUI because it's built for:
-- **Team collaboration**: Centralized workspace for multiple users
-- **Deployment focus**: Easy conversion of workflows to APIs
-- **Cloud infrastructure**: Scalable compute resources on demand
+<Note>
+**New to FlowScale AI?** You'll need to [create a project first](/get-started/setup). Think of projects as collaborative workspaces where your team's workflows live and evolve together.
+</Note>
 
-While ComfyUI's default interface is designed for local, isolated workflow development, FlowScale AI extends this with enterprise features and cloud deployment capabilities.
+## The Conceptual Shift: From Personal Tool to Production Platform
 
-## Importing Existing Workflows
+**Here's what's about to change for you:** Your ComfyUI workflow is moving from a personal creative tool to a **governed, collaborative asset** that your entire team can rely on.
 
-Import your existing ComfyUI workflows to run them on powerful cloud GPUs with team collaboration features.
+<AccordionGroup>
+  <Accordion title="From Isolated to Collaborative">
+    **Before:** Your workflow lives on your machine. Others can't access it, modify it, or build on it without complex file sharing and setup replication.
+    
+    **After:** Your workflow becomes a shared team asset. Teammates can view, modify, and improve it within governed boundaries. Changes are tracked, conflicts are resolved automatically, and everyone builds on the same foundation.
+  </Accordion>
+  <Accordion title="From Local Compute to Cloud Scale">
+    **Before:** You're limited by your local GPU power and have to manage driver updates, model downloads, and dependency conflicts manually.
+    
+    **After:** Access enterprise-grade GPUs (T4, L4, A100, H100) on demand. Models and dependencies are managed centrally. Scale from single runs to thousands of concurrent executions without hardware concerns.
+  </Accordion>
+  <Accordion title="From Demo to Production Service">
+    **Before:** Sharing your workflow means screen recordings, file exports, or walking someone through your local setup.
+    
+    **After:** Your workflow becomes a production API, interactive web interface, or SDK integration that others can use reliably without understanding the underlying complexity.
+  </Accordion>
+</AccordionGroup>
+
+**The interface looks familiar because it's still ComfyUI at its core—**but now it's ComfyUI with enterprise capabilities that transform how you and your team create with AI.
+
+## Bringing Your Breakthrough to the Team
+
+**This is where your local creative success becomes a collaborative asset.** The import process takes your proven workflow and transforms it into something your entire team can access, modify, and deploy without losing any of its power or sophistication.
+
+<Tip>
+**What you're actually doing:** Taking a workflow that currently only exists on your machine and making it accessible to your team as a governed, version-controlled, deployable service. The technical complexity remains the same, but the collaboration and deployment capabilities are transformative.
+</Tip>
 
 ### Step-by-Step Import Process
+
+<Note>
+**Why each step matters:** This isn't just file uploading—we're ensuring your workflow's dependencies, custom nodes, and configurations are preserved exactly while making them accessible in a collaborative cloud environment.
+</Note>
 
 <Steps>
   <Step title="Click Import Workflow">
     In your FlowScale AI project dashboard, click the **"Import Workflow"** button
     
-    *[Screenshot needed: Project dashboard with Import Workflow button highlighted]*
+<Frame>
+  <img
+    src="/images/import/project-dashboard-import-button.png"
+    alt="FlowScale project dashboard with Import Workflow button highlighted"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of FlowScale project dashboard showing main interface with prominent Import Workflow button and workflow list */}
   </Step>
   
   <Step title="Upload Workflow JSON">
     Select and upload your ComfyUI workflow JSON file (exported from ComfyUI using the "Save" option)
     
-    *[Screenshot needed: Import modal showing file upload area]*
+<Frame>
+  <img
+    src="/images/import/import-modal-file-upload.png"
+    alt="Import workflow modal dialog showing file upload interface"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of import modal showing file upload area with drag-and-drop zone and accepted file format information */}
   </Step>
   
   <Step title="Review Custom Nodes">
     FlowScale AI automatically detects required custom nodes and displays them for review
     
-    *[Screenshot needed: Custom nodes detection screen showing detected nodes]*
+<Frame>
+  <img
+    src="/images/import/custom-nodes-detection.png"
+    alt="Custom nodes detection screen displaying automatically identified workflow dependencies"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of custom nodes detection showing list of detected nodes with status indicators and source information */}
   </Step>
   
   <Step title="Resolve Conflicts">
     If conflicting nodes are detected, select the correct versions that your workflow actually uses
     
-    *[Screenshot needed: Node conflict resolution interface]*
+<Frame>
+  <img
+    src="/images/import/node-conflict-resolution.png"
+    alt="Node conflict resolution interface showing version selection options"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of conflict resolution showing node versions with comparison options and recommended version highlighting */}
   </Step>
   
   <Step title="Complete Setup">
@@ -59,62 +116,106 @@ Import your existing ComfyUI workflows to run them on powerful cloud GPUs with t
 
 <Frame>
   <img
-    src="/images/getting-started/import-workflow-process.png"
-    alt="Complete workflow import process"
+    src="/images/import/complete-import-workflow-process.png"
+    alt="Complete workflow import process from upload to successful integration"
   />
 </Frame>
 
+{/* Image Description for Team: Screenshot showing complete import flow with step-by-step progress and imported workflow preview */}
+
 ### Supported Import Format
 
-FlowScale AI currently supports importing **Workflow JSON** files only - the standard ComfyUI workflow format exported via ComfyUI's "Save" button. This ensures maximum compatibility and reliability when importing your workflows.
+**We focus on the standard for maximum reliability:** FlowScale AI imports **Workflow JSON** files—the same format you get from ComfyUI's "Save" button. This ensures your workflow maintains complete fidelity during the transition from local to cloud.
 
-## Starting ComfyUI Workspace
+<Warning>
+**File Format Matters:** Only use JSON files exported directly from ComfyUI's Save function. Other export formats or manually edited files may cause import issues or lost functionality.
+</Warning>
 
-FlowScale AI uses **Pods** to run ComfyUI instances in the cloud.
+## Launching Your Cloud-Powered Creative Environment
+
+**Here's where the magic happens:** Your familiar ComfyUI interface, but now running on enterprise-grade cloud infrastructure with unlimited scaling potential.
+
+**Pods are your personal ComfyUI instances in the cloud**—think of them as your dedicated creative workstation that appears instantly when you need it and disappears when you don't, saving you costs while providing more power than most local setups.
 
 ### Launch Process
+
+<Note>
+**What's actually happening:** FlowScale AI is spinning up a dedicated cloud instance, installing your custom nodes, configuring your models, and preparing a ComfyUI environment that matches your workflow's requirements. This takes a few minutes initially but gives you a consistent, powerful environment every time.
+</Note>
 
 <Steps>
   <Step title="Start ComfyUI">
     Click **"Start ComfyUI"** button in your project
     
-    *[Screenshot needed: Project interface with Start ComfyUI button]*
+<Frame>
+  <img
+    src="/images/import/project-start-comfyui-button.png"
+    alt="Project interface showing Start ComfyUI button for workspace access"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of project interface showing workflow list with prominent Start ComfyUI button and navigation structure */}
   </Step>
   
   <Step title="Select Pod">
     Choose the pod configuration for your ComfyUI instance from the modal
     
-    *[Screenshot needed: Pod selection modal with different pod options]*
+<Frame>
+  <img
+    src="/images/import/pod-selection-modal.png"
+    alt="Pod selection modal displaying GPU options and compute resources"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of pod selection modal showing GPU types, resource specifications, and pricing information */}
   </Step>
   
   <Step title="Monitor Installation">
     While ComfyUI starts, custom nodes are installed automatically. View progress in System Logs
     
-    *[Screenshot needed: ComfyUI starting screen with logs panel open showing installation progress]*
+<Frame>
+  <img
+    src="/images/import/comfyui-startup-logs.png"
+    alt="ComfyUI initialization screen with logs panel showing startup progress"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of ComfyUI startup showing loading interface with logs panel and installation progress indicators */}
   </Step>
   
   <Step title="Workspace Ready">
     Once started, you'll see the ComfyUI workspace in CPU mode
     
-    *[Screenshot needed: ComfyUI workspace interface with CPU mode indicator]*
+<Frame>
+  <img
+    src="/images/import/comfyui-workspace-cpu-mode.png"
+    alt="ComfyUI workspace interface showing CPU mode indicator and workspace layout"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of ComfyUI workspace showing full interface with CPU mode indicator and imported workflow */}
   </Step>
 </Steps>
 
-### CPU vs GPU Mode
+### CPU vs GPU Mode: Smart Resource Management
+
+**This is how you stay creative without breaking budgets:** FlowScale AI separates workflow development from workflow execution, so you only pay for GPU power when you actually need it.
 
 <Tabs>
   <Tab title="CPU Mode (Default)">
-    - **Purpose**: Workflow editing and development
-    - **Cost**: Minimal credits usage
-    - **Best for**: Building, testing, and modifying workflows
-    - **Switch to**: Use the actions bar at the bottom of the page
+    **Your creative sandbox:**
+    - **Perfect for**: Connecting nodes, adjusting parameters, organizing your workflow logic
+    - **Cost impact**: Minimal—focus on creativity without cost anxiety
+    - **Best practices**: Do all your planning, node connections, and parameter tweaking here
+    - **Why this matters**: You can spend hours perfecting your workflow structure without burning through GPU credits
   </Tab>
   
   <Tab title="GPU Mode">
-    - **Purpose**: Running compute-intensive workflows
-    - **Cost**: Higher credits usage
-    - **Best for**: Actual workflow execution and testing
-    - **Switch from**: Actions bar when you need to execute workflows
+    **Your execution powerhouse:**
+    - **Perfect for**: Running inference, testing outputs, validating results
+    - **Cost impact**: Higher, but you're getting enterprise-grade GPU performance
+    - **Best practices**: Switch here only when you need to see actual results
+    - **Why this matters**: Access to GPUs that cost thousands to own, available instantly when you need them
   </Tab>
 </Tabs>
 
@@ -122,13 +223,28 @@ FlowScale AI uses **Pods** to run ComfyUI instances in the cloud.
 **Cost Optimization**: Always use CPU mode for editing workflows and only switch to GPU mode when you need to execute them. This prevents unnecessary credit burn.
 </Tip>
 
-*[Screenshot needed: Actions bar showing CPU/GPU mode toggle]*
+<Frame>
+  <img
+    src="/images/import/actions-bar-cpu-gpu-toggle.png"
+    alt="ComfyUI actions bar highlighting CPU/GPU mode toggle switch"
+  />
+</Frame>
 
-## Managing Models and Dependencies
+{/* Image Description for Team: Screenshot of actions bar showing CPU/GPU toggle switch and other action buttons like Save, Queue, Stop, Refresh */}
 
-Model management in FlowScale AI is a manual process that ensures you have full control over your dependencies.
+## Model Management: From Chaos to Control
 
-### Model Setup Workflow
+**Remember managing models locally?** The endless downloads, version conflicts, storage concerns, and "why isn't this model loading?" debugging sessions. FlowScale AI transforms this into **a centralized, team-accessible model library** where everyone shares the same high-quality assets.
+
+<Note>
+**Why manual model management is actually better:** Unlike automatic systems that might pull the wrong versions or create conflicts, FlowScale AI gives you complete control over which exact models your workflows use. This ensures consistency across your team and prevents the "works on my machine" problems that plague local ComfyUI setups.
+</Note>
+
+### Model Setup Workflow: Turning Dependencies into Assets
+
+<Tip>
+**The mindset shift:** Instead of "I need to download another model," think "I'm adding a shared asset that my entire team can use." Every model you set up becomes available to all team members, creating a collaborative library of capabilities.
+</Tip>
 
 <Steps>
   <Step title="Start ComfyUI Workspace">
@@ -138,7 +254,14 @@ Model management in FlowScale AI is a manual process that ensures you have full 
   <Step title="Test Workflow">
     Run your workflow once to identify missing models (you'll see error messages)
     
-    *[Screenshot needed: Error message showing missing model]*
+<Frame>
+  <img
+    src="/images/import/missing-model-error.png"
+    alt="Error message dialog showing missing model notification with resolution options"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of error message showing missing model notification with resolution options and action buttons */}
   </Step>
   
   <Step title="Check Workflow Node Dropdowns for Public Models">
@@ -148,37 +271,79 @@ Model management in FlowScale AI is a manual process that ensures you have full 
     Models may appear under similar filenames—check carefully for variations or similar names.
     </Tip>
     
-    *[Screenshot needed: Workflow node showing model dropdown with available models]*
+<Frame>
+  <img
+    src="/images/import/workflow-node-model-dropdown.png"
+    alt="ComfyUI workflow node with model selection dropdown showing available models"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of ComfyUI node showing expanded model dropdown with available models and selected model highlighted */}
   </Step>
   
   <Step title="Access Private Models">
     If models aren't found publicly, navigate to **Private Models** section
     
-    *[Screenshot needed: Private models interface]*
+<Frame>
+  <img
+    src="/images/import/private-models-interface.png"
+    alt="Private models management interface showing uploaded model organization"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of private models section showing folder structure, model list, and upload/manage options */}
   </Step>
   
   <Step title="Create Model Folders">
     Create appropriate folder structure as required by ComfyUI or custom nodes
     
-    *[Screenshot needed: Creating model folder interface]*
+<Frame>
+  <img
+    src="/images/import/create-model-folder-dialog.png"
+    alt="Create model folder dialog with folder type selection options"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of folder creation dialog showing dropdown with folder type options like checkpoints, loras, embeddings */}
   </Step>
   
   <Step title="Upload Models">
     Click **"Upload Model"** and either search for models or provide download links
     
-    *[Screenshot needed: Model upload interface with search and URL options]*
+<Frame>
+  <img
+    src="/images/import/model-upload-interface.png"
+    alt="Model upload interface showing search, URL, and file upload options"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of model upload interface showing tabbed options for search, URL download, and file upload */}
   </Step>
   
   <Step title="Refresh ComfyUI">
     After model download completes, refresh ComfyUI from the actions bar
     
-    *[Screenshot needed: Refresh button in actions bar]*
+<Frame>
+  <img
+    src="/images/import/comfyui-refresh-button.png"
+    alt="ComfyUI actions bar with refresh button highlighted for reloading models"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot showing ComfyUI actions bar with refresh button highlighted for reloading models and nodes */}
   </Step>
   
   <Step title="Verify Model Availability">
     Check the workflow node dropdowns again to confirm the newly added models are now available for selection
     
-    *[Screenshot needed: Workflow node dropdown showing newly added model]*
+<Frame>
+  <img
+    src="/images/import/node-dropdown-new-model.png"
+    alt="Workflow node dropdown menu displaying newly added model in the selection list"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot showing workflow node dropdown with newly uploaded model visible and selectable in the list */}
   </Step>
 </Steps>
 
@@ -209,11 +374,22 @@ When creating folders for models, follow ComfyUI conventions:
 For custom node models, always refer to the node's GitHub repository README for correct folder naming conventions.
 </Warning>
 
-*[Screenshot needed: Private models folder structure example]*
+<Frame>
+  <img
+    src="/images/import/private-models-folder-structure.png"
+    alt="Private models section showing organized folder structure with different model types"
+  />
+</Frame>
 
-## Creating New Workflows
+{/* Image Description for Team: Screenshot of models organization showing folder tree structure with standard ComfyUI folders and organized models */}
 
-Build workflows from scratch using FlowScale AI's cloud-based ComfyUI workspace.
+## Creating New Workflows: Starting with Purpose
+
+**Ready to build something new?** Creating workflows in FlowScale AI means starting with collaboration and deployment in mind from day one. Unlike local ComfyUI where you build in isolation, here you're building **team assets that can become production services**.
+
+<Warning>
+**Think beyond the workflow:** As you create, consider who will use this, how they'll access it, and what the end experience should be. FlowScale AI makes it easy to go from creative experiment to production service, but having that bigger picture in mind will guide your design decisions.
+</Warning>
 
 ### Quick Start Method
 
@@ -221,25 +397,53 @@ Build workflows from scratch using FlowScale AI's cloud-based ComfyUI workspace.
   <Step title="Create New Workflow">
     Click **"Create New Workflow"** button in your project
     
-    *[Screenshot needed: Create New Workflow button location]*
+<Frame>
+  <img
+    src="/images/import/create-new-workflow-button.png"
+    alt="Project interface showing Create New Workflow button location"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot showing project dashboard with Create New Workflow button prominently displayed as alternative to importing */}
   </Step>
   
   <Step title="Start with Basic Template">
     A basic text-to-image workflow loads automatically in the ComfyUI workspace
     
-    *[Screenshot needed: Basic workflow template in workspace]*
+<Frame>
+  <img
+    src="/images/import/basic-workflow-template.png"
+    alt="ComfyUI workspace showing basic workflow template with essential nodes"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot showing ComfyUI workspace with simple starter workflow template ready for customization */}
   </Step>
   
   <Step title="Customize Workflow">
     Modify the workflow by adding, removing, or connecting nodes as needed
     
-    *[Screenshot needed: Workflow editing in progress]*
+<Frame>
+  <img
+    src="/images/import/workflow-editing-progress.png"
+    alt="ComfyUI workspace showing workflow being edited with nodes being added and connected"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot showing ComfyUI workspace with workflow being modified and creative process of building workflows */}
   </Step>
   
   <Step title="Save Workflow">
     Click **"Save"** in the actions bar and provide a descriptive commit message
     
-    *[Screenshot needed: Save workflow modal with commit message field]*
+<Frame>
+  <img
+    src="/images/import/save-workflow-modal.png"
+    alt="Save workflow modal dialog with commit message field and version control options"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of save dialog showing modal with commit message field, version control information, and save options */}
   </Step>
 </Steps>
 
@@ -249,39 +453,54 @@ Build workflows from scratch using FlowScale AI's cloud-based ComfyUI workspace.
 
 <ImportWorkflowsTroubleshooting />
 
-<Info>
+<Note>
 For detailed troubleshooting guidance, refer to our [FAQ and Troubleshooting guide](/getting-started/troubleshooting).
-</Info>
+</Note>
 
-## Next Steps
+## Your Creative Journey Continues 🎆
+
+**Congratulations!** You've successfully transformed your ComfyUI workflow from a local experiment into a collaborative, cloud-powered asset. Your workflow is now accessible to your team, backed by enterprise infrastructure, and ready for the next phase of its evolution.
+
+### What You've Accomplished
+
+✅ **Preserved your creative work** while adding collaborative capabilities  
+✅ **Eliminated local setup friction** for yourself and teammates  
+✅ **Gained access to enterprise-grade GPU infrastructure**  
+✅ **Created a foundation** for turning your workflow into a production service  
+
+### Choose Your Next Adventure
 
 <CardGroup cols={2}>
   <Card
-    title="ComfyUI Workspace Guide"
-    icon="pen-to-square"
+    title="Perfect Your Workflow"
+    icon="magic"
     href="/workspace/overview"
   >
-    Master the cloud workspace interface
+    **Ready to refine?** Master the cloud workspace to iterate, collaborate, and perfect your workflow with your team.
   </Card>
   <Card
-    title="Deploy Workflows"
+    title="Deploy to Production"
     icon="rocket"
     href="/getting-started/deploy-workflows"
   >
-    Convert workflows to production APIs
+    **Ready to ship?** Transform your workflow into production APIs and interactive interfaces that users can actually access.
   </Card>
   <Card
-    title="Manage Projects"
-    icon="folder"
+    title="Scale Your Impact"
+    icon="users"
     href="/getting-started/manage"
   >
-    Organize and collaborate on workflows
+    **Ready to collaborate?** Learn how to organize projects, manage team access, and build a sustainable creative workflow operation.
   </Card>
   <Card
-    title="Troubleshooting"
-    icon="life-ring"
+    title="Get Unstuck"
+    icon="lifebuoy"
     href="/getting-started/troubleshooting"
   >
-    Resolve common issues
+    **Hit a snag?** Find solutions to common issues and get back to creating amazing things.
   </Card>
 </CardGroup>
+
+---
+
+*Your workflow is now part of something bigger. Let's see where you take it next.* 🚀

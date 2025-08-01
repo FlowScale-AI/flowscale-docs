@@ -4,15 +4,21 @@ description: "Test and share your deployed workflows with interactive, user-frie
 icon: "play"
 ---
 
-Playground UIs provide an intuitive, web-based interface for testing and sharing your deployed workflows. Each configured and deployed workflow automatically generates its own playground, eliminating the need for users to navigate ComfyUI's complexity while still accessing the full power of your AI workflows.
+**This is the moment your technical AI workflow becomes accessible to everyone.** Playground UIs transform your sophisticated ComfyUI creations into polished, user-friendly interfaces that anyone can use—no technical knowledge required.
 
-<Info>
-Playground UIs are automatically created alongside the API when you deploy a workflow. One playground is generated for each configured workflow in your project.
-</Info>
+<Tip>
+**The "aha" moment:** Watch non-technical team members, clients, or stakeholders use your complex AI workflows as easily as filling out a web form. What took you hours to perfect in ComfyUI now takes them seconds to use effectively.
+</Tip>
 
-## Accessing Playgrounds
+<Note>
+**Automatic Magic:** Every workflow you deploy instantly generates its own playground. No additional configuration, no UI development, no user training required. Your ComfyUI logic becomes a professional web application automatically.
+</Note>
 
-### Opening a Playground
+## Sharing Your AI Innovation
+
+**Ready to see your workflow in action through fresh eyes?** Opening a playground transforms the experience from "let me show you how this works" to "try it yourself and see what you can create."
+
+### Opening Your User-Friendly Interface
 
 <Steps>
 <Step title="Navigate to API Server">
@@ -29,20 +35,33 @@ Click the **"Open Playground"** button to launch the playground interface in a n
 </Step>
 </Steps>
 
-**[IMAGE PLACEHOLDER: API Server page showing deployed workflows list with expanded workflow and "Open Playground" button highlighted]**
+<Frame>
+  <img
+    src="/images/playground/api-server-open-playground.png"
+    alt="API Server page with expanded workflow showing Open Playground button highlighted"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of API Server page showing deployed workflows list with one expanded to show Open Playground button highlighted */}
 
 <Frame>
-<img
-src="/images/deploy/api-server-playground.png"
-alt="API Server page with Open Playground button"
-/>
+  <img
+    src="/images/playground/api-server-playground-access.png"
+    alt="API Server page showing playground access point for deployed workflows"
+  />
 </Frame>
+
+{/* Image Description for Team: Screenshot of main API Server interface showing workflow list with status indicators and playground access pathway */}
 
 ## Playground Interface
 
-### Layout Overview
+### Interface Design: Complexity Hidden, Power Preserved
 
-The playground features a clean, two-column design that makes testing workflows intuitive:
+**Here's where thoughtful design shines:** Your playground presents a clean, intuitive interface that hides all the ComfyUI complexity while preserving every bit of your workflow's creative power.
+
+<Note>
+**Design philosophy:** Users see only what they need to control, in language they understand, with guardrails that prevent mistakes. Your sophisticated AI logic becomes as approachable as any consumer web application.
+</Note>
 
 <Tabs>
 <Tab title="Left Column - Inputs">
@@ -61,14 +80,23 @@ The playground features a clean, two-column design that makes testing workflows 
 </Tab>
 </Tabs>
 
-**[IMAGE PLACEHOLDER: Full playground interface showing two-column layout with input controls on left and output display on right]**
+<Frame>
+  <img
+    src="/images/playground/playground-two-column-layout.png"
+    alt="Complete playground interface showing two-column layout with input controls and output display"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of full playground interface showing two-column layout with input controls on left and output display on right */}
 
 <Frame>
-<img
-src="/images/deploy/playground-interface.png"
-alt="Playground UI showing input and output columns"
-/>
+  <img
+    src="/images/playground/playground-interface-detailed.png"
+    alt="Detailed view of playground interface showing user-friendly workflow interaction"
+  />
 </Frame>
+
+{/* Image Description for Team: Screenshot of detailed playground interface showing professional web app with intuitive controls and real-time feedback */}
 
 ### Input Field Types
 
@@ -81,9 +109,11 @@ The input fields in your playground directly correspond to the FlowScale I/O nod
 | **[FS] InputNumber** | Number input | Numeric field with validation |
 | **[FS] InputSlider** | Range slider | Interactive slider with min/max values |
 
-<Warning>
-The available input fields are determined by your workflow's I/O configuration. If you need different inputs, return to the [workflow configuration](/deploy-api/configuration) to modify your setup.
-</Warning>
+💡 **Lightbulb Moment:** The input fields you see are exactly the parameters you chose to expose when configuring your workflow. This is where your thoughtful I/O design pays off—users see an intuitive interface because you made intentional choices about what to show and what to keep internal.
+
+<Tip>
+**Interface refinement:** If the playground doesn't feel quite right, you can always refine your [workflow I/O configuration](/deploy-api/configuration) to better match your users' needs. Great interfaces evolve through real user feedback.
+</Tip>
 
 ## GPU Status Monitoring
 
@@ -103,7 +133,14 @@ The top-right corner of every playground displays real-time GPU status informati
 </Card>
 </CardGroup>
 
-**[IMAGE PLACEHOLDER: Close-up of playground header showing GPU status indicator in different states]**
+<Frame>
+  <img
+    src="/images/playground/playground-gpu-status-header.png"
+    alt="Playground header showing GPU status indicator with different operational states"
+  />
+</Frame>
+
+{/* Image Description for Team: Screenshot of playground header showing GPU status indicator in different states with status text and workflow controls */}
 
 ### Performance Implications
 
@@ -151,7 +188,14 @@ Generated outputs appear in the right column as they become available
 </Step>
 </Steps>
 
-**[IMAGE PLACEHOLDER: Step-by-step sequence showing user filling inputs, clicking generate, and receiving outputs]**
+<Frame>
+  <img
+    src="/images/playground/playground-usage-sequence.png"
+    alt="Step-by-step sequence showing complete playground workflow from input to output"
+  />
+</Frame>
+
+{/* Image Description for Team: Multi-panel sequence showing complete playground workflow from input configuration to results display */}
 
 ### Generation Process
 
@@ -169,9 +213,9 @@ During generation, you'll see:
 - **Partial results** appearing as they're generated (for multi-step workflows)
 - **Completion notifications** when generation finishes
 
-<Info>
+<Note>
 Generation time varies based on workflow complexity, model size, and current GPU state. Simple text workflows may complete in seconds, while high-resolution image generation can take several minutes.
-</Info>
+</Note>
 
 ## Sharing and Collaboration
 

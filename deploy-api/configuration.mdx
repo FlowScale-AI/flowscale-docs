@@ -6,9 +6,9 @@ icon: "sliders"
 
 To deploy a workflow as an API or playground UI, you must configure the workflow's input and output parameters. By default, the FlowScale platform doesn't automatically determine which nodes should serve as input and output endpoints - this must be explicitly configured.
 
-<Info>
+<Note>
 Workflows that haven't been configured for deployment will show a **red cross mark** in your project's workflow sidebar. Properly configured workflows display a **green checkmark**.
-</Info>
+</Note>
 
 ## Configuration Methods
 
@@ -80,11 +80,15 @@ Connect these output nodes to capture the final results of your workflow
 | **[FS] SaveAudio** | Audio output | Generated audio files |
 
 <Frame>
-<img
-src="/images/deploy/io-config-option.png"
-alt="Adding FlowScale I/O nodes to workflow"
-/>
+  <img
+    src="/images/configuration/flowscale-io-nodes-integration.png"
+    alt="Adding FlowScale I/O nodes to workflow for deployment configuration"
+  />
 </Frame>
+
+<Note>
+**Image Description for Team:** Screenshot showing FlowScale I/O nodes integration: ComfyUI workspace with FlowScale I/O nodes being added, [FS] prefix clearly visible on FlowScale-specific nodes, examples of both input nodes (InputText, InputImage) and output nodes (SaveImage, SaveText), connection process between I/O nodes and existing workflow nodes, professional interface showing the configuration process.
+</Note>
 
 ### Verify Configuration
 
@@ -207,22 +211,30 @@ Once your workflow is configured (showing a green checkmark), you can deploy it.
 Click the **"Deploy"** button in the top-right corner of the application
 
 <Frame>
-<img
-src="/images/deploy/deploy-button.png"
-alt="Deploy workflow button"
-/>
+  <img
+    src="/images/configuration/deploy-button-location.png"
+    alt="Deploy workflow button location in FlowScale interface"
+  />
 </Frame>
+
+<Note>
+**Image Description for Team:** Screenshot showing deploy button location: FlowScale interface with deploy button prominently displayed in top-right corner or main action area, deploy button clearly highlighted (blue/primary color), context showing workflow is ready for deployment (green checkmark visible), professional interface design with clear call-to-action.
+</Note>
 </Step>
 
 <Step title="Select Pod">
 A dialog box will appear asking you to select the Pod for deployment
 
 <Frame>
-<img
-src="/images/deploy/deploy-modal.png"
-alt="Pod selection modal"
-/>
+  <img
+    src="/images/configuration/pod-selection-modal.png"
+    alt="Pod selection modal for deployment configuration"
+  />
 </Frame>
+
+<Note>
+**Image Description for Team:** Screenshot of pod selection modal showing: Modal dialog for selecting deployment pod configuration, list of available GPU types (T4, L4, A100, H100), resource specifications and pricing for each option, memory and compute requirements display, availability status indicators, "Deploy" and "Cancel" buttons, professional deployment configuration interface.
+</Note>
 </Step>
 
 <Step title="Choose Configuration">
@@ -237,9 +249,9 @@ Click **Deploy** to start the deployment process
 </Step>
 </Steps>
 
-<Info>
+<Note>
 For detailed information about pod types, specifications, and choosing the right configuration for your workflow, refer to our [Pods documentation](/getting-started/glossary/pods).
-</Info>
+</Note>
 
 ## Next Steps
 

@@ -21,9 +21,11 @@ This section shows how FlowScale AI turns a saved workflow into a **deployable s
 | Product / tool integration | **API or SDK** | Stable contract, versioned schema, auth. |
 | Automation, batch, agents | **SDK + Scaling controls** | Queues, concurrency, budget caps. |
 
-<Callout type="info">
-Ready to move from "prototype in ComfyUI" to "operational API your teams can trust"? If you haven't yet, start with [Why FlowScale AI?](/getting-started/why-flowscale-ai) to understand the strategic context this section delivers on.
-</Callout>
+<Note>
+**Coming from the Getting Started guides?** Perfect! You've already experienced the journey from ComfyUI workflow to deployed service. This section shows you how to master the production-grade features that make your deployments enterprise-ready.
+
+**New to FlowScale AI?** Start with [Why FlowScale AI?](/getting-started/why-flowscale-ai) to understand the strategic context, then work through [Import/Create Workflows](/getting-started/import-create-workflows) and [Deploy Workflows](/getting-started/deploy-workflows) to get hands-on experience before diving into these advanced capabilities.
+</Note>
 
 ---
 
@@ -64,10 +66,12 @@ After completing this section, you'll be able to:
 
 <Frame>
   <img
-    src="/images/deploy/deployment-tab.png"
-    alt="Workflow deployment flow: artifact → configuration → surfaces → governance"
+    src="/images/overview/deployment-mental-model.png"
+    alt="FlowScale deployment flow showing progression from workflow to production service"
   />
 </Frame>
+
+{/* Image Description for Team: Conceptual diagram showing deployment progression from workflow artifact through configuration, service surfaces, to scale & governance */}
 
 Every deployed workflow in FlowScale AI follows this progression:
 
@@ -96,6 +100,12 @@ Every deployed workflow in FlowScale AI follows this progression:
 </Steps>
 
 ### Try It Now: SDK Examples
+
+<Tip>
+**Already deployed a workflow?** These examples will work with your deployed workflow—just replace the `workflowId` with your actual workflow ID from the API Server page.
+
+**Haven't deployed yet?** Complete the [Deploy Workflows guide](/getting-started/deploy-workflows) first to get your workflow running as an API, then return here to see how to integrate it into applications.
+</Tip>
 
 <CodeGroup>
 
@@ -251,49 +261,66 @@ curl -X POST https://api.flowscale.ai/v1/run \
 
 ---
 
-## Next Steps
+## Master Your Production AI Infrastructure
 
+**You've successfully deployed ComfyUI workflows as APIs—now let's make them enterprise-ready.** Choose your path based on what you need to accomplish:
+
+### For Immediate Integration
 <CardGroup cols={2}>
-  <Card
-    title="Deployment Configuration"
-    icon="settings"
-    href="/deploy-api/configuration"
-  >
-    Control runtime, auth, versioning, and governance settings
-  </Card>
-  <Card
-    title="Playground UIs"
-    icon="play"
-    href="/deploy-api/playgrounds"
-  >
-    Share safely with stakeholders and non-technical teams
-  </Card>
   <Card
     title="JavaScript/TypeScript SDK"
     icon="js"
     href="/deploy-api/sdk/sdk-js"
   >
-    Integrate workflows into web apps and Node.js services
+    **Ready to integrate?** Connect your deployed workflows to web applications, Node.js services, and React components.
   </Card>
   <Card
     title="Python SDK"
     icon="python"
     href="/deploy-api/sdk/sdk-python"
   >
-    Build with Python, Jupyter notebooks, and AI frameworks
+    **Building with Python?** Integrate workflows into data pipelines, Jupyter notebooks, and ML applications.
+  </Card>
+</CardGroup>
+
+### For Production Governance
+<CardGroup cols={2}>
+  <Card
+    title="Advanced Configuration"
+    icon="settings"
+    href="/deploy-api/configuration"
+  >
+    **Need enterprise features?** Set up authentication, versioning, governance controls, and security policies.
   </Card>
   <Card
     title="Scaling & Performance"
-    icon="chart-line"
+    icon="gauge-high"
     href="/deploy-api/scaling"
   >
-    Auto-scale GPUs and optimize costs under load
+    **Planning for growth?** Configure auto-scaling, optimize costs, and ensure reliable performance under load.
+  </Card>
+</CardGroup>
+
+### For Team Collaboration
+<CardGroup cols={2}>
+  <Card
+    title="Playground Interfaces"
+    icon="users"
+    href="/deploy-api/playgrounds"
+  >
+    **Sharing with non-technical teams?** Create safe, intuitive interfaces that let anyone use your AI workflows.
   </Card>
   <Card
-    title="API Reference"
+    title="API Documentation"
     icon="book"
     href="/api-reference/introduction"
   >
-    Complete endpoint documentation and payload schemas
+    **Supporting developers?** Explore complete endpoint documentation with interactive examples and payload schemas.
   </Card>
 </CardGroup>
+
+---
+
+<Note>
+**Lost or need to revisit basics?** Return to [Getting Started](/getting-started/introduction) to review the foundational concepts, or check [Troubleshooting](/getting-started/troubleshooting) if you're encountering specific issues.
+</Note>
