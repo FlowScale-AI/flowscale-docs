@@ -269,14 +269,14 @@ console.log('Available Workflows:', workflows);
   "status": "success",
   "data": [
     {
-      "id": "bncu0a1kipv",
+      "id": "550e8400-e29b-41d4-a716-446655440000",
       "name": "Text to Image",
       "description": "Generate an image from text input",
       "inputs": "{ \"text_51536\": \"string\" }",
       "outputs": "{ \"image_output\": \"image\" }"
     },
     {
-      "id": "a9bc45rt2kpm", 
+      "id": "660f9411-f30c-52e5-b827-557766551111", 
       "name": "Image to Image",
       "description": "Transform an existing image",
       "inputs": "{ \"image_input\": \"image\", \"prompt\": \"string\" }",
@@ -294,7 +294,7 @@ console.log('Available Workflows:', workflows);
 Trigger a workflow execution and get immediate response:
 
 ```typescript
-const workflowId = "bncu0a1kipv";
+const workflowId = "550e8400-e29b-41d4-a716-446655440000";
 const groupId = "test_group"; // Optional for organizing runs
 
 const inputs = {
@@ -312,12 +312,8 @@ console.log('Workflow Result:', result);
 {
   "status": "success",
   "data": {
-    "number": 0,
-    "node_errors": {},
-    "output_names": [
-      "filename_prefix_58358_5WWF7GQUYF"
-    ],
-    "run_id": "808f34d0-ef97-4b78-a00f-1268077ea6db"
+    "run_id": "808f34d0-ef97-4b78-a00f-1268077ea6db",
+    "workflow_id": "550e8400-e29b-41d4-a716-446655440000"
   }
 }
 ```
@@ -328,14 +324,14 @@ console.log('Workflow Result:', result);
 Execute a workflow and automatically wait for the result:
 
 ```typescript
-const workflowId = "bncu0a1kipv";
+const workflowId = "550e8400-e29b-41d4-a716-446655440000";
 const inputs = {
   "text_51536": "A serene lake at dawn",
   "image_1234": imageFile
 };
 
 try {
-  // Auto-polls every 1 second, times out after 5 minutes by default
+  // Auto-polls every 2 seconds, times out after 10 minutes by default
   const result = await flowscale.executeWorkflowAsync(
     workflowId,
     inputs,
@@ -353,14 +349,33 @@ try {
 }
 ```
 
+<Note>
+**Migration Notice - executeWorkflowAsync Response Format**
+
+Starting from **v1.0.18**, `executeWorkflowAsync` automatically detects single vs multiple outputs and returns the appropriate format for backward compatibility:
+
+- **Single Output**: Returns legacy format with deprecation warning
+- **Multiple Outputs**: Returns new array format
+
+For new applications, use the new array format which supports multiple outputs.
+</Note>
+
 <Accordion title="Response Example">
 ```json
 {
   "status": "success",
-  "data": {
-    "download_url": "https://runs.s3.amazonaws.com/generations/...",
-    "generation_status": "success"
-  }
+  "data": [
+    {
+      "filename": "output_image_1.png",
+      "download_url": "https://runs.s3.amazonaws.com/generations/...", 
+      "generation_status": "success"
+    },
+    {
+      "filename": "output_image_2.png",
+      "download_url": "https://runs.s3.amazonaws.com/generations/...",
+      "generation_status": "success"
+    }
+  ]
 }
 ```
 </Accordion>
@@ -743,6 +758,86 @@ export function ImageGenerator() {
     </div>
   );
 }
+```
+
+## WebSocket Support
+
+The SDK provides WebSocket functionality for real-time communication:
+
+### Connecting to WebSocket
+
+```typescript
+// Connect to WebSocket and set up event handlers
+const disconnect = flowscale.connectWebSocket({
+  onOpen: () => {
+    console.log('WebSocket connected!');
+  },
+  onMessage: (message) => {
+    console.log('Received message:', message);
+    if (message.type === 'run_status_update') {
+      console.log('Run status updated:', message.data);
+    }
+  },
+  onClose: (event) => {
+    console.log('WebSocket closed:', event.code, event.reason);
+  },
+  onError: (error) => {
+    console.error('WebSocket error:', error);
+  }
+});
+
+// Later, to disconnect:
+disconnect();
+```
+
+### Sending Messages
+
+```typescript
+const success = flowscale.sendWebSocketMessage({
+  type: 'client_event',
+  data: {
+    action: 'subscribe',
+    runId: '808f34d0-ef97-4b78-a00f-1268077ea6db'
+  }
+});
+
+if (success) {
+  console.log('Message sent successfully');
+} else {
+  console.error('Failed to send message');
+}
+```
+
+## Security Features
+
+### Proxy Mode Configuration
+
+For secure frontend usage, use proxy mode to keep your API key safe:
+
+```typescript
+// ✅ SECURE: No API key exposed to frontend users
+const flowscale = new FlowscaleAPI({
+  baseUrl: 'https://your-backend-proxy.com', // Your secure backend proxy
+  proxyMode: true, // Enable proxy mode
+  customHeaders: {
+    'Authorization': 'Bearer jwt-token-here' // Use JWT tokens instead
+  }
+});
+```
+
+### Dynamic Header Management
+
+```typescript
+// Update JWT token without recreating SDK instance
+flowscale.updateCustomHeaders({
+  'Authorization': 'Bearer new-jwt-token'
+});
+
+// Get current headers
+const headers = flowscale.getCustomHeaders();
+
+// Clear all custom headers
+flowscale.clearCustomHeaders();
 ```
 
 ## Best Practices

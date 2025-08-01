@@ -1,23 +1,33 @@
 ---
 title: "Python SDK"
-description: "A comprehensive Python SDK designed to simplify interaction with the FlowScale ComfyUI API. Abstract away API complexities and effortlessly invoke workflows."
+description: "Transform your deployed ComfyUI workflows into powerful Python applications with production-ready integration and comprehensive features."
 icon: "python"
 ---
 
-<Info>
-**🚀 What's New in v1.1.2**
+**Your ComfyUI workflows are deployed as APIs—now let's integrate them into Python applications.** This SDK transforms your creative AI work into application features that users can access through web services, data pipelines, automation systems, and interactive tools.
 
-- **📚 Comprehensive Documentation**: Completely updated with advanced usage examples
-- **✨ Enhanced `get_runs()`**: Pagination, sorting, and filtering capabilities
-- **🖼️ Dynamic Image Parameters**: Support for dynamic parameter names (e.g., `image_35728`)
-- **📤 Multiple Image Uploads**: Handle multiple images in a single workflow execution
-- **🔧 Improved File Handling**: Better support for various file types and upload methods
-- **📊 Updated Response Types**: New response structure with comprehensive metadata
+<Note>
+**What you're building:** Instead of asking users to understand ComfyUI or API endpoints, you're creating seamless experiences where AI capabilities feel like native Python functions. Your workflows become the invisible intelligence powering data processing, web applications, and automated systems.
+</Note>
+
+<Info>
+**🚀 What's New in v1.1.4**
+
+- **🔄 Updated Response Format**: Both `execute_workflow` and `execute_workflow_async` now return `workflow_id` alongside `run_id`
+- **✨ Enhanced Polling**: Improved `execute_workflow_async` with better run status detection and failure handling
+- **📚 Comprehensive Documentation**: Advanced usage examples for FastAPI, Django, Flask, and Jupyter integration
+- **🖼️ Dynamic Parameters**: Full support for dynamic parameter names matching your ComfyUI workflow structure
+- **📤 Multiple File Support**: Handle multiple images, videos, and files in single workflow execution
+- **📊 Pagination & Filtering**: Enhanced `get_runs()` with sorting, filtering, and pagination capabilities
 </Info>
 
-## Installation
+## Installation: Adding AI Power to Your Python Projects
 
-Install the FlowScale SDK using pip:
+**Ready to bring your AI workflows into your Python applications?** Install the FlowScale SDK to start integrating your deployed ComfyUI workflows into any Python project.
+
+<Tip>
+**What this enables:** Your users won't interact with ComfyUI or see API endpoints—they'll experience AI capabilities as seamless Python functions. Image generation, style transfer, content creation, and other AI workflows become as simple as calling a method.
+</Tip>
 
 <CodeGroup>
 
@@ -39,11 +49,15 @@ conda install -c conda-forge flowscale
 
 </CodeGroup>
 
-## Quick Start
+## Quick Start: From Deployment to Integration
 
-### Importing the SDK
+<Note>
+**Prerequisites:** You should have already deployed your ComfyUI workflow as an API through the FlowScale AI platform. If you haven't, complete the [Deploy Workflows guide](/getting-started/deploy-workflows) first.
+</Note>
 
-To get started, import the FlowScale SDK into your project:
+### Connecting Your Python Application to Your AI Infrastructure
+
+**This is where your deployed AI workflows become Python application features.** Import the SDK and connect to the production APIs you've already created:
 
 <CodeGroup>
 
@@ -51,7 +65,7 @@ To get started, import the FlowScale SDK into your project:
 from flowscale import FlowscaleAPI
 import os
 
-# Initialize the SDK
+# Store API keys in environment variables
 api_key = os.environ.get("FLOWSCALE_API_KEY")
 api_url = os.environ.get("FLOWSCALE_API_URL")
 
@@ -88,18 +102,43 @@ FLOWSCALE_API_KEY=your-api-key
 FLOWSCALE_API_URL=https://your-api-url.pod.flowscale.ai
 ```
 
+### Integration Patterns for Production Applications
+
+**Choose the integration pattern that matches your application's needs:**
+
 <Tabs>
-  <Tab title="Development">
-    - Store API keys in environment variables
-    - Use `.env` files with `python-dotenv`
-    - Enable debug logging for troubleshooting
-    - Test with smaller timeouts for faster feedback
+  <Tab title="Web Services (FastAPI/Django/Flask)">
+    **Best for:** API endpoints, web applications, microservices
+    
+    **Benefits:**
+    - Production-ready web framework integration
+    - Built-in authentication and validation
+    - Scalable request handling
+    - Easy deployment and monitoring
+    
+    **Use cases:** REST APIs, web applications, background job processing
   </Tab>
-  <Tab title="Production">
-    - Use secure environment variable management
-    - Configure appropriate timeouts for your workflows
-    - Set up proper error handling and monitoring
-    - Consider connection pooling for high-volume usage
+  <Tab title="Data Processing & ML Pipelines">
+    **Best for:** Jupyter notebooks, data science workflows, batch processing
+    
+    **Benefits:**
+    - Interactive development and experimentation
+    - Integration with data science libraries
+    - Batch processing capabilities
+    - Research and development workflows
+    
+    **Use cases:** Data analysis, model training pipelines, research projects
+  </Tab>
+  <Tab title="Automation & Scripting">
+    **Best for:** Command-line tools, automation scripts, scheduled tasks
+    
+    **Benefits:**
+    - Simple script execution
+    - Easy integration with existing systems
+    - Automation and scheduling
+    - File processing workflows
+    
+    **Use cases:** Content processing, automated workflows, system integration
   </Tab>
 </Tabs>
 
@@ -256,12 +295,8 @@ print(f"Workflow Result: {result}")
 {
   "status": "success",
   "data": {
-    "number": 0,
-    "node_errors": {},
-    "output_names": [
-      "filename_prefix_58358_5WWF7GQUYF"
-    ],
-    "run_id": "808f34d0-ef97-4b78-a00f-1268077ea6db"
+    "run_id": "808f34d0-ef97-4b78-a00f-1268077ea6db",
+    "workflow_id": "550e8400-e29b-41d4-a716-446655440000"
   }
 }
 ```
@@ -276,11 +311,11 @@ workflow_id = "bncu0a1kipv"
 
 # Simple usage
 inputs = {
-    "text_51536": "Prompt test",
+    "text_51536": "A serene lake at dawn",
     "image_1234": open("path/to/image.png", "rb")
 }
 
-# This will wait for the output, up to 5 minutes by default
+# Auto-polls every 2 seconds, times out after 10 minutes by default
 result = flowscale.execute_workflow_async(workflow_id, inputs)
 print(f"Workflow Result: {result}")
 
@@ -288,7 +323,7 @@ print(f"Workflow Result: {result}")
 result = flowscale.execute_workflow_async(
     workflow_id, 
     inputs,
-    group_id="batch_001",
+    group_id="my_group",
     timeout=600,           # 10 minutes
     polling_interval=5     # Check every 5 seconds
 )
@@ -301,17 +336,38 @@ inputs = {
     "style_image_789": "path/to/style.png"
 }
 
-result = flowscale.execute_workflow_async(workflow_id, inputs, group_id="batch_001")
+try:
+    result = flowscale.execute_workflow_async(
+        workflow_id, 
+        inputs, 
+        group_id="batch_001",
+        timeout=600,           # 10 minutes
+        polling_interval=2     # Check every 2 seconds
+    )
+    print("Success:", result)
+except Exception as e:
+    if "timed out" in str(e):
+        print("Workflow took too long to complete")
+    else:
+        print("Workflow error:", e)
 ```
 
 <Accordion title="Response Example">
 ```json
 {
-  "status": "success",
-  "data": {
-    "download_url": "https://runs.s3.amazonaws.com/generations/...",
-    "generation_status": "success"
-  }
+  "run_id": "808f34d0-ef97-4b78-a00f-1268077ea6db",
+  "workflow_id": "550e8400-e29b-41d4-a716-446655440000",
+  "outputs": {
+    "filename_prefix_58358_5WWF7GQUYF": {
+      "status": "success",
+      "data": {
+        "download_url": "https://runs.s3.amazonaws.com/generations/...",
+        "generation_status": "success"
+      }
+    }
+  },
+  "total_outputs": 1,
+  "status": "completed"
 }
 ```
 </Accordion>
