@@ -1,550 +1,353 @@
 ---
-title: "Playground UIs"
-description: "Share safely with stakeholders and non-technical teams through auto-generated interfaces."
+title: Playground UI
+description: "Test and share your deployed workflows with interactive, user-friendly playground interfaces"
 icon: "play"
 ---
 
-# One-Click Shareable UI for Non-Technical Collaborators
+Playground UIs provide an intuitive, web-based interface for testing and sharing your deployed workflows. Each configured and deployed workflow automatically generates its own playground, eliminating the need for users to navigate ComfyUI's complexity while still accessing the full power of your AI workflows.
 
-You've configured a deployment with proper schema validation and access controls. Now you need to **let stakeholders try it** without requiring technical knowledge, API keys, or code.
+<Info>
+Playground UIs are automatically created alongside the API when you deploy a workflow. One playground is generated for each configured workflow in your project.
+</Info>
 
-Playground UIs solve this by auto-generating **parameter-bounded interfaces** from your deployment configuration, with **guardrails**, **presets**, and **shareable links** that make AI workflows accessible to creative reviewers, product managers, and business stakeholders.
+## Accessing Playgrounds
 
-<Callout type="info">
-**For AI & Creative Leads:** This page shows how to create safe sandbox environments for stakeholder collaboration.
-**For Developers:** See [Custom Playground Integration](#custom-playground-integration) for embedding options.
-**For Leadership:** Review [Usage Governance](#usage-governance) for compliance and audit capabilities.
-</Callout>
+### Opening a Playground
 
----
+<Steps>
+<Step title="Navigate to API Server">
+Go to the **API Server** section of your project from the main navigation
+</Step>
+<Step title="Find Your Deployed Workflow">
+Locate the workflow you want to test in the **Deployed Workflows** list
+</Step>
+<Step title="Expand Workflow Details">
+Click to expand the workflow entry to reveal additional options and information
+</Step>
+<Step title="Open Playground">
+Click the **"Open Playground"** button to launch the playground interface in a new tab
+</Step>
+</Steps>
 
-## When to Use Playground UIs
-
-| Scenario | Playground Benefits | Alternative Approaches |
-|---|---|---|
-| **Creative Review Cycles** | Non-technical teams can iterate on prompts, styles, and parameters safely | Developers manually generating variations |
-| **Stakeholder Demos** | Self-service exploration with preset bounds during meetings | Static screenshots or recorded demos |
-| **Client Presentations** | Branded, professional interface that clients can interact with | Sharing raw API endpoints or technical docs |
-| **User Acceptance Testing** | Product teams can validate AI behavior before development integration | Building custom test interfaces |
-| **Training & Onboarding** | New team members learn workflow capabilities hands-on | Documentation-only learning |
-
----
-
-## Auto-Generated Interface Features
-
-### Parameter Controls Based on Schema
+**[IMAGE PLACEHOLDER: API Server page showing deployed workflows list with expanded workflow and "Open Playground" button highlighted]**
 
 <Frame>
-  <img
-    src="/images/deploy/playground-interface.png"
-    alt="Auto-generated playground UI showing parameter controls, presets, and output preview"
-  />
+<img
+src="/images/deploy/api-server-playground.png"
+alt="API Server page with Open Playground button"
+/>
 </Frame>
 
-FlowScale AI automatically creates appropriate UI controls based on your deployment schema:
+## Playground Interface
+
+### Layout Overview
+
+The playground features a clean, two-column design that makes testing workflows intuitive:
 
 <Tabs>
-  <Tab title="Text Inputs">
-    **Schema Definition:**
-    ```typescript
-    {
-      "prompt": {
-        "type": "string",
-        "maxLength": 1000,
-        "description": "Describe the image you want to create"
-      }
-    }
-    ```
-    
-    **Generated UI:**
-    - Large text area with character counter (0/1000)
-    - Placeholder text from description
-    - Real-time validation feedback
-    - Suggested prompts dropdown (if configured)
-  </Tab>
-  <Tab title="Numeric Sliders">
-    **Schema Definition:**
-    ```typescript
-    {
-      "creativity": {
-        "type": "number", 
-        "minimum": 0.1,
-        "maximum": 2.0,
-        "default": 0.7,
-        "step": 0.1,
-        "description": "Higher values = more creative, unexpected results"
-      }
-    }
-    ```
-    
-    **Generated UI:**
-    - Slider with min/max bounds (0.1 ↔ 2.0)  
-    - Current value display (0.7)
-    - Helpful labels: "Conservative ← → Creative"
-    - Tooltip with description on hover
-  </Tab>
-  <Tab title="Dropdown Selections">
-    **Schema Definition:**
-    ```typescript
-    {
-      "style_preset": {
-        "type": "string",
-        "enum": ["photographic", "digital_art", "comic_book", "fantasy_art"],
-        "default": "photographic",
-        "description": "Visual style for the generated image"
-      }
-    }
-    ```
-    
-    **Generated UI:**
-    - Dropdown with enum options
-    - Preview thumbnails for each style (if configured)
-    - Default selection highlighted
-    - Search/filter for long lists
-  </Tab>
-  <Tab title="Locked Parameters">
-    **Schema Definition:**
-    ```typescript
-    {
-      "model_checkpoint": {
-        "type": "string",
-        "enum": ["stable-diffusion-xl"],
-        "default": "stable-diffusion-xl", 
-        "locked": true,
-        "description": "Model version (locked for brand consistency)"
-      }
-    }
-    ```
-    
-    **Generated UI:**
-    - Read-only display: "Model: Stable Diffusion XL"
-    - Lock icon indicating parameter is fixed
-    - Tooltip explaining why it's locked
-    - Hidden from UI entirely (if configured)
-  </Tab>
+<Tab title="Left Column - Inputs">
+**Input Controls**
+- Parameter fields based on your workflow configuration
+- Input types match your FlowScale I/O nodes (text fields, sliders, image uploads)
+- Default values pre-filled from your workflow settings
+- **Generate button** at the bottom to execute the workflow
+</Tab>
+<Tab title="Right Column - Outputs">
+**Results Display**
+- Output sections for each configured output node
+- Real-time display of generated content (images, text, etc.)
+- Download options for generated files
+- Generation status and progress indicators
+</Tab>
 </Tabs>
 
-### Parameter Presets & Templates
+**[IMAGE PLACEHOLDER: Full playground interface showing two-column layout with input controls on left and output display on right]**
 
-<CardGroup cols={2}>
-  <Card title="Quick Start Presets" icon="zap">
-    **Curated combinations** for common use cases
-    
-    Example: "Product Photography", "Social Media Post", "Marketing Banner"
-    
-    Users click preset → all parameters set to tested values
-  </Card>
-  <Card title="Team Templates" icon="users">
-    **Saved configurations** that teams can share and reuse
-    
-    Example: Brand manager saves "Holiday Campaign Style" → designers can load with one click
-  </Card>
+<Frame>
+<img
+src="/images/deploy/playground-interface.png"
+alt="Playground UI showing input and output columns"
+/>
+</Frame>
+
+### Input Field Types
+
+The input fields in your playground directly correspond to the FlowScale I/O nodes you configured:
+
+| Input Node Type | Playground Control | Description |
+|-----------------|-------------------|-------------|
+| **[FS] InputText** | Text area/field | Multi-line or single-line text input |
+| **[FS] InputImage** | File upload | Drag-and-drop or click to upload images |
+| **[FS] InputNumber** | Number input | Numeric field with validation |
+| **[FS] InputSlider** | Range slider | Interactive slider with min/max values |
+
+<Warning>
+The available input fields are determined by your workflow's I/O configuration. If you need different inputs, return to the [workflow configuration](/deploy-api/configuration) to modify your setup.
+</Warning>
+
+## GPU Status Monitoring
+
+### Understanding GPU States
+
+The top-right corner of every playground displays real-time GPU status information:
+
+<CardGroup cols={3}>
+<Card title="Idle" icon="circle" color="#gray">
+**Gray indicator**: GPU is ready and waiting for requests. Fastest response time for new generations.
+</Card>
+<Card title="Running" icon="circle" color="#green">
+**Green indicator**: GPU is actively processing your request. Generation in progress.
+</Card>
+<Card title="Cold Starting" icon="circle" color="#orange">
+**Orange indicator**: GPU is warming up and loading models. First request after idle period.
+</Card>
 </CardGroup>
 
-<CodeGroup>
-```yaml Preset Configuration
-presets:
-  - name: "Product Photography"
-    description: "Clean, professional product shots"
-    parameters:
-      prompt: "professional product photography, white background, studio lighting"
-      style_preset: "photographic"
-      creativity: 0.3
-      aspect_ratio: "1:1"
-      
-  - name: "Social Media"
-    description: "Eye-catching posts for Instagram/Facebook" 
-    parameters:
-      prompt: "vibrant, engaging social media post"
-      style_preset: "digital_art"
-      creativity: 0.8
-      aspect_ratio: "4:5"
-```
+**[IMAGE PLACEHOLDER: Close-up of playground header showing GPU status indicator in different states]**
 
-```javascript Custom Preset API
-// Teams can save their own presets programmatically
-const customPreset = await playground.savePreset({
-  name: "Brand Campaign Q4",
-  description: "Holiday season marketing materials",
-  parameters: {
-    prompt: brandGuidelines.holidayPromptTemplate,
-    style_preset: "fantasy_art", 
-    creativity: 0.6,
-    color_palette: ["#FF4444", "#00AA44"] // Brand colors
+### Performance Implications
+
+<AccordionGroup>
+<Accordion title="Idle State">
+- **Response Time**: Immediate (< 1 second to start)
+- **Best For**: Interactive testing and real-time workflows
+- **Cost**: Active compute resources maintained
+</Accordion>
+
+<Accordion title="Cold Starting">
+- **Response Time**: 30-120 seconds initial delay
+- **Occurs When**: First request after period of inactivity
+- **Best For**: Batch processing and non-time-sensitive tasks
+- **Cost**: Lower cost as resources scale to zero when unused
+</Accordion>
+
+<Accordion title="Running State">
+- **Response Time**: Depends on workflow complexity
+- **Queue Behavior**: Additional requests queue until completion
+- **Best For**: Sequential generation tasks
+- **Monitoring**: Progress indicators show generation status
+</Accordion>
+</AccordionGroup>
+
+## Using the Playground
+
+### Running Your Workflow
+
+<Steps>
+<Step title="Configure Inputs">
+Fill in the required input fields on the left side:
+- Enter text prompts, descriptions, or parameters
+- Upload reference images if your workflow requires them
+- Adjust numeric values and sliders to your preferences
+</Step>
+<Step title="Initiate Generation">
+Click the **Generate** button at the bottom of the left column to start the workflow
+</Step>
+<Step title="Monitor Progress">
+Watch the GPU status indicator and any progress bars that appear during generation
+</Step>
+<Step title="Review Results">
+Generated outputs appear in the right column as they become available
+</Step>
+</Steps>
+
+**[IMAGE PLACEHOLDER: Step-by-step sequence showing user filling inputs, clicking generate, and receiving outputs]**
+
+### Generation Process
+
+<Frame>
+<img
+src="/images/deploy/generation-process.png"
+alt="Playground showing generation in progress with status indicators"
+/>
+</Frame>
+
+During generation, you'll see:
+
+- **Progress indicators** showing workflow execution stages
+- **GPU status updates** reflecting current processing state
+- **Partial results** appearing as they're generated (for multi-step workflows)
+- **Completion notifications** when generation finishes
+
+<Info>
+Generation time varies based on workflow complexity, model size, and current GPU state. Simple text workflows may complete in seconds, while high-resolution image generation can take several minutes.
+</Info>
+
+## Sharing and Collaboration
+
+### Shareable Links
+
+Every playground has a unique, shareable URL that enables team collaboration:
+
+<CardGroup cols={2}>
+<Card title="Team Access" icon="users">
+**Share with colleagues** who need to test or use your workflow without ComfyUI knowledge
+</Card>
+<Card title="Client Demos" icon="presentation">
+**Present to stakeholders** with a clean, professional interface that hides technical complexity
+</Card>
+<Card title="Creative Review" icon="eye">
+**Enable creative teams** to experiment with parameters and generate variations
+</Card>
+<Card title="Quality Assurance" icon="check-circle">
+**Facilitate testing** by non-technical team members for validation and feedback
+</Card>
+</CardGroup>
+
+### Sharing Best Practices
+
+<Steps>
+<Step title="Test Before Sharing">
+Verify your playground works correctly with various input combinations
+</Step>
+<Step title="Document Expected Inputs">
+Provide guidance on what inputs work best for your specific workflow
+</Step>
+<Step title="Set Appropriate Defaults">
+Configure sensible default values so users can generate results immediately
+</Step>
+<Step title="Monitor Usage">
+Track playground usage through your project's analytics dashboard
+</Step>
+</Steps>
+
+<Warning>
+**Security Note**: Playground links provide access to your deployed workflow. Only share with trusted team members and consider implementing access controls for sensitive workflows.
+</Warning>
+
+## Playground Benefits
+
+### For Technical Teams
+
+<AccordionGroup>
+<Accordion title="Rapid Prototyping">
+- Test parameter combinations quickly without ComfyUI complexity
+- Iterate on workflow improvements with immediate feedback
+- Validate configuration changes before API integration
+</Accordion>
+
+<Accordion title="Quality Assurance">
+- Systematic testing of edge cases and input variations
+- Documentation of expected behaviors and outputs
+- Regression testing when updating workflow versions
+</Accordion>
+</AccordionGroup>
+
+### For Non-Technical Users
+
+<AccordionGroup>
+<Accordion title="Creative Exploration">
+- Experiment with AI-generated content without technical barriers
+- Discover optimal parameter settings through intuitive controls
+- Generate variations and iterations for creative projects
+</Accordion>
+
+<Accordion title="Content Production">
+- Streamlined workflow for regular content generation
+- Consistent results through pre-configured parameters
+- Immediate access to generated assets with download options
+</Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+### Common Issues
+
+<CardGroup cols={2}>
+<Card title="Long Load Times" icon="clock">
+**Cause**: GPU cold starting after idle period
+**Solution**: Wait for warm-up (30-120 seconds) or consider keeping instances warm
+</Card>
+<Card title="Missing Input Fields" icon="exclamation-triangle">
+**Cause**: Workflow not properly configured for deployment
+**Solution**: Return to [configuration](/deploy-api/configuration) and add missing I/O nodes
+</Card>
+<Card title="Generation Failures" icon="times-circle">
+**Cause**: Invalid inputs or workflow errors
+**Solution**: Check input validation and test workflow in ComfyUI workspace
+</Card>
+<Card title="Access Denied" icon="lock">
+**Cause**: Playground link restrictions or expired sessions
+**Solution**: Verify access permissions and generate new playground link if needed
+</Card>
+</CardGroup>
+
+### Performance Optimization
+
+<Tabs>
+<Tab title="Input Optimization">
+**Best Practices:**
+- Use recommended input ranges shown in field descriptions
+- Optimize image sizes for faster processing
+- Test with minimal viable inputs first
+- Cache frequently used reference images
+</Tab>
+<Tab title="Output Management">
+**Efficiency Tips:**
+- Download generated assets promptly to free GPU memory
+- Use appropriate output formats for your use case
+- Monitor generation costs in high-usage scenarios
+- Consider batch processing for multiple generations
+</Tab>
+</Tabs>
+
+## Integration with Development Workflow
+
+### From Playground to Production
+
+<Steps>
+<Step title="Prototype in Playground">
+Use the playground to validate workflow behavior and optimal parameters
+</Step>
+<Step title="Document Findings">
+Record successful parameter combinations and expected outputs
+</Step>
+<Step title="Generate API Code">
+Use the playground results to inform your API integration approach
+</Step>
+<Step title="Implement in Application">
+Translate playground interactions into programmatic API calls using [SDKs](/deploy-api/sdk/sdk-python)
+</Step>
+</Steps>
+
+### API Equivalent
+
+Every playground interaction has a corresponding API call. Use the playground to:
+
+- **Validate request formats** before writing API integration code
+- **Test error conditions** and understand response structures  
+- **Optimize parameters** for your specific use case
+- **Generate example requests** for API documentation
+
+<CodeGroup>
+```javascript Playground to API
+// Playground interaction
+{
+  "prompt": "A beautiful sunset over mountains",
+  "steps": 25,
+  "width": 1024,
+  "height": 1024
+}
+
+// Equivalent API call
+const response = await fetch('/api/v1/workflows/run', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer your-api-key',
+    'Content-Type': 'application/json'
   },
-  sharing: "team" // or "private", "organization"
+  body: JSON.stringify({
+    workflow_id: 'wf_abc123',
+    inputs: {
+      prompt: "A beautiful sunset over mountains",
+      steps: 25,
+      width: 1024,
+      height: 1024
+    }
+  })
 });
 ```
 </CodeGroup>
-
----
-
-## Shareable Links & Access Control
-
-### Link Types & Permissions
-
-<Tabs>
-  <Tab title="Public Share Links">
-    **Use Case:** Client presentations, external collaborator reviews
-    
-    ```
-    https://playground.flowscale.ai/share/abc123?expires=2024-02-15
-    ```
-    
-    **Features:**
-    - No login required
-    - Configurable expiration (1 day → 6 months)
-    - Usage limits (10 generations, 100 API calls)
-    - Optional password protection
-    - Watermarked outputs (if configured)
-    
-    **Security:** Rate limited, no API key exposure, audit logged
-  </Tab>
-  <Tab title="Team-Only Links">
-    **Use Case:** Internal reviews, stakeholder feedback sessions
-    
-    ```
-    https://playground.flowscale.ai/team/creative-services/workflow-v2
-    ```
-    
-    **Features:**
-    - SSO authentication required
-    - Full parameter access (within bounds)
-    - Usage tracking by individual user
-    - Team-wide preset sharing
-    - Integration with Slack/Teams notifications
-    
-    **Security:** Organization auth, role-based access, full audit trails
-  </Tab>
-  <Tab title="Embedded Playgrounds">
-    **Use Case:** Custom applications, internal tools integration
-    
-    ```html
-    <iframe 
-      src="https://playground.flowscale.ai/embed/workflow-123"
-      data-auth-token="embed_token_xyz"
-      width="800" height="600">
-    </iframe>
-    ```
-    
-    **Features:**
-    - Customizable branding and styling
-    - Parent application authentication
-    - PostMessage API for result handling
-    - Responsive design for mobile/desktop
-    - White-label options available
-    
-    **Security:** CORS controls, token-based auth, sandbox isolation
-  </Tab>
-</Tabs>
-
-### Link Configuration Example
-
-<CodeGroup>
-```yaml Client Demo Link
-link_type: "public_share"
-permissions:
-  max_generations: 20
-  time_limit: "4_hours"  # Demo duration
-  parameter_restrictions:
-    - lock: ["model_checkpoint", "brand_guidelines"]
-    - limit: { creativity: { max: 0.8 } }  # Prevent extreme outputs
-branding:
-  logo: "company_logo.png"
-  primary_color: "#0066CC"
-  title: "New Product Line Concept Generator"
-watermark: 
-  enabled: true
-  text: "Confidential Preview - Company Name"
-```
-
-```yaml Team Review Link  
-link_type: "team_authenticated"
-permissions:
-  max_concurrent_users: 10
-  session_duration: "8_hours" 
-  full_parameter_access: true
-  preset_creation: true
-integrations:
-  slack_notifications:
-    channel: "#creative-reviews"
-    notify_on: ["generation_complete", "preset_saved"]
-  usage_tracking:
-    track_individual_usage: true
-    export_reports: true
-```
-</CodeGroup>
-
----
-
-## Usage Governance & Compliance
-
-### Audit Logging
-
-<Frame>
-  <img
-    src="/images/deploy/playground-audit.png"
-    alt="Audit dashboard showing playground usage, user actions, and compliance metrics"
-  />
-</Frame>
-
-**Leadership Visibility:**
-
-<CardGroup cols={2}>
-  <Card title="User Activity Tracking" icon="users">
-    - Who accessed which playground when
-    - Parameter combinations tried  
-    - Outputs generated and downloaded
-    - Time spent per session
-    - Geographic access patterns
-  </Card>
-  <Card title="Content Compliance" icon="shield-check">
-    - Prompt content analysis for brand compliance
-    - Output content scanning for inappropriate material
-    - Parameter usage outside approved ranges
-    - Attempts to bypass locked settings
-    - GDPR/privacy compliance for user data
-  </Card>
-</CardGroup>
-
-### Usage Analytics Dashboard
-
-<Tabs>
-  <Tab title="Creative Team Insights">
-    **Metrics for AI & Creative Leads:**
-    
-    - Most popular parameter combinations
-    - Preset usage and effectiveness
-    - User journey from prompt to final output
-    - Creative iteration patterns and time investment
-    - Team collaboration patterns and knowledge sharing
-    
-    **Actionable Insights:**
-    - Which presets should become default templates
-    - Parameter bounds that may be too restrictive/permissive
-    - Training needs for specific team members
-    - Workflow optimization opportunities
-  </Tab>
-  <Tab title="Business Impact">
-    **Metrics for Leadership:**
-    
-    - Cost per playground session vs traditional creative processes
-    - Time-to-deliverable reduction percentage
-    - Stakeholder engagement rates during reviews
-    - Client satisfaction scores for AI-assisted presentations
-    - ROI on FlowScale AI investment via usage acceleration
-    
-    **Risk Indicators:**
-    - Unusual usage spikes that might indicate security issues
-    - Parameter attempts outside brand guidelines
-    - Unauthorized sharing of sensitive playground links
-    - Budget variance from expected usage patterns
-  </Tab>
-</Tabs>
-
----
-
-## Advanced Playground Features
-
-### Custom Branding & White-Labeling
-
-<CodeGroup>
-```css Brand Customization
-/* Custom playground styling */
-:root {
-  --primary-color: #FF6B35;
-  --brand-font: 'Montserrat', sans-serif;
-  --logo-url: url('/assets/company-logo.svg');
-}
-
-.playground-header {
-  background: linear-gradient(135deg, var(--primary-color), #4ECDC4);
-  font-family: var(--brand-font);
-}
-
-.parameter-panel {
-  --accent-color: var(--primary-color);
-  --border-radius: 12px;
-}
-```
-
-```yaml White-Label Configuration
-branding:
-  mode: "white_label"
-  company_name: "Acme Creative Studio"
-  logo: "https://cdn.acme.com/logo.svg"
-  favicon: "https://cdn.acme.com/favicon.ico"
-  domain: "ai-studio.acme.com"  # Custom domain
-  
-ui_customization:
-  color_scheme: "acme_brand"
-  typography: "montserrat"
-  layout: "compact"  # or "spacious", "minimal"
-  
-footer:
-  powered_by_flowscale: false  # Enterprise feature
-  custom_links:
-    - text: "Support"
-      url: "https://acme.com/ai-support"
-    - text: "Guidelines" 
-      url: "https://acme.com/brand-guidelines"
-```
-</CodeGroup>
-
-### Integration with Creative Tools
-
-<CardGroup cols={2}>
-  <Card title="Figma Plugin" icon="figma">
-    **Direct export** from playground to Figma frames
-    
-    - Generated images become Figma assets
-    - Parameter metadata preserved as component properties
-    - Version history linked to playground sessions
-    - Team libraries automatically updated
-  </Card>
-  <Card title="Adobe Creative Cloud" icon="adobe">
-    **Seamless workflow** integration
-    
-    - One-click import to Photoshop/Illustrator
-    - Layer preservation with editable text/shapes
-    - Asset panel integration for quick access
-    - Creative Cloud Libraries sync
-  </Card>
-  <Card title="Slack/Teams Bots" icon="slack">
-    **Collaborative generation** in chat
-    
-    - `/generate` command with natural language prompts
-    - Automatic sharing to design channels
-    - Approval workflows for client-facing content
-    - Thread-based iteration tracking
-  </Card>
-  <Card title="DAM Integration" icon="database">
-    **Enterprise asset management**
-    
-    - Auto-tagging with generation metadata
-    - Rights management for AI-generated content
-    - Usage tracking across campaigns
-    - Brand compliance scoring
-  </Card>
-</CardGroup>
-
----
-
-## Playground Templates by Use Case
-
-### Creative Agency Template
-
-<CodeGroup>
-```yaml Client Review Setup
-name: "client-review-playground"
-description: "Safe client-facing creative review environment"
-
-ui_config:
-  layout: "presentation_mode"
-  parameter_visibility: "essential_only"  # Hide technical parameters
-  presets:
-    - "Brand Guidelines Compliant"
-    - "Campaign Theme A" 
-    - "Campaign Theme B"
-    - "Alternative Direction"
-
-guardrails:
-  content_filter: "strict"  # No potentially inappropriate content
-  brand_compliance: "enforce"  # Must match brand guidelines
-  output_quality: "high"  # No low-quality/glitched results
-
-client_controls:
-  parameter_access: "preset_only"  # Clients can only use presets
-  download_permissions: "watermarked"
-  sharing: "disabled"  # Prevent client from sharing outside
-  
-session_config:
-  max_duration: "2_hours"  # Presentation meeting length
-  max_generations: 50
-  auto_save_favorites: true
-```
-
-```yaml Internal Team Setup
-name: "creative-team-sandbox"
-description: "Full-featured playground for internal creative iteration"
-
-ui_config:
-  layout: "power_user"
-  parameter_visibility: "all"
-  advanced_controls: true
-  preset_creation: true
-  
-collaboration:
-  real_time_sharing: true  # Multiple users can work simultaneously  
-  comment_system: true
-  version_branching: true  # Save alternative directions
-  
-integrations:
-  figma_export: true
-  slack_notifications: true
-  asset_library_sync: true
-
-session_config:
-  max_duration: "unlimited"
-  max_generations: 500  
-  auto_save_frequency: "every_5_generations"
-```
-</CodeGroup>
-
-### Product Team Template
-
-<CodeGroup>
-```yaml UAT Environment
-name: "product-uat-playground"
-description: "User acceptance testing for AI-powered product features"
-
-testing_features:
-  parameter_boundary_testing: true  # Test edge cases
-  error_simulation: true  # Trigger API errors safely
-  performance_monitoring: true  # Track response times
-  a_b_scenario_testing: true  # Compare different configurations
-
-user_simulation:
-  persona_presets:
-    - "New User (Conservative)"
-    - "Power User (Advanced)"  
-    - "Client (Restricted)"
-  realistic_usage_patterns: true
-  
-reporting:
-  usability_metrics: true
-  conversion_funnel_tracking: true
-  user_satisfaction_surveys: true
-  export_to_product_analytics: true
-```
-
-```yaml Sales Demo Setup
-name: "sales-demo-playground"
-description: "Impressive, foolproof demos for prospect meetings"
-
-demo_config:
-  preset_scenarios:
-    - name: "E-commerce Product Images"
-      prompt: "Professional product photography for online store"
-      locked_parameters: ["quality", "style", "brand_safe"]
-    - name: "Marketing Campaign Assets"  
-      prompt: "Eye-catching social media advertisement"
-      locked_parameters: ["brand_colors", "approved_styles"]
-      
-failsafe_features:
-  guaranteed_good_outputs: true  # Pre-validated parameter combinations
-  fallback_examples: true  # Backup generated content if API fails
-  offline_mode: true  # Demo works without internet
-  
-prospect_experience:
-  zero_configuration: true  # Works immediately
-  impressive_speed: true  # Optimized for fast generation
-  branded_interface: true  # Professional appearance
-  takeaway_assets: true  # Prospects can download examples
-```
-</CodeGroup>
-
----
 
 ## Next Steps
 
