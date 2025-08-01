@@ -70,7 +70,13 @@
           {
             "group": "API Reference",
             "pages": [
-              "deploy-api/reference/get-run"
+              "api-reference/introduction",
+              "api-reference/endpoint/execute_workflow",
+              "api-reference/endpoint/get_execution_output",
+              "api-reference/endpoint/get_queue",
+              "api-reference/endpoint/get_run_details",
+              "api-reference/endpoint/get_runs",
+              "api-reference/endpoint/health_check"
             ]
           }
         ]
