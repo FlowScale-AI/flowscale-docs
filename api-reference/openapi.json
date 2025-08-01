@@ -438,22 +438,15 @@
             "type": "string",
             "title": "Run Id"
           },
-          "output_names": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Output Names"
-          },
-          "node_errors": {
-            "title": "Node Errors"
+          "workflow_id": {
+            "type": "string",
+            "title": "Workflow Id"
           }
         },
         "type": "object",
         "required": [
           "run_id",
-          "output_names",
-          "node_errors"
+          "workflow_id"
         ],
         "title": "ComfyRunResponse"
       },
