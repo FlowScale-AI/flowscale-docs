@@ -10,12 +10,12 @@
       "description": "Pod #flowscale-core (Default)"
     },
     {
-      "url": "{customDomain}",
-      "description": "Custom Domain",
+      "url": "{apiEndpoint}",
+      "description": "Deployed API Endpoint",
       "variables": {
-        "customDomain": {
+        "apiEndpoint": {
           "default": "https://your-domain.com",
-          "description": "Your custom domain or API endpoint"
+          "description": "Your project's deployed API endpoint"
         }
       }
     }
