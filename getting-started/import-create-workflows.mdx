@@ -6,29 +6,16 @@ icon: "upload"
 
 import ImportWorkflowsTroubleshooting from '/snippets/troubleshooting/import-workflows-basic.mdx';
 
-**You've built something amazing in ComfyUI.** Now it's time to bring that creative breakthrough into a collaborative, production-ready environment where your team can build on your work and users can actually benefit from your innovation.
-
-This guide shows you how to transform your local ComfyUI experiments into **team-accessible, deployable workflows** that maintain all their creative power while gaining enterprise-grade collaboration and deployment capabilities.
+Import your ComfyUI workflows into FlowScale AI for team collaboration and production deployment. This guide covers importing existing workflows and creating new ones in the cloud environment.
 
 <Note>
 **New to FlowScale AI?** You'll need to [create a project first](/getting-started/glossary/projects). Think of projects as collaborative workspaces where your team's workflows live and evolve together.
 </Note>
 
-**The interface looks familiar because it's still ComfyUI at its core—**but now it's ComfyUI with enterprise capabilities that transform how you and your team create with AI.
-
-## Bringing Your Breakthrough to the Team
-
-**This is where your local creative success becomes a collaborative asset.** The import process takes your proven workflow and transforms it into something your entire team can access, modify, and deploy without losing any of its power or sophistication.
-
-<Tip>
-**What you're actually doing:** Taking a workflow that currently only exists on your machine and making it accessible to your team as a governed, version-controlled, deployable service. The technical complexity remains the same, but the collaboration and deployment capabilities are transformative.
-</Tip>
+## Import Existing Workflows
 
 ### Step-by-Step Import Process
 
-<Note>
-**Why each step matters:** This isn't just file uploading—we're ensuring your workflow's dependencies, custom nodes, and configurations are preserved exactly while making them accessible in a collaborative cloud environment.
-</Note>
 
 <Steps>
   <Step title="Click Import Workflow">
@@ -99,23 +86,18 @@ This guide shows you how to transform your local ComfyUI experiments into **team
 
 ### Supported Import Format
 
-**We focus on the standard for maximum reliability:** FlowScale AI imports **Workflow JSON** files—the same format you get from ComfyUI's "Save" button. This ensures your workflow maintains complete fidelity during the transition from local to cloud.
+FlowScale AI imports **Workflow JSON** files from ComfyUI's "Save" function.
 
 <Warning>
 **File Format Matters:** Only use JSON files exported directly from ComfyUI's Save function. Other export formats or manually edited files may cause import issues or lost functionality.
 </Warning>
 
-## Launching Your Cloud-Powered Creative Environment
+## Accessing ComfyUI Workspace
 
-**Here's where the magic happens:** Your familiar ComfyUI interface, but now running on enterprise-grade cloud infrastructure with unlimited scaling potential.
-
-**Pods are your personal ComfyUI instances in the cloud**—think of them as your dedicated creative workstation that appears instantly when you need it and disappears when you don't, saving you costs while providing more power than most local setups.
+Pods are cloud-hosted ComfyUI instances that provide on-demand access to GPU resources.
 
 ### Launch Process
 
-<Note>
-**What's actually happening:** FlowScale AI is spinning up a dedicated cloud instance, installing your custom nodes, configuring your models, and preparing a ComfyUI environment that matches your workflow's requirements. This takes a few minutes initially but gives you a consistent, powerful environment every time.
-</Note>
 
 <Steps>
   <Step title="Start ComfyUI">
@@ -171,25 +153,21 @@ This guide shows you how to transform your local ComfyUI experiments into **team
   </Step>
 </Steps>
 
-### CPU vs GPU Mode: Smart Resource Management
-
-**This is how you stay creative without breaking budgets:** FlowScale AI separates workflow development from workflow execution, so you only pay for GPU power when you actually need it.
+### CPU vs GPU Mode
 
 <Tabs>
   <Tab title="CPU Mode (Default)">
-    **Your creative sandbox:**
-    - **Perfect for**: Connecting nodes, adjusting parameters, organizing your workflow logic
-    - **Cost impact**: Minimal—focus on creativity without cost anxiety
-    - **Best practices**: Do all your planning, node connections, and parameter tweaking here
-    - **Why this matters**: You can spend hours perfecting your workflow structure without burning through GPU credits
+    **For workflow editing:**
+    - Connecting nodes and adjusting parameters
+    - Low cost for workflow development
+    - Use for planning and structure building
   </Tab>
   
   <Tab title="GPU Mode">
-    **Your execution powerhouse:**
-    - **Perfect for**: Running inference, testing outputs, validating results
-    - **Cost impact**: Higher, but you're getting enterprise-grade GPU performance
-    - **Best practices**: Switch here only when you need to see actual results
-    - **Why this matters**: Access to GPUs that cost thousands to own, available instantly when you need them
+    **For workflow execution:**
+    - Running inference and testing outputs
+    - Higher cost but enterprise GPU performance
+    - Use only when generating results
   </Tab>
 </Tabs>
 
@@ -206,19 +184,11 @@ This guide shows you how to transform your local ComfyUI experiments into **team
 
 {/* Image Description for Team: Screenshot of actions bar showing CPU/GPU toggle switch and other action buttons like Save, Queue, Stop, Refresh */}
 
-## Model Management: From Chaos to Control
+## Model Management
 
-**Remember managing models locally?** The endless downloads, version conflicts, storage concerns, and "why isn't this model loading?" debugging sessions. FlowScale AI transforms this into **a centralized, team-accessible model library** where everyone shares the same high-quality assets.
+FlowScale AI provides centralized model management with public and private model libraries for team sharing.
 
-<Note>
-**Why manual model management is actually better:** Unlike automatic systems that might pull the wrong versions or create conflicts, FlowScale AI gives you complete control over which exact models your workflows use. This ensures consistency across your team and prevents the "works on my machine" problems that plague local ComfyUI setups.
-</Note>
-
-### Model Setup Workflow: Turning Dependencies into Assets
-
-<Tip>
-**The mindset shift:** Instead of "I need to download another model," think "I'm adding a shared asset that my entire team can use." Every model you set up becomes available to all team members, creating a collaborative library of capabilities.
-</Tip>
+### Model Setup Process
 
 <Steps>
   <Step title="Start ComfyUI Workspace">
@@ -357,13 +327,9 @@ For custom node models, always refer to the node's GitHub repository README for 
 
 {/* Image Description for Team: Screenshot of models organization showing folder tree structure with standard ComfyUI folders and organized models */}
 
-## Creating New Workflows: Starting with Purpose
+## Creating New Workflows
 
-**Ready to build something new?** Creating workflows in FlowScale AI means starting with collaboration and deployment in mind from day one. Unlike local ComfyUI where you build in isolation, here you're building **team assets that can become production services**.
-
-<Warning>
-**Think beyond the workflow:** As you create, consider who will use this, how they'll access it, and what the end experience should be. FlowScale AI makes it easy to go from creative experiment to production service, but having that bigger picture in mind will guide your design decisions.
-</Warning>
+Create workflows directly in FlowScale AI for immediate team collaboration and deployment readiness.
 
 ### Quick Start Method
 
@@ -431,11 +397,7 @@ For custom node models, always refer to the node's GitHub repository README for 
 For detailed troubleshooting guidance, refer to our [FAQ and Troubleshooting guide](/getting-started/troubleshooting).
 </Note>
 
-## Your Creative Journey Continues 🎆
-
-**Congratulations!** You've successfully transformed your ComfyUI workflow from a local experiment into a collaborative, cloud-powered asset. Your workflow is now accessible to your team, backed by enterprise infrastructure, and ready for the next phase of its evolution.
-
-### Choose Your Next Adventure
+## Next Steps
 
 <CardGroup cols={2}>
   <Card
@@ -443,17 +405,14 @@ For detailed troubleshooting guidance, refer to our [FAQ and Troubleshooting gui
     icon="rocket"
     href="/getting-started/deploy-workflows"
   >
-    **Ready to ship?** Transform your workflow into production APIs and interactive interfaces that users can actually access.
+    Transform workflows into production APIs and interactive interfaces
   </Card>
   <Card
     title="Get Unstuck"
     icon="circle-question"
     href="/getting-started/troubleshooting"
   >
-    **Hit a snag?** Find solutions to common issues and get back to creating amazing things.
+    Solutions to common issues and troubleshooting guidance
   </Card>
 </CardGroup>
 
----
-
-*Your workflow is now part of something bigger. Let's see where you take it next.* 🚀

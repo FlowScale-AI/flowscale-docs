@@ -4,11 +4,7 @@ description: "Transform your deployed ComfyUI workflows into powerful applicatio
 icon: "js"
 ---
 
-**Your ComfyUI workflows are deployed as APIs—now let's integrate them into real applications.** This SDK transforms your creative AI work into application features that users can access through web apps, mobile apps, Node.js services, and automation systems.
-
-<Note>
-**What you're building:** Instead of asking users to understand ComfyUI or API endpoints, you're creating seamless experiences where AI capabilities feel like native application features. Your workflows become the invisible intelligence powering user-facing products.
-</Note>
+Integrate deployed ComfyUI workflows into JavaScript and TypeScript applications using the FlowScale SDK.
 
 <Warning>
 **Production Security Best Practices**
@@ -23,13 +19,7 @@ icon: "js"
 **If you must use client-side**: Set `allowDangerouslyExposeApiKey: true` to acknowledge the security implications.
 </Warning>
 
-## Installation: Adding AI Power to Your Applications
-
-**Ready to bring your AI workflows into your applications?** Install the FlowScale SDK to start integrating your deployed ComfyUI workflows into any JavaScript or TypeScript project.
-
-<Tip>
-**What this enables:** Your users won't interact with ComfyUI or see API endpoints—they'll experience AI capabilities as seamless application features. Image generation, style transfer, content creation, and other AI workflows become as simple as calling a function.
-</Tip>
+## Installation
 
 <CodeGroup>
 
@@ -51,15 +41,9 @@ bun install flowscale
 
 </CodeGroup>
 
-## Quick Start: From Deployment to Integration
+## Quick Start
 
-<Note>
-**Prerequisites:** You should have already deployed your ComfyUI workflow as an API through the FlowScale AI platform. If you haven't, complete the [Deploy Workflows guide](/getting-started/deploy-workflows) first.
-</Note>
-
-### Connecting Your Application to Your AI Infrastructure
-
-**This is where your deployed AI workflows become application features.** Import the SDK and connect to the production APIs you've already created:
+Connect to your deployed workflows:
 
 <CodeGroup>
 
@@ -129,79 +113,21 @@ FLOWSCALE_API_URL=https://your-api-url.pod.flowscale.ai
 
 ## Configuration
 
-### Client Options
-
 ```typescript
-interface FlowScaleConfig {
-  apiKey: string;
-  baseUrl?: string;                    // Default: 'https://api.flowscale.ai'
-  allowDangerouslyExposeApiKey?: boolean; // Required for browser usage
-  enableLogging?: boolean;             // Default: true
-  logLevel?: 'debug' | 'info' | 'warn' | 'error'; // Default: 'info'
-  timeout?: number;                    // Default: 300000 (5 minutes)
-  retries?: number;                    // Default: 3
-  retryDelay?: number;                 // Default: 1000 (1 second)
-  userAgent?: string;                  // Custom user agent
-}
-
 const flowscale = new FlowscaleAPI({
   apiKey: process.env.FLOWSCALE_API_KEY,
   baseUrl: process.env.FLOWSCALE_API_URL,
-  enableLogging: true,
-  logLevel: 'info',
-  timeout: 60000,                      // 1 minute timeout
-  retries: 5                           // Retry failed requests 5 times
+  timeout: 60000,
+  retries: 3
 });
 ```
-
-### Logging Configuration
-
-The SDK includes configurable logging to help with debugging and monitoring:
-
-```typescript
-// Configure logging during initialization
-const flowscale = new FlowscaleAPI({
-  apiKey: 'your-api-key',
-  baseUrl: 'https://your-api-url.pod.flowscale.ai',
-  enableLogging: true,    // Enable/disable logging (default: true)
-  logLevel: 'debug'       // Set log level (default: 'info')
-});
-
-// Change logging settings after initialization
-flowscale.setLoggingConfig(true, 'debug');
-
-// Disable logging completely
-flowscale.setLoggingConfig(false);
-
-// Check current logging configuration
-const loggingConfig = flowscale.getLoggingConfig();
-console.log(loggingConfig); // { enabled: true, level: 'debug' }
-```
-
-<Accordion title="Log Levels">
-- **debug**: Most verbose, includes detailed operation information
-- **info**: General information about operations (default)
-- **warn**: Warning messages for potential issues
-- **error**: Only error messages
-
-All logs are prefixed with timestamp and level:
-```
-[Flowscale INFO] 2025-06-03T10:30:45.123Z: WebSocket connection established
-[Flowscale DEBUG] 2025-06-03T10:30:46.456Z: Polling workflow output: {...}
-```
-</Accordion>
 
 ## Core Methods
 
-### Platform Health and Status
-
-#### Check Health Status
-
-Monitor the health of the FlowScale platform, including container status:
+### Health Check
 
 ```typescript
 const health = await flowscale.checkHealth();
-console.log('API Health:', health);
 ```
 
 <Accordion title="Response Example">

@@ -4,16 +4,9 @@ description: "Expose your FlowScale AI workflows as governed services your teams
 icon: "rocket"
 ---
 
-# From Workflow to Widely-Usable Service
+# Deploy Workflows as APIs
 
-You've validated a ComfyUI workflow. The results look great in the FlowScale AI builder — now the questions start:
-
-- **Can my app call this workflow programmatically?**
-- **Can I let non-technical teams try variations without breaking anything?**
-- **How do we control cost when demand spikes?**
-- **What changes between a demo link and a production SLA?**
-
-This section shows how FlowScale AI turns a saved workflow into a **deployable service surface** you can use in three ways:
+Transform your ComfyUI workflows into production services with three deployment options:
 
 | Use Case | Best Surface | Notes |
 |---|---|---|
@@ -21,22 +14,15 @@ This section shows how FlowScale AI turns a saved workflow into a **deployable s
 | Product / tool integration | **API or SDK** | Stable contract, versioned schema, auth. |
 | Automation, batch, agents | **SDK + Scaling controls** | Queues, concurrency, budget caps. |
 
-<Note>
-**Coming from the Getting Started guides?** Perfect! You've already experienced the journey from ComfyUI workflow to deployed service. This section shows you how to master the production-grade features that make your deployments enterprise-ready.
-
-**New to FlowScale AI?** Start with [Why FlowScale AI?](/getting-started/why-flowscale-ai) to understand the strategic context, then work through [Import/Create Workflows](/getting-started/import-create-workflows) and [Deploy Workflows](/getting-started/deploy-workflows) to get hands-on experience before diving into these advanced capabilities.
-</Note>
 
 ---
 
-## What You'll Learn
+## Core Capabilities
 
-After completing this section, you'll be able to:
-
-1. **Configure Deployments:** Turn a validated ComfyUI workflow into a governed deployment target with runtime controls, auth scopes, and budget caps.
-2. **Launch Playground UIs:** Create ready-to-share interfaces for internal demos, reviews, or lightweight production use.
-3. **Call Workflows from Code:** Consume deployments programmatically via FlowScale AI SDKs (JS/TS & Python) or direct REST calls.
-4. **Scale & Govern:** Auto-scale GPUs, control costs, and monitor performance using FlowScale AI's scaling primitives.
+- Configure deployments with runtime controls and access permissions
+- Launch interactive playground UIs for non-technical users
+- Integrate workflows programmatically via SDKs or REST APIs
+- Auto-scale GPUs with cost controls and performance monitoring
 
 ---
 
@@ -99,13 +85,7 @@ Every deployed workflow in FlowScale AI follows this progression:
   </Step>
 </Steps>
 
-### Try It Now: SDK Examples
-
-<Tip>
-**Already deployed a workflow?** These examples will work with your deployed workflow—just replace the `workflowId` with your actual workflow ID from the API Server page.
-
-**Haven't deployed yet?** Complete the [Deploy Workflows guide](/getting-started/deploy-workflows) first to get your workflow running as an API, then return here to see how to integrate it into applications.
-</Tip>
+### SDK Examples
 
 <CodeGroup>
 
@@ -194,19 +174,11 @@ curl -X POST https://api.flowscale.ai/v1/run \
 
 ---
 
-## Leadership Snapshots
+## Enterprise Features
 
-<AccordionGroup>
-  <Accordion title="Cost & Governance Controls">
-    Every deployment can carry soft budgets and hard caps. When you hit thresholds, FlowScale AI can throttle, alert, or block — preventing runaway GPU spend during experimentation. Teams get creative freedom within defined financial boundaries.
-  </Accordion>
-  <Accordion title="Brand Consistency Assurance">
-    Lock model checkpoints and parameter ranges so all business units render within approved creative bounds. Deploy once with guardrails, then trust teams to iterate safely without brand risk.
-  </Accordion>
-  <Accordion title="Security & Compliance Posture">
-    All deployments include HTTPS-only communication, configurable data retention policies, audit logging, and SOC 2 compliance. Integration patterns support your existing authentication and authorization systems.
-  </Accordion>
-</AccordionGroup>
+- **Cost Controls**: Budget caps and spending alerts
+- **Brand Safety**: Parameter restrictions and model locking
+- **Security**: HTTPS, audit logging, SOC 2 compliance
 
 ---
 
@@ -261,66 +233,61 @@ curl -X POST https://api.flowscale.ai/v1/run \
 
 ---
 
-## Master Your Production AI Infrastructure
+## Next Steps
 
-**You've successfully deployed ComfyUI workflows as APIs—now let's make them enterprise-ready.** Choose your path based on what you need to accomplish:
-
-### For Immediate Integration
+### Integration
 <CardGroup cols={2}>
   <Card
     title="JavaScript/TypeScript SDK"
     icon="js"
     href="/deploy-api/sdk/sdk-js"
   >
-    **Ready to integrate?** Connect your deployed workflows to web applications, Node.js services, and React components.
+    Connect workflows to web applications and Node.js services
   </Card>
   <Card
     title="Python SDK"
     icon="python"
     href="/deploy-api/sdk/sdk-python"
   >
-    **Building with Python?** Integrate workflows into data pipelines, Jupyter notebooks, and ML applications.
+    Integrate workflows into data pipelines and ML applications
   </Card>
 </CardGroup>
 
-### For Production Governance
+### Configuration
 <CardGroup cols={2}>
   <Card
     title="Advanced Configuration"
     icon="settings"
     href="/deploy-api/configuration"
   >
-    **Need enterprise features?** Set up authentication, versioning, governance controls, and security policies.
+    Authentication, versioning, and governance controls
   </Card>
   <Card
     title="Scaling & Performance"
     icon="gauge-high"
     href="/deploy-api/scaling"
   >
-    **Planning for growth?** Configure auto-scaling, optimize costs, and ensure reliable performance under load.
+    Auto-scaling, cost optimization, and performance management
   </Card>
 </CardGroup>
 
-### For Team Collaboration
+### Documentation
 <CardGroup cols={2}>
   <Card
     title="Playground Interfaces"
     icon="users"
     href="/deploy-api/playgrounds"
   >
-    **Sharing with non-technical teams?** Create safe, intuitive interfaces that let anyone use your AI workflows.
+    Safe, intuitive interfaces for non-technical users
   </Card>
   <Card
     title="API Documentation"
     icon="book"
     href="/api-reference/introduction"
   >
-    **Supporting developers?** Explore complete endpoint documentation with interactive examples and payload schemas.
+    Complete endpoint documentation with examples
   </Card>
 </CardGroup>
 
 ---
 
-<Note>
-**Lost or need to revisit basics?** Return to [Getting Started](/getting-started/introduction) to review the foundational concepts, or check [Troubleshooting](/getting-started/troubleshooting) if you're encountering specific issues.
-</Note>
