@@ -137,31 +137,6 @@ Navigate to **Pods › *Your Pod* › Settings** to access three configuration t
 
 ## How Pod Scaling Works
 
-```mermaid
-sequenceDiagram
-    participant User
-    participant API as Pod API Gateway
-    participant Queue as GPU Container Queue
-    participant Container1 as GPU Container #1
-    participant ContainerN as GPU Container #N
-    
-    User->>API: POST /generate
-    API->>Queue: Enqueue request
-    
-    Note over Queue: Cold start if queue > warm containers
-    
-    Queue->>Container1: Spawn/wake container
-    
-    alt Multiple requests
-        Queue->>Container1: Job 1
-        Queue->>ContainerN: Job 2
-    end
-    
-    Container1*/}>User: Generated response
-    
-    Note over Container1,ContainerN: Containers stay warm until idle timeout
-```
-
 **Key Phases:**
 - **Cold Start** – Container boots and loads workflow graph ± model weights
 - **Warm Pool** – Containers stay resident until *Idle Timeout* expires  
@@ -227,20 +202,6 @@ sequenceDiagram
     href="/getting-started/deploy-workflows"
   >
     Deploy your ComfyUI workflows to production pods
-  </Card>
-  <Card
-    title="Monitor Performance"
-    icon="chart-line"
-    href="/deploy-api/overview"
-  >
-    Track and optimize your pod performance
-  </Card>
-  <Card
-    title="Manage Costs"
-    icon="dollar-sign"
-    href="/reference/deployment-models"
-  >
-    Understand pricing models and cost optimization
   </Card>
   <Card
     title="Troubleshooting"
