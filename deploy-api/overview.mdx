@@ -109,22 +109,24 @@ Every deployed workflow in FlowScale AI follows this progression:
 <CodeGroup>
 
 ```javascript JavaScript
-import FlowScale from '@flowscale/sdk';
+import { FlowscaleAPI } from 'flowscale';
 
-const client = new FlowScale({
-  apiKey: 'fs_your_api_key_here'
+const flowscale = new FlowscaleAPI({
+  apiKey: 'your-api-key',
+  baseUrl: 'your-api-url',
+  allowDangerouslyExposeApiKey: true // Required acknowledgment
 });
 
-const result = await client.run({
-  workflowId: 'text-to-image-v1',
-  inputs: {
-    prompt: 'A serene mountain landscape at sunset',
-    width: 1024,
-    height: 1024
-  }
-});
+const workflowId = "your-workflow-id"; // UUID format
+const inputs = {
+  prompt: 'A serene mountain landscape at sunset',
+  width: 1024,
+  height: 1024
+}
 
-console.log(result.images[0].url);
+const result = await flowscale.executeWorkflowAsync(workflowId, inputs);
+
+console.log('Workflow Result:', result);
 ```
 
 ```python Python
