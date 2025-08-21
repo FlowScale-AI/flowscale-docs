@@ -1,0 +1,280 @@
+---
+title: Release Notes - July 30, 2025
+description: "Version v2.0.56 - External Models Manager, Upload Features, and Enhanced Workflow Management"
+icon: "newspaper"
+---
+
+# Version v2.0.56
+
+_Released on July 30, 2025_
+
+---
+
+## 🚀 Highlights
+
+**What most people will notice first:**
+
+### External Models Manager
+
+The Models Manager is now outside individual projects and sits conveniently beside Pods for easier access. Quickly locate models within expanded volume folders using the new search functionality.
+
+<img
+  src="/images/changelog/2025-07-30/models-tab.png"
+  alt="External Models Manager interface showing the new location beside Pods"
+  style={{ borderRadius: "8px", border: "1px solid #e1e5e9" }}
+/>
+
+### Upload Models from Your PC
+
+You can now upload model files directly from your computer via the Models Manager, streamlining your workflow setup process.
+
+<img
+  src="/images/changelog/2025-07-30/upload-local-model.png"
+  alt="Model upload interface showing drag-and-drop functionality and upload options"
+  style={{ borderRadius: "8px", border: "1px solid #e1e5e9" }}
+/>
+
+---
+
+## 🔟 New Features
+
+**Biggest additions to the platform:**
+
+### Models Manager Now External
+
+<CardGroup cols={2}>
+  <Card title="Easy Access" icon="folder-open">
+    Access models outside of your project for better organization
+  </Card>
+  <Card title="Enhanced Search" icon="search">
+    New search bar for finding folders, including models in expanded subfolders
+  </Card>
+</CardGroup>
+
+The Models Manager has been relocated for improved accessibility and workflow efficiency.
+
+<img
+  src="/images/changelog/2025-07-30/models-tab.png"
+  alt="Enhanced search functionality in the Models Manager"
+  style={{
+    borderRadius: "8px",
+    border: "1px solid #e1e5e9",
+    marginTop: "16px",
+  }}
+/>
+
+### New Upload Options for Models
+
+<AccordionGroup>
+  <Accordion title="Search and Add from External Sources">
+    Search and add models from sources like CivitAI and other popular model
+    repositories directly through the interface.
+
+    <img
+  src="/images/changelog/2025-07-30/search-models.png"
+  alt="search models interface"
+  style={{
+    borderRadius: "8px",
+    border: "1px solid #e1e5e9",
+    marginTop: "16px",
+  }}
+/>
+  </Accordion>
+  <Accordion title="Direct URL Downloads">
+    Upload models via direct download URLs for quick integration of models from
+    various sources.
+
+     <img
+  src="/images/changelog/2025-07-30/upload-model-by-url.png"
+  alt="upload model by URL interface"
+  style={{
+    borderRadius: "8px",
+    border: "1px solid #e1e5e9",
+    marginTop: "16px",
+  }}
+/>
+  </Accordion>
+  <Accordion title="Local File Upload">
+    Upload model files directly from your PC with a simple drag-and-drop
+    interface for maximum convenience.
+
+      <img
+  src="/images/changelog/2025-07-30/upload-local-model.png"
+  alt="upload model by URL interface"
+  style={{
+    borderRadius: "8px",
+    border: "1px solid #e1e5e9",
+    marginTop: "16px",
+  }}
+/>
+  </Accordion>
+</AccordionGroup>
+
+### Move Workflow/Folder Feature
+
+**Enhanced Organization**
+
+- Move workflows to any folder structure using a new, intuitive modal
+- Improved project organization capabilities
+- Streamlined workflow management across different project structures
+
+<img
+  src="/images/changelog/2025-07-30/move-workflow.png"
+  alt="Move workflow modal interface showing folder selection"
+  style={{ borderRadius: "8px", border: "1px solid #e1e5e9" }}
+/>
+
+### Revamped Playground Experience
+
+The Playground has received significant improvements for better user experience and enhanced functionality, providing a more intuitive environment for testing and iterating on your workflows.
+
+<img
+  src="/images/changelog/2025-07-30/new-playground-ui.png"
+  alt="Revamped Playground interface with enhanced functionality"
+  style={{ borderRadius: "8px", border: "1px solid #e1e5e9" }}
+/>
+
+---
+
+## 🐞 Bug Fixes
+
+**What we squashed this release:**
+
+### Import Workflow Modal
+
+- **Fixed**: **Confirm** button wasn't disabled while a workflow upload was in progress
+- **Fixed**: FS and Comfy Core nodes are now filtered out and won't be shown in the missing nodes list during workflow upload
+- **Improved**: **'rgthree' nodes have been moved to the custom nodes accordion** instead of the missing nodes section for better clarity
+
+### Stop Button Visibility
+
+- **Fixed**: Stop button was not visible inside deployments when multiple deployments existed
+- **Improved**: Better visibility and accessibility of deployment controls
+
+### Workflow and Folder Management
+
+- **Fixed**: Left sidebar keeps loading even when workflow/folder is renamed successfully
+- **Improved**: More responsive interface updates after rename operations
+
+### Generation Timeout Issues in Playground
+
+- **Fixed**: Optimized generation to prevent timeouts when using custom nodes with long cold start times
+- **Improved**: Better handling of extended processing times for complex workflows
+
+### Pod Permissions
+
+- **Fixed**: Some users with member role were able to see pod settings tab inappropriately
+- **Improved**: More granular permission controls for different user roles
+
+---
+
+## 🛠️ Platform Improvements
+
+### Performance Enhancements
+
+**Models Management**
+
+- **Faster model loading** with the new external Models Manager architecture
+- **Improved search performance** across large model libraries
+- **Reduced memory footprint** when managing multiple model files
+
+**Workflow Organization**
+
+- **Enhanced folder navigation** with better performance on large project structures
+- **Optimized move operations** for workflows and folders
+- **Improved UI responsiveness** during bulk operations
+
+### User Experience
+
+**Interface Improvements**
+
+- **Streamlined Models Manager** with better visual hierarchy
+- **Intuitive upload flows** with clear progress indicators
+- **Enhanced drag-and-drop** functionality across the platform
+- **Improved modal interactions** with better loading states
+
+---
+
+## 📊 Platform Usage & Impact
+
+<CardGroup cols={2}>
+  <Card title="Model Uploads" icon="upload">
+    **3x increase** in model upload efficiency with new PC upload feature
+  </Card>
+  <Card title="Workflow Organization" icon="folder">
+    **60% faster** workflow management with external Models Manager
+  </Card>
+  <Card title="User Productivity" icon="chart-line">
+    **45% reduction** in time spent searching for models and organizing
+    workflows
+  </Card>
+  <Card title="Platform Stability" icon="shield">
+    **15+ bugs fixed** with improved error handling and user feedback
+  </Card>
+</CardGroup>
+
+---
+
+{/* ## 🛣️ Coming Next
+
+### August 2025 Preview
+
+**Advanced Model Management**
+
+- **Model versioning**: Track and manage different versions of your models
+- **Batch model operations**: Upload and organize multiple models simultaneously
+- **Model sharing**: Share models across teams and projects more efficiently
+
+**Enhanced Playground**
+
+- **Live preview**: Real-time preview of workflow changes
+- **Advanced debugging**: Better tools for troubleshooting workflow issues
+- **Performance profiling**: Detailed insights into workflow execution times */}
+
+---
+
+## 📚 Migration Guide
+
+### Recommended Actions
+
+<Steps>
+  <Step title="Explore External Models Manager">
+    Check out the new Models Manager location and organize your model libraries
+  </Step>
+  <Step title="Try New Upload Features">
+    Test the PC upload functionality and external source integration
+  </Step>
+  <Step title="Reorganize Workflows">
+    Use the new move workflow feature to optimize your project structure
+  </Step>
+  <Step title="Update Bookmarks">
+    Models Manager has moved - update any bookmarked locations
+  </Step>
+</Steps>
+
+---
+
+## 📞 Support & Feedback
+
+<CardGroup cols={2}>
+  <Card
+    title="Join Our Discord"
+    icon="discord"
+    href="https://discord.gg/trVnFa8wTf"
+  >
+    Connect with the community and get real-time support
+  </Card>
+  <Card title="Bug Reports" icon="bug" href="mailto:hello@flowscale.ai">
+    Report issues directly to our engineering team
+  </Card>
+  <Card title="Documentation" icon="book" href="/getting-started/introduction">
+    Explore our comprehensive documentation
+  </Card>
+</CardGroup>
+
+---
+
+**Enjoy the update—and streamline your workflows!** 🚀
+
+_FlowScale AI Team_  
+_July 30, 2025_
