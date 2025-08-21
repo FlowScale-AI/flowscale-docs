@@ -58,31 +58,12 @@ FlowScale AI has transitioned from GitHub authentication to Google authenticatio
 1. You are prompted to **Connect GitHub**. Click **Authorize**.
 2. Approve the read‑only permission request.
 
-{/* <Frame>
-  <div style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '250px',
-    backgroundColor: '#f8f9fa',
-    border: '2px dashed #dee2e6',
-    borderRadius: '8px',
-    padding: '1.5rem',
-    textAlign: 'center'
-  }}>
-    <div>
-      <h4 style={{marginBottom: '1rem', color: '#495057'}}>
-        [GITHUB AUTHORIZATION INTERFACE PLACEHOLDER]
-      </h4>
-      <p style={{color: '#6c757d', maxWidth: '450px', lineHeight: '1.5'}}>
-        GitHub authorization interface showing permission requests and connection process for project migration with read-only access permissions clearly displayed.
-      </p>
-      <small style={{color: '#868e96', display: 'block', marginTop: '1rem'}}>
-        Image Type: UI Screenshot | Context: GitHub integration for migration
-      </small>
-    </div>
-  </div>
-</Frame> */}
+<Frame>
+  <img
+    src="/images/troubleshooting/connect-github.png"
+    alt="Connect GitHub"
+  />
+</Frame>
 
 <Warning>
 **Heads‑up:** If the GitHub account's primary email does not match your Google email, the wizard will block migration. Switch accounts or update your GitHub email before retrying.
@@ -93,31 +74,12 @@ FlowScale AI has transitioned from GitHub authentication to Google authenticatio
 1. After a successful GitHub link, the **Start Migration** button appears.
 2. Click it to begin.
 
-{/* <Frame>
-  <div style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '200px',
-    backgroundColor: '#f8f9fa',
-    border: '2px dashed #dee2e6',
-    borderRadius: '8px',
-    padding: '1.5rem',
-    textAlign: 'center'
-  }}>
-    <div>
-      <h4 style={{marginBottom: '1rem', color: '#495057'}}>
-        [START MIGRATION BUTTON PLACEHOLDER]
-      </h4>
-      <p style={{color: '#6c757d', maxWidth: '400px', lineHeight: '1.5'}}>
-        Migration interface with prominent "Start Migration" button and project migration options clearly displayed with confirmation messaging.
-      </p>
-      <small style={{color: '#868e96', display: 'block', marginTop: '1rem'}}>
-        Image Type: UI Screenshot | Context: Migration process initiation
-      </small>
-    </div>
-  </div>
-</Frame> */}
+<Frame>
+  <img
+    src="/images/troubleshooting/start-migration.png"
+    alt="Start Migration"
+  />
+</Frame>
 
 ### Track Progress
 
@@ -155,55 +117,10 @@ FlowScale AI has transitioned from GitHub authentication to Google authenticatio
 2. Confirm that every project, workflow, and environment variable is present.
 
 <Frame>
-  <div style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '250px',
-    backgroundColor: '#f8f9fa',
-    border: '2px dashed #dee2e6',
-    borderRadius: '8px',
-    padding: '1.5rem',
-    textAlign: 'center'
-  }}>
-    <div>
-      <h4 style={{marginBottom: '1rem', color: '#495057'}}>
-        [MIGRATION COMPLETION CONFIRMATION PLACEHOLDER]
-      </h4>
-      <p style={{color: '#6c757d', maxWidth: '450px', lineHeight: '1.5'}}>
-        Completion confirmation interface showing successful migration status and next steps for accessing migrated projects with clear success indicators.
-      </p>
-      <small style={{color: '#868e96', display: 'block', marginTop: '1rem'}}>
-        Image Type: UI Screenshot | Context: Migration completion and next steps
-      </small>
-    </div>
-  </div>
-</Frame>
-
-<Frame>
-  <div style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '300px',
-    backgroundColor: '#f8f9fa',
-    border: '2px dashed #dee2e6',
-    borderRadius: '8px',
-    padding: '2rem',
-    textAlign: 'center'
-  }}>
-    <div>
-      <h4 style={{marginBottom: '1rem', color: '#495057'}}>
-        [POST-MIGRATION DASHBOARD VIEW PLACEHOLDER]
-      </h4>
-      <p style={{color: '#6c757d', maxWidth: '500px', lineHeight: '1.5'}}>
-        Post-migration dashboard showing successfully imported projects, workflows, and configurations in the new authentication system with clear project organization.
-      </p>
-      <small style={{color: '#868e96', display: 'block', marginTop: '1rem'}}>
-        Image Type: UI Screenshot | Context: Migrated project dashboard overview
-      </small>
-    </div>
-  </div>
+  <img
+    src="/images/troubleshooting/migration-finished.png"
+    alt="Migration Finished"
+  />
 </Frame>
 
 ## Migration Timeline & Expectations
@@ -236,7 +153,6 @@ FlowScale AI has transitioned from GitHub authentication to Google authenticatio
   </Accordion>
 
   <Accordion title="During Migration">
-    - ✅ You can continue using FlowScale AI while migration happens in the background
     - ✅ Migrated projects will appear in your dashboard as they're processed
     - ✅ Progress indicator shows status for large migrations
     - ✅ No interruption to existing deployments
@@ -301,12 +217,10 @@ If you encounter issues during migration, these solutions usually resolve common
   <Tab title="Missing Projects">
     If some projects don't appear after migration:
 
-    <Checklist>
-      <Check>**Repository permissions**: Ensure FlowScale AI had access to all your repositories</Check>
-      <Check>**Private repositories**: Make sure private repos containing FlowScale projects were accessible</Check>
-      <Check>**Repository naming**: Projects may have been in repositories with non-standard names</Check>
-      <Check>**Contact support**: We can manually review your account for missing projects</Check>
-    </Checklist>
+     - ✅ **Repository permissions**: Ensure FlowScale AI had access to all your repositories
+     - ✅ **Private repositories**: Make sure private repos containing FlowScale projects were accessible
+     - ✅ **Repository naming**: Projects may have been in repositories with non-standard names
+     - ✅ **Contact support**: We can manually review your account for missing projects
   </Tab>
 
   <Tab title="Migration Stuck/Failed">
