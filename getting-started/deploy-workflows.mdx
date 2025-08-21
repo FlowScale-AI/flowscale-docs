@@ -4,12 +4,15 @@ description: "Transform your ComfyUI workflows into production-ready APIs and in
 icon: "rocket"
 ---
 
-import DeploymentTroubleshooting from '/snippets/troubleshooting/deployment.mdx';
+import DeploymentTroubleshooting from "/snippets/troubleshooting/deployment.mdx";
 
 Deploy your ComfyUI workflows as production APIs with automatic documentation, interactive interfaces, and enterprise scaling.
 
 <Warning>
-**Haven't set up your workflow yet?** You'll need to complete the [Import/Create Workflows guide](/getting-started/import-create-workflows) first. The deployment process requires a fully configured, tested workflow as its foundation.
+  **Haven't set up your workflow yet?** You'll need to complete the
+  [Import/Create Workflows guide](/getting-started/import-create-workflows)
+  first. The deployment process requires a fully configured, tested workflow as
+  its foundation.
 </Warning>
 
 ## Prerequisites
@@ -29,13 +32,18 @@ Ensure your workflow is ready for deployment, you can check which workflows are 
 </Steps>
 
 <Frame>
-    <img src="/images/glossary/comfyui_ready_to_deploy_workflow.png" alt="Workflow tab highlighting green checkmark next to workflow name" />
+  <img
+    src="/images/glossary/comfyui_ready_to_deploy_workflow.png"
+    alt="Workflow tab highlighting green checkmark next to workflow name"
+  />
 </Frame>
 
 {/* Image Description for Team: Screenshot of ComfyUI workspace after successful execution showing nodes with green checkmarks and completion status */}
 
 <Warning>
-**Important**: The workflow must run successfully at least once in the ComfyUI workspace before deployment. This ensures all models and custom nodes are properly configured and the platform can verify the workflow's functionality.
+  **Important**: The workflow must run successfully at least once in the ComfyUI
+  workspace before deployment. This ensures all models and custom nodes are
+  properly configured and the platform can verify the workflow's functionality.
 </Warning>
 
 ## Configure API Interface
@@ -48,7 +56,9 @@ Transform your workflow into a standardized API by defining inputs and outputs:
 - Establish reliable API contracts
 
 <Note>
-By default, workflows are not configured for deployment. You'll notice a **red cross mark** next to unconfigured workflows in your project's workflow sidebar.
+  By default, workflows are not configured for deployment. You'll notice a **red
+  cross mark** next to unconfigured workflows in your project's workflow
+  sidebar.
 </Note>
 
 {/* Image Description for Team: Screenshot of FlowScale project sidebar showing workflow list with red cross icons indicating unconfigured deployment status */}
@@ -61,10 +71,13 @@ There are two primary ways to configure a workflow for deployment:
 
 <Tabs>
   <Tab title="FlowScale I/O Nodes (Recommended)">
-    Use specialized FlowScale I/O nodes that are designed for deployment configuration.
+    Use specialized FlowScale I/O nodes that are designed for deployment
+    configuration.
   </Tab>
   <Tab title="Advanced I/O Configurator">
-    Use the advanced configuration interface for complex setups. [Read more about advanced API configuration](/deploy-api/overview).
+    Use the advanced configuration interface for complex setups. [Read more
+    about advanced API
+    configuration](/deploy-api/configuration#method-2%3A-advanced-api-configuration).
   </Tab>
 </Tabs>
 
@@ -76,17 +89,18 @@ Use FlowScale I/O nodes to define API inputs and outputs. Choose which controls 
 
 <Steps>
   <Step title="Open Node Search">
-    Double-click on an empty area in the ComfyUI workspace to open the node search
+    Double-click on an empty area in the ComfyUI workspace to open the node
+    search
   </Step>
   <Step title="Search for Input Nodes">
-    Type one of the following input node names:
-    - **InputText** - For text prompts and string inputs
-    - **InputImage** - For image uploads
-    - **InputNumber** - For numeric parameters
-    - **InputSlider** - For slider controls
+    Type one of the following input node names: - **InputText** - For text
+    prompts and string inputs - **InputImage** - For image uploads -
+    **InputNumber** - For numeric parameters - **InputSlider** - For slider
+    controls
   </Step>
   <Step title="Select FlowScale Nodes">
-    Choose nodes with the **"[FS]"** prefix, indicating they are FlowScale-specific nodes
+    Choose nodes with the **"[FS]"** prefix, indicating they are
+    FlowScale-specific nodes
   </Step>
   <Step title="Connect to Workflow">
     Connect these input nodes to your workflow where external inputs are needed
@@ -94,13 +108,19 @@ Use FlowScale I/O nodes to define API inputs and outputs. Choose which controls 
 </Steps>
 
 <Frame>
-    <img src="/images/glossary/comfyui_flowscale_nodes.png" alt="ComfyUI node search dialog displaying FlowScale-specific I/O nodes with [FS] prefix, showing input and output node categories with clear descriptions and usage examples" />
+  <img
+    src="/images/glossary/comfyui_flowscale_nodes.png"
+    alt="ComfyUI node search dialog displaying FlowScale-specific I/O nodes with [FS] prefix, showing input and output node categories with clear descriptions and usage examples"
+  />
 </Frame>
 
 {/* Image Description for Team: Screenshot of ComfyUI node search showing FlowScale I/O nodes with [FS] prefix including InputText, InputImage, InputNumber, InputSlider */}
 
 <Frame>
-    <img src="/images/glossary/comfyui_fs_nodes_highlighted.png" alt="ComfyUI workspace showing FlowScale I/O nodes being added to workflow with connection preview and configuration options visible" />
+  <img
+    src="/images/glossary/comfyui_fs_nodes_highlighted.png"
+    alt="ComfyUI workspace showing FlowScale I/O nodes being added to workflow with connection preview and configuration options visible"
+  />
 </Frame>
 
 {/* Image Description for Team: Screenshot showing FlowScale I/O nodes being added to ComfyUI workspace with connection process and [FS] prefix visible */}
@@ -109,11 +129,9 @@ Use FlowScale I/O nodes to define API inputs and outputs. Choose which controls 
 
 <Steps>
   <Step title="Search for Output Nodes">
-    In the node search, type one of the following output node names:
-    - **SaveImage** - For image outputs
-    - **SaveText** - For text outputs
-    - **SaveVideo** - For video outputs
-    - **SaveAudio** - For audio outputs
+    In the node search, type one of the following output node names: -
+    **SaveImage** - For image outputs - **SaveText** - For text outputs -
+    **SaveVideo** - For video outputs - **SaveAudio** - For audio outputs
   </Step>
   <Step title="Select FlowScale Nodes">
     Again, choose nodes with the **"[FS]"** prefix
@@ -127,16 +145,16 @@ Use FlowScale I/O nodes to define API inputs and outputs. Choose which controls 
 
 ### Available FlowScale I/O Nodes
 
-| Node Type | Purpose | Use Case |
-|-----------|---------|----------|
-| **[FS] InputText** | Text input field | Prompts, descriptions, parameters |
-| **[FS] InputImage** | Image upload | Reference images, masks, source images |
-| **[FS] InputNumber** | Numeric input | Steps, strength, dimensions |
-| **[FS] InputSlider** | Range slider | CFG scale, denoise strength |
-| **[FS] SaveImage** | Image output | Generated images, processed images |
-| **[FS] SaveText** | Text output | Generated text, metadata |
-| **[FS] SaveVideo** | Video output | Animated sequences |
-| **[FS] SaveAudio** | Audio output | Generated audio files |
+| Node Type            | Purpose          | Use Case                               |
+| -------------------- | ---------------- | -------------------------------------- |
+| **[FS] InputText**   | Text input field | Prompts, descriptions, parameters      |
+| **[FS] InputImage**  | Image upload     | Reference images, masks, source images |
+| **[FS] InputNumber** | Numeric input    | Steps, strength, dimensions            |
+| **[FS] InputSlider** | Range slider     | CFG scale, denoise strength            |
+| **[FS] SaveImage**   | Image output     | Generated images, processed images     |
+| **[FS] SaveText**    | Text output      | Generated text, metadata               |
+| **[FS] SaveVideo**   | Video output     | Animated sequences                     |
+| **[FS] SaveAudio**   | Audio output     | Generated audio files                  |
 
 ### Verify Configuration
 
@@ -150,7 +168,8 @@ After adding FlowScale I/O nodes:
     Click the **Save** button in the ComfyUI workspace
   </Step>
   <Step title="Check Status">
-    Look for a **green checkmark** next to your workflow in the left sidebar, indicating successful configuration
+    Look for a **green checkmark** next to your workflow in the left sidebar,
+    indicating successful configuration
   </Step>
 </Steps>
 
@@ -165,40 +184,48 @@ Deploy your configured workflow as a production API with automatic scaling and m
 <Steps>
   <Step title="Click Deploy">
     Click the **"Deploy"** button in the top-right corner of the application
-    
     <Frame>
-        <img src="/images/deploy-api/comfyui-deploy-button.png" alt=" Main application interface with prominently highlighted Deploy button in top-right corner, showing deployment readiness and access controls" />
+      <img
+        src="/images/deploy-api/comfyui-deploy-button.png"
+        alt=" Main application interface with prominently highlighted Deploy button in top-right corner, showing deployment readiness and access controls"
+      />
     </Frame>
   </Step>
-  
+
   <Step title="Select Pod">
     A dialog box will appear asking you to select the Pod for deployment
-    
     <Frame>
-        <img src="/images/deploy-api/comfyui-pod-selection.png" alt="A dialog box will appear asking you to select the Pod for deployment" />
+      <img
+        src="/images/deploy-api/comfyui-pod-selection.png"
+        alt="A dialog box will appear asking you to select the Pod for deployment"
+      />
     </Frame>
   </Step>
-  
+
   <Step title="Choose Configuration">
-    Select the appropriate pod based on your workflow requirements:
-    - **GPU type** needed for your models
-    - **Memory requirements** for your workflow
-    - **Expected usage** patterns
+    Select the appropriate pod based on your workflow requirements: - **GPU
+    type** needed for your models - **Memory requirements** for your workflow -
+    **Expected usage** patterns
   </Step>
-  
+
   <Step title="Confirm Deployment">
     Click **Deploy** to start the deployment process
   </Step>
 </Steps>
 
 <Frame>
-    <img src="/images/glossary/comfyui-api-deployment.png" alt=" Real-time deployment progress interface showing infrastructure provisioning, model loading, and service initialization with progress indicators and status messages" />
+  <img
+    src="/images/glossary/comfyui-api-deployment.png"
+    alt=" Real-time deployment progress interface showing infrastructure provisioning, model loading, and service initialization with progress indicators and status messages"
+  />
 </Frame>
 
 {/* Image Description for Team: Screenshot of deployment process showing progress indicators and status messages during workflow deployment */}
 
 <Note>
-For detailed information about pod types, specifications, and choosing the right configuration for your workflow, refer to our [Pods documentation](/getting-started/glossary/pods).
+  For detailed information about pod types, specifications, and choosing the
+  right configuration for your workflow, refer to our [Pods
+  documentation](/getting-started/glossary/pods).
 </Note>
 
 ## Deployed Workflow Features
@@ -212,7 +239,10 @@ Your deployed workflow provides:
 - Performance insights and metrics
 
 <Frame>
-    <img src="/images/glossary/comfyui-api-runs.png" alt="Comprehensive API management dashboard showing deployed workflows, request metrics, endpoint URLs, and management controls with professional monitoring interface" />
+  <img
+    src="/images/glossary/comfyui-api-runs.png"
+    alt="Comprehensive API management dashboard showing deployed workflows, request metrics, endpoint URLs, and management controls with professional monitoring interface"
+  />
 </Frame>
 
 ### API Integration
@@ -236,20 +266,20 @@ curl -X POST https://api.flowscale.ai/v1/run \
 ```
 
 ```javascript JavaScript
-const response = await fetch('https://api.flowscale.ai/v1/run', {
-  method: 'POST',
+const response = await fetch("https://api.flowscale.ai/v1/run", {
+  method: "POST",
   headers: {
-    'Authorization': 'Bearer your-api-key',
-    'Content-Type': 'application/json'
+    Authorization: "Bearer your-api-key",
+    "Content-Type": "application/json",
   },
   body: JSON.stringify({
-    workflow_id: 'wf_abc123',
+    workflow_id: "wf_abc123",
     inputs: {
-      prompt: 'A beautiful sunset over mountains',
+      prompt: "A beautiful sunset over mountains",
       steps: 20,
-      cfg: 7.5
-    }
-  })
+      cfg: 7.5,
+    },
+  }),
 });
 ```
 
@@ -281,24 +311,32 @@ The auto-generated playground provides a user-friendly interface for non-technic
 
 <Steps>
   <Step title="Access Playground">
-    In the API Server page, find your deployed workflow and click **"Open Playground"**
+    In the API Server page, find your deployed workflow and click **"Open
+    Playground"**
   </Step>
   <Step title="Test Workflow">
     Use the auto-generated form to input parameters and test your workflow
   </Step>
   <Step title="Share with Team">
-    Share the playground URL with team members for easy access without ComfyUI complexity
+    Share the playground URL with team members for easy access without ComfyUI
+    complexity
   </Step>
 </Steps>
 
 <Frame>
-    <img src="/images/deploy-api/comfyui-playground-button.png" alt="List view of deployed workflows with Open Playground buttons, status indicators, performance metrics, and management actions clearly visible" />
+  <img
+    src="/images/deploy-api/comfyui-playground-button.png"
+    alt="List view of deployed workflows with Open Playground buttons, status indicators, performance metrics, and management actions clearly visible"
+  />
 </Frame>
 
 {/* Image Description for Team: Screenshot of API Server workflows list showing deployed workflows with Open Playground buttons and management options */}
 
 <Frame>
-    <img src="/images/deploy-api/comfyui-playground-UI.png" alt=" Auto-generated Gradio web interface showing user-friendly form inputs based on workflow parameters, real-time preview, and results display area" />
+  <img
+    src="/images/deploy-api/comfyui-playground-UI.png"
+    alt=" Auto-generated Gradio web interface showing user-friendly form inputs based on workflow parameters, real-time preview, and results display area"
+  />
 </Frame>
 
 Benefits of the playground interface:
@@ -311,127 +349,7 @@ Benefits of the playground interface:
 
 {/* Image Description for Team: Screenshot of full playground interface showing input controls on left and output display on right with professional UI design */}
 
-## Advanced Configuration Options
-
-### GPU & Scaling Settings
-
-<Frame>
-    <img src="/images/glossary/comfyui_deploy_pod_config.png" alt="GPU configuration interface showing hardware selection options (T4, L4, A100, H100), performance specifications, cost comparisons, and usage recommendations for different workflow types" />
-</Frame>
-
-Choose the right compute resources for your workflow:
-
-| GPU Type | Use Case | Performance | Cost |
-|----------|----------|-------------|------|
-| **T4** | Simple workflows, testing | Basic | $ |
-| **L4** | Standard image generation | Good | $$ |
-| **A100** | Complex workflows, batch processing | Excellent | $$$ |
-| **H100** | Largest models, real-time inference | Premium | $$$$ |
-
-### Auto-scaling Configuration
-
-- **Concurrency limits**: Maximum simultaneous requests
-- **Cold start optimization**: Faster response times
-- **Geographic regions**: Deploy closer to your users
-- **Timeout settings**: Request processing limits
-
-<Frame>
-  <div style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '300px',
-    backgroundColor: '#f8f9fa',
-    border: '2px dashed #dee2e6',
-    borderRadius: '8px',
-    padding: '2rem',
-    textAlign: 'center'
-  }}>
-    <div>
-      <h4 style={{marginBottom: '1rem', color: '#495057'}}>
-        [ADVANCED DEPLOYMENT CONFIG PLACEHOLDER]
-      </h4>
-      <p style={{color: '#6c757d', maxWidth: '500px', lineHeight: '1.5'}}>
-        Advanced deployment configuration screen with GPU selection, scaling options, timeout settings, concurrency limits, geographic regions, and cost estimation tools.
-      </p>
-      <small style={{color: '#868e96', display: 'block', marginTop: '1rem'}}>
-        Image Type: UI Screenshot | Context: Enterprise deployment configuration
-      </small>
-    </div>
-  </div>
-</Frame>
-
-{/* Image Description for Team: Screenshot of advanced deployment settings showing GPU selection, scaling configuration, timeout settings, and cost estimation */}
-
-### Input/Output Settings
-
-Configure how your workflow interacts with the API:
-
-<Tabs>
-  <Tab title="Input Parameters">
-    - **Text prompts**: String inputs with validation
-    - **Numeric values**: Sliders, number inputs with ranges
-    - **Image uploads**: File handling with format restrictions
-    - **Dropdown options**: Predefined choices for models/styles
-  </Tab>
-  <Tab title="Output Formats">
-    - **Images**: PNG, JPEG, WebP with quality settings
-    - **JSON data**: Structured response with metadata
-    - **File downloads**: Direct file URLs for generated content
-    - **Batch results**: Multiple outputs from single request
-  </Tab>
-</Tabs>
-
-## Monitoring & Management
-
-### Deployment Dashboard
-
-Track the performance and usage of your deployed workflows:
-
-<CardGroup cols={2}>
-  <Card title="Request Analytics" icon="chart-line">
-    Monitor API usage, response times, and error rates
-  </Card>
-  <Card title="Cost Tracking" icon="dollar-sign">
-    View compute costs and optimize resource usage
-  </Card>
-  <Card title="Version Management" icon="code-branch">
-    Deploy multiple versions and manage traffic routing
-  </Card>
-  <Card title="Error Monitoring" icon="triangle-exclamation">
-    Debug issues with detailed error logs and traces
-  </Card>
-</CardGroup>
-
-<Frame>
-  <div style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '300px',
-    backgroundColor: '#f8f9fa',
-    border: '2px dashed #dee2e6',
-    borderRadius: '8px',
-    padding: '2rem',
-    textAlign: 'center'
-  }}>
-    <div>
-      <h4 style={{marginBottom: '1rem', color: '#495057'}}>
-        [DEPLOYMENT ANALYTICS DASHBOARD PLACEHOLDER]
-      </h4>
-      <p style={{color: '#6c757d', maxWidth: '500px', lineHeight: '1.5'}}>
-        Comprehensive analytics dashboard showing request metrics, cost tracking, performance monitoring, error rates, version management, and usage patterns with detailed charts and graphs.
-      </p>
-      <small style={{color: '#868e96', display: 'block', marginTop: '1rem'}}>
-        Image Type: UI Screenshot | Context: Production monitoring and analytics
-      </small>
-    </div>
-  </div>
-</Frame>
-
-{/* Image Description for Team: Screenshot of analytics dashboard showing request metrics, cost tracking, performance metrics, error monitoring, and version management */}
-
-### API Documentation
+## API Documentation
 
 FlowScale AI automatically generates comprehensive API documentation:
 
@@ -439,34 +357,6 @@ FlowScale AI automatically generates comprehensive API documentation:
 - **Code examples**: Ready-to-use snippets in multiple languages
 - **Schema definitions**: Detailed input/output specifications
 - **Authentication**: API key management and security
-
-<Frame>
-  <div style={{
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '300px',
-    backgroundColor: '#f8f9fa',
-    border: '2px dashed #dee2e6',
-    borderRadius: '8px',
-    padding: '2rem',
-    textAlign: 'center'
-  }}>
-    <div>
-      <h4 style={{marginBottom: '1rem', color: '#495057'}}>
-        [API DOCUMENTATION PAGE PLACEHOLDER]
-      </h4>
-      <p style={{color: '#6c757d', maxWidth: '500px', lineHeight: '1.5'}}>
-        Interactive API documentation page with endpoint explorer, code examples in multiple languages, schema documentation, authentication guides, and API key management interface.
-      </p>
-      <small style={{color: '#868e96', display: 'block', marginTop: '1rem'}}>
-        Image Type: UI Screenshot | Context: Developer documentation and API testing
-      </small>
-    </div>
-  </div>
-</Frame>
-
-{/* Image Description for Team: Screenshot of API documentation showing interactive explorer, code examples, schema documentation, and API key management */}
 
 <Frame>
   <img
@@ -488,19 +378,16 @@ FlowScale AI automatically generates comprehensive API documentation:
 
 <AccordionGroup>
   <Accordion title="Caching Strategies">
-    - Model caching to reduce cold start times
-    - Result caching for identical requests
-    - CDN integration for faster content delivery
+    - Model caching to reduce cold start times - Result caching for identical
+    requests - CDN integration for faster content delivery
   </Accordion>
   <Accordion title="Request Optimization">
-    - Async processing for long-running workflows
-    - Batch requests to reduce overhead
-    - Progressive loading for large outputs
+    - Async processing for long-running workflows - Batch requests to reduce
+    overhead - Progressive loading for large outputs
   </Accordion>
   <Accordion title="Resource Management">
-    - Auto-scaling based on demand
-    - GPU pooling for efficient utilization
-    - Memory optimization for large models
+    - Auto-scaling based on demand - GPU pooling for efficient utilization -
+    Memory optimization for large models
   </Accordion>
 </AccordionGroup>
 
@@ -511,7 +398,8 @@ FlowScale AI automatically generates comprehensive API documentation:
 <DeploymentTroubleshooting />
 
 <Note>
-For additional troubleshooting guidance, refer to our [comprehensive troubleshooting guide](/getting-started/troubleshooting).
+  For additional troubleshooting guidance, refer to our [comprehensive
+  troubleshooting guide](/getting-started/troubleshooting).
 </Note>
 
 ## Next Steps
@@ -548,4 +436,3 @@ Your workflow is now deployed as production infrastructure. Continue building:
     Comprehensive troubleshooting guidance and solutions
   </Card>
 </CardGroup>
-

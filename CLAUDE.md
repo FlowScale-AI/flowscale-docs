@@ -19,13 +19,12 @@ mintlify install
 
 ### Prerequisites
 - Mintlify CLI must be installed globally: `npm i -g mintlify`
-- Run commands from the root directory (where mint.json is located)
+- Run commands from the root directory (where docs.json is located)
 
 ## Architecture and Structure
 
 ### Core Configuration
-- **mint.json**: Main Mintlify configuration file defining navigation, theming, and site structure
-- **docs.json**: Additional Mintlify schema configuration
+- **docs.json**: Main Mintlify configuration file defining navigation, theming, and site structure
 - Uses "almond" theme with FlowScale AI branding
 
 ### Content Organization
@@ -72,4 +71,4 @@ The documentation is structured into three main tabs:
 - Base endpoints follow `/api/v1/` pattern
 
 ### Navigation Structure
-The site uses a sophisticated tab-based navigation defined in mint.json with groups and pages. When adding new content, ensure it fits within the existing information architecture.
+The site uses a sophisticated tab-based navigation defined in docs.json with groups and pages. When adding new content, ensure it fits within the existing information architecture.

@@ -21,7 +21,6 @@ icon: "circle-question"
   <Accordion title="What file formats can I import?">
     FlowScale supports several import formats:
     - **Workflow JSON**: Standard ComfyUI export format
-    - **API JSON**: ComfyUI API format for advanced users  
     - **PNG with metadata**: Images with embedded workflow data
     - **Workflow templates**: FlowScale-specific templates
 
@@ -55,8 +54,6 @@ icon: "circle-question"
     5. **Send invitation** - they'll receive an email to join
 
     **Role levels**:
-    - **Viewer**: Read-only access
-    - **Contributor**: Can create and edit workflows
     - **Admin**: Full project management access
     - **Owner**: Complete control including billing
   </Accordion>
@@ -108,8 +105,9 @@ icon: "circle-question"
     **Performance optimization**:
 
     **GPU selection**:
-    - Use higher-tier GPUs (L4, A100) for complex workflows
-    - T4 GPUs are suitable for simple workflows only
+    - Use higher-tier GPUs (L4, L40S, A100, H100, H200) for complex workflows
+    - T4 and A10G GPUs are suitable for simple to moderate workflows
+    - B200 for cutting-edge models requiring maximum performance
 
     **Model optimization**:
     - Use FP16 precision when possible
@@ -141,8 +139,9 @@ icon: "circle-question"
     - Unload models when not needed
 
     **GPU upgrade**:
-    - Switch to a GPU with more VRAM (L4, A100, H100)
+    - Switch to a GPU with more VRAM (L4, L40S, A100, H100, H200)
     - Consider the memory requirements of your specific workflow
+    - H200 provides maximum VRAM (141GB) for the largest models
   </Accordion>
 </AccordionGroup>
 
@@ -192,7 +191,7 @@ icon: "circle-question"
     - Implement proper retry logic with exponential backoff
   </Accordion>
 
-  <Accordion title="Gradio UI not loading or functioning properly">
+  <Accordion title="Playground UI not loading or functioning properly">
     **UI troubleshooting**:
 
     **Browser compatibility**:
@@ -222,19 +221,15 @@ icon: "circle-question"
 
     **Compute time**:
     - Charged per second of GPU usage
-    - Different rates for T4, L4, A100, H100 GPUs
-    - No charges when pods are idle
+    - Different rates for T4, A10G, L4, L40S, A100, H100, H200 and B200 GPUs
+    - $0.07 per hour is charged when pods are idle
 
     **Storage**:
-    - Model storage: $X per GB per month
+    - Model storage: $0.01 per model download
     - Workflow storage: Included in base plan
-    - Output storage: Temporary (24 hours) included
 
     **API calls**:
     - No additional charges for API requests
-    - Only GPU compute time is billed
-
-    **View usage**: Check your dashboard for real-time usage and cost tracking.
   </Accordion>
 
   <Accordion title="How do I upgrade my plan or add more resources?">
@@ -242,8 +237,8 @@ icon: "circle-question"
 
     1. **Go to account settings** (profile icon → Settings)
     2. **Click "Billing & Usage"** tab
-    3. **Select "Change Plan"** or "Add Resources"
-    4. **Choose your new plan** or resource allocation
+    3. **Select "Change Plan"**
+    4. **Choose your new plan**
     5. **Confirm changes** - billing adjusts automatically
 
     **Available upgrades**:
@@ -396,7 +391,6 @@ icon: "circle-question"
     **Network security**:
     - Use HTTPS for all API communications
     - Implement proper input validation
-    - Monitor for unusual API usage patterns
   </Accordion>
 </AccordionGroup>
 
@@ -408,7 +402,7 @@ Can't find the answer you're looking for? Here's how to get additional support:
   <Card
     title="Join Discord Community"
     icon="discord"
-    href="https://discord.gg/flowscale"
+    href="https://discord.gg/trVnFa8wTf"
   >
     Chat with other FlowScale users and get quick help
   </Card>
