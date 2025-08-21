@@ -41,7 +41,6 @@
           {
             "group": "Troubleshooting",
             "pages": [
-              "getting-started/troubleshooting/index",
               "getting-started/troubleshooting/project-migration"
             ]
           }
