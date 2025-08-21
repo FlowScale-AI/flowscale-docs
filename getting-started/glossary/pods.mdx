@@ -26,7 +26,7 @@ icon: "server"
 
 <AccordionGroup>
   <Accordion title="GPU Type">
-    The graphics card model used by the pod (e.g. *T4 16 GB*, *A100 80 GB*). Each model has a different $/hr rate.
+    The graphics card model used by the pod (e.g. *T4 16GB*, *A10G 24GB*, *L40S 48GB*, *A100 40GB*, *A100 80GB*, *H200 141GB*, *B200 180GB*). Each model has a different $/hr rate.
   </Accordion>
   <Accordion title="Allotted GPU Containers">
     The *maximum* number of GPU workers the pod can burst to during high load.
@@ -56,20 +56,45 @@ icon: "server"
     
     Perfect for getting started and lightweight image generation tasks
   </Card>
+  <Card title="A10G - 24GB VRAM" icon="microchip" color="#059669">
+    **Best for:** Enhanced development, moderate workloads
+    
+    Cost-effective option with improved performance over T4
+  </Card>
   <Card title="L4 - 24GB VRAM" icon="microchip" color="#3b82f6">
     **Best for:** Standard image generation, medium workloads
     
     Balanced performance for most production use cases
   </Card>
-  <Card title="A100 - 40GB/80GB VRAM" icon="microchip" color="#f59e0b">
-    **Best for:** Complex workflows, batch processing
+  <Card title="L40S - 48GB VRAM" icon="microchip" color="#2563eb">
+    **Best for:** Advanced image/video generation, large models
+    
+    High-memory GPU for complex multi-modal workflows
+  </Card>
+  <Card title="A100 - 40GB VRAM" icon="microchip" color="#f59e0b">
+    **Best for:** Complex workflows, large model training
     
     High-performance computing for demanding AI tasks
+  </Card>
+  <Card title="A100 - 80GB VRAM" icon="microchip" color="#ea580c">
+    **Best for:** Massive models, extensive batch processing
+    
+    Maximum A100 memory for the largest workloads
   </Card>
   <Card title="H100 - 80GB VRAM" icon="microchip" color="#dc2626">
     **Best for:** Largest models, real-time inference
     
     Top-tier performance for the most demanding workloads
+  </Card>
+  <Card title="H200 - 141GB VRAM" icon="microchip" color="#b91c1c">
+    **Best for:** Massive models, extreme workloads
+    
+    Maximum memory capacity for the largest AI models
+  </Card>
+  <Card title="B200 - 180GB VRAM" icon="microchip" color="#7c2d12">
+    **Best for:** Next-generation AI inference, cutting-edge models
+    
+    Latest architecture with massive memory for breakthrough AI performance
   </Card>
 </CardGroup>
 

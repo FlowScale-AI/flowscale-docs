@@ -105,8 +105,9 @@ icon: "circle-question"
     **Performance optimization**:
 
     **GPU selection**:
-    - Use higher-tier GPUs (L4, A100) for complex workflows
-    - T4 GPUs are suitable for simple workflows only
+    - Use higher-tier GPUs (L4, L40S, A100, H100, H200) for complex workflows
+    - T4 and A10G GPUs are suitable for simple to moderate workflows
+    - B200 for cutting-edge models requiring maximum performance
 
     **Model optimization**:
     - Use FP16 precision when possible
@@ -138,8 +139,9 @@ icon: "circle-question"
     - Unload models when not needed
 
     **GPU upgrade**:
-    - Switch to a GPU with more VRAM (L4, A100, H100)
+    - Switch to a GPU with more VRAM (L4, L40S, A100, H100, H200)
     - Consider the memory requirements of your specific workflow
+    - H200 provides maximum VRAM (141GB) for the largest models
   </Accordion>
 </AccordionGroup>
 
