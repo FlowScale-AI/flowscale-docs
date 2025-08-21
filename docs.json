@@ -61,10 +61,7 @@
           },
           {
             "group": "SDKs",
-            "pages": [
-              "deploy-api/sdk/sdk-js",
-              "deploy-api/sdk/sdk-python"
-            ]
+            "pages": ["deploy-api/sdk/sdk-js", "deploy-api/sdk/sdk-python"]
           },
           {
             "group": "API Reference",
@@ -88,7 +85,11 @@
           {
             "group": "Changelog",
             "pages": [
-              "reference/changelog/2025-07-10"
+              "reference/changelog/2025-07-30",
+              "reference/changelog/2025-07-15",
+              "reference/changelog/2025-06-11",
+              "reference/changelog/2025-05-21",
+              "reference/changelog/2025-05-12"
             ]
           }
         ]
