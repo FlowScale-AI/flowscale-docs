@@ -1,0 +1,155 @@
+---
+title: "Testing Workflow APIs"
+description: "How to test your deployed ComfyUI workflow APIs with various tools"
+icon: "flask"
+---
+
+# Testing Your Workflow APIs
+
+Since each FlowScale AI workflow has dynamic parameter names based on its ComfyUI nodes, the generic "Try it" interface has limitations. Here are better approaches for testing your specific workflow APIs.
+
+## Method 1: Use the Playground UI (Recommended)
+
+The **Playground UI** is the easiest way to test your workflows interactively:
+
+1. Go to your FlowScale dashboard
+2. Navigate to your deployed workflow
+3. Click **"Open Playground"**
+4. Fill out the auto-generated form with your workflow's actual parameters
+5. Submit to test your workflow
+
+The Playground automatically knows your workflow's parameter names and types.
+
+## Method 2: Using curl
+
+Get your exact parameter names from the Playground UI, then use curl:
+
+```bash
+curl -X POST "https://your-deployment.flowscale.ai/api/v1/runs?workflow_id=your-workflow-id" \
+  -H "X-API-KEY: your-api-key" \
+  -H "Content-Type: multipart/form-data" \
+  -F "prompt_68667=A beautiful sunset over mountains" \
+  -F "steps_68668=20" \
+  -F "width_68669=1024" \
+  -F "height_68670=1024" \
+  -F "image_68671=@/path/to/your/image.jpg"
+```
+
+## Method 3: Using Postman
+
+1. Create a new POST request
+2. Set URL: `https://your-deployment.flowscale.ai/api/v1/runs?workflow_id=your-workflow-id`
+3. Add Headers:
+   - `X-API-KEY: your-api-key`
+4. Set Body type to "form-data"
+5. Add your workflow's specific parameters as form fields
+6. For file uploads, select "File" type and choose your file
+
+## Method 4: Using Python requests
+
+```python
+import requests
+
+url = "https://your-deployment.flowscale.ai/api/v1/runs"
+headers = {"X-API-KEY": "your-api-key"}
+params = {"workflow_id": "your-workflow-id"}
+
+# For text-only workflows
+data = {
+    "prompt_68667": "A beautiful sunset over mountains",
+    "steps_68668": 20,
+    "width_68669": 1024,
+    "height_68670": 1024
+}
+
+response = requests.post(url, headers=headers, params=params, data=data)
+
+# For workflows with file uploads
+files = {"input_image": open("path/to/image.jpg", "rb")}
+data = {"prompt_68667": "Transform this image", "strength_68668": 0.8}
+
+response = requests.post(url, headers=headers, params=params, data=data, files=files)
+```
+
+## Method 5: Using JavaScript fetch
+
+```javascript
+const formData = new FormData();
+formData.append('prompt_68667', 'A beautiful sunset over mountains');
+formData.append('steps_68668', '20');
+formData.append('width_68669', '1024');
+formData.append('height_68670', '1024');
+
+// For file uploads
+const fileInput = document.querySelector('input[type="file"]');
+if (fileInput.files[0]) {
+  formData.append('image_68671', fileInput.files[0]);
+}
+
+const response = await fetch('https://your-deployment.flowscale.ai/api/v1/runs?workflow_id=your-workflow-id', {
+  method: 'POST',
+  headers: {
+    'X-API-KEY': 'your-api-key'
+  },
+  body: formData
+});
+
+const result = await response.json();
+```
+
+## Discovering Your Workflow's Parameters
+
+### From the Playground UI
+1. Open your workflow's Playground
+2. Inspect the form fields - these are your exact parameter names
+3. Note the field types (text, number, file upload, etc.)
+
+### From ComfyUI Workflow
+1. Open your workflow in ComfyUI
+2. Look for nodes with input fields
+3. The input field names become API parameter names
+4. Common patterns:
+   - Text inputs → `prompt_68667`, `negative_prompt_68668`, `style_68669`
+   - Numeric inputs → `steps_68668`, `cfg_scale_68669`, `strength_68670`, `width_68671`, `height_68672`  
+   - File inputs → `image_68671`, `mask_68672`, `reference_image_68673`
+
+### From Auto-Generated API Docs
+Each deployment has its own API Deployment Dashboard with the exact parameter names for that specific workflow.
+
+## Common Parameter Patterns
+
+While parameter names are workflow-specific, here are common patterns:
+
+**Image Generation Workflows:**
+- `prompt_68667` (string) - Main text prompt
+- `negative_prompt_68668` (string) - What to avoid  
+- `width_68669`, `height_68670` (integers) - Image dimensions
+- `steps_68668` (integer) - Denoising steps
+- `cfg_scale_68669` (number) - Guidance scale
+- `seed_68670` (integer) - Random seed
+
+**Image-to-Image Workflows:**
+- `image_68671` (file) - Source image
+- `prompt_68667` (string) - Transformation prompt
+- `strength_68668` (number 0-1) - How much to change
+- `steps_68668` (integer) - Processing steps
+
+**ControlNet Workflows:**
+- `image_68671` (file) - Source image
+- `control_image_68672` (file) - Control/reference image
+- `prompt_68667` (string) - Generation prompt
+- `controlnet_conditioning_scale_68668` (number) - Control strength
+
+Remember: These are just common patterns. Your specific workflow may have completely different parameter names based on its ComfyUI nodes.
+
+## Troubleshooting
+
+**"Field required" errors:** You're missing a required parameter. Check your workflow's Playground UI to see all required fields.
+
+**"Invalid value" errors:** Check the parameter type (string vs number vs integer) and value ranges.
+
+**File upload issues:** Ensure you're using `multipart/form-data` content type and the correct field name for file parameters.
+
+**Authentication errors:** Verify your `X-API-KEY` header is correct and the API key has access to the specified workflow.
+
+For the most reliable testing experience, use the **Playground UI** which automatically handles all parameter discovery and validation for your specific workflow.

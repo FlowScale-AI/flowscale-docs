@@ -1,13 +1,13 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Comfy API",
-    "version": "1.0.0"
+    "title": "FlowScale ComfyUI API",
+    "version": "2.0.0"
   },
   "servers": [
     {
-      "url": "https://flowscale-core.pod.flowscale.ai",
-      "description": "Pod #flowscale-core (Default)"
+      "url": "https://your-deployment-api-url.pod.flowscale.ai",
+      "description": "Pod #your-pod (Default)"
     },
     {
       "url": "{apiEndpoint}",
@@ -81,7 +81,7 @@
           "run"
         ],
         "summary": "Execute Workflow",
-        "description": "Executes a specified workflow by processing dynamic form data, which can include both text fields and file uploads. The workflow is executed on an available ComfyUI instance within the cluster based on the queue size limit.\nThis endpoint accepts `multipart/form-data` with arbitrary fields. The form data can include both text fields and file uploads.",
+        "description": "Executes a specified workflow by processing dynamic form data with field names and types determined by the deployed ComfyUI workflow. Each workflow defines its own unique input parameters based on the nodes it contains.\n\n**Important**: The exact parameter names and types vary for each workflow_id and deployment URL. To discover the required parameters for your workflow:\n1. Check your workflow's **API Deployment Dashboard**\n2. Refer to your ComfyUI workflow's input nodes\n\nThe workflow is executed on an available ComfyUI instance within the cluster based on queue size limits.",
         "operationId": "execute_workflow_api_v1_runs_post",
         "security": [
           {
@@ -138,21 +138,47 @@
           }
         },
         "requestBody": {
+          "required": true,
           "content": {
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "additionalProperties": true,
-                "description": "Dynamic form data with arbitrary fields, including file uploads.",
-                "example": {
-                  "text_field": "Sample text",
-                  "file_field": "(binary file data)"
-                }
+                "properties": {
+                  "custom_field_1": {
+                    "type": "string",
+                    "description": "Replace 'custom_field_1' with your actual parameter name. Example: 'prompt', 'style', 'model_name'",
+                    "example": "your_value_here"
+                  },
+                  "custom_field_2": {
+                    "type": "number",
+                    "description": "Replace 'custom_field_2' with your numeric parameter name. Example: 'strength', 'cfg_scale', 'temperature'",
+                    "example": 7.5
+                  },
+                  "custom_field_3": {
+                    "type": "integer",
+                    "description": "Replace 'custom_field_3' with your integer parameter name. Example: 'steps', 'seed', 'width', 'height'",
+                    "example": 20
+                  },
+                  "custom_file_upload": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Replace 'custom_file_upload' with your file parameter name. Example: 'input_image', 'reference_image', 'mask'"
+                  }
+                },
+                "additionalProperties": {
+                  "oneOf": [
+                    {"type": "string"},
+                    {"type": "number"},
+                    {"type": "integer"},
+                    {"type": "boolean"},
+                    {"type": "string", "format": "binary"}
+                  ]
+                },
+                "description": "⚠️ **IMPORTANT**: The field names shown below are placeholders. You must replace them with the actual parameter names required by your specific workflow.\n\n**To find your workflow's parameter names:**\n1. **API Docs**: Check your deployment's auto-generated API Deployment Dashboard  \n3. **ComfyUI Workflow**: Look at the input nodes in your workflow\n\n**Note**: Different workflows have completely different parameter names and types."
               },
               "encoding": {
-                "field_name": {
-                  "style": "form",
-                  "explode": true
+                "custom_file_upload": {
+                  "contentType": "image/*,video/*,audio/*"
                 }
               }
             }

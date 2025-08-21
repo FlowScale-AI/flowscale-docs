@@ -70,6 +70,7 @@
             "group": "API Reference",
             "pages": [
               "api-reference/introduction",
+              "api-reference/testing-workflows",
               "api-reference/endpoint/execute_workflow",
               "api-reference/endpoint/get_execution_output",
               "api-reference/endpoint/get_queue",
