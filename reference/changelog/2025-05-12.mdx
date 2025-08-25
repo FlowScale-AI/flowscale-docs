@@ -17,11 +17,18 @@ _Released on May 12, 2025_
 ### Instant Mode-Switch for Advanced Settings
 
 You can flip between "normal" and "power-user" views with one click. The app even detects special FS (FlowScale IO) nodes for you, so you don't hunt for them manually. If you are already using FlowScale IO Nodes, your workflow will be automatically configured for deployment.
-
+<img
+  src="/images/changelog/2025-05-12/comfyui_fs_node_detection.png"
+  alt="Detecting custom/fs nodes"
+  style={{ borderRadius: "8px"}}
+/>
 ### Clear Spending Limits for Pods
-
 Each Pod (think of it as one workspace or mini-server) now shows you its money limit up front.
-
+<img
+  src="/images/changelog/2025-05-12/comfyui_pod_interface.png"
+  alt="Standard json file"
+  style={{ borderRadius: "8px"}}
+/>
 ---
 
 ## 🔟 New Features
@@ -38,20 +45,34 @@ Each Pod (think of it as one workspace or mini-server) now shows you its money l
     Instant switching between normal and power-user views
   </Card>
 </CardGroup>
-
 ### Pod Budget Management
 
 <AccordionGroup>
   <Accordion title="Budget Assignment">
     Assign a hard dollar cap to each Pod right in its General tab. Great for
     preventing unintentional credit bills.
+    <img
+  src="/images/changelog/2025-05-12/comfyui_pod_budget_manager.png"
+  alt="Manage your pod budget"
+  style={{ borderRadius: "8px"}}
+/>
   </Accordion>
   <Accordion title="Real-Time Alerts">
     The moment a Pod goes below $1, you get a notification and an email alert.
+      <img
+  src="/images/changelog/2025-05-12/comfyui_pod_alert1.png"
+  alt="Real time budget alert"
+  style={{ borderRadius: "8px"}}
+/>
   </Accordion>
   <Accordion title="Visual Indicators">
     Clear display of budget limits and current spending directly in the
     interface.
+        <img
+  src="/images/changelog/2025-05-12/comfyui_pod_alert2.png"
+  alt="Overall pod budget alert"
+  style={{ borderRadius: "8px"}}
+/>
   </Accordion>
 </AccordionGroup>
 
@@ -66,13 +87,28 @@ Each Pod (think of it as one workspace or mini-server) now shows you its money l
 
 - Deleting an environment variable now asks "Are you sure?" to prevent accidental deletions
 - Better protection for critical configuration keys
+  <img
+  src="/images/changelog/2025-05-12/comfyui_env_variables.png"
+  alt="Detecting custom/fs nodes"
+  style={{ borderRadius: "8px"}}
+  />
+
 
 **Member Restrictions**
 
 - Non-admins (role: member) cannot see or use the pod settings section
 - Non-admins cannot edit organization details
 - More granular permission controls for different user roles
-
+  <img
+  src="/images/changelog/2025-05-12/comfyui_member_restrictions.png"
+  alt="Workflow IO previews"
+  style={{ borderRadius: "8px"}}
+  />
+  <img
+  src="/images/changelog/2025-05-12/comfyui_org_detail_restrictions.png"
+  alt="Org details cannot be changed by everyone"
+  style={{ borderRadius: "8px"}}
+  />
 ### Workflow Deployment Preview
 
 **Workflow I/O Preview**
@@ -80,6 +116,11 @@ Each Pod (think of it as one workspace or mini-server) now shows you its money l
 - When you hit _Deploy_, the pop-up lists every configured workflow in "Ready To Deploy" section
 - Click on workflows to see configured inputs and outputs beforehand
 - Better visibility into what will be deployed
+  <img
+  src="/images/changelog/2025-05-12/comfyui_wf_io_preview.png"
+  alt="Workflow IO previews"
+  style={{ borderRadius: "8px"}}
+  />
 
 ### Version Control Improvements
 
@@ -98,8 +139,19 @@ Each Pod (think of it as one workspace or mini-server) now shows you its money l
 **Visual Indicators**
 
 - New icon for collapse button
+  <img
+  src="/images/changelog/2025-05-12/comfyui_icon_collapse.png"
+  alt="Workflow IO previews"
+  style={{ borderRadius: "8px"}}
+  />
 - Little ⚙️ shows up beside an API file that's in "advanced" mode—instantly shows it's configured for deployment
+  <img
+  src="/images/changelog/2025-05-12/comfyui_advanced_setting_button.png"
+  alt="Workflow IO previews"
+  style={{ borderRadius: "8px"}}
+  />
 - Improved visual hierarchy throughout the platform
+
 
 ### Performance Optimizations
 
