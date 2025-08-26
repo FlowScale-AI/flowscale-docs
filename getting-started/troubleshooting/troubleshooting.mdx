@@ -1,0 +1,1004 @@
+---
+title: Troubleshooting & FAQs
+description: "Common questions and solutions for FlowScale AI"
+icon: "circle-question"
+---
+
+## Getting Started
+
+<AccordionGroup>
+  <Accordion title="How do I create my first workflow?">
+    1. **Sign up** at [app.flowscale.ai](https://app.flowscale.ai)
+    2. **Create a project** from your dashboard
+    3. **Import a workflow** by uploading a ComfyUI JSON file, or
+    4. **Start with a template** from our pre-built collection
+    5. **Test the workflow** in the cloud editor
+    6. **Deploy** when you're ready to create an API
+
+    See our [Import & Create Workflows](/getting-started/import-create-workflows) guide for detailed steps.
+  </Accordion>
+
+  <Accordion title="What file formats can I import?">
+    FlowScale supports several import formats:
+    - **Workflow JSON**: Standard ComfyUI export format
+    - **PNG with metadata**: Images with embedded workflow data
+    - **Workflow templates**: FlowScale-specific templates
+
+    The platform automatically detects the format and converts it appropriately.
+  </Accordion>
+
+  <Accordion title="Why can't I see my uploaded models?">
+    If your models aren't appearing:
+    
+    **Check file format**:
+    - All AI model formats are supported: `.safetensors`, `.ckpt`, `.pth`, `.bin`, `.pt`, `.pkl`, `.onnx`, `.gguf`, and more
+    - Ensure files aren't corrupted during upload
+    
+    **Verify upload completion**:
+    - Large models may take time to process
+    - Check the upload progress indicator
+    
+    **Model placement**:
+    - Models appear in the appropriate category (Checkpoints, LoRAs, VAEs)
+    - Use the search function if you have many models
+    
+    **Refresh the interface**:
+    - Sometimes a browser refresh resolves display issues
+  </Accordion>
+
+  <Accordion title="How do I invite team members to my project?">
+    1. **Go to project settings** (gear icon in your project)
+    2. **Click "Team Members"** tab
+    3. **Click "Invite Member"**
+    4. **Enter email address or username** and select role level
+    5. **Send invitation** - they'll receive an email to join
+
+    **Role levels**:
+    - **Admin**: Full project management access
+    - **Owner**: Complete control including billing
+  </Accordion>
+</AccordionGroup>
+
+## Team Collaboration & Access
+
+<AccordionGroup>
+  <Accordion title="How do I manage team member access and permissions?">
+    **Team access management**:
+
+    **Adding team members**:
+    1. **Go to Organization Settings** → Team Members
+    2. **Click "Invite Member"** and enter their email address or username
+    3. **Select role level**: Admin or Member
+    4. **Send invitation** - they'll receive email with setup instructions
+
+    **Role types and permissions**:
+    - **Owner**: Full control including billing, team management, all projects
+    - **Admin**: Project management, team invitations, resource management
+    - **Member**: Create projects, access shared resources, collaborate on workflows
+
+    **Project-specific permissions**:
+    - **Project Owner**: Full control of specific project
+    - **Project Collaborator**: Edit workflows, access models, deploy APIs
+
+    **Access control best practices**:
+    - Use least-privilege principle for role assignments
+    - Regularly review team member access and permissions
+    - Remove access promptly when team members leave
+    - Use project-specific roles for granular access control
+  </Accordion>
+
+  <Accordion title="Sharing workflows and projects with team members">
+    **Project and workflow sharing**:
+
+    **Project sharing**:
+    - **Organization-wide**: All team members can access shared projects
+    - **Invite-only**: Specific team members invited to individual projects
+    - **Public sharing**: Share project links with external collaborators (Enterprise)
+    - **Version control**: Track changes and contributions from team members
+
+    **Workflow collaboration**:
+    - **Shared editing**: Multiple team members can edit workflows simultaneously
+    - **Version history**: See who made changes and when
+    - **Comments and annotations**: Add notes and feedback within workflows
+
+    **Resource sharing**:
+    - **Model libraries**: Shared organization-wide model storage
+    - **Templates**: Create reusable workflow templates for the team
+    - **Deployment configs**: Share API deployment configurations
+  </Accordion>
+
+  <Accordion title="Managing organization resources and billing across teams">
+    **Organization resource management**:
+
+    **Resource allocation**:
+    - **Pod quotas**: Distribute compute resources across teams and projects
+    - **Cost centers**: Allocate costs to specific pods
+  </Accordion>
+
+  <Accordion title="Version control and change management for collaborative workflows">
+    **Workflow version control**:
+
+    **Change tracking**:
+    - **Commit history**: Track all changes with timestamps and authors
+    - **Rollback capability**: Revert to previous workflow versions when needed
+  </Accordion>
+</AccordionGroup>
+
+## Workflow Issues
+
+<AccordionGroup>
+  <Accordion title="My workflow fails with 'Model not found' error">
+    **Common causes and solutions**:
+
+    **Missing models**:
+    - Check if all required models are uploaded to your project
+    - Verify model names match exactly (case-sensitive)
+    - Ensure models are in the correct folders (checkpoints/, loras/, etc.)
+
+    **Model path issues**:
+    - Use relative paths in your workflow, not absolute paths
+    - FlowScale automatically maps model paths to the correct locations
+
+    **Model compatibility**:
+    - All AI model formats are supported (.safetensors, .ckpt, .pth, .bin, .pt, .pkl, .onnx, .gguf, and more)
+    - Check if the model is compatible with your ComfyUI nodes
+
+    **Quick fix**: Go to the node causing the error and re-select the model from the dropdown.
+  </Accordion>
+
+  <Accordion title="Workflow runs locally but fails in FlowScale">
+    **Environment differences**:
+
+    **Custom nodes**: 
+    - Install required custom nodes in FlowScale
+    - Some nodes may not be compatible with cloud execution
+
+    **Model versions**:
+    - Ensure you're using the same model versions
+    - Check if models were uploaded correctly
+
+    **File paths**:
+    - Remove any hardcoded local file paths
+    - Use FlowScale's file upload nodes instead
+
+    **Dependencies**:
+    - Some workflows may require specific Python packages
+    - Contact support if you need additional dependencies installed
+  </Accordion>
+
+  <Accordion title="Workflow execution is very slow">
+    **Performance optimization**:
+
+    **GPU selection**:
+    - Use higher-tier GPUs (L4, L40S, A100, H100, H200) for complex workflows
+    - T4 and A10G GPUs are suitable for simple to moderate workflows
+    - B200 for cutting-edge models requiring maximum performance
+
+    **Model optimization**:
+    - Use FP16 precision when possible
+    - Consider smaller model variants for faster processing
+
+    **Workflow structure**:
+    - Minimize unnecessary nodes and connections
+    - Use batch processing for multiple similar operations
+    - Cache results when appropriate
+
+    **Cold start delays**:
+    - First execution may be slower due to model loading
+    - Subsequent runs are typically much faster
+  </Accordion>
+
+  <Accordion title="Out of memory errors">
+    **Memory management**:
+
+    **Reduce batch size**:
+    - Lower the batch_size parameter in your nodes
+    - Process images individually rather than in batches
+
+    **Image resolution**:
+    - Use smaller image dimensions for development
+    - Upscale as a separate step if needed
+
+    **Model selection**:
+    - Use smaller models or quantized versions
+    - Unload models when not needed
+
+    **GPU upgrade**:
+    - Switch to a GPU with more VRAM (L4, L40S, A100, H100, H200)
+    - Consider the memory requirements of your specific workflow
+    - B200 provides maximum VRAM (180GB) for the largest models
+  </Accordion>
+</AccordionGroup>
+
+## Model Management Issues
+
+<AccordionGroup>
+  <Accordion title="How do I find and download specific models?">
+    **Model discovery and acquisition**:
+
+    **Public Model Library**:
+    - Use the search function in the Models tab
+    - Browse by category: checkpoints, LoRAs, VAE, ControlNet, etc.
+    - Popular models from Hugging Face and Civitai are pre-loaded
+    - Check model compatibility with your workflow type
+
+    **Private Model Upload**:
+    - Go to Models tab → Private Models section
+    - Click "Upload Model" for local files
+    - Use "URL Download" for models from external sources
+    - Create appropriate folder structure (checkpoints/, loras/, etc.)
+
+    **Model URLs for download**:
+    - Hugging Face: Use direct file links from model repositories
+    - CivitAI: Copy download links from model pages
+
+    **Model search tips**:
+    - Try variations of model names (SD1.5, SDXL, Flux, etc.)
+    - Search by model type and version
+    - All AI model formats are supported (.safetensors, .ckpt, .pth, .bin, .pt, .pkl, .onnx, .gguf, and more)
+  </Accordion>
+
+  <Accordion title="Model compatibility and version issues">
+    **Model compatibility problems**:
+
+    **Base model compatibility**:
+    - Ensure LoRAs match their base model (SD1.5 LoRA with SD1.5 checkpoint)
+    - SDXL models require SDXL-compatible LoRAs and VAEs
+    - Flux models need Flux-specific components
+
+    **Version mismatches**:
+    - Check if workflow was created with specific model versions
+    - Some models have v1, v2, v3 variants with different requirements
+    - Update workflow nodes to use compatible model versions
+
+    **Format compatibility**:
+    - All AI model formats are supported: .safetensors, .ckpt, .pth, .bin, .pt, .pkl, .onnx, .gguf, and more
+    - .safetensors format is recommended for security and reliability
+    - Some older workflows may require specific formats
+
+    **Custom node model requirements**:
+    - Check custom node documentation for model requirements
+    - Some nodes require specific model architectures
+    - Install node-specific models in correct subdirectories
+  </Accordion>
+
+  <Accordion title="Models not appearing in dropdown menus">
+    **Model visibility issues**:
+
+    **Folder structure problems**:
+    - Ensure models are in correct ComfyUI folders:
+      - Checkpoints: `models/checkpoints/`
+      - LoRAs: `models/loras/`
+      - VAE: `models/vae/`
+      - ControlNet: `models/controlnet/`
+
+    **Model refresh needed**:
+    - Click "Refresh" in ComfyUI actions bar after uploading models
+    - Wait for model indexing to complete
+    - Check System Logs for any model loading errors
+
+    **File naming issues**:
+    - Avoid special characters in model filenames
+    - Use descriptive names without spaces
+    - Some models may conflict if they have identical names
+
+    **Permission and access issues**:
+    - Verify model upload completed successfully
+    - Check if model is in Public or Private library
+    - Ensure you have access to organization's private models
+  </Accordion>
+
+  <Accordion title="Model storage limits and organization">
+    **Storage management**:
+
+    **Storage capacity**:
+    - FlowScale provides unlimited model storage per organization
+    - Large models (10GB+) may take longer to upload and process
+    - Monitor your organization's total storage usage
+
+    **Organization best practices**:
+    - Use descriptive folder names and structures
+    - Group models by project or use case
+    - Archive unused models to reduce clutter
+    - Document model purposes and sources for team members
+
+    **Model sharing across projects**:
+    - Models uploaded to organization storage are shared across all projects
+    - Private models are accessible to all team members
+    - Use consistent naming conventions for team collaboration
+
+    **Model cleanup**:
+    - Remove duplicate or outdated model versions
+    - Check usage before deleting models (may break existing workflows)
+    - Keep backup copies of critical custom models
+  </Accordion>
+
+  <Accordion title="Custom model training and fine-tuning integration">
+    **Working with custom models**:
+
+    **Upload custom trained models**:
+    - All AI model formats are supported (.safetensors, .ckpt, .pth, .bin, .pt, .pkl, .onnx, .gguf, and more)
+    - Include proper metadata and model cards when possible
+    - Test models in small workflows before full deployment
+
+    **Fine-tuned model compatibility**:
+    - Verify base model compatibility with your workflows
+    - Check if fine-tuning preserved expected model behavior
+    - Test with various prompts and parameters
+
+    **Model metadata and documentation**:
+    - Document training parameters and datasets used
+    - Include usage recommendations and limitations
+    - Share model cards with team members for proper usage
+
+    **Version control for custom models**:
+    - Use descriptive naming with version numbers
+    - Keep training checkpoints for rollback if needed
+    - Document changes between model versions
+  </Accordion>
+</AccordionGroup>
+
+## Deployment Issues
+
+<AccordionGroup>
+  <Accordion title="API deployment fails or times out">
+    **Deployment troubleshooting**:
+
+    **Workflow validation**:
+    - Ensure workflow runs successfully in the editor first
+    - Check for any error nodes or warnings
+
+    **Input/output configuration**:
+    - Verify all required inputs are properly configured
+    - Ensure output nodes are correctly set up
+
+    **Resource requirements**:
+    - Check if your workflow requires specific GPU types
+    - Verify sufficient resources are available
+
+    **Network issues**:
+    - Temporary network problems can cause deployment failures
+    - Try deploying again after a few minutes
+
+    If issues persist, check the deployment logs or contact support.
+  </Accordion>
+
+  <Accordion title="API returns errors or unexpected results">
+    **API debugging**:
+
+    **Input validation**:
+    - Check API request format matches documentation
+    - Verify required parameters are included
+    - Ensure data types match expectations (string, number, etc.)
+
+    **Authentication**:
+    - Confirm API key is correct and has proper permissions
+    - Check if API key has expired or been revoked
+
+    **Response format**:
+    - Review API documentation for expected response structure
+    - Check if the workflow output nodes are configured correctly
+
+    **Rate limiting**:
+    - Ensure you're not exceeding API rate limits
+    - Implement proper retry logic with exponential backoff
+  </Accordion>
+
+  <Accordion title="Playground UI not loading or functioning properly">
+    **UI troubleshooting**:
+
+    **Browser compatibility**:
+    - Use a modern browser (Chrome, Firefox, Safari, Edge)
+    - Clear browser cache and cookies
+    - Disable browser extensions that might interfere
+
+    **Network connectivity**:
+    - Check your internet connection
+    - Try accessing from a different network
+
+    **Input handling**:
+    - Ensure uploaded files meet size and format requirements
+    - Check if all required fields are filled
+
+    **Performance**:
+    - Large files may take time to upload and process
+    - Be patient with complex workflows
+  </Accordion>
+
+  <Accordion title="How do I manage deployment versions and rollbacks?">
+    **Version control and rollbacks**:
+
+    **Deployment versioning**:
+    - Each deployment gets a version number (v1, v2, v3, etc.)
+    - Update deployments by creating new versions with workflow changes
+    - Previous versions remain accessible until manually retired
+
+    **Rolling back deployments**:
+    - Switch traffic back to a previous working version
+    - Go to Deployment Settings → Version History
+    - Select "Make Active" on a previous version
+    - Test the rollback with a few requests before full switchover
+
+    **Version comparison**:
+    - Compare different deployment versions in the dashboard
+    - Review changes in workflow configuration and parameters
+    - Check performance metrics between versions
+
+    **Deployment lifecycle**:
+    - Development → Staging → Production workflow recommended
+    - Use separate API keys for different environments
+    - Test new versions with a small percentage of traffic first
+  </Accordion>
+
+  <Accordion title="Understanding usage costs and optimizing spending">
+    **Cost management and optimization**:
+
+    **Billing breakdown**:
+    - **GPU compute time**: Charged per second of active processing
+    - **Idle time**: $0.07/hour when pods are running but not processing
+    - **Model storage**: $0.01 per model download from public library
+    - **Data transfer**: Generally included, check for large file transfers
+
+    **Cost optimization strategies**:
+    - Use CPU mode for workflow editing (free)
+    - Choose appropriate GPU tiers: T4 for simple, H100 for complex workflows
+    - Implement auto-scaling to shut down idle resources
+    - Monitor usage patterns and adjust resource allocation
+
+    **Budget controls**:
+    - Set spending alerts in account settings
+    - Configure usage limits per project or API key
+    - Monitor real-time costs in the dashboard
+    - Use cost allocation tags for department billing
+
+    **Unexpected billing issues**:
+    - Check for stuck processes consuming GPU time
+    - Review API key usage for unauthorized access
+    - Monitor for runaway workflows or batch jobs
+    - Contact billing support for usage disputes
+  </Accordion>
+
+  <Accordion title="Production deployment best practices and scaling">
+    **Production readiness checklist**:
+
+    **Pre-deployment testing**:
+    - Test workflows thoroughly in Playground before deployment
+    - Verify all required models and dependencies are available
+    - Load test with expected traffic volume
+    - Set up monitoring and alerting
+
+    **Scaling configuration**:
+    - Configure auto-scaling policies based on usage patterns
+    - Set minimum and maximum instance counts
+    - Choose appropriate GPU types for your workload performance requirements
+    - Implement circuit breakers for handling failures
+
+    **Monitoring and observability**:
+    - Set up logging for API requests and errors
+    - Monitor response times and success rates
+    - Track GPU utilization and cost metrics
+    - Configure alerts for system failures or performance degradation
+
+    **Security and compliance**:
+    - Use least-privilege API keys with appropriate scopes
+    - Implement rate limiting and abuse prevention
+    - Regularly rotate API keys and access credentials
+    - Document security policies for audit requirements
+  </Accordion>
+
+  <Accordion title="API endpoint management and custom domains">
+    **Endpoint configuration and customization**:
+
+    **Default endpoints**:
+    - FlowScale provides default API endpoints per deployment
+    - URLs follow pattern: `https://your-deployment.pod.flowscale.ai`
+    - Endpoints are automatically load-balanced and scaled
+
+    **API documentation**:
+    - Auto-generated OpenAPI/Swagger documentation for each deployment
+    - Include parameter descriptions and example requests
+    - Share documentation URLs with integration teams
+    - Keep documentation updated when workflows change
+  </Accordion>
+</AccordionGroup>
+
+## SDK & Integration Issues
+
+<AccordionGroup>
+  <Accordion title="Authentication errors when using SDKs">
+    **Common authentication problems**:
+
+    **Incorrect API key**:
+    - Verify the key hasn't been regenerated or revoked
+
+    **Environment variable issues**:
+    - Check `.env` file exists and is loaded
+    - Verify `FLOWSCALE_API_KEY` and `FLOWSCALE_API_URL` are set
+    - In Node.js, use `process.env.FLOWSCALE_API_KEY`
+  </Accordion>
+
+  <Accordion title="SDK installation and compatibility issues">
+    **Installation problems**:
+
+    **Version conflicts**:
+    - Update to latest SDK version: `npm install flowscale@latest`
+    - Check for peer dependency warnings during installation
+    - Use `npm ls` to identify conflicting package versions
+
+    **Import/require issues**:
+    - ES modules: `import { FlowscaleAPI } from 'flowscale'`
+    - CommonJS: `const { FlowscaleAPI } = require('flowscale')`
+    - Check your `package.json` type field configuration
+  </Accordion>
+
+  <Accordion title="API key exposure warnings in browser applications">
+    **Security best practices**:
+
+    **Why this matters**:
+    - Browser applications expose all code to users
+    - API keys become visible in DevTools and source code
+    - Users can copy keys and make unauthorized API calls
+    - This can lead to unexpected usage charges
+
+    **Recommended solutions**:
+    - **Backend proxy**: Create your own API endpoints that call FlowScale internally
+    - **Server-side rendering**: Use Next.js API routes, Express servers, or similar
+    - **Serverless functions**: Deploy to Vercel, Netlify, or AWS Lambda
+
+    **If you must use browser-side**:
+    ```javascript
+    const flowscale = new FlowscaleAPI({
+      apiKey: 'your-api-key',
+      baseUrl: 'your-api-url',
+      allowDangerouslyExposeApiKey: true // Explicit acknowledgment required
+    });
+    ```
+
+    **Additional protections**:
+    - Set usage limits and alerts in your FlowScale dashboard
+    - Rotate API keys regularly
+    - Monitor usage for unexpected spikes
+  </Accordion>
+
+  <Accordion title="Parameter format and validation errors">
+    **Input parameter problems**:
+
+    **Parameter naming**:
+    - Parameter names are workflow-specific (e.g., `prompt_68667`, `width_68669`)
+    - Use the Deployment dashboard to discover exact parameter names
+    - Names include parameter names and may change if workflow is modified
+
+    **Data type mismatches**:
+    - Strings: Use quotes for text parameters
+    - Numbers: Send as integers or floats without quotes
+    - Files: Use proper multipart/form-data encoding
+    - Booleans: Send as `true`/`false` (not "true"/"false")
+
+    **File upload format**:
+    ```javascript
+    const formData = new FormData();
+    formData.append('image_68671', fileInput.files[0]);
+    formData.append('prompt_68667', 'Transform this image');
+    ```
+
+    **Required vs optional parameters**:
+    - Check the OpenAPI documentation for your specific workflow
+    - Missing required parameters will cause "Field required" errors
+  </Accordion>
+</AccordionGroup>
+
+## Performance & Optimization
+
+<AccordionGroup>
+  <Accordion title="How do I choose the right GPU for my workflow?">
+    **GPU selection guidelines**:
+
+    **GPU tiers and recommendations**:
+    - **T4 (16GB VRAM)**: Simple text-to-image, basic LoRA workflows, testing
+    - **A10G (24GB VRAM)**: Standard Stable Diffusion, moderate complexity workflows
+    - **L4 (24GB VRAM)**: Enhanced performance for SDXL, faster inference
+    - **L40S (48GB VRAM)**: Large batch processing, complex multi-model workflows
+    - **A100 40GB/80GB**: High-performance training, large model inference
+    - **H100 (80GB VRAM)**: Latest generation, maximum performance for cutting-edge models
+    - **H200 (141GB VRAM)**: Largest VRAM for massive models and batch processing
+    - **B200 (180GB VRAM)**: Next-generation performance for the most demanding workloads
+
+    **Workflow-specific recommendations**:
+    - **Text-to-image (SD1.5)**: T4 or A10G sufficient
+    - **Text-to-image (SDXL)**: L4 or higher recommended
+    - **Image-to-image with ControlNet**: L4 or L40S for good performance
+    - **Video generation**: H100 or H200 for reasonable processing times
+    - **Batch processing**: L40S, A100, or H200 depending on batch size
+  </Accordion>
+
+  <Accordion title="Why is my workflow running slowly and how can I optimize it?">
+    **Performance optimization strategies**:
+
+    **Workflow-level optimizations**:
+    - **Remove unnecessary nodes**: Eliminate debugging or unused processing steps
+    - **Optimize node connections**: Reduce redundant data processing paths
+    - **Use efficient sampling methods**: Some samplers are significantly faster
+    - **Adjust step counts**: Balance quality vs speed with appropriate step counts
+
+    **Parameter tuning**:
+    - **Image resolution**: Start with lower resolutions for development
+    - **Batch size optimization**: Find the sweet spot between speed and memory usage
+    - **Sampling parameters**: Use faster samplers like DPM++ 2M Karras
+    - **CFG scale**: Higher values slow down processing significantly
+
+    **Model optimizations**:
+    - **Model format**: Prefer .safetensors over .ckpt for faster loading
+    - **Model pruning**: Use smaller, optimized model variants when available
+    - **Quantized models**: Consider FP16 or INT8 models for faster inference
+    - **Model caching**: Keep frequently used models loaded in memory
+
+    **GPU utilization**:
+    - **Monitor VRAM usage**: Ensure you're not hitting memory limits
+    - **Batch processing**: Process multiple images together when possible
+    - **Pipeline optimization**: Use model-specific optimization techniques
+  </Accordion>
+
+  <Accordion title="Understanding cold starts and how to minimize them">
+    **Cold start optimization**:
+
+    **What causes cold starts**:
+    - **Model loading**: Large models take time to load into GPU memory
+    - **Environment initialization**: ComfyUI and custom nodes need startup time
+    - **Dependency installation**: First-time custom node setup
+    - **Resource allocation**: GPU provisioning and network setup
+
+    **Minimizing cold start impact**:
+    - **Keep instances warm**: Configure minimum instance counts for production
+    - **Use smaller models**: Faster loading times with optimized model variants
+    - **Pre-load dependencies**: Ensure all models and nodes are properly cached
+    - **Batch requests**: Group multiple requests to amortize startup costs
+
+    **Warm instance management**:
+    - **Auto-scaling configuration**: Set appropriate cooldown periods
+    - **Resource pooling**: Keep a pool of warm instances ready
+    - **Load balancing**: Distribute requests across multiple warm instances
+    - **Predictive scaling**: Scale up before anticipated traffic spikes
+
+    **Expected cold start times**:
+    - **Simple workflows**: 20 seconds for basic text-to-image
+    - **Complex workflows**: 30-60 seconds with multiple complex custom nodes
+  </Accordion>
+
+  <Accordion title="Optimizing costs while maintaining performance">
+    **Cost optimization strategies**:
+
+    **Resource right-sizing**:
+    - **GPU tier selection**: Don't over-provision - match GPU to workload requirements
+    - **Auto-scaling policies**: Configure aggressive scale-down for cost savings
+    - **Spot instances**: Use lower-cost GPU instances when availability allows
+    - **Resource scheduling**: Run batch jobs during off-peak hours
+
+    **Workflow efficiency**:
+    - **Reduce processing steps**: Eliminate unnecessary computation
+    - **Optimize parameters**: Find quality/speed balance that meets requirements
+    - **Batch processing**: Process multiple items together to reduce overhead
+    - **Caching strategies**: Cache intermediate results when possible
+
+    **Usage monitoring**:
+    - **Real-time cost tracking**: Monitor spending as workflows execute
+    - **Resource utilization alerts**: Get notified when resources are underutilized
+    - **Usage analytics**: Identify patterns and optimization opportunities
+    - **Budget controls**: Set hard limits to prevent runaway costs
+
+    **Development vs production separation**:
+    - **Use CPU mode for editing**: Free workflow development and testing
+    - **Separate environments**: Lower-cost development, optimized production
+    - **Testing strategies**: Validate on smaller datasets before full production runs
+  </Accordion>
+
+  <Accordion title="Monitoring and troubleshooting performance issues">
+    **Performance monitoring**:
+
+    **Key metrics to track**:
+    - **Request latency**: End-to-end processing time per request
+    - **GPU utilization**: Percentage of GPU compute being used
+    - **Memory usage**: VRAM consumption and availability
+    - **Queue depth**: Number of requests waiting for processing
+
+    **Diagnostic tools**:
+    - **System logs**: Review ComfyUI execution logs for bottlenecks
+    - **Resource monitoring**: Track CPU, GPU, and memory usage over time
+    - **Request tracing**: Follow individual requests through the processing pipeline
+    - **Performance profiling**: Identify which nodes consume the most time
+
+    **Common performance issues**:
+    - **Memory bottlenecks**: VRAM exhaustion causing swapping or failures
+    - **CPU limitations**: Preprocessing bottlenecks before GPU execution
+    - **I/O constraints**: Slow model loading or file operations
+    - **Network latency**: Slow file uploads or result downloads
+
+    **Troubleshooting methodology**:
+    - **Baseline measurement**: Establish normal performance metrics
+    - **Incremental testing**: Isolate performance issues by component
+    - **Resource monitoring**: Identify resource constraints during execution
+    - **Comparative analysis**: Compare performance across different configurations
+  </Accordion>
+</AccordionGroup>
+
+## File Upload & Format Issues
+
+<AccordionGroup>
+  <Accordion title="What file formats are supported for uploads?">
+    **Supported file formats by use case**:
+
+    **Image formats**:
+    - **Common formats**: JPEG, PNG, WEBP, HEIF, etc.
+    - **High-quality formats**: PNG for transparency, TIFF for professional editing
+    - **Web-optimized**: JPEG for photos, WEBP for smaller file sizes
+    - **Specialized**: EXR, HDR for high dynamic range content
+
+    **Video formats**:
+    - **Standard formats**: MP4, AVI, MOV, MKV, WEBM
+    - **Codecs**: H.264, H.265 (HEVC), VP9, AV1
+    - **Frame rates**: Support for various frame rates up to 60fps
+    - **Resolutions**: SD, HD, 4K, and higher resolutions
+
+    **Audio formats**:
+    - **Compressed**: MP3, AAC, OGG, WEBM
+    - **Uncompressed**: WAV, FLAC, AIFF
+    - **Sample rates**: 44.1kHz, 48kHz, 96kHz, 192kHz
+    - **Bit depths**: 16-bit, 24-bit, 32-bit
+
+    **Document formats**:
+    - **Text**: TXT, RTF, JSON, XML
+    - **Documents**: PDF (for text extraction)
+    - **Data**: CSV, TSV (for structured data workflows)
+
+    **Workflow formats**:
+    - **ComfyUI**: JSON workflow exports
+    - **Images with metadata**: PNG files with embedded workflow data
+  </Accordion>
+
+  <Accordion title="Upload failures and troubleshooting">
+    **Common upload problems and solutions**:
+
+    **Network-related failures**:
+    - **Slow connections**: Large files may timeout on slow internet
+    - **Unstable connections**: Interruptions can cause upload failures
+    - **Firewall issues**: Corporate firewalls may block large file uploads
+    - **Browser limitations**: Some browsers have upload size restrictions
+
+    **File-related issues**:
+    - **Corrupted files**: Re-download or re-export the original file
+    - **Invalid formats**: Check if file format is supported
+    - **File permissions**: Ensure you have read access to the file
+    - **Special characters**: Avoid non-ASCII characters in filenames
+
+    **Browser and client issues**:
+    - **Browser cache**: Clear cache if uploads consistently fail
+    - **JavaScript errors**: Check browser console for error messages
+    - **Browser version**: Update to latest browser version
+    - **Extensions**: Disable ad blockers or security extensions temporarily
+
+    **Troubleshooting steps**:
+    1. **Verify file integrity**: Open file locally to ensure it's not corrupted
+    2. **Check file size**: Ensure file is within size limits
+    3. **Try different browser**: Test with Chrome, Firefox, or Safari
+    4. **Reduce file size**: Compress or resize file if possible
+    5. **Check network**: Test with smaller files first
+    6. **Contact support**: If issues persist, provide error details
+  </Accordion>
+</AccordionGroup>
+
+## Account & Billing
+
+<AccordionGroup>
+  <Accordion title="How is usage calculated and billed?">
+    **Billing structure**:
+
+    **Compute time**:
+    - Charged per second of GPU usage
+    - Different rates for T4, A10G, L4, L40S, A100, H100, H200 and B200 GPUs
+    - $0.07 per hour is charged when pods are idle
+
+    **Storage**:
+    - Model storage: $0.01 per model download
+    - Workflow storage: Included in base plan
+
+    **API calls**:
+    - No additional charges for API requests
+  </Accordion>
+
+  <Accordion title="How do I upgrade my plan or add more resources?">
+    **Plan management**:
+
+    1. **Go to account settings** (profile icon → Settings)
+    2. **Click "Billing & Usage"** tab
+    3. **Select "Change Plan"**
+    4. **Choose your new plan**
+    5. **Confirm changes** - billing adjusts automatically
+
+    **Available upgrades**:
+    - Higher GPU quotas and access to premium GPUs
+    - Priority support and SLA guarantees
+    - Team collaboration features
+  </Accordion>
+
+  <Accordion title="Can I get a refund or credit for unused resources?">
+    **Refund policy**:
+
+    **Compute credits**:
+    - Unused compute time doesn't expire
+    - Credits roll over month to month
+    - Can be used across all projects in your account
+
+    **Subscription refunds**:
+    - Monthly plans: No refunds, but you can downgrade
+
+    **Service issues**:
+    - Credits issued for platform outages or service issues
+    - Contact support for technical problems that prevent usage
+
+    For specific billing questions, contact our support team.
+  </Accordion>
+</AccordionGroup>
+
+## Technical Support
+
+<AccordionGroup>
+  <Accordion title="How do I contact support?">
+    **Support channels**:
+
+    **In-app support**:
+    - Click the "?" icon in any FlowScale interface
+    - Submit tickets directly from the platform
+    - Include relevant project and workflow details
+
+    **Community**:
+    - Discord and Slack community for peer support
+
+    **Enterprise support**:
+    - Dedicated support for Pro and Enterprise plans
+    - Phone and video call support available
+    - Custom SLA agreements
+
+    **Response times**:
+    - Free tier: 48-72 hours
+    - Pro tier: 24 hours
+    - Enterprise: 4-8 hours (or per SLA)
+  </Accordion>
+
+  <Accordion title="What information should I include in support requests?">
+    **Include these details**:
+
+    **Account information**:
+    - Your FlowScale username/email
+    - Project name and ID
+    - Workflow name and version
+
+    **Problem description**:
+    - What you were trying to do
+    - What actually happened vs. expected behavior
+    - Error messages (exact text or screenshots)
+    - Steps to reproduce the issue
+
+    **Environment details**:
+    - Browser and version (for UI issues)
+    - API client and version (for API issues)
+    - Any relevant workflow or deployment configurations
+
+    **Additional context**:
+    - When the issue started
+    - Any recent changes you made
+    - Whether the issue is reproducible
+  </Accordion>
+
+  <Accordion title="How do I report a bug or request a feature?">
+    **Bug reports**:
+    - Use in-app support for bugs affecting your work
+    - Include reproduction steps and expected vs. actual behavior
+
+    **Feature requests**:
+    - Discord community for discussion and voting
+    - GitHub discussions for detailed proposals
+    - In-app feedback for workflow-specific needs
+
+    **Security issues**:
+    - Email security@flowscale.ai for security vulnerabilities
+    - Include detailed reproduction steps
+    - Do not post security issues publicly
+
+    **Roadmap**:
+    - Check our public roadmap for planned features
+    - Vote on existing requests to show interest
+    - Engage with the community for feature discussion
+  </Accordion>
+</AccordionGroup>
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="How can I optimize my workflows for better performance?">
+    **Performance optimization tips**:
+
+    **Workflow design**:
+    - Minimize unnecessary nodes and connections
+    - Use efficient node types when available
+    - Avoid redundant operations
+
+    **Model management**:
+    - Use appropriate model sizes for your use case
+    - Consider quantized models for faster inference
+    - Cache frequently used models
+
+    **Resource selection**:
+    - Choose the right GPU type for your workload
+    - Monitor resource utilization and adjust as needed
+    - Use batch processing for multiple similar requests
+
+    **Testing approach**:
+    - Test with smaller parameters during development
+    - Use lower resolution for initial testing
+    - Scale up gradually to production settings
+  </Accordion>
+
+  <Accordion title="What are the security best practices?">
+    **Security recommendations**:
+
+    **API keys**:
+    - Keep API keys secure and never share them publicly
+    - Rotate keys regularly
+    - Use different keys for different environments (dev/prod)
+
+    **Access control**:
+    - Use least-privilege principle for team member roles
+    - Regularly review and update team permissions
+    - Remove access for former team members promptly
+
+    **Data handling**:
+    - Don't include sensitive data in workflows
+    - Use secure methods for handling user uploads
+    - Understand data retention and deletion policies
+
+    **Network security**:
+    - Use HTTPS for all API communications
+    - Implement proper input validation
+  </Accordion>
+</AccordionGroup>
+
+## Still Need Help?
+
+Can't find the answer you're looking for? Here's how to get additional support:
+
+<CardGroup cols={2}>
+  <Card
+    title="Join Discord Community"
+    icon="discord"
+    href="https://discord.gg/trVnFa8wTf"
+  >
+    Chat with other FlowScale users and get quick help
+  </Card>
+  <Card
+    title="Join Slack Community"
+    icon="slack"
+    href="https://join.slack.com/t/flowscalecommunity/shared_invite/zt-3bwly1x7b-wboUNaOu1b1gEX8Pvrp~kA"
+  >
+    Chat with other FlowScale users and get quick help
+  </Card>
+  <Card
+    title="Contact Support"
+    icon="envelope"
+    href="mailto:support@flowscale.ai"
+  >
+    Submit a support ticket for technical assistance
+  </Card>
+  <Card
+    title="Documentation"
+    icon="book"
+    href="/workspace/overview"
+  >
+    Explore detailed guides and tutorials
+  </Card>
+  <Card
+    title="API Documentation"
+    icon="code"
+    href="/deploy-api/api-overview"
+  >
+    Complete API reference and examples
+  </Card>
+</CardGroup>
