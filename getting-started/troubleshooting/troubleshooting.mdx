@@ -45,18 +45,6 @@ icon: "circle-question"
     **Refresh the interface**:
     - Sometimes a browser refresh resolves display issues
   </Accordion>
-
-  <Accordion title="How do I invite team members to my project?">
-    1. **Go to project settings** (gear icon in your project)
-    2. **Click "Team Members"** tab
-    3. **Click "Invite Member"**
-    4. **Enter email address or username** and select role level
-    5. **Send invitation** - they'll receive an email to join
-
-    **Role levels**:
-    - **Admin**: Full project management access
-    - **Owner**: Complete control including billing
-  </Accordion>
 </AccordionGroup>
 
 ## Team Collaboration & Access
@@ -93,7 +81,7 @@ icon: "circle-question"
     **Project sharing**:
     - **Organization-wide**: All team members can access shared projects
     - **Invite-only**: Specific team members invited to individual projects
-    - **Public sharing**: Share project links with external collaborators (Enterprise)
+    - **Public sharing**: Share project links with external users
     - **Version control**: Track changes and contributions from team members
 
     **Workflow collaboration**:
@@ -104,7 +92,6 @@ icon: "circle-question"
     **Resource sharing**:
     - **Model libraries**: Shared organization-wide model storage
     - **Templates**: Create reusable workflow templates for the team
-    - **Deployment configs**: Share API deployment configurations
   </Accordion>
 
   <Accordion title="Managing organization resources and billing across teams">
@@ -112,7 +99,6 @@ icon: "circle-question"
 
     **Resource allocation**:
     - **Pod quotas**: Distribute compute resources across teams and projects
-    - **Cost centers**: Allocate costs to specific pods
   </Accordion>
 
   <Accordion title="Version control and change management for collaborative workflows">
@@ -219,7 +205,7 @@ icon: "circle-question"
     **Public Model Library**:
     - Use the search function in the Models tab
     - Browse by category: checkpoints, LoRAs, VAE, ControlNet, etc.
-    - Popular models from Hugging Face and Civitai are pre-loaded
+    - Popular models from Hugging Face and CivitAI are pre-loaded
     - Check model compatibility with your workflow type
 
     **Private Model Upload**:
@@ -411,21 +397,9 @@ icon: "circle-question"
     **Deployment versioning**:
     - Each deployment gets a version number (v1, v2, v3, etc.)
     - Update deployments by creating new versions with workflow changes
-    - Previous versions remain accessible until manually retired
-
-    **Rolling back deployments**:
-    - Switch traffic back to a previous working version
-    - Go to Deployment Settings → Version History
-    - Select "Make Active" on a previous version
-    - Test the rollback with a few requests before full switchover
-
-    **Version comparison**:
-    - Compare different deployment versions in the dashboard
-    - Review changes in workflow configuration and parameters
-    - Check performance metrics between versions
+    - Previous versions remain accessible by reverting a workflow to that specific checkpoint
 
     **Deployment lifecycle**:
-    - Development → Staging → Production workflow recommended
     - Use separate API keys for different environments
     - Test new versions with a small percentage of traffic first
   </Accordion>
@@ -440,8 +414,8 @@ icon: "circle-question"
     - **Data transfer**: Generally included, check for large file transfers
 
     **Cost optimization strategies**:
-    - Use CPU mode for workflow editing (free)
-    - Choose appropriate GPU tiers: T4 for simple, H100 for complex workflows
+    - Use CPU mode for workflow editing
+    - Choose appropriate GPU tiers: T4 or equivalent for simple, H100 or A100 or GPUs with higher VRAM for complex workflows
     - Implement auto-scaling to shut down idle resources
     - Monitor usage patterns and adjust resource allocation
 
@@ -471,7 +445,6 @@ icon: "circle-question"
     - Configure auto-scaling policies based on usage patterns
     - Set minimum and maximum instance counts
     - Choose appropriate GPU types for your workload performance requirements
-    - Implement circuit breakers for handling failures
 
     **Monitoring and observability**:
     - Set up logging for API requests and errors
@@ -543,7 +516,6 @@ icon: "circle-question"
     **Recommended solutions**:
     - **Backend proxy**: Create your own API endpoints that call FlowScale internally
     - **Server-side rendering**: Use Next.js API routes, Express servers, or similar
-    - **Serverless functions**: Deploy to Vercel, Netlify, or AWS Lambda
 
     **If you must use browser-side**:
     ```javascript
@@ -555,7 +527,7 @@ icon: "circle-question"
     ```
 
     **Additional protections**:
-    - Set usage limits and alerts in your FlowScale dashboard
+    - Set pod budget quota in your Pod Settings
     - Rotate API keys regularly
     - Monitor usage for unexpected spikes
   </Accordion>
@@ -567,23 +539,6 @@ icon: "circle-question"
     - Parameter names are workflow-specific (e.g., `prompt_68667`, `width_68669`)
     - Use the Deployment dashboard to discover exact parameter names
     - Names include parameter names and may change if workflow is modified
-
-    **Data type mismatches**:
-    - Strings: Use quotes for text parameters
-    - Numbers: Send as integers or floats without quotes
-    - Files: Use proper multipart/form-data encoding
-    - Booleans: Send as `true`/`false` (not "true"/"false")
-
-    **File upload format**:
-    ```javascript
-    const formData = new FormData();
-    formData.append('image_68671', fileInput.files[0]);
-    formData.append('prompt_68667', 'Transform this image');
-    ```
-
-    **Required vs optional parameters**:
-    - Check the OpenAPI documentation for your specific workflow
-    - Missing required parameters will cause "Field required" errors
   </Accordion>
 </AccordionGroup>
 
@@ -669,56 +624,13 @@ icon: "circle-question"
 
     **Resource right-sizing**:
     - **GPU tier selection**: Don't over-provision - match GPU to workload requirements
-    - **Auto-scaling policies**: Configure aggressive scale-down for cost savings
-    - **Spot instances**: Use lower-cost GPU instances when availability allows
-    - **Resource scheduling**: Run batch jobs during off-peak hours
 
     **Workflow efficiency**:
     - **Reduce processing steps**: Eliminate unnecessary computation
     - **Optimize parameters**: Find quality/speed balance that meets requirements
-    - **Batch processing**: Process multiple items together to reduce overhead
-    - **Caching strategies**: Cache intermediate results when possible
-
-    **Usage monitoring**:
-    - **Real-time cost tracking**: Monitor spending as workflows execute
-    - **Resource utilization alerts**: Get notified when resources are underutilized
-    - **Usage analytics**: Identify patterns and optimization opportunities
-    - **Budget controls**: Set hard limits to prevent runaway costs
-
-    **Development vs production separation**:
     - **Use CPU mode for editing**: Free workflow development and testing
-    - **Separate environments**: Lower-cost development, optimized production
     - **Testing strategies**: Validate on smaller datasets before full production runs
   </Accordion>
-
-  <Accordion title="Monitoring and troubleshooting performance issues">
-    **Performance monitoring**:
-
-    **Key metrics to track**:
-    - **Request latency**: End-to-end processing time per request
-    - **GPU utilization**: Percentage of GPU compute being used
-    - **Memory usage**: VRAM consumption and availability
-    - **Queue depth**: Number of requests waiting for processing
-
-    **Diagnostic tools**:
-    - **System logs**: Review ComfyUI execution logs for bottlenecks
-    - **Resource monitoring**: Track CPU, GPU, and memory usage over time
-    - **Request tracing**: Follow individual requests through the processing pipeline
-    - **Performance profiling**: Identify which nodes consume the most time
-
-    **Common performance issues**:
-    - **Memory bottlenecks**: VRAM exhaustion causing swapping or failures
-    - **CPU limitations**: Preprocessing bottlenecks before GPU execution
-    - **I/O constraints**: Slow model loading or file operations
-    - **Network latency**: Slow file uploads or result downloads
-
-    **Troubleshooting methodology**:
-    - **Baseline measurement**: Establish normal performance metrics
-    - **Incremental testing**: Isolate performance issues by component
-    - **Resource monitoring**: Identify resource constraints during execution
-    - **Comparative analysis**: Compare performance across different configurations
-  </Accordion>
-</AccordionGroup>
 
 ## File Upload & Format Issues
 
