@@ -39,9 +39,7 @@
           },
           {
             "group": "Troubleshooting",
-            "pages": [
-              "getting-started/troubleshooting/project-migration"
-            ]
+            "pages": ["getting-started/troubleshooting/project-migration"]
           }
         ]
       },
@@ -83,6 +81,7 @@
           {
             "group": "Changelog",
             "pages": [
+              "reference/changelog/2025-09-05",
               "reference/changelog/2025-07-30",
               "reference/changelog/2025-07-15",
               "reference/changelog/2025-06-11",

@@ -1,0 +1,78 @@
+---
+title: Pods
+description: Isolated environments to host your ComfyUI instances and run workflows or APIs.
+icon: "server"
+---
+
+**Pods** in Flowscale act like virtual machines or servers that host your ComfyUI instances. They are the execution environment where your workflows run.
+
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-11-05+175011.png" alt="API Keys Screenshot"/>
+
+## Key Features
+  - Dedicated Resources: Each pod has allocated CPU, memory, and GPU resources.
+  - Isolation: Pods are isolated from each other, ensuring security and performance.
+  - Customization: Configure pods to meet the specific requirements of your workflows.
+
+## How to Use Pods
+
+#### 1. Access Pods:
+  - Go to the Pods section in Flowscale.
+
+#### 2. Create a New Pod:
+  - Click on Create New Pod or select an existing pod
+  - Select the configuration (e.g., GPU type, generation timeout, etc).
+
+<img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-11-05+175247.png" alt="API Keys Screenshot"/>
+
+  
+#### 3. Assign Workflows to Pods:
+  - Link your projects or workflows to a pod for execution.
+
+#### 4. Each pod can be started in one of the two modes:
+  - ComfyUI Workspace
+  <img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-11-05+180412.png" alt="API Keys Screenshot"/>
+
+  - API Server
+  <img src="https://flowscale-prod.s3.us-east-1.amazonaws.com/docs/Screenshot+2024-11-05+180428.png" alt="API Keys Screenshot"/>
+
+## Containers
+
+Containers are the lowest possible unit of deployment in Flowscale. Each pods comprises one or more containers, which can be used for autoscaling GPUs based on queue size.
+
+### Key Features
+  - Lightweight Execution Units: Containers package your workflows with all dependencies.
+  - Scalable: Easily add or remove containers to meet demand.
+  - Isolation: Each container runs independently, ensuring consistent performance.
+
+### How to Use Containers
+
+#### 1. Configure Containers in Clusters:
+  - When setting up a pod, specify the number of containers by modifying the **Allotted GPU Containers** in the *Pod GPU Settings*
+  - Set **Queue Size Limit** to specify the queue size upon reaching which, a new ComfyUI instance will spawn.
+
+## Autoscaling
+
+**Autoscaling** allows ComfyUI APIs to scale out to multiple GPUs, enabling concurrent executions and improved performance. This is achieved by starting multiple containers and load balancing incoming requests based on queue size.
+
+### Key Features
+  - Dynamic Scaling: Automatically adjusts the number of containers based on demand.
+  - Load Balancing: Distributes requests evenly to prevent bottlenecks.
+  - Cost Efficiency: Scale down when demand is low to save resources.
+
+### How to Use Autoscaling
+
+1. Set Scaling Policies:
+  - In your cluster settings, define autoscaling rules.
+  - Specify number of containers.
+  - Specify Queue size Limit
+
+## Benefits
+  - Control over the execution environment.
+  - Ability to scale resources as needed.
+  - Isolation ensures stable and secure workflow execution.
+  - Fine-grained control over deployment units.
+  - Ability to scale specific components of your application.
+  - Consistency across different environments.
+  - Ensures optimal resource utilization.
+  - Improves application responsiveness under varying loads.
+  - Reduces operational costs by scaling down when idle.

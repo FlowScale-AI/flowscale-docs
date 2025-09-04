@@ -23,9 +23,7 @@
   "paths": {
     "/api/v1/comfy/health": {
       "get": {
-        "tags": [
-          "comfy"
-        ],
+        "tags": ["comfy"],
         "summary": "Comfyui Health Check",
         "description": "Checks the health status of all ComfyUI instances within the specified cluster. It verifies whether each ComfyUI instance is running or stopped.",
         "operationId": "comfyui_health_check_api_v1_comfy_health_get",
@@ -50,9 +48,7 @@
     },
     "/api/v1/comfy/queue": {
       "get": {
-        "tags": [
-          "comfy"
-        ],
+        "tags": ["comfy"],
         "summary": "Get Queue",
         "description": "Retrieves the queue data for all ComfyUI instances in the cluster. This includes information about running and pending tasks in each instance's queue.",
         "operationId": "get_queue_api_v1_comfy_queue_get",
@@ -77,9 +73,7 @@
     },
     "/api/v1/runs": {
       "post": {
-        "tags": [
-          "run"
-        ],
+        "tags": ["run"],
         "summary": "Execute Workflow",
         "description": "Executes a specified workflow by processing dynamic form data with field names and types determined by the deployed ComfyUI workflow. Each workflow defines its own unique input parameters based on the nodes it contains.\n\n**Important**: The exact parameter names and types vary for each workflow_id and deployment URL. To discover the required parameters for your workflow:\n1. Check your workflow's **API Deployment Dashboard**\n2. Refer to your ComfyUI workflow's input nodes\n\nThe workflow is executed on an available ComfyUI instance within the cluster based on queue size limits.",
         "operationId": "execute_workflow_api_v1_runs_post",
@@ -167,11 +161,11 @@
                 },
                 "additionalProperties": {
                   "oneOf": [
-                    {"type": "string"},
-                    {"type": "number"},
-                    {"type": "integer"},
-                    {"type": "boolean"},
-                    {"type": "string", "format": "binary"}
+                    { "type": "string" },
+                    { "type": "number" },
+                    { "type": "integer" },
+                    { "type": "boolean" },
+                    { "type": "string", "format": "binary" }
                   ]
                 },
                 "description": "⚠️ **IMPORTANT**: The field names shown below are placeholders. You must replace them with the actual parameter names required by your specific workflow.\n\n**To find your workflow's parameter names:**\n1. **API Docs**: Check your deployment's auto-generated API Deployment Dashboard  \n3. **ComfyUI Workflow**: Look at the input nodes in your workflow\n\n**Note**: Different workflows have completely different parameter names and types."
@@ -186,9 +180,7 @@
         }
       },
       "get": {
-        "tags": [
-          "run"
-        ],
+        "tags": ["run"],
         "summary": "Get Runs",
         "description": "Retrieves a list of all runs associated with a specific group ID. Useful for aggregating and managing related runs.",
         "operationId": "get_runs_api_v1_runs_get",
@@ -234,9 +226,7 @@
     },
     "/api/v1/runs/output": {
       "get": {
-        "tags": [
-          "run"
-        ],
+        "tags": ["run"],
         "summary": "Get Output",
         "description": "Retrieves the output of a specific run by providing the filename. It checks the run's status and returns a download URL if the output is available.",
         "operationId": "get_output_api_v1_runs_output_get",
@@ -285,9 +275,7 @@
     },
     "/api/v1/runs/{run_id}": {
       "get": {
-        "tags": [
-          "run"
-        ],
+        "tags": ["run"],
         "summary": "Get Run",
         "description": "Retrieves detailed information about a specific run using its unique run ID.",
         "operationId": "get_run_api_v1_runs__run_id__get",
@@ -346,10 +334,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "url",
-          "status"
-        ],
+        "required": ["url", "status"],
         "title": "ComfyHealthCheckResponse"
       },
       "ComfyHealthCheckResponseWrapper": {
@@ -395,10 +380,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "status",
-          "data"
-        ],
+        "required": ["status", "data"],
         "title": "ComfyHealthCheckResponseWrapper"
       },
       "ComfyQueueResponseItem": {
@@ -413,10 +395,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "comfy_uri",
-          "queue"
-        ],
+        "required": ["comfy_uri", "queue"],
         "title": "ComfyQueueResponseItem"
       },
       "ComfyQueueResponseWrapper": {
@@ -462,10 +441,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "status",
-          "data"
-        ],
+        "required": ["status", "data"],
         "title": "ComfyQueueResponseWrapper"
       },
       "ComfyRunResponse": {
@@ -480,10 +456,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "run_id",
-          "workflow_id"
-        ],
+        "required": ["run_id", "workflow_id"],
         "title": "ComfyRunResponse"
       },
       "ComfyRunResponseWrapper": {
@@ -529,10 +502,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "status",
-          "data"
-        ],
+        "required": ["status", "data"],
         "title": "ComfyRunResponseWrapper"
       },
       "HTTPValidationError": {
@@ -670,10 +640,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "status",
-          "data"
-        ],
+        "required": ["status", "data"],
         "title": "RunDetailResponseWrapper"
       },
       "RunListResponse": {
@@ -695,11 +662,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "group_id",
-          "count",
-          "runs"
-        ],
+        "required": ["group_id", "count", "runs"],
         "title": "RunListResponse"
       },
       "RunListResponseWrapper": {
@@ -741,10 +704,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "status",
-          "data"
-        ],
+        "required": ["status", "data"],
         "title": "RunListResponseWrapper"
       },
       "RunOutputResponse": {
@@ -759,10 +719,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "download_url",
-          "generation_status"
-        ],
+        "required": ["download_url", "generation_status"],
         "title": "RunOutputResponse"
       },
       "RunOutputResponseWrapper": {
@@ -804,10 +761,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "status",
-          "data"
-        ],
+        "required": ["status", "data"],
         "title": "RunOutputResponseWrapper"
       },
       "ValidationError": {
@@ -836,11 +790,7 @@
           }
         },
         "type": "object",
-        "required": [
-          "loc",
-          "msg",
-          "type"
-        ],
+        "required": ["loc", "msg", "type"],
         "title": "ValidationError"
       }
     },
