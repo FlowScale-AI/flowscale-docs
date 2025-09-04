@@ -1,0 +1,231 @@
+---
+title: Pods
+description: "Cloud GPU infrastructure that powers your ComfyUI workflows and deployments"
+icon: "server"
+---
+
+<Note>
+**TL;DR:** A Pod is a cloud GPU machine managed by FlowScale AI that powers your ComfyUI workspace and any APIs/playgrounds you deploy from a project. Pods give you fine‑grained control over cost, performance, access, and scale—all without having to provision infrastructure yourself.
+</Note>
+
+## Why Pods Exist
+
+<CardGroup cols={3}>
+  <Card title="Run ComfyUI" icon="paintbrush">
+    Every FlowScale AI project needs an attached pod to spin‑up a ComfyUI workspace in the cloud
+  </Card>
+  <Card title="Serve APIs & Playgrounds" icon="globe">
+    Deploy workflows as API endpoints with a Playground UI
+  </Card>
+  <Card title="Scale on Demand" icon="arrows-maximize">
+    Serverless GPU containers that scale automatically based on traffic
+  </Card>
+</CardGroup>
+
+## Key Concepts
+
+<AccordionGroup>
+  <Accordion title="GPU Type">
+    The graphics card model used by the pod (e.g. *T4 16GB*, *A10G 24GB*, *L40S 48GB*, *A100 40GB*, *A100 80GB*, *H200 141GB*, *B200 180GB*). Each model has a different $/hr rate.
+  </Accordion>
+  <Accordion title="Allotted GPU Containers">
+    The *maximum* number of GPU workers the pod can burst to during high load.
+  </Accordion>
+  <Accordion title="Idle Timeout">
+    Time a container waits after a generation before parking (→ $0.07/hr CPU fee only).
+  </Accordion>
+  <Accordion title="Cold Start">
+    The first request that wakes an idle container. Adds ~10‑20s latency depending on model size.
+  </Accordion>
+  <Accordion title="Warm Containers">
+    Containers you pin **always‑on**. Great for latency‑sensitive use cases; incurs full GPU cost 24/7.
+  </Accordion>
+  <Accordion title="Run Timeout">
+    Hard cap (in minutes) on a single generation. Prevents runaway jobs & surprise bills.
+  </Accordion>
+  <Accordion title="Credit Budget">
+    Optional soft‑limit that stops the pod once the specified credit amount is consumed.
+  </Accordion>
+</AccordionGroup>
+
+## Pod Types & GPU Configurations
+
+<CardGroup cols={2}>
+  <Card title="T4 - 16GB VRAM" icon="microchip" color="#10b981">
+    **Best for:** Development, simple workflows, testing
+    
+    Perfect for getting started and lightweight image generation tasks
+  </Card>
+  <Card title="A10G - 24GB VRAM" icon="microchip" color="#059669">
+    **Best for:** Enhanced development, moderate workloads
+    
+    Cost-effective option with improved performance over T4
+  </Card>
+  <Card title="L4 - 24GB VRAM" icon="microchip" color="#3b82f6">
+    **Best for:** Standard image generation, medium workloads
+    
+    Balanced performance for most production use cases
+  </Card>
+  <Card title="L40S - 48GB VRAM" icon="microchip" color="#2563eb">
+    **Best for:** Advanced image/video generation, large models
+    
+    High-memory GPU for complex multi-modal workflows
+  </Card>
+  <Card title="A100 - 40GB VRAM" icon="microchip" color="#f59e0b">
+    **Best for:** Complex workflows, large model training
+    
+    High-performance computing for demanding AI tasks
+  </Card>
+  <Card title="A100 - 80GB VRAM" icon="microchip" color="#ea580c">
+    **Best for:** Massive models, extensive batch processing
+    
+    Maximum A100 memory for the largest workloads
+  </Card>
+  <Card title="H100 - 80GB VRAM" icon="microchip" color="#dc2626">
+    **Best for:** Largest models, real-time inference
+    
+    Top-tier performance for the most demanding workloads
+  </Card>
+  <Card title="H200 - 141GB VRAM" icon="microchip" color="#b91c1c">
+    **Best for:** Massive models, extreme workloads
+    
+    Maximum memory capacity for the largest AI models
+  </Card>
+  <Card title="B200 - 180GB VRAM" icon="microchip" color="#7c2d12">
+    **Best for:** Next-generation AI inference, cutting-edge models
+    
+    Latest architecture with massive memory for breakthrough AI performance
+  </Card>
+</CardGroup>
+
+## Creating a Pod
+
+<Steps>
+  <Step title="Navigate to Pods">
+    Go to **Pods → ➕ New Pod**
+  </Step>
+  <Step title="Select GPU Type">
+    Pick a **GPU Type** that balances memory requirements vs. price
+  </Step>
+  <Step title="Configure Containers">
+    Set **Allotted GPU Containers** (start with 1 unless you expect heavy traffic)
+  </Step>
+  <Step title="Set Budget (Optional)">
+    Tick **Assign Credit Budget** and enter a limit to control costs
+  </Step>
+  <Step title="Create">
+    Click **Create Pod** — ComfyUI is now one click away!
+  </Step>
+</Steps>
+
+## Pod Settings Configuration
+
+Navigate to **Pods › *Your Pod* › Settings** to access three configuration tabs:
+
+<Tabs>
+  <Tab title="General">
+    <Frame>
+        <img src="/images/glossary/comfyui-pod-settings.png" alt = "Pod configuration interface showing GPU selection, resource allocation, and performance settings with clear options and recommendations" />
+
+    </Frame>
+    
+    - Rename or add description to your pod
+    - Toggle **Assign Credit Budget** and manage spending limits
+  </Tab>
+  
+  <Tab title="GPU Settings">
+    <Frame>
+        <img src="/images/glossary/comfyui-pod-gpu-settings.png" alt="Detailed GPU configuration panel showing hardware specifications, availability status, and performance optimization options" />
+    </Frame>
+    
+    **Core Configuration:**
+    - Change the **GPU Type**
+    - Adjust **Allotted GPU Containers**
+    
+    **Timeout Options:**
+    - **Generation Run Timeout** – cap per‑request time
+    - **Idle Timeout** – how long containers stay warm after each request
+    
+    **Performance Optimization:**
+    - **Warm Containers** (visible when scaling > 1) – pin a subset always‑on
+    
+    <Tip>Start with Idle Timeout = 60s and Warm Containers = 0 to minimize spend, then optimize for latency later.</Tip>
+  </Tab>
+  
+  <Tab title="Pod Members">
+    **Access Control:**
+    - Add teammates by handle or email
+    - Assign **Owner**, **Admin**, or **Member** roles
+    - Only listed members and service accounts can access ComfyUI workspace or call private APIs
+  </Tab>
+</Tabs>
+
+## How Pod Scaling Works
+
+**Key Phases:**
+- **Cold Start** – Container boots and loads workflow graph ± model weights
+- **Warm Pool** – Containers stay resident until *Idle Timeout* expires  
+- **Round‑Robin** – FlowScale AI evenly distributes jobs to maximize utilization
+
+## Cost Control Best Practices
+
+<Checklist>
+  <Check>Use the smallest GPU that meets VRAM requirements</Check>
+  <Check>Keep **Allotted GPU Containers** realistic (1‑2 for dev, ≥3 for prod)</Check>
+  <Check>Set **Run Timeout** ≤ expected worst‑case generation + 20%</Check>
+  <Check>Tune **Idle Timeout** (30‑120s sweet spot) before going live</Check>
+  <Check>Apply a **Credit Budget** on every non‑trial pod</Check>
+</Checklist>
+
+## Monitoring & Performance
+
+<CardGroup cols={2}>
+  <Card title="Real-Time Metrics" icon="chart-line">
+    Monitor CPU, GPU, memory, and storage utilization in real-time
+  </Card>
+  <Card title="Performance Analytics" icon="gauge">
+    Track execution times, throughput, and latency patterns
+  </Card>
+  <Card title="Error Tracking" icon="triangle-exclamation">
+    Monitor error rates, failure types, and get debugging information
+  </Card>
+  <Card title="Cost Analytics" icon="dollar-sign">
+    Track resource costs and identify optimization opportunities
+  </Card>
+</CardGroup>
+
+{/* ## Frequently Asked Questions
+
+<AccordionGroup>
+  <Accordion title="Can one project use multiple pods?">
+    Yes! For example, use an A100 pod for 4K renders and a T4 pod for thumbnails to optimize costs.
+  </Accordion>
+  
+  <Accordion title="What happens when the budget is exceeded?">
+    New jobs fail with a budget error; existing generations finish gracefully. You can raise the cap or wait until the next billing cycle.
+  </Accordion>
+  
+  <Accordion title="Can I connect the same pod to several projects?">
+    No—pods are **scoped to a single project** for isolation & cost tracking purposes.
+  </Accordion>
+  
+  <Accordion title="How do I monitor usage?">
+    Go to **Pods › *Your Pod* › Deployment History** for per‑generation logs.
+  </Accordion>
+  
+  <Accordion title="What's the difference between development and production pods?">
+    **Development pods** have longer session persistence (up to 6 hours) and full ComfyUI workspace interface. **Production pods** have fast cold-start optimization (< 30 seconds) and API-only interface.
+  </Accordion>
+</AccordionGroup> */}
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Deploy Workflows"
+    icon="rocket"
+    href="/getting-started/deploy-workflows"
+  >
+    Deploy your ComfyUI workflows to production pods
+  </Card>
+</CardGroup>

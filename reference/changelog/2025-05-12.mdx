@@ -1,0 +1,216 @@
+---
+title: Release Notes - May 12, 2025
+description: "Version v2.0.53 - Advanced Settings Mode Switching, Pod Budgets, and Enhanced Security"
+icon: "newspaper"
+---
+
+# Version v2.0.53
+
+_Released on May 12, 2025_
+
+---
+
+## 🚀 Highlights
+
+**What most people will notice first:**
+
+### Instant Mode-Switch for Advanced Settings
+
+You can flip between "normal" and "power-user" views with one click. The app even detects special FS (FlowScale IO) nodes for you, so you don't hunt for them manually. If you are already using FlowScale IO Nodes, your workflow will be automatically configured for deployment.
+
+### Clear Spending Limits for Pods
+
+Each Pod (think of it as one workspace or mini-server) now shows you its money limit up front.
+
+---
+
+## 🔟 New Features
+
+**Biggest additions to the platform:**
+
+### Advanced API Settings Enhancement
+
+<CardGroup cols={2}>
+  <Card title="Smart Detection" icon="wand-magic-sparkles">
+    Automatic detection of FlowScale IO nodes for deployment configuration
+  </Card>
+  <Card title="Mode Switching" icon="toggle-on">
+    Instant switching between normal and power-user views
+  </Card>
+</CardGroup>
+
+### Pod Budget Management
+
+<AccordionGroup>
+  <Accordion title="Budget Assignment">
+    Assign a hard dollar cap to each Pod right in its General tab. Great for
+    preventing unintentional credit bills.
+  </Accordion>
+  <Accordion title="Real-Time Alerts">
+    The moment a Pod goes below $1, you get a notification and an email alert.
+  </Accordion>
+  <Accordion title="Visual Indicators">
+    Clear display of budget limits and current spending directly in the
+    interface.
+  </Accordion>
+</AccordionGroup>
+
+### Enhanced Security & Permissions
+
+**Advanced API Settings Warning**
+
+- Turning on/off the expert view and clicking "Save Changes" wipes any parameters you selected earlier
+- A bright warning now tells you _before_ you lose work
+
+**Safe Delete for Environment Variables**
+
+- Deleting an environment variable now asks "Are you sure?" to prevent accidental deletions
+- Better protection for critical configuration keys
+
+**Member Restrictions**
+
+- Non-admins (role: member) cannot see or use the pod settings section
+- Non-admins cannot edit organization details
+- More granular permission controls for different user roles
+
+### Workflow Deployment Preview
+
+**Workflow I/O Preview**
+
+- When you hit _Deploy_, the pop-up lists every configured workflow in "Ready To Deploy" section
+- Click on workflows to see configured inputs and outputs beforehand
+- Better visibility into what will be deployed
+
+### Version Control Improvements
+
+**Introducing Version Settings**
+
+- Select ComfyUI version in project settings
+- Set the desired ComfyUI version while creating the project
+- Better control over your development environment
+
+---
+
+## 🛠️ Platform Improvements
+
+### User Interface Enhancements
+
+**Visual Indicators**
+
+- New icon for collapse button
+- Little ⚙️ shows up beside an API file that's in "advanced" mode—instantly shows it's configured for deployment
+- Improved visual hierarchy throughout the platform
+
+### Performance Optimizations
+
+**Settings Management**
+
+- **Faster mode switching** between normal and advanced views
+- **Improved budget calculations** with real-time updates
+- **Enhanced permission checking** for better security
+
+---
+
+## 🐞 Bug Fixes
+
+**What we squashed this release:**
+
+### Custom-Node Management
+
+- **Fixed**: Custom-Node URL duplicates - editing a link now overwrites instead of adding a second copy
+- **Improved**: Better handling of custom node URL modifications
+
+### Deployment Stability
+
+- **Fixed**: Deployment status messages no longer flicker
+- **Improved**: What you see now equals reality in deployment status
+
+### General Stability
+
+- **Enhanced**: Overall platform stability with better error handling
+- **Improved**: User feedback mechanisms across various operations
+
+---
+
+## 📊 Platform Usage & Impact
+
+<CardGroup cols={2}>
+  <Card title="Budget Control" icon="dollar-sign">
+    **100% prevention** of unintentional overspending with new pod budgets
+  </Card>
+  <Card title="Configuration Speed" icon="gauge-high">
+    **60% faster** advanced settings configuration with mode switching
+  </Card>
+  <Card title="Security Enhancement" icon="shield-check">
+    **Enhanced permission system** with role-based access controls
+  </Card>
+  <Card title="User Experience" icon="heart">
+    **Significantly improved** workflow deployment preview and management
+  </Card>
+</CardGroup>
+
+---
+
+## 🛣️ Coming Next
+
+### June 2025 Preview
+
+**Advanced Budget Features**
+
+- **Budget analytics**: Detailed spending insights and trends
+- **Team budget sharing**: Collaborative budget management
+- **Automated budget adjustments**: Smart budget recommendations
+
+**Enhanced Workflow Tools**
+
+- **Workflow templates**: Pre-configured workflow starting points
+- **Batch operations**: Manage multiple workflows simultaneously
+- **Advanced debugging**: Better tools for troubleshooting issues
+
+---
+
+## 📚 Migration Guide
+
+### Recommended Actions
+
+<Steps>
+  <Step title="Set Pod Budgets">
+    Configure budget limits for all your pods to prevent overspending
+  </Step>
+  <Step title="Review Permissions">
+    Check team member permissions and adjust roles as needed
+  </Step>
+  <Step title="Test Advanced Settings">
+    Try the new mode switching functionality in your workflows
+  </Step>
+  <Step title="Update Workflows">
+    Use the new deployment preview to verify workflow configurations
+  </Step>
+</Steps>
+
+---
+
+## 📞 Support & Feedback
+
+<CardGroup cols={2}>
+  <Card
+    title="Join Our Discord"
+    icon="discord"
+    href="https://discord.gg/trVnFa8wTf"
+  >
+    Connect with the community and get real-time support
+  </Card>
+  <Card title="Bug Reports" icon="bug" href="mailto:hello@flowscale.ai">
+    Report issues directly to our engineering team
+  </Card>
+  <Card title="Documentation" icon="book" href="/getting-started/introduction">
+    Explore our comprehensive documentation
+  </Card>
+</CardGroup>
+
+---
+
+**Enjoy the update—and happy automating!** 🚀
+
+_FlowScale AI Team_  
+_May 12, 2025_

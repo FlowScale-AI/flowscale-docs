@@ -1,0 +1,195 @@
+---
+title: What is ComfyUI?
+description: "Build sophisticated GenAI applications without coding using visual workflows and production deployment"
+icon: "palette"
+---
+
+
+## What is ComfyUI?
+
+ComfyUI is a visual programming interface for building AI workflows using drag-and-drop nodes. Create sophisticated image, video, text, and audio generation workflows without coding. FlowScale AI deploys these workflows as production APIs.
+
+{/* <Frame>
+  <div style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '350px',
+    backgroundColor: '#f8f9fa',
+    border: '2px dashed #dee2e6',
+    borderRadius: '8px',
+    padding: '2rem',
+    textAlign: 'center'
+  }}>
+    <div>
+      <h4 style={{marginBottom: '1rem', color: '#495057'}}>
+        [COMFYUI TO API COMPARISON PLACEHOLDER]
+      </h4>
+      <p style={{color: '#6c757d', maxWidth: '600px', lineHeight: '1.5'}}>
+        Split-screen comparison showing ComfyUI workflow interface on left with complex node network, and clean REST API endpoint documentation on right, connected by transformation arrows demonstrating the conversion process.
+      </p>
+      <small style={{color: '#868e96', display: 'block', marginTop: '1rem'}}>
+        Image Type: Comparison Diagram | Context: ComfyUI to API transformation concept
+      </small>
+    </div>
+  </div>
+</Frame> */}
+
+{/* Image Description for Team: Split-screen screenshot showing ComfyUI workspace with complex workflow on left and clean API interface on right with transformation arrows */}
+
+
+<Frame>
+    <img src="/images/glossary/comfyui_default_state.png" alt="Clean overview of ComfyUI workspace showing the visual programming interface with sample nodes, connections, and basic workflow structure. Emphasizes the drag-and-drop nature and node-based architecture" />
+</Frame>
+
+{/* Image Description for Team: Screenshot of ComfyUI workspace showing clean visual programming interface with nodes, connections, and basic workflow example */}
+
+## Core Capabilities
+
+<Frame>
+    <img src="/images/glossary/comfyui-workflow-example.png" alt="ComfyUI workspace showing multiple connected node chains for text, image, and video processing with clear data flow between AI models" />
+</Frame>
+
+{/* Image Description for Team: Screenshot of ComfyUI workspace showing multiple connected node chains for text, image, and video processing with clear data flow between AI models */}
+
+<CardGroup cols={2}>
+  <Card title="Beyond Images" icon="sparkles">
+    Build complex workflows for **images, videos, audio, and text generation**—all in one interface
+  </Card>
+  <Card title="Complex Logic Made Simple" icon="brain">
+    Create conditional workflows, multi-step pipelines, and advanced AI operations without coding
+  </Card>
+  <Card title="Drag-and-Drop Power" icon="hand">
+    Each block (called a *node*) does one specialized job—combine them to build enterprise-grade GenAI solutions
+  </Card>
+  <Card title="Universal Compatibility" icon="globe">
+    Works with any AI model, custom nodes, and runs anywhere—Windows, macOS, Linux, or cloud
+  </Card>
+</CardGroup>
+
+Key features:
+
+- **Visual Programming**: Connect nodes instead of writing code
+- **Multi-modal**: Support for images, videos, audio, and text
+- **Real-time Editing**: Modify workflows and see results instantly
+- **Community Extensions**: Thousands of custom nodes available
+
+## FlowScale AI Integration
+
+FlowScale AI converts ComfyUI workflows into production APIs with auto-scaling infrastructure, monitoring, and security.
+
+<CardGroup cols={2}>
+  <Card title="Visual Development" icon="palette">
+    Build complex workflows without coding
+  </Card>
+  <Card title="Production Deployment" icon="rocket">
+    Deploy as scalable APIs and web interfaces
+  </Card>
+  <Card title="Managed Infrastructure" icon="server">
+    Auto-scaling GPUs and monitoring
+  </Card>
+  <Card title="Complete Solution" icon="stack">
+    From prototype to production without code
+  </Card>
+</CardGroup>
+
+## Use Cases
+
+<CardGroup cols={2}>
+  <Card title="AI Art Platform" icon="image">
+    **ComfyUI**: Multi-style image generation with LoRA switching
+    **FlowScale**: Web playground where users generate custom art via simple prompts
+  </Card>
+  <Card title="Video Processing API" icon="video">
+    **ComfyUI**: Video-to-video transformation with face swapping
+    **FlowScale**: REST API that processes uploaded videos and returns results
+  </Card>
+  <Card title="Content Creation Tool" icon="pen-nib">
+    **ComfyUI**: Text-to-image + upscaling + background removal pipeline
+    **FlowScale**: Web app for marketers to create social media content
+  </Card>
+  <Card title="Custom AI Chatbot" icon="robot">
+    **ComfyUI**: Multi-model text generation with memory and context
+    **FlowScale**: Embeddable chat widget for websites
+  </Card>
+</CardGroup>
+
+## Workflow Structure
+
+Workflows consist of connected nodes that process data:
+
+<Steps>
+  <Step title="Input nodes">
+    Load models and define prompts
+  </Step>
+  <Step title="Processing nodes">
+    Apply samplers, upscalers, and transformations
+  </Step>
+  <Step title="Output nodes">
+    Save or display results
+  </Step>
+</Steps>
+
+
+## Key Concepts
+
+| Term | Think of it as... | Why it matters |
+|------|-------------------|----------------|
+| **Node** | A single LEGO® brick | Does one job (e.g., "Load model") |
+| **Workflow** | The finished LEGO® set | Runs the whole image pipeline. Saved as `.json` |
+| **Model / Checkpoint** | A cookbook | Holds all the AI knowledge—whether for images, text, video, or audio |
+| **Custom Node** | A fan-made LEGO® piece | Community add-ons—try new ideas without waiting for official updates |
+| **Pod (FlowScale)** | A line cook in the cloud | Executes your workflow on a rented GPU |
+
+## Basic Workflow Example
+
+<Steps>
+  <Step title="Load Model">
+    Choose your AI model (SDXL for images, LLaMA for text, etc.)
+  </Step>
+  <Step title="Add Input">
+    Enter your text prompt
+  </Step>
+  <Step title="Configure Processing">
+    Set parameters like steps, strength, and sampling method
+  </Step>
+  <Step title="Process Output">
+    Convert output to desired format
+  </Step>
+  <Step title="Save Results">
+    Output saved to results folder
+  </Step>
+</Steps>
+
+
+## Essential Terms
+
+<AccordionGroup>
+  <Accordion title="Prompt">
+    Text that describes the image you want
+  </Accordion>
+  <Accordion title="Checkpoint">
+    The big file that stores the AI model's brain
+  </Accordion>
+  <Accordion title="Sampler">
+    The method that slowly sharpens the noisy blob into a picture
+  </Accordion>
+  <Accordion title="LoRA">
+    A small add-on file that teaches the model a new style or character
+  </Accordion>
+  <Accordion title="Pod (FlowScale)">
+    A cloud worker that runs your workflow
+  </Accordion>
+</AccordionGroup>
+
+## Learning Resources
+
+<Card
+  title="ComfyUI Official Documentation"
+  icon="external-link"
+  href="https://docs.comfy.org"
+  color="#60a5fa"
+>
+  Comprehensive guides and API references for mastering ComfyUI
+</Card>
+

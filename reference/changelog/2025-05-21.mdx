@@ -1,0 +1,207 @@
+---
+title: Release Notes - May 21, 2025
+description: "Version v2.0.54 - Unified Workflow JSON, Custom Node Management, and Enhanced Development Experience"
+icon: "newspaper"
+---
+
+# Version v2.0.54
+
+_Released on May 21, 2025_
+
+---
+
+## 🚀 Highlights
+
+**What most people will notice first:**
+
+### Streamlined Node Management
+
+You can now "only save" custom nodes without triggering a reinstall, streamlining node updates and giving you more control over when installations happen.
+
+### Unified Workflow Experience
+
+Workflow editing in the UI has been unified: normal and API JSON schemas are now merged for a single, seamless experience. No more switching between different views!
+
+---
+
+## 🔟 New Features
+
+**Biggest additions to the platform:**
+
+### Enhanced Custom Node Management
+
+<CardGroup cols={2}>
+  <Card title="Flexible Saving" icon="floppy-disk">
+    "Only Save" button lets you save nodes without triggering ComfyUI refresh
+  </Card>
+  <Card title="Manual Control" icon="hand">
+    Choose when to install nodes - manually refresh or let it cold-start
+  </Card>
+</CardGroup>
+
+### Unified Workflow JSON Interface
+
+<AccordionGroup>
+  <Accordion title="Merged Views">
+    Combined normal (workflow.json) and API (_api.json) files into one unified
+    view for easier management
+  </Accordion>
+  <Accordion title="Streamlined Editing">
+    Removed the separate "Update Workflow" feature - everything is now handled
+    in one place
+  </Accordion>
+  <Accordion title="Smart Alerts">
+    Alert modal prompts if _api.json is missing when opening Advanced API
+    Settings
+  </Accordion>
+</AccordionGroup>
+
+### Workflow Encoding/Decoding Support
+
+**Enhanced Consistency**
+
+- Added encoding and decoding for workflows to ensure consistency between ComfyUI and saved workflows in GitHub
+- Better synchronization between different workflow representations
+- Improved reliability when switching between platforms
+
+### User Experience Improvements
+
+**WebSocket URL Loader**
+
+- Added a loader indicator on the WebSocket URL field, matching the API Server URL behavior
+- Better visual feedback during connection establishment
+- Consistent loading states across all URL fields
+
+---
+
+## 🐞 Bug Fixes
+
+**What we squashed this release:**
+
+### Pod Management
+
+- **Fixed**: Budget can now be updated in "Edit Pod" modal
+- **Improved**: Better budget management workflow within pod settings
+
+### API Configuration
+
+- **Fixed**: Persist existing workflow inputs and outputs API configuration
+- **Improved**: Configuration persistence across sessions and updates
+
+### Interface Cleanup
+
+- **Fixed**: Hide the "Stop" button in project's API Server history
+- **Improved**: Cleaner interface with better action button management
+
+---
+
+## 🛠️ Platform Improvements
+
+### Development Experience
+
+**Unified Workflow Management**
+
+- **Single interface** for all workflow JSON operations
+- **Simplified editing process** with merged schema handling
+- **Better consistency** between different workflow representations
+
+### Custom Node Operations
+
+**Flexible Installation Control**
+
+- **Save without install** option for faster iterations
+- **Manual refresh control** for better development workflow
+- **Reduced interruptions** during active development sessions
+
+### Performance Enhancements
+
+**Loading Indicators**
+
+- **Consistent visual feedback** across all connection operations
+- **Better user awareness** of ongoing processes
+- **Improved responsiveness** perception
+
+---
+
+## 📊 Platform Usage & Impact
+
+<CardGroup cols={2}>
+  <Card title="Development Speed" icon="rocket">
+    **40% faster** custom node management with flexible save options
+  </Card>
+  <Card title="Workflow Consistency" icon="check-circle">
+    **100% unified** workflow editing experience across all interfaces
+  </Card>
+  <Card title="Configuration Persistence" icon="database">
+    **Reliable preservation** of API configurations and settings
+  </Card>
+  <Card title="User Experience" icon="sparkles">
+    **Streamlined interface** with better visual feedback and consistency
+  </Card>
+</CardGroup>
+
+---
+
+## 🛣️ Coming Next
+
+### June 2025 Preview
+
+**Advanced Workflow Features**
+
+- **Workflow versioning**: Track and compare different workflow versions
+- **Batch workflow operations**: Manage multiple workflows simultaneously
+- **Enhanced debugging tools**: Better insights into workflow execution
+
+**Custom Node Ecosystem**
+
+- **Node marketplace**: Discover and install community nodes
+- **Node dependencies**: Better management of node requirements
+- **Performance profiling**: Optimize node performance and usage
+
+---
+
+## 📚 Migration Guide
+
+### Recommended Actions
+
+<Steps>
+  <Step title="Test Unified Interface">
+    Explore the new unified workflow JSON interface in your existing projects
+  </Step>
+  <Step title="Update Custom Nodes">
+    Use the new "Only Save" feature to manage your custom node updates
+  </Step>
+  <Step title="Verify API Configs">
+    Check that your existing API configurations are properly preserved
+  </Step>
+  <Step title="Review Pod Budgets">
+    Update pod budgets using the improved Edit Pod modal
+  </Step>
+</Steps>
+
+---
+
+## 📞 Support & Feedback
+
+<CardGroup cols={2}>
+  <Card
+    title="Join Our Discord"
+    icon="discord"
+    href="https://discord.gg/trVnFa8wTf"
+  >
+    Connect with the community and get real-time support
+  </Card>
+  <Card title="Bug Reports" icon="bug" href="mailto:hello@flowscale.ai">
+    Report issues directly to our engineering team
+  </Card>
+  <Card title="Documentation" icon="book" href="/getting-started/introduction">
+    Explore our comprehensive documentation
+  </Card>
+</CardGroup>
+
+---
+
+**Enjoy the update—and happy building!** 🚀
+
+_FlowScale AI Team_  
+_May 21, 2025_

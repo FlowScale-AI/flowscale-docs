@@ -1,0 +1,311 @@
+---
+title: "Overview"
+description: "Expose your FlowScale AI workflows as governed services your teams and products can trust."
+icon: "rocket"
+---
+
+# Deploy Workflows as APIs
+
+Transform your ComfyUI workflows into production services with three deployment options:
+
+| Use Case | Best Surface | Notes |
+|---|---|---|
+| Quick reviews, creative iteration | **Playground UI** | Guardrails + presets; zero code. |
+| Product / tool integration | **API or SDK** | Stable contract, versioned schema, auth. |
+| Automation, batch, agents | **SDK + Scaling controls** | Queues, concurrency, budget caps. |
+
+
+---
+
+## Core Capabilities
+
+- Configure deployments with runtime controls and access permissions
+- Launch interactive playground UIs for non-technical users
+- Integrate workflows programmatically via SDKs or REST APIs
+- Auto-scale GPUs with cost controls and performance monitoring
+
+---
+
+## Audience Quick-Nav
+
+<CardGroup cols={3}>
+  <Card title="For Developers" icon="code">
+    **Need:** Auth, endpoints, payload formats, SDK examples
+    
+    **Quick Start:** [JS/TS SDK](/deploy-api/sdk/sdk-js) or [Python SDK](/deploy-api/sdk/sdk-python)
+  </Card>
+  <Card title="For AI & Product Leads" icon="users">
+    **Need:** Governance, safe defaults, usage limits, team access
+    
+    **Quick Start:** [Deployment Configuration](/deploy-api/configuration)
+  </Card>
+  <Card title="For Leadership" icon="shield">
+    **Need:** Risk controls, scaling behavior, integration patterns
+    
+    **Quick Start:** [Security & Governance](/deploy-api/security)
+  </Card>
+</CardGroup>
+
+---
+
+## Mental Model
+
+{/* <Frame>
+  <div style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '350px',
+    backgroundColor: '#f8f9fa',
+    border: '2px dashed #dee2e6',
+    borderRadius: '8px',
+    padding: '2rem',
+    textAlign: 'center'
+  }}>
+    <div>
+      <h4 style={{marginBottom: '1rem', color: '#495057'}}>
+        [DEPLOYMENT MENTAL MODEL DIAGRAM PLACEHOLDER]
+      </h4>
+      <p style={{color: '#6c757d', maxWidth: '600px', lineHeight: '1.5'}}>
+        Conceptual flow diagram showing the progression from ComfyUI workflow artifact through deployment configuration to service surfaces (API endpoints, Playground UI) and finally to scale & governance features. Clean, professional infographic style with clear arrows and labeled stages.
+      </p>
+      <small style={{color: '#868e96', display: 'block', marginTop: '1rem'}}>
+        Image Type: Conceptual Diagram | Context: High-level deployment architecture explanation
+      </small>
+    </div>
+  </div>
+</Frame> */}
+
+{/* Image Description for Team: Conceptual diagram showing deployment progression from workflow artifact through configuration, service surfaces, to scale & governance */}
+
+Every deployed workflow in FlowScale AI follows this progression:
+
+**Workflow Artifact** (your ComfyUI graph + assets)  
+→ **Deployment Configuration** (runtime, schema, permissions)  
+→ **Service Surfaces** (API endpoint, Playground UI, SDK bindings)  
+→ **Scale & Governance** (metrics, scaling, budgets)
+
+---
+
+## Quick Start (5 Minutes)
+
+<Steps>
+  <Step title="Deploy a Workflow">
+    Pick a saved workflow and click **Deploy** → Select runtime + access scope → Publish **v1**
+  </Step>
+  <Step title="Test with Playground">
+    Generate **Playground Link** and test parameter variations with guardrails
+  </Step>
+  <Step title="Call from Code">
+    Copy the **API Endpoint** → paste into SDK quick start examples below
+  </Step>
+  <Step title="Monitor Runs">
+    Open **Runs** tab to see generation and outputs real-time
+  </Step>
+</Steps>
+
+### SDK Examples
+
+<CodeGroup>
+
+```javascript JavaScript
+import { FlowscaleAPI } from 'flowscale';
+
+const flowscale = new FlowscaleAPI({
+  apiKey: 'your-api-key',
+  baseUrl: 'your-api-url',
+  allowDangerouslyExposeApiKey: true // Required acknowledgment
+});
+
+const workflowId = "your-workflow-id"; // UUID format
+const inputs = {
+  prompt: 'A serene mountain landscape at sunset',
+  width: 1024,
+  height: 1024
+}
+
+const result = await flowscale.executeWorkflowAsync(workflowId, inputs);
+
+console.log('Workflow Result:', result);
+```
+
+```python Python
+import flowscale
+
+client = flowscale.Client(api_key="fs_your_api_key_here")
+
+result = client.run(
+    workflow_id="text-to-image-v1",
+    inputs={
+        "prompt": "A serene mountain landscape at sunset",
+        "width": 1024,
+        "height": 1024
+    }
+)
+
+print(result.images[0].url)
+```
+
+```bash cURL
+curl -X POST https://api.flowscale.ai/v1/run \
+  -H "Authorization: Bearer fs_your_api_key_here" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "workflow_id": "text-to-image-v1",
+    "inputs": {
+      "prompt": "A serene mountain landscape at sunset",
+      "width": 1024,
+      "height": 1024
+    }
+  }'
+```
+
+</CodeGroup>
+
+---
+
+## Service Surfaces Explained
+
+### API Endpoints
+**When to use:** Product integration, backend automation, webhook triggers
+
+**Key features:**
+- RESTful HTTP interface with auto-generated OpenAPI docs
+- Strongly-typed input validation and structured outputs
+- Authentication via API keys with fine-grained permissions
+- Async job support for long-running workflows
+
+### Playground UIs
+**When to use:** Creative review cycles, stakeholder demos, non-technical team access
+
+**Key features:**
+- Auto-generated interfaces based on workflow parameters
+- Parameter presets and validation guardrails
+- Shareable links with access controls
+
+### SDK Integration
+**When to use:** Application development, batch processing, programmatic automation
+
+**Key features:**
+- Type-safe clients for JavaScript/TypeScript and Python
+- Built-in retry logic and error handling
+- Streaming support for real-time outputs
+- Environment-specific best practices (frontend vs. server)
+
+---
+
+## Enterprise Features
+
+- **Cost Controls**: Budget caps and spending alerts
+- **Brand Safety**: Parameter restrictions and model locking
+- **Security**: HTTPS, audit logging, SOC 2 compliance
+
+---
+
+## Deployment Patterns by Use Case
+
+<Tabs>
+  <Tab title="Demo & Review">
+    **Pattern:** Playground UI with parameter presets
+    
+    **Configuration:**
+    - Restricted parameter ranges for brand safety
+    - Low-cost GPU tiers for occasional use
+    
+    **Example:** Creative team reviews ad variations before campaign launch
+  </Tab>
+  <Tab title="Internal Tooling">
+    **Pattern:** API + custom frontend with team authentication
+    
+    **Configuration:**
+    - Team-scoped API keys with role-based permissions
+    - Moderate scaling limits for predictable costs
+    - Integration with existing SSO systems
+    - Audit trails for compliance requirements
+    
+    **Example:** Marketing tool for generating social media assets
+  </Tab>
+  <Tab title="Product Integration">
+    **Pattern:** SDK integration with production SLAs
+    
+    **Configuration:**
+    - Auto-scaling with performance guarantees
+    - Versioned deployments for stable contracts
+    - High-availability GPU pools
+    - Comprehensive monitoring and alerting
+    
+    **Example:** E-commerce app generating product images on-demand
+  </Tab>
+  <Tab title="Automation & Agents">
+    **Pattern:** Batch SDK calls with queue management
+    
+    **Configuration:**
+    - High concurrency limits for batch processing
+    - Cost optimization via spot instances
+    - Webhook callbacks for async workflows
+    - Dead letter queues for error handling
+    
+    **Example:** Content pipeline processing thousands of images nightly
+  </Tab>
+</Tabs>
+
+---
+
+## Next Steps
+
+### Integration
+<CardGroup cols={2}>
+  <Card
+    title="JavaScript/TypeScript SDK"
+    icon="js"
+    href="/deploy-api/sdk/sdk-js"
+  >
+    Connect workflows to web applications and Node.js services
+  </Card>
+  <Card
+    title="Python SDK"
+    icon="python"
+    href="/deploy-api/sdk/sdk-python"
+  >
+    Integrate workflows into data pipelines and ML applications
+  </Card>
+</CardGroup>
+
+### Configuration
+<CardGroup cols={2}>
+  <Card
+    title="Advanced Configuration"
+    icon="settings"
+    href="/deploy-api/configuration"
+  >
+    Authentication, versioning, and governance controls
+  </Card>
+  <Card
+    title="Scaling & Performance"
+    icon="gauge-high"
+    href="/deploy-api/scaling"
+  >
+    Auto-scaling, cost optimization, and performance management
+  </Card>
+</CardGroup>
+
+### Documentation
+<CardGroup cols={2}>
+  <Card
+    title="Playground Interfaces"
+    icon="users"
+    href="/deploy-api/playgrounds"
+  >
+    Safe, intuitive interfaces for non-technical users
+  </Card>
+  <Card
+    title="API Documentation"
+    icon="book"
+    href="/api-reference/introduction"
+  >
+    Complete endpoint documentation with examples
+  </Card>
+</CardGroup>
+
+---
+

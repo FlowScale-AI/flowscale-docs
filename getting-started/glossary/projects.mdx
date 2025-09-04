@@ -1,0 +1,137 @@
+---
+title: Projects
+description: "Understanding projects in FlowScale - your workspace for building and deploying AI workflows"
+icon: "folder-open"
+---
+
+## What is a Project?
+
+A **project** in FlowScale is a workspace that contains your workflows and all the configurations needed to run them. You must create a project before you can start building or importing any workflows.
+
+<Frame>
+    <img src="/images/glossary/comfyui-projects-dashboard.png" alt="Comprehensive project dashboard showing the main workspace interface with project navigation, workflow organization, deployment status, and component overview clearly displayed" />
+</Frame>
+
+Once you've built your workflows, you can deploy them from your project as APIs or Playground UIs on a Pod.
+
+## Project Components
+
+Every FlowScale project includes:
+
+<CardGroup cols={2}>
+  <Card title="ComfyUI Workspace" icon="diagram-project">
+    Build and edit your AI workflows
+  </Card>
+  <Card title="API Deployments" icon="rocket">
+    Deploy workflows as live APIs
+  </Card>
+  <Card title="Runs" icon="play">
+    View execution history from APIs and Playground
+  </Card>
+  <Card title="Settings" icon="gear">
+    Configure environment, API keys, and collaborators
+  </Card>
+</CardGroup>
+
+## ComfyUI Workspace
+
+The ComfyUI Workspace is where you build and modify your AI workflows. It provides a visual node-based interface for creating complex AI pipelines.
+
+<Frame>
+    <img src="/images/glossary/comfyui-project-overview.png" alt="Project-specific ComfyUI workspace interface showing workflow development environment with project context, saved workflows, and workspace tools integrated" />
+</Frame>
+
+<Info>
+Learn more about ComfyUI in the [ComfyUI documentation](/getting-started/glossary/comfyui).
+</Info>
+
+## Deployments
+
+Once your workflows are ready, you can deploy them as:
+
+- **APIs**: RESTful endpoints for programmatic access
+- **Playground UIs**: Interactive web interfaces for testing
+
+<Frame>
+    <img src="/images/glossary/comfyui-api-deployment.png" alt="Project deployments dashboard showing deployed APIs and playground interfaces with status indicators, endpoint URLs, and management controls" />
+</Frame>
+
+All deployed workflows run on Pods, which provide the computational resources needed for your AI workflows.
+
+## Runs
+
+The Runs section shows the execution history of your workflows, including:
+
+- Runs triggered through deployed APIs
+- Runs executed in the Playground UI
+- Input parameters and output results
+- Execution timestamps and status
+
+<Frame>
+    <img src="/images/glossary/comfyui-api-runs.png" alt="Execution history interface showing workflow runs with timestamps, input parameters, output results, and execution status in a detailed timeline view" />
+</Frame>
+
+## Project Settings
+
+### API Keys
+
+Once you deploy an API, you can manage API keys in the project settings. These keys are used to authenticate requests to your deployed workflows.
+
+### Environment Variables
+
+If your workflows or custom nodes require specific environment variables, you can configure them in the Environment Settings. This is useful for:
+
+- API keys for external services
+- Configuration parameters
+- Custom node requirements
+
+### Collaborators
+
+You can add team members to your project for collaboration. 
+
+<Frame>
+    <img src="/images/glossary/comfyui-project-collab.png" alt="Project settings interface showing API key management, environment variables configuration, and team collaboration controls with role assignments and permissions" />
+</Frame>
+
+<Note>
+Before adding collaborators to a project, they must first be added to your organization.
+</Note>
+
+## Getting Started
+
+<Steps>
+  <Step title="Create a Project">
+    Start by creating a new project in your FlowScale workspace
+  </Step>
+  <Step title="Build Workflows">
+    Use the ComfyUI Workspace to create or import your AI workflows
+  </Step>
+  <Step title="Configure Settings">
+    Set up any required environment variables or configurations
+  </Step>
+  <Step title="Deploy">
+    Deploy your workflows as APIs or Playground UIs
+  </Step>
+  <Step title="Collaborate">
+    Invite team members to work together on your project
+  </Step>
+</Steps>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Create Your First Project"
+    icon="plus"
+    href="/getting-started/import-create-workflows"
+  >
+    Set up a new project and import workflows
+  </Card>
+  <Card
+    title="Project Deployment"
+    icon="rocket"
+    href="/getting-started/deploy-workflows"
+  >
+    Deploy project workflows as APIs
+  </Card>
+</CardGroup>

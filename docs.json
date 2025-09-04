@@ -1,0 +1,104 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "almond",
+  "name": "FlowScale AI",
+  "logo": {
+    "dark": "/logo/logo-with-fullname.svg",
+    "light": "/logo/logo-with-fullname-light.svg",
+    "href": "https://flowscale.ai"
+  },
+  "favicon": "/flowscale-fav.svg",
+  "colors": {
+    "primary": "#60a5fa",
+    "light": "#93c5fd",
+    "dark": "#2563eb"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Getting Started",
+        "icon": "rocket",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "getting-started/introduction",
+              "getting-started/import-create-workflows",
+              "getting-started/deploy-workflows"
+            ]
+          },
+          {
+            "group": "Glossary",
+            "pages": [
+              "getting-started/glossary/comfyui",
+              "getting-started/glossary/comfyui-workspace",
+              "getting-started/glossary/projects",
+              "getting-started/glossary/pods",
+              "getting-started/glossary/models"
+            ]
+          },
+          {
+            "group": "Troubleshooting",
+            "pages": [
+              "getting-started/troubleshooting/project-migration"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API & Deployment",
+        "icon": "code",
+        "groups": [
+          {
+            "group": "Deployment",
+            "pages": [
+              "deploy-api/overview",
+              "deploy-api/configuration",
+              "deploy-api/playgrounds"
+            ]
+          },
+          {
+            "group": "SDKs",
+            "pages": ["deploy-api/sdk/sdk-js", "deploy-api/sdk/sdk-python"]
+          },
+          {
+            "group": "API Reference",
+            "pages": [
+              "api-reference/introduction",
+              "api-reference/testing-workflows",
+              "api-reference/endpoint/execute_workflow",
+              "api-reference/endpoint/get_execution_output",
+              "api-reference/endpoint/get_queue",
+              "api-reference/endpoint/get_run_details",
+              "api-reference/endpoint/get_runs",
+              "api-reference/endpoint/health_check"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Other References",
+        "icon": "book",
+        "groups": [
+          {
+            "group": "Changelog",
+            "pages": [
+              "reference/changelog/2025-07-30",
+              "reference/changelog/2025-07-15",
+              "reference/changelog/2025-06-11",
+              "reference/changelog/2025-05-21",
+              "reference/changelog/2025-05-12"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "navbar": {
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://app.flowscale.ai/"
+    }
+  }
+}

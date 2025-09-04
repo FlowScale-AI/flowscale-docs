@@ -1,0 +1,366 @@
+---
+title: Playground UI
+description: "Test and share your deployed workflows with interactive, user-friendly playground interfaces"
+icon: "play"
+---
+
+**This is the moment your technical AI workflow becomes accessible to everyone.** Playground UIs transform your sophisticated ComfyUI creations into polished, user-friendly interfaces that anyone can use—no technical knowledge required.
+
+<Tip>
+**The "aha" moment:** Watch non-technical team members, clients, or stakeholders use your complex AI workflows as easily as filling out a web form. What took you hours to perfect in ComfyUI now takes them seconds to use effectively.
+</Tip>
+
+<Note>
+**Automatic Magic:** Every workflow you deploy instantly generates its own playground. No additional configuration, no UI development, no user training required. Your ComfyUI logic becomes a professional web application automatically.
+</Note>
+
+## Sharing Your AI Innovation
+
+**Ready to see your workflow in action through fresh eyes?** Opening a playground transforms the experience from "let me show you how this works" to "try it yourself and see what you can create."
+
+### Opening Your User-Friendly Interface
+
+<Steps>
+<Step title="Navigate to API Server">
+Go to the **API Server** section of your project from the main navigation
+</Step>
+<Step title="Find Your Deployed Workflow">
+Locate the workflow you want to test in the **Deployed Workflows** list
+</Step>
+<Step title="Expand Workflow Details">
+Click to expand the workflow entry to reveal additional options and information
+</Step>
+<Step title="Open Playground">
+Click the **"Open Playground"** button to launch the playground interface in a new tab
+</Step>
+</Steps>
+
+<Frame>
+    <img src="/images/deploy-api/comfyui-playground-button.png" alt="API server management page with Open Playground button highlighted, showing workflow deployment status and playground access controls" />
+</Frame>
+
+{/* Image Description for Team: Screenshot of API Server page showing deployed workflows list with one expanded to show Open Playground button highlighted */}
+
+{/* Image Description for Team: Screenshot of main API Server interface showing workflow list with status indicators and playground access pathway */}
+
+## Playground Interface
+
+### Interface Design: Complexity Hidden, Power Preserved
+
+**Here's where thoughtful design shines:** Your playground presents a clean, intuitive interface that hides all the ComfyUI complexity while preserving every bit of your workflow's creative power.
+
+<Note>
+**Design philosophy:** Users see only what they need to control, in language they understand, with guardrails that prevent mistakes. Your sophisticated AI logic becomes as approachable as any consumer web application.
+</Note>
+
+<Tabs>
+<Tab title="Left Column - Inputs">
+**Input Controls**
+- Parameter fields based on your workflow configuration
+- Input types match your FlowScale I/O nodes (text fields, sliders, image uploads)
+- Default values pre-filled from your workflow settings
+- **Generate button** at the bottom to execute the workflow
+</Tab>
+<Tab title="Right Column - Outputs">
+**Results Display**
+- Output sections for each configured output node
+- Real-time display of generated content (images, text, etc.)
+- Download options for generated files
+- Generation status and progress indicators
+</Tab>
+</Tabs>
+
+<Frame>
+    <img src="/images/deploy-api/comfyui-playground-UI.png" alt="Playground interface showing optimal two-column layout with input controls on left, output display on right, and clear visual separation between input and result areas" />
+</Frame>
+
+{/* Image Description for Team: Screenshot of full playground interface showing two-column layout with input controls on left and output display on right */}
+
+{/* Image Description for Team: Screenshot of detailed playground interface showing professional web app with intuitive controls and real-time feedback */}
+
+### Input Field Types
+
+The input fields in your playground directly correspond to the FlowScale I/O nodes you configured:
+
+| Input Node Type | Playground Control | Description |
+|-----------------|-------------------|-------------|
+| **[FS] InputText** | Text area/field | Multi-line or single-line text input |
+| **[FS] InputImage** | File upload | Drag-and-drop or click to upload images |
+| **[FS] InputNumber** | Number input | Numeric field with validation |
+| **[FS] InputSlider** | Range slider | Interactive slider with min/max values |
+
+💡 **Lightbulb Moment:** The input fields you see are exactly the parameters you chose to expose when configuring your workflow. This is where your thoughtful I/O design pays off—users see an intuitive interface because you made intentional choices about what to show and what to keep internal.
+
+<Tip>
+**Interface refinement:** If the playground doesn't feel quite right, you can always refine your [workflow I/O configuration](/deploy-api/configuration) to better match your users' needs. Great interfaces evolve through real user feedback.
+</Tip>
+
+## GPU Status Monitoring
+
+### Understanding GPU States
+
+The top-right corner of every playground displays real-time GPU status information:
+
+<CardGroup cols={3}>
+<Card title="Idle" icon="circle" color="#gray">
+**Gray indicator**: GPU is ready and waiting for requests. Fastest response time for new generations.
+</Card>
+<Card title="Running" icon="circle" color="#green">
+**Green indicator**: GPU is actively processing your request. Generation in progress.
+</Card>
+<Card title="Cold Starting" icon="circle" color="#orange">
+**Orange indicator**: GPU is warming up and loading models. First request after idle period.
+</Card>
+</CardGroup>
+
+<Frame>
+    <img src="/images/glossary/comfyui_gpu_status.png" alt="Playground header showing GPU status indicator with different operational states" />
+</Frame>
+
+{/* Image Description for Team: Screenshot of playground header showing GPU status indicator in different states with status text and workflow controls */}
+   
+### Performance Implications
+
+<AccordionGroup>
+<Accordion title="Idle State">
+- **Response Time**: Immediate (< 1 second to start)
+- **Best For**: Interactive testing and real-time workflows
+- **Cost**: Active compute resources maintained
+</Accordion>
+
+<Accordion title="Cold Starting">
+- **Response Time**: 30-120 seconds initial delay
+- **Occurs When**: First request after period of inactivity
+- **Best For**: Batch processing and non-time-sensitive tasks
+- **Cost**: Lower cost as resources scale to zero when unused
+</Accordion>
+
+<Accordion title="Running State">
+- **Response Time**: Depends on workflow complexity
+- **Queue Behavior**: Additional requests queue until completion
+- **Best For**: Sequential generation tasks
+- **Monitoring**: Progress indicators show generation status
+</Accordion>
+</AccordionGroup>
+
+## Using the Playground
+
+### Running Your Workflow
+
+<Steps>
+<Step title="Configure Inputs">
+Fill in the required input fields on the left side:
+- Enter text prompts, descriptions, or parameters
+- Upload reference images if your workflow requires them
+- Adjust numeric values and sliders to your preferences
+</Step>
+<Step title="Initiate Generation">
+Click the **Generate** button at the bottom of the left column to start the workflow
+</Step>
+<Step title="Monitor Progress">
+Watch the GPU status indicator and any progress bars that appear during generation
+</Step>
+<Step title="Review Results">
+Generated outputs appear in the right column as they become available
+</Step>
+</Steps>
+
+{/* Image Description for Team: Multi-panel sequence showing complete playground workflow from input configuration to results display */}
+
+### Generation Process
+
+During generation, you'll see:
+
+- **Progress indicators** showing workflow execution stages
+- **GPU status updates** reflecting current processing state
+- **Partial results** appearing as they're generated (for multi-step workflows)
+- **Completion notifications** when generation finishes
+
+<Note>
+Generation time varies based on workflow complexity, model size, and current GPU state. Simple text workflows may complete in seconds, while high-resolution image generation can take several minutes.
+</Note>
+
+## Sharing and Collaboration
+
+### Shareable Links
+
+Every playground has a unique, shareable URL that enables team collaboration:
+
+<CardGroup cols={2}>
+<Card title="Team Access" icon="users">
+**Share with colleagues** who need to test or use your workflow without ComfyUI knowledge
+</Card>
+<Card title="Client Demos" icon="presentation">
+**Present to stakeholders** with a clean, professional interface that hides technical complexity
+</Card>
+<Card title="Creative Review" icon="eye">
+**Enable creative teams** to experiment with parameters and generate variations
+</Card>
+<Card title="Quality Assurance" icon="check-circle">
+**Facilitate testing** by non-technical team members for validation and feedback
+</Card>
+</CardGroup>
+
+### Sharing Best Practices
+
+<Steps>
+<Step title="Test Before Sharing">
+Verify your playground works correctly with various input combinations
+</Step>
+<Step title="Document Expected Inputs">
+Provide guidance on what inputs work best for your specific workflow
+</Step>
+<Step title="Set Appropriate Defaults">
+Configure sensible default values so users can generate results immediately
+</Step>
+</Steps>
+
+<Warning>
+**Security Note**: Playground links provide access to your deployed workflow. Only share with trusted team members and consider implementing access controls for sensitive workflows.
+</Warning>
+
+## Playground Benefits
+
+### For Technical Teams
+
+<AccordionGroup>
+<Accordion title="Rapid Prototyping">
+- Test parameter combinations quickly without ComfyUI complexity
+- Iterate on workflow improvements with immediate feedback
+- Validate configuration changes before API integration
+</Accordion>
+
+<Accordion title="Quality Assurance">
+- Systematic testing of edge cases and input variations
+- Documentation of expected behaviors and outputs
+- Regression testing when updating workflow versions
+</Accordion>
+</AccordionGroup>
+
+### For Non-Technical Users
+
+<AccordionGroup>
+<Accordion title="Creative Exploration">
+- Experiment with AI-generated content without technical barriers
+- Discover optimal parameter settings through intuitive controls
+- Generate variations and iterations for creative projects
+</Accordion>
+
+<Accordion title="Content Production">
+- Streamlined workflow for regular content generation
+- Consistent results through pre-configured parameters
+- Immediate access to generated assets with download options
+</Accordion>
+</AccordionGroup>
+
+{/* ## Troubleshooting
+
+### Common Issues
+
+<CardGroup cols={2}>
+<Card title="Long Load Times" icon="clock">
+**Cause**: GPU cold starting after idle period
+**Solution**: Wait for warm-up (30-120 seconds) or consider keeping instances warm
+</Card>
+<Card title="Missing Input Fields" icon="exclamation-triangle">
+**Cause**: Workflow not properly configured for deployment
+**Solution**: Return to [configuration](/deploy-api/configuration) and add missing I/O nodes
+</Card>
+<Card title="Generation Failures" icon="times-circle">
+**Cause**: Invalid inputs or workflow errors
+**Solution**: Check input validation and test workflow in ComfyUI workspace
+</Card>
+<Card title="Access Denied" icon="lock">
+**Cause**: Playground link restrictions or expired sessions
+**Solution**: Verify access permissions and generate new playground link if needed
+</Card>
+</CardGroup>
+
+### Performance Optimization
+
+<Tabs>
+<Tab title="Input Optimization">
+**Best Practices:**
+- Use recommended input ranges shown in field descriptions
+- Optimize image sizes for faster processing
+- Test with minimal viable inputs first
+- Cache frequently used reference images
+</Tab>
+<Tab title="Output Management">
+**Efficiency Tips:**
+- Download generated assets promptly to free GPU memory
+- Use appropriate output formats for your use case
+- Monitor generation costs in high-usage scenarios
+- Consider batch processing for multiple generations
+</Tab>
+</Tabs> */}
+
+## Integration with Development Workflow
+
+### From Playground to Production
+
+<Steps>
+<Step title="Prototype in Playground">
+Use the playground to validate workflow behavior and optimal parameters
+</Step>
+<Step title="Document Findings">
+Record successful parameter combinations and expected outputs
+</Step>
+<Step title="Generate API Code">
+Use the playground results to inform your API integration approach
+</Step>
+<Step title="Implement in Application">
+Translate playground interactions into programmatic API calls using [SDKs](/deploy-api/sdk/sdk-python)
+</Step>
+</Steps>
+
+### API Equivalent
+
+Every playground interaction has a corresponding API call. Use the playground to:
+
+- **Validate request formats** before writing API integration code
+- **Test error conditions** and understand response structures  
+- **Optimize parameters** for your specific use case
+- **Generate example requests** for API documentation
+
+<CodeGroup>
+```javascript Playground to API
+// Playground interaction
+{
+  "prompt": "A beautiful sunset over mountains",
+  "steps": 25,
+  "width": 1024,
+  "height": 1024
+}
+
+// Equivalent API call
+const response = await fetch('/api/v1/workflows/run', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer your-api-key',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    workflow_id: 'wf_abc123',
+    inputs: {
+      prompt: "A beautiful sunset over mountains",
+      steps: 25,
+      width: 1024,
+      height: 1024
+    }
+  })
+});
+```
+</CodeGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="SDK Integration"
+    icon="code"
+    href="/deploy-api/sdk/sdk-js"
+  >
+    Integrate playground-tested workflows into applications via code
+  </Card>
+</CardGroup>
